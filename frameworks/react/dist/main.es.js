@@ -46,7 +46,7 @@ const ee = "_button_g8pqx_1", te = "_primary_g8pqx_29", ne = "_secondary_g8pqx_3
       ]
     }
   );
-}), fe = "_badge_1as2w_1", ge = "_neutral_1as2w_15", ve = "_primary_1as2w_20", ye = "_success_1as2w_25", be = "_warning_1as2w_30", xe = "_danger_1as2w_35", we = "_solid_1as2w_41", Me = "_outline_1as2w_66", D = {
+}), fe = "_badge_11zoy_1", ge = "_neutral_11zoy_15", ve = "_primary_11zoy_20", ye = "_success_11zoy_25", be = "_warning_11zoy_30", xe = "_danger_11zoy_35", we = "_solid_11zoy_41", Me = "_outline_11zoy_66", D = {
   badge: fe,
   neutral: ge,
   primary: ve,
