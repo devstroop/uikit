@@ -97,18 +97,22 @@
 
 .se-alert--info {
   border-color: var(--se-color-primary);
+  background-color: color-mix(in srgb, var(--se-color-primary) 12%, transparent);
 }
 
 .se-alert--success {
   border-color: var(--se-color-success);
+  background-color: color-mix(in srgb, var(--se-color-success) 12%, transparent);
 }
 
 .se-alert--warning {
   border-color: var(--se-color-warning);
+  background-color: color-mix(in srgb, var(--se-color-warning) 12%, transparent);
 }
 
 .se-alert--danger {
   border-color: var(--se-color-danger);
+  background-color: color-mix(in srgb, var(--se-color-danger) 12%, transparent);
 }
 
 .se-alert-content {
@@ -131,8 +135,10 @@
   flex-shrink: 0;
   width: 22px;
   height: 22px;
+  margin-top: calc(-1 * var(--se-space-3) / 2);
+  margin-right: calc(-1 * var(--se-space-4) / 2);
   border: none;
-  border-radius: var(--se-radius-sm);
+  border-radius: var(--se-radius-md);
   background: transparent;
   color: var(--se-color-text-muted);
   font-size: 16px;
@@ -336,6 +342,14 @@
   border-color: var(--se-color-danger);
 }
 
+
+.se-body {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  padding: var(--se-space-4);
+  overflow-y: auto;
+}
 
 .se-button {
   display: inline-flex;
@@ -822,6 +836,22 @@
 }
 
 
+.se-footer {
+  display: flex;
+  flex-shrink: 0;
+  padding: var(--se-space-4);
+  background: var(--se-color-surface);
+  border-top: 1px solid var(--se-color-border);
+}
+
+.se-header {
+  display: flex;
+  flex-shrink: 0;
+  padding: var(--se-space-4);
+  background: var(--se-color-surface);
+  border-bottom: 1px solid var(--se-color-border);
+}
+
 /* Icon — no styles. The react Icon has no CSS module and the spec declares
    zero tokens: the glyph inherits its color via stroke="currentColor" and
    sizing comes from the width/height/stroke-width attributes on the <svg>. */
@@ -890,6 +920,18 @@
   color: var(--se-color-text);
 }
 
+
+.se-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.se-layout-row {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+}
 
 .se-progress {
   position: relative;
@@ -1038,6 +1080,29 @@
   font-size: var(--se-font-size-md);
 }
 
+
+.se-sidebar {
+  flex-shrink: 0;
+  width: var(--se-layout-sidebar-width, 240px);
+  padding: var(--se-space-4);
+  background: var(--se-color-surface);
+  overflow-y: auto;
+}
+
+.se-sidebar--left {
+  border-right: 1px solid var(--se-color-border);
+}
+
+.se-sidebar--right {
+  border-left: 1px solid var(--se-color-border);
+}
+
+.se-sidebar--collapsed {
+  width: 0;
+  padding: 0;
+  border: none;
+  overflow: hidden;
+}
 
 .se-skeleton {
   display: inline-block;
