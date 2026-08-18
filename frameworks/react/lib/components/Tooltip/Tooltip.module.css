@@ -1,0 +1,88 @@
+.trigger {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.tooltip {
+  position: absolute;
+  z-index: var(--se-z-tooltip);
+  background: var(--se-color-text);
+  color: var(--se-color-bg);
+  font-size: var(--se-font-size-xs);
+  font-weight: var(--se-font-weight-medium);
+  line-height: 1.4;
+  padding: var(--se-space-1) var(--se-space-2);
+  border-radius: var(--se-radius-sm);
+  box-shadow: var(--se-shadow-md);
+  white-space: nowrap;
+  pointer-events: none;
+  animation: se-tooltip-in var(--se-transition-fast) ease-out;
+}
+
+@keyframes se-tooltip-in {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.top {
+  bottom: calc(100% + var(--se-space-2));
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.right {
+  left: calc(100% + var(--se-space-2));
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.bottom {
+  top: calc(100% + var(--se-space-2));
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.left {
+  right: calc(100% + var(--se-space-2));
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.arrow {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: var(--se-color-text);
+  transform: rotate(45deg);
+}
+
+.top .arrow {
+  top: 100%;
+  left: 50%;
+  margin: -3px 0 0 -3px;
+}
+
+.right .arrow {
+  right: 100%;
+  top: 50%;
+  margin: -3px -3px 0 0;
+}
+
+.bottom .arrow {
+  bottom: 100%;
+  left: 50%;
+  margin: 0 0 -3px -3px;
+}
+
+.left .arrow {
+  left: 100%;
+  top: 50%;
+  margin: -3px 0 0 -3px;
+}

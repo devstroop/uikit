@@ -1,0 +1,67 @@
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.tabList {
+  display: flex;
+  gap: var(--se-space-1);
+  margin-bottom: var(--se-space-4);
+}
+
+.underline {
+  border-bottom: 1px solid var(--se-color-border);
+}
+
+.pills {
+  gap: var(--se-space-2);
+}
+
+.tab {
+  border: none;
+  background: transparent;
+  color: var(--se-color-text-muted);
+  font-size: var(--se-font-size-sm);
+  font-weight: var(--se-font-weight-medium);
+  padding: var(--se-space-2) var(--se-space-3);
+  cursor: pointer;
+  transition: color var(--se-transition-fast);
+}
+
+.underline .tab {
+  margin-bottom: -1px;
+  border-bottom: 2px solid transparent;
+}
+
+.underline .tab.active {
+  color: var(--se-color-primary);
+  border-bottom-color: var(--se-color-primary);
+}
+
+.pills .tab {
+  border-radius: var(--se-radius-full);
+}
+
+.pills .tab.active {
+  background: var(--se-color-primary);
+  color: var(--se-color-primary-fg);
+}
+
+.tab:hover:not(.disabled):not(.active) {
+  color: var(--se-color-text);
+}
+
+.tab:focus-visible {
+  outline: 2px solid var(--se-color-focus);
+  outline-offset: 2px;
+}
+
+.tab.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.panel {
+  font-size: var(--se-font-size-sm);
+  line-height: 1.6;
+}

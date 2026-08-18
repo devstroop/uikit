@@ -1,0 +1,48 @@
+.stat {
+  font-family: var(--se-font-sans);
+  display: flex;
+  flex-direction: column;
+  gap: var(--se-space-2);
+}
+
+.label {
+  font-size: var(--se-font-size-xs);
+  font-weight: var(--se-font-weight-medium);
+  color: var(--se-color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--se-space-2);
+}
+
+.value {
+  font-size: var(--se-font-size-lg);
+  font-weight: var(--se-font-weight-bold);
+  color: var(--se-color-text);
+}
+
+.delta {
+  font-size: var(--se-font-size-xs);
+  font-weight: var(--se-font-weight-medium);
+}
+
+.delta.success {
+  color: var(--se-color-success);
+}
+
+.delta.danger {
+  color: var(--se-color-danger);
+}
+
+.delta.neutral {
+  color: var(--se-color-text-muted);
+}
+
+.hint {
+  font-size: var(--se-font-size-xs);
+  color: var(--se-color-text-muted);
+}

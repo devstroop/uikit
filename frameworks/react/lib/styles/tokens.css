@@ -1,0 +1,94 @@
+/*
+ * @devstroop/react-ui design tokens.
+ *
+ * All components consume tokens exclusively — no hardcoded colors, radii,
+ * spacing, or shadows. Consumers theme the library by overriding any subset
+ * of these custom properties on their own `:root` (or a scoped container).
+ *
+ * `--se-` prefix is namespaced to avoid collisions with consumer styles. // Must standardize after migration!
+ */
+
+:root {
+  /* Colors */
+  --se-color-bg: #f8fafc;
+  --se-color-surface: #ffffff;
+  --se-color-surface-hover: #f1f5f9;
+  --se-color-border: #e2e8f0;
+  --se-color-border-strong: #cbd5e1;
+  --se-color-text: #0f172a;
+  --se-color-text-muted: #64748b;
+  --se-color-primary: #2563eb;
+  --se-color-primary-hover: #1d4ed8;
+  --se-color-primary-fg: #ffffff;
+  --se-color-danger: #dc2626;
+  --se-color-danger-hover: #b91c1c;
+  --se-color-danger-fg: #ffffff;
+  --se-color-success: #16a34a;
+  --se-color-warning: #d97706;
+  --se-color-focus: rgb(37 99 235 / 0.35);
+
+  /* Radii */
+  --se-radius-sm: 4px;
+  --se-radius-md: 8px;
+  --se-radius-lg: 12px;
+  --se-radius-full: 9999px;
+
+  /* Spacing */
+  --se-space-1: 4px;
+  --se-space-2: 8px;
+  --se-space-3: 12px;
+  --se-space-4: 16px;
+  --se-space-5: 24px;
+  --se-space-6: 32px;
+
+  /* Typography */
+  --se-font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+  --se-font-size-xs: 12px;
+  --se-font-size-sm: 14px;
+  --se-font-size-md: 16px;
+  --se-font-size-lg: 18px;
+  --se-font-weight-regular: 400;
+  --se-font-weight-medium: 500;
+  --se-font-weight-bold: 600;
+
+  /* Effects */
+  --se-shadow-sm: 0 1px 2px rgb(15 23 42 / 0.06);
+  --se-shadow-md: 0 4px 12px rgb(15 23 42 / 0.1);
+  --se-shadow-lg: 0 12px 32px rgb(15 23 42 / 0.18);
+  --se-transition-fast: 120ms ease;
+  --se-transition-base: 200ms ease;
+  --se-transition-slow: 300ms ease;
+  --se-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Overlay */
+  --se-color-backdrop: rgb(15 23 42 / 0.5);
+
+  /* Layering */
+  --se-z-tooltip: 1000;
+  --se-z-popover: 1500;
+  --se-z-modal: 2000;
+  --se-z-toast: 3000;
+
+  /* Controls */
+  --se-control-height: 36px;
+}
+
+[data-theme="dark"] {
+  --se-color-bg: #0f172a;
+  --se-color-surface: #1e293b;
+  --se-color-surface-hover: #334155;
+  --se-color-border: #334155;
+  --se-color-border-strong: #475569;
+  --se-color-text: #f1f5f9;
+  --se-color-text-muted: #94a3b8;
+  --se-color-primary: #3b82f6;
+  --se-color-primary-hover: #2563eb;
+  --se-color-danger: #ef4444;
+  --se-color-danger-hover: #dc2626;
+  --se-color-focus: rgb(59 130 246 / 0.4);
+  --se-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+  --se-shadow-md: 0 4px 12px rgb(0 0 0 / 0.5);
+  --se-shadow-lg: 0 12px 32px rgb(0 0 0 / 0.6);
+  --se-color-backdrop: rgb(0 0 0 / 0.6);
+}

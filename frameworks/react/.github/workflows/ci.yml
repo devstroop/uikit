@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+      - develop
+      - fixes
+      - features
+      - chores
+      - docs
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      - name: Verify built package exports
+        run: node -e "import('./dist/main.es.js').then((m) => { const names = ['Button','Card','Badge','Icon','Stat','Table','EmptyState','Field','Label','Input','Select','Checkbox','Switch','Tooltip','Dialog','ToastProvider','useToast','Alert','Skeleton','Progress','Avatar','Tabs','Accordion','Textarea']; const missing = names.filter((n) => !(n in m)); if (missing.length) { console.error('missing exports:', missing); process.exit(1); } console.log('all', names.length, 'exports present'); })"
