@@ -53,13 +53,18 @@ async function validateSpec(file) {
       return { name, errors };
     }
   } catch (err) {
-    fail(`cannot read spec: ${err.message}`);
+    fail(`cannot read spec ${file}: ${err.message}`);
     return { name, errors };
   }
 
   if (typeof meta.name !== "string" || !meta.name) fail("missing name");
-  else if (meta.name !== componentName(meta, name)) {
-    fail(`name "${meta.name}" does not match file "${file}"`);
+  else {
+    const kebab = meta.name
+      .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
+      .toLowerCase();
+    if (kebab !== name) {
+      fail(`name "${meta.name}" does not match file "${file}" (expected ${kebab}.md)`);
+    }
   }
 
   if (!VALID_STATUSES.includes(meta.status)) {
@@ -112,10 +117,6 @@ async function validateSpec(file) {
 
   if (errors.length === 0) console.log(`✓ ${name} valid`);
   return { name, errors };
-}
-
-function componentName(meta, fallback) {
-  return typeof meta.name === "string" ? meta.name : fallback;
 }
 
 async function main() {

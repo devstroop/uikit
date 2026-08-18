@@ -1,4 +1,4 @@
-# uikit
+# UIKit
 
 Framework-agnostic UI kit for Devstroop app front-ends. One contract — many
 deliveries.

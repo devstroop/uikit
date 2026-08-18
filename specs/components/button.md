@@ -4,30 +4,30 @@ status: implemented
 frameworks:
   react: v0.2.0
 tokens:
-  - radius.md
-  - space.2
-  - font.sans
-  - font.weight-medium
-  - font.size-xs
-  - font.size-sm
-  - font.size-md
-  - color.primary
-  - color.primary-hover
-  - color.primary-fg
-  - color.surface
-  - color.surface-hover
-  - color.text
-  - color.border-strong
-  - color.danger
-  - color.danger-hover
-  - color.danger-fg
-  - color.focus
-  - transition.fast
+  - "radius.md"
+  - "space.2"
+  - "font.sans"
+  - "font.weight-medium"
+  - "font.size-xs"
+  - "font.size-sm"
+  - "font.size-md"
+  - "color.primary"
+  - "color.primary-hover"
+  - "color.primary-fg"
+  - "color.surface"
+  - "color.surface-hover"
+  - "color.text"
+  - "color.border-strong"
+  - "color.danger"
+  - "color.danger-hover"
+  - "color.danger-fg"
+  - "color.focus"
+  - "transition.fast"
 a11y:
-  - Renders a semantic <button> element (native Enter/Space activation).
-  - Focus visible ring via --se-color-focus (keyboard-only, :focus-visible).
-  - Disabled state blocks activation (native disabled attribute).
-  - Text-on-fill contrast >= 4.5:1 (primary-fg on primary, danger-fg on danger).
+  - "Renders a semantic <button> element (native Enter/Space activation)."
+  - "Focus visible ring via --se-color-focus (keyboard-only, :focus-visible)."
+  - "Disabled state blocks activation (native disabled attribute)."
+  - "Text-on-fill contrast >= 4.5:1 (primary-fg on primary, danger-fg on danger)."
 ---
 
 # Button

@@ -1,0 +1,63 @@
+---
+name: Badge
+status: implemented
+frameworks:
+  react: v0.2.0
+tokens:
+  - "space.1"
+  - "radius.full"
+  - "font.sans"
+  - "font.size-xs"
+  - "font.weight-medium"
+  - "color.surface-hover"
+  - "color.text-muted"
+  - "color.primary"
+  - "color.success"
+  - "color.warning"
+  - "color.danger"
+  - "color.primary-fg"
+  - "color.text"
+  - "color.surface"
+  - "color.border-strong"
+a11y:
+  - "Renders a semantic <span>; no interactive role — must not be used for interactive controls."
+  - "Text-on-fill contrast >= 4.5:1: primary-fg on primary (solid primary), text on surface (solid neutral/success/warning/danger) per schema contrastRules."
+  - "Soft/outline tones pair the tone color with a 12% color-mix tint or border of the same hue; tone-color-on-tint contrast is not covered by schema contrastRules."
+  - "Non-solid danger uses color.danger on tint (soft/outline); solid danger uses color.surface on color.danger rather than danger-fg."
+---
+# Badge
+
+A compact status or count label in soft, solid, or outline styles.
+
+## API
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `tone` | `neutral` \| `primary` \| `success` \| `warning` \| `danger` | `neutral` | Color tone |
+| `variant` | `soft` \| `solid` \| `outline` | `soft` | Fill style |
+
+All remaining props extend `HTMLAttributes<HTMLSpanElement>` and are spread
+onto the `<span>` (aria-label, className, ...). The component is forwardRef'd
+to the span.
+
+## Behavior
+
+- Single `<span>`; classes are `badge` + tone + variant. Soft is the base
+  style; `solid` and `outline` override it.
+- Soft: `surface-hover`/`text-muted` for neutral; 12% `color-mix` tint
+  background with the tone color as text for the other tones.
+- Solid: filled with `primary` + `primary-fg`; all other solid tones use the
+  tone color fill with `surface` text (neutral uses `text` fill on `surface`).
+- Outline: 1px `border-strong` + `text` for neutral; tone-colored border and
+  text for other tones.
+- Layout: `inline-flex`, `radius.full`, xs font, 2px 8px padding (hardcoded).
+
+## Keyboard
+
+Non-interactive span; no focus or activation semantics.
+
+## Tests
+
+No `.test.tsx` exists for this component in the react framework; no automated
+assertions are defined. Every framework implementation must pass an equivalent
+matrix (per `docs/DEVELOPMENT_STRATEGY.md`).
