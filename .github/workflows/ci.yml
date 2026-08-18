@@ -28,6 +28,7 @@ jobs:
           npm run tokens:generate
           git diff --exit-code
       - run: npm run specs:validate
+      - run: npm run parity:validate
 
   react:
     name: React framework

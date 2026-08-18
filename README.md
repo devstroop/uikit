@@ -14,7 +14,8 @@ frameworks/     per-technology implementations of the same contracts
   (`specs/components/*.md` with YAML frontmatter: API, tokens, a11y,
   test matrix); a framework is a faithful implementation, not a
   re-invention. `npm run specs:validate` cross-checks specs against the
-  token schema and the implementations.
+  token schema and the implementations; `npm run parity:validate` enforces
+  that a component uses exactly the tokens its spec declares.
 - **Tokens as data** — `themes/<name>/tokens.json` is validated against
   `specs/tokens.schema.json` (completeness + WCAG 2.1 AA contrast) and
   compiled to CSS by `scripts/generate-css.mjs`. See `specs/tokens.md`.
@@ -40,6 +41,7 @@ npm ci                        # tooling deps (yaml parser)
 npm run tokens:validate       # all themes must validate before commit
 npm run tokens:generate       # regenerate tokens.css (+ framework syncs)
 npm run specs:validate        # component specs vs. token schema + impls
+npm run parity:validate       # spec token lists vs. actual component usage
 
 # react framework
 npm run lint && npm run typecheck && npm test && npm run build --prefix frameworks/react
