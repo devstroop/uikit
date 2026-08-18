@@ -1,19 +1,22 @@
 ---
 name: Skeleton
 status: implemented
+category: feedback
 frameworks:
-  react: v0.3.0
-  htmx: v0.1.0
+  react: v0.3.5
+  htmx: v0.1.6
 tokens:
   - "color.surface-hover"
   - "radius.sm"
   - "color.border"
+  - "color.border-strong"
   - "motion.shimmer"
   - "radius.md"
 a11y:
   - "Renders a <span> with aria-hidden=\"true\" — purely decorative, excluded from the accessibility tree."
   - "Not focusable and never interactive; no keyboard or focus-visible behavior."
   - "Shimmer uses color.surface-hover with a color.border sweep — a non-text visual indicator (no text contrast pair involved)."
+  - "In dark mode the sweep uses color.border-strong: several themes define dark border === surface-hover, which would make the band invisible."
 ---
 
 # Skeleton

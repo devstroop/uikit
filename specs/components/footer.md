@@ -1,9 +1,10 @@
 ---
 name: Footer
 status: implemented
+category: layout
 frameworks:
-  react: v0.3.4
-  htmx: v0.1.5
+  react: v0.3.5
+  htmx: v0.1.6
 tokens:
   - "color.surface"
   - "color.border"

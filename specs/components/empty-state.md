@@ -1,9 +1,10 @@
 ---
 name: EmptyState
 status: implemented
+category: data-display
 frameworks:
-  react: v0.3.0
-  htmx: v0.1.0
+  react: v0.3.5
+  htmx: v0.1.6
 tokens:
   - "space.2"
   - "space.6"
@@ -39,7 +40,9 @@ Centered placeholder used when a list or panel has no content to show.
 ## Behavior
 
 - Single `div` laid out as a centered flex column (`align-items: center`,
-  `gap: space.2`, `padding: space.6`, `text-align: center`).
+  `gap: space.2`, `padding: space.6`, `text-align: center`). The root is
+  `width: 100%`, so the centered column centers within the whole
+  containing block, not just the content box.
 - Slots render in fixed order — icon, title, description, action — and
   only when non-null. No variants, tones, or state handling.
 - Title: `font.size-md` / `weight-bold` in `color.text`; description:

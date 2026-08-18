@@ -1,9 +1,10 @@
 ---
 name: Column
 status: implemented
+category: layout
 frameworks:
-  react: v0.3.3
-  htmx: v0.1.4
+  react: v0.3.5
+  htmx: v0.1.6
 tokens: []
 a11y:
   - "Renders a plain <div>; purely a layout container — no semantic role, no aria, no keyboard behavior."

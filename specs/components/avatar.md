@@ -1,9 +1,10 @@
 ---
 name: Avatar
 status: implemented
+category: data-display
 frameworks:
-  react: v0.3.2
-  htmx: v0.1.3
+  react: v0.3.5
+  htmx: v0.1.6
 tokens:
   - "color.surface-hover"
   - "font.weight-bold"
@@ -47,11 +48,16 @@ derived initials on a deterministic hash-based background color.
   `status` is set.
 - Initials: first letters of up to the first two whitespace-separated words,
   uppercased; no name → `?`.
-- Background: deterministic hash of the name selects one of six hardcoded
-  hex palette colors, applied via inline `style={{ background }}` (not a
-  theme token). Initials text is hardcoded `#fff`.
-- Sizes are hardcoded px (sm 28, md 36, lg 48); status dot is 9px with a
-  2px `color.surface` ring positioned at the bottom-right.
+- Background: deterministic hash of the name selects one of six per-mode
+  palette tokens (`color.palette-0..5`, defined in `tokens.css` and derived
+  by `scripts/derive-tone-tokens.mjs` so surface on the fill >= 4.55), applied
+  via inline `style={{ background }}` in React and a `--palette-N` modifier
+  class in htmx. Initials text is `color.surface`.
+- Sizes are hardcoded px (sm 28, md 36, lg 48); the root also anchors a
+  per-size `font-size` (sm 16, md 20, lg 26) so the initials (`0.72em`,
+  ≈ 11.5 / 14.4 / 18.7px) scale with the avatar; the status dot scales per
+  size (sm 10, md 12, lg 14) with a 2px `color.surface` ring positioned at
+  the bottom-right.
 - Status fill colors: online → success, offline → text-muted, away → warning.
 
 ## Keyboard

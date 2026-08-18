@@ -1,0 +1,53 @@
+# Component Taxonomy
+
+Every component spec carries a `category` in its frontmatter. This document
+is the single source of truth: `scripts/validate-specs.mjs` parses the
+category -> members map below and fails any spec whose `category` is unknown
+or whose component is not listed (or listed twice).
+
+The categories synthesize the grouping conventions of three industry
+references:
+
+- **Radzen Blazor** — Buttons, Inputs, Data, Layout, Navigation,
+  Notifications, Overlays (feature-grouped docs)
+- **Material UI (MUI)** — Inputs, Data Display, Feedback, Surfaces,
+  Navigation, Layout, Utils
+- **shadcn/ui** — Actions, Forms, Data Display, Feedback, Navigation,
+  Layout, Surfaces
+
+The uikit taxonomy is intentionally small (8 buckets): a component belongs to
+the bucket that answers "what does a consumer build with this?" A category
+with a single member signals a core primitive that warrants its own bucket
+(actions) or a cross-cutting concern (utilities) — not a taxonomy failure.
+
+## Taxonomy
+
+actions: button
+data-display: avatar, badge, empty-state, icon, stat, table
+feedback: alert, dialog, progress, skeleton, toast, tooltip
+forms: checkbox, field, input, label, select, switch, textarea
+layout: body, column, footer, header, layout, row
+navigation: sidebar, tabs
+surfaces: accordion, card
+utilities: theme-switcher
+
+## Placement notes
+
+- **layout** — the app shell and its composition primitives (Radzen's
+  RadzenLayout regions: header/sidebar/body/footer; MUI's Grid/Stack). The
+  Sidebar shell region is the exception: it lands in navigation because its
+  purpose is wayfinding (MUI places Drawer under Navigation).
+- **forms** — everything a `<form>` consumes (Radzen Inputs; MUI Inputs).
+  `field`/`label` are the composition parts around the controls.
+- **data-display** — presentational components that render data without
+  input semantics (MUI Data Display: Avatar, Badge, Table, Tooltip).
+  `tooltip` stays in feedback here because it is transient feedback, not a
+  static display (Radzen's Notifications; shadcn Feedback).
+- **feedback** — transient or stateful messaging: alerts, dialogs,
+  progress, skeletons, toasts, tooltips (MUI Feedback: Alert, Dialog,
+  Progress, Skeleton, Snackbar; Radzen Notifications + Overlays).
+- **surfaces** — static content containers (MUI Surfaces: Accordion, Card).
+  `accordion` is a static container, not navigation, in this system.
+- **actions** — the single interactive trigger primitive (Radzen Buttons;
+  shadcn Actions). Menus/dropdowns belong here when they ship.
+- **utilities** — cross-cutting, non-visual concerns (theme switching).

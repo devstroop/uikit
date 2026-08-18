@@ -1,9 +1,10 @@
 ---
 name: Row
 status: implemented
+category: layout
 frameworks:
-  react: v0.3.3
-  htmx: v0.1.4
+  react: v0.3.5
+  htmx: v0.1.6
 tokens:
   - "space.4"
 a11y:

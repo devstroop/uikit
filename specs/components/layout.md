@@ -1,9 +1,10 @@
 ---
 name: Layout
 status: implemented
+category: layout
 frameworks:
-  react: v0.3.4
-  htmx: v0.1.5
+  react: v0.3.5
+  htmx: v0.1.6
 tokens: []
 a11y:
   - "Renders a plain <div>; landmarks come from the section components (Header <header>, Body <main>, Footer <footer>, Sidebar <aside>)."
@@ -40,6 +41,10 @@ All other `HTMLAttributes<HTMLDivElement>` are spread onto the `<div>`.
   min-height: 100vh }`; `.se-layout-row { display: flex; flex: 1;
   min-width: 0 }`. `min-height: 100vh` is a layout default and can be
   overridden via `style` for embedded shells.
+- An overlay sidebar (see `Sidebar`) becomes absolutely positioned, so
+  the row turns into its positioning context:
+  `.se-layout-row:has(.se-sidebar--overlay) { position: relative }` —
+  pure CSS, no prop.
 - Collapsing a sidebar (see `Sidebar`) shrinks the row automatically —
   flex adjusts, no re-render of siblings needed.
 - No JS, no `data-*` hooks; the skeleton is pure flex arrangement

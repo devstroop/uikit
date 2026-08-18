@@ -1,9 +1,10 @@
 ---
 name: Stat
 status: implemented
+category: data-display
 frameworks:
-  react: v0.3.2
-  htmx: v0.1.3
+  react: v0.3.5
+  htmx: v0.1.6
 tokens:
   - "font.sans"
   - "space.2"

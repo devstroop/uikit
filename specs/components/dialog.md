@@ -1,9 +1,10 @@
 ---
 name: Dialog
 status: implemented
+category: feedback
 frameworks:
-  react: v0.3.0
-  htmx: v0.1.0
+  react: v0.3.5
+  htmx: v0.1.6
 tokens:
   - "z.modal"
   - "color.border"
@@ -28,7 +29,7 @@ tokens:
   - "space.2"
 a11y:
   - "Renders a native <dialog> element opened via showModal() (implicit role=\"dialog\", top-layer modal semantics, background made inert by the browser)."
-  - "aria-labelledby=\"se-dialog-title\" links the dialog to its <h2> title."
+  - "Each dialog instance generates unique ids for its title/description via useId(); `aria-labelledby` links the dialog to its <h2> title and is present only when a title is rendered."
   - "aria-describedby=\"se-dialog-desc\" is set only when a description is rendered."
   - "Close button is a native <button type=\"button\"> with aria-label=\"Close dialog\" and onClick={onClose}."
   - "No custom focus trap or focus restore — focus entry/containment is delegated to native showModal()."

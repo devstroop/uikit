@@ -1,9 +1,10 @@
 ---
 name: Progress
 status: implemented
+category: feedback
 frameworks:
-  react: v0.3.0
-  htmx: v0.1.0
+  react: v0.3.5
+  htmx: v0.1.6
 tokens:
   - "radius.full"
   - "color.surface-hover"
@@ -34,20 +35,35 @@ Designed for loading states, uploads, and multi-step tasks.
 | `max` | `number` | `100` | Maximum value; `0` yields an empty bar |
 | `tone` | `primary` \| `success` \| `warning` \| `danger` | `primary` | Fill color tier |
 | `indeterminate` | `boolean` | `false` | Animated sliding bar with no numeric state |
+| `variant` | `"linear"` \| `"circular"` | `"linear"` | Shape (Radzen `ProgressBarCircular` parity) |
+| `size` | `number` | `64` | Circular diameter in px; linear ignores it |
 
-All remaining props are forwarded to the native `<div>` (`className`, `id`,
-...). The component is a plain function component (not `forwardRef`d).
+All remaining props are forwarded to the native `<div>` for linear
+(`className`, `id`, ...). The circular variant forwards only the common
+attribute subset `id` / `style` / `aria-label` / `aria-labelledby` (SVG
+element typing); other HTML attributes are not forwarded on the ring. The
+component is a plain function component (not `forwardRef`d).
 
 ## Behavior
 
-- DOM: `div[role="progressbar"] > div.bar`. Width of `.bar` is set inline to
-  `(value / max) * 100` clamped to `[0, 100]`; `aria-valuenow` is
+- Linear DOM: `div[role="progressbar"] > div.bar`. Width of `.bar` is set
+  inline to `(value / max) * 100` clamped to `[0, 100]`; `aria-valuenow` is
   `Math.round(value)` **unclamped**.
-- Tones map to fill backgrounds: primary, success, warning, danger.
-- Indeterminate: `.bar` fixed at 40% width, animated
-  `translateX(-100%) → 350%` loop using the slow transition.
+- Circular DOM: `svg[role="progressbar"]` (`viewBox="0 0 size size"`)
+  with a `circle` track (`surface-hover`) plus a `circle` fill stroked in
+  the tone color, rotated `-90deg` so progress starts at 12 o'clock.
+- Circular geometry: stroke width `6px`; the fill circle's
+  `stroke-dasharray` is the circumference (`2π · (size/2 − 3)`) and
+  `stroke-dashoffset` is `circumference · (1 − value/max)` — computed in
+  JS (react) or inline by the server template (htmx, formula documented
+  in the reference markup).
+- Tones map to fill backgrounds (linear) / stroke (circular): primary,
+  success, warning, danger.
+- Indeterminate: linear keeps the 40% sliding bar; circular rotates the
+  ring continuously.
 - Track is 6px tall, full width, `radius.full`, with `surface-hover` fill;
-  bar transitions width on `transition.base` / `ease.out`.
+  bar transitions width on `transition.base` / `ease.out`; circular fill
+  transitions `stroke-dashoffset` on the same easing.
 
 ## Keyboard
 
@@ -61,6 +77,9 @@ None — the element is not focusable and exposes no keyboard interaction.
 | "Clamps value to the max" | `aria-valuenow` is `100` (clamped to max) |
 | Indeterminate | no `aria-valuenow`, `indeterminate` class applied |
 | Tone | `tone="success"` adds `success` class |
+| Circular | `role="progressbar"` on an `<svg>` with tone class and `aria-valuenow` |
+| Circular geometry | fill circle has inline `stroke-dasharray` (circumference) and `stroke-dashoffset` (remaining arc) |
+| Circular indeterminate | ring rotates (indeterminate class) |
 
 Every framework implementation must pass an equivalent matrix (per
 `docs/DEVELOPMENT_STRATEGY.md`).

@@ -74,6 +74,30 @@ Derived tokens carry their own contracts (see
 Only opaque colors are checked; translucent values (`focus`, `backdrop`,
 alpha-bearing colors) are skipped.
 
+## Typography scale
+
+Component text draws exclusively from the four `font.size-*` tokens. Every
+text role maps to exactly one tier, so sizes stay consistent across
+components (learned from Radzen's single `TextStyle` scale — components never
+pick sizes ad hoc):
+
+| Tier | Token | Value | Roles |
+|---|---|---|---|
+| `heading-lg` | `size-lg` | 18px | Overlay titles: dialog, stat value |
+| `heading-md` | `size-md` | 16px | Block titles: card header, empty-state title; default buttons, icon glyphs (md) |
+| `heading-sm` | `size-sm` | 14px | Section labels: accordion header, tabs; form labels, control text, body copy (alert, card body, table cells, dialog content), toast title |
+| `caption` | `size-xs` | 12px | Meta: badge, stat label/delta/hint, table headers, field hints/errors, tooltip, toast description, xs/sm buttons |
+| relative | — | `0.72em` | Avatar initials (scales with the avatar size) |
+
+Two rules keep the scale honest:
+
+- **No raw pixel sizes in component CSS.** Every `font-size` must be a token;
+  icon glyphs in dismiss buttons use the matching token
+  (`size-md` in alert/toast, `size-lg` in dialog).
+- **Body copy never inherits the page size.** Containers that carry prose
+  (card body, dialog content, table cells, tabs panels) set `size-sm`
+  explicitly.
+
 ## Authoring a theme
 
 1. Copy `themes/default/tokens.json` to `themes/<name>/tokens.json`.

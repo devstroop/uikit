@@ -1,9 +1,10 @@
 ---
 name: Field
 status: implemented
+category: forms
 frameworks:
-  react: v0.3.2
-  htmx: v0.1.3
+  react: v0.3.5
+  htmx: v0.1.6
 tokens:
   - "space.1"
   - "font.sans"
@@ -43,8 +44,13 @@ Form wrapper that composes a label, control, and hint/error messaging.
 - Flex column container with `gap: space.1`; label styled with
   `font.size-sm` / `weight-medium`, hint and error with `font.size-xs`.
 - `error` and `hint` are mutually exclusive — error wins when both set.
-- No `aria-describedby`/`aria-invalid` wiring: error/hint text is not
-  automatically linked to the child control.
+- When the child is a single element, it is cloned with
+  `aria-describedby` pointing at the visible message (error id wins over
+  hint id); a consumer-supplied `aria-describedby` on the child is
+  preserved and space-joined.
+- When `error` is set and the child is a single element, the clone also
+  receives `aria-invalid="true"` (a consumer-supplied `aria-invalid` is
+  preserved).
 
 ## Keyboard
 
@@ -61,7 +67,9 @@ click-to-focus is native `<label>` + `htmlFor` behavior.
 | Error | renders in a `role="alert"` div |
 | Hint without error | hint text renders, no alert role |
 | Error + hint | error wins; hint is not rendered |
-| ARIA wiring | no `aria-describedby`/`aria-invalid` added to the child control |
+| ARIA wiring | child control receives `aria-describedby` pointing at the visible message (error id wins) |
+| ARIA invalid | `error` adds `aria-invalid="true"` to the child control |
+| ARIA merge | consumer-supplied `aria-describedby`/`aria-invalid` on the child are preserved |
 | No label | children render without a `<label>` |
 
 Every framework implementation must pass an equivalent matrix (per

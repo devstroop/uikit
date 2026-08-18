@@ -1,9 +1,10 @@
 ---
 name: Accordion
 status: implemented
+category: surfaces
 frameworks:
-  react: v0.3.0
-  htmx: v0.1.0
+  react: v0.3.5
+  htmx: v0.1.6
 tokens:
   - "color.border"
   - "radius.md"

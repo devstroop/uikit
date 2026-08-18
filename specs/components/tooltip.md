@@ -1,9 +1,10 @@
 ---
 name: Tooltip
 status: implemented
+category: feedback
 frameworks:
-  react: v0.3.0
-  htmx: v0.1.0
+  react: v0.3.5
+  htmx: v0.1.6
 tokens:
   - "z.tooltip"
   - "color.text"
@@ -17,7 +18,7 @@ tokens:
   - "transition.fast"
 a11y:
   - "Tooltip element has `role=\"tooltip\"` with a `useId`-generated id."
-  - "When open, the trigger element is cloned with `aria-describedby` pointing at the tooltip id (attribute absent while closed); a consumer-supplied `aria-describedby` on the child is preserved and space-joined."
+  - "When open, the trigger element is cloned with `aria-describedby` pointing at the tooltip id (attribute absent while closed); a consumer-supplied `aria-describedby` on the child is preserved and space-joined. The htmx reference implementation applies the same contract on the trigger element: `aria-describedby` is set while the bubble is visible and removed when it hides."
   - "Opens on both hover and keyboard focus (wrapper `onMouseEnter`/`onFocus`), closes on leave/blur, and on Escape keydown while open."
   - "Arrow span is `aria-hidden=\"true\"`; the tooltip has `pointer-events: none`."
   - "Text-on-fill contrast >= 4.5:1 (bg on text — inverted tooltip: `color.bg` foreground on `color.text` background)."

@@ -1,9 +1,10 @@
 ---
 name: Card
 status: implemented
+category: surfaces
 frameworks:
-  react: v0.3.0
-  htmx: v0.1.0
+  react: v0.3.5
+  htmx: v0.1.6
 tokens:
   - "radius.lg"
   - "color.surface"
@@ -16,6 +17,7 @@ tokens:
   - "color.focus"
   - "space.4"
   - "font.size-md"
+  - "font.size-sm"
   - "font.weight-bold"
   - "color.text"
   - "space.3"
@@ -50,6 +52,9 @@ always wrapped in `.body`.
   `border-strong` and lifts to `shadow.sm`.
 - Header spacing collapses into body (`header + body` reduces top padding to
   `space.3`); body padding is `space.4`.
+- Typography: header is `font.size-md` / `weight-bold` (heading-md tier);
+  body text is `font.size-sm` (body tier) — it no longer inherits the page
+  size.
 
 ## Keyboard
 
