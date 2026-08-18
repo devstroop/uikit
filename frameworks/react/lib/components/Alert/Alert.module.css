@@ -11,18 +11,22 @@
 
 .info {
   border-color: var(--se-color-primary);
+  background-color: color-mix(in srgb, var(--se-color-primary) 12%, transparent);
 }
 
 .success {
   border-color: var(--se-color-success);
+  background-color: color-mix(in srgb, var(--se-color-success) 12%, transparent);
 }
 
 .warning {
   border-color: var(--se-color-warning);
+  background-color: color-mix(in srgb, var(--se-color-warning) 12%, transparent);
 }
 
 .danger {
   border-color: var(--se-color-danger);
+  background-color: color-mix(in srgb, var(--se-color-danger) 12%, transparent);
 }
 
 .content {
@@ -45,8 +49,10 @@
   flex-shrink: 0;
   width: 22px;
   height: 22px;
+  margin-top: calc(-1 * var(--se-space-3) / 2);
+  margin-right: calc(-1 * var(--se-space-4) / 2);
   border: none;
-  border-radius: var(--se-radius-sm);
+  border-radius: var(--se-radius-md);
   background: transparent;
   color: var(--se-color-text-muted);
   font-size: 16px;
