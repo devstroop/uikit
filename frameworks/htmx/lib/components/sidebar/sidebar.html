@@ -1,0 +1,27 @@
+<!--
+  Sidebar — collapsible flank (Radzen RadzenSidebar model).
+  Root: <aside class="se-sidebar [se-sidebar--left|--right] [se-sidebar--collapsed]" data-se-sidebar>
+  Position: --left (default, right border) or --right (left border).
+  Width: var(--se-layout-sidebar-width, 240px) — override inline or
+  per theme.
+  Collapse: author adds se-sidebar--collapsed for the initial state;
+  any element with data-se-sidebar-toggle="#id" flips the class and
+  mirrors aria-expanded on itself. Toggle should set aria-controls
+  pointing at the sidebar id.
+  Collapse is visual-only: hide the aside (hidden/inert) as well if
+  its content must not be reachable while collapsed.
+-->
+
+<aside class="se-sidebar se-sidebar--left" id="preview-sidebar" data-se-sidebar>
+  <nav aria-label="Preview navigation">
+    <ul class="se-list" style="display: grid; gap: 4px">
+      <li>Dashboard</li>
+      <li>Users</li>
+      <li>Settings</li>
+    </ul>
+  </nav>
+</aside>
+
+<button class="se-button se-button--ghost se-button--sm" type="button" data-se-sidebar-toggle="#preview-sidebar" aria-expanded="true" aria-controls="preview-sidebar">
+  Toggle sidebar
+</button>

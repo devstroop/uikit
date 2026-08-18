@@ -11,6 +11,8 @@
  *   Toast       [data-se-toast] container + window.seToast(options)
  *   Dismiss     [data-se-dismiss] removes the closest [data-se-dismissable]
  *   Interactive [data-se-interactive] Enter/Space dispatch click
+ *   Sidebar     [data-se-sidebar-toggle="#id"] toggles --collapsed on the
+ *               target sidebar and mirrors aria-expanded on the trigger
  */
 
 (function () {
@@ -197,6 +199,18 @@
       e.preventDefault();
       el.click();
     }
+  });
+
+  /* ---------------- Sidebar toggle ---------------- */
+
+  on("[data-se-sidebar-toggle]", "click", (trigger) => {
+    const selector = trigger.getAttribute("data-se-sidebar-toggle");
+    const target = selector
+      ? document.querySelector(selector)
+      : trigger.closest("[data-se-sidebar]");
+    if (!target) return;
+    const collapsed = target.classList.toggle("se-sidebar--collapsed");
+    trigger.setAttribute("aria-expanded", String(!collapsed));
   });
 
   /* ---------------- API ---------------- */
