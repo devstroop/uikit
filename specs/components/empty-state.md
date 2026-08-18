@@ -2,7 +2,7 @@
 name: EmptyState
 status: implemented
 frameworks:
-  react: v0.2.0
+  react: v0.3.0
 tokens:
   - "space.2"
   - "space.6"

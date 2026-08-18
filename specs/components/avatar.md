@@ -2,7 +2,7 @@
 name: Avatar
 status: implemented
 frameworks:
-  react: v0.2.0
+  react: v0.3.0
 tokens:
   - "color.surface-hover"
   - "font.weight-bold"

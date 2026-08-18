@@ -2,7 +2,7 @@
 name: Stat
 status: implemented
 frameworks:
-  react: v0.2.0
+  react: v0.3.0
 tokens:
   - "font.sans"
   - "space.2"

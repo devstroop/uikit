@@ -2,7 +2,7 @@
 name: Checkbox
 status: implemented
 frameworks:
-  react: v0.2.0
+  react: v0.3.0
 tokens:
   - "color.border-strong"
   - "radius.sm"
