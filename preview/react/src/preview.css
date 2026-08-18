@@ -94,6 +94,14 @@ body {
   text-align: center;
 }
 
+.shell-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+}
+
 .chrome-footer {
   padding: 24px;
   color: var(--se-color-text-muted);
