@@ -58,4 +58,13 @@ None — the element is not focusable and exposes no keyboard interaction.
 
 | Scenario | Assertion |
 |---|---|
-| — no test file present in `frameworks/react/lib/components/Stat/` | Tests must be added per `docs/DEVELOPMENT_STRATEGY.md` |
+| Label + value | both texts are rendered |
+| ReactNode value | rendered as-is |
+| Delta | rendered only when provided; default `neutral` tone class applied |
+| Delta tones | `success` / `danger` tone classes applied |
+| Hint | rendered only when provided |
+| DOM slots | label and hint are direct children of the root; value and delta share the row container |
+| Forwarded props | `className`, `data-*` reach the outer div |
+
+Every framework implementation must pass an equivalent matrix (per
+`docs/DEVELOPMENT_STRATEGY.md`).

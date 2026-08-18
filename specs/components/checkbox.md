@@ -51,6 +51,14 @@ indicator; disabled inputs cannot be focused or toggled.
 
 ## Tests
 
-No `.test.tsx` exists for this component in the react framework; no automated
-assertions are defined. Every framework implementation must pass an equivalent
-matrix (per `docs/DEVELOPMENT_STRATEGY.md`).
+| Scenario | Assertion |
+|---|---|
+| Renders control | `role="checkbox"` with `type="checkbox"` |
+| Default state + click | unchecked by default; click fires `onChange` and checks it |
+| Controlled `checked` | checked state reflected |
+| Disabled + click | `toBeDisabled`; click does not fire `onChange` or check it |
+| Native props | `id`/`name`/`value` forwarded |
+| Ref | forwarded to the `<input>` element |
+
+Every framework implementation must pass an equivalent matrix (per
+`docs/DEVELOPMENT_STRATEGY.md`).

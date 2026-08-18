@@ -52,7 +52,14 @@ click-to-focus is native `<label>` + `htmlFor` behavior.
 
 | Scenario | Assertion |
 |---|---|
-| No automated tests shipped with v0.2.0 (no `Field.test.tsx` in `frameworks/react/lib/components/Field/`) | — |
+| Label + `htmlFor` | a `<label for="...">` is rendered |
+| Label click | focuses the associated control (native label behavior) |
+| Required marker | a `*` span with `aria-hidden="true"` |
+| Error | renders in a `role="alert"` div |
+| Hint without error | hint text renders, no alert role |
+| Error + hint | error wins; hint is not rendered |
+| ARIA wiring | no `aria-describedby`/`aria-invalid` added to the child control |
+| No label | children render without a `<label>` |
 
 Every framework implementation must pass an equivalent matrix (per
 `docs/DEVELOPMENT_STRATEGY.md`).

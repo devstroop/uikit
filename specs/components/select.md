@@ -68,4 +68,14 @@ the only focus indicator.
 
 | Scenario | Assertion |
 |---|---|
-| — no test file present in `frameworks/react/lib/components/Select/` | Tests must be added per `docs/DEVELOPMENT_STRATEGY.md` |
+| Options from `options` prop | native `role="combobox"`; each `<option>` carries its `value` and label text |
+| Disabled option | option with `disabled: true` is disabled; others are not |
+| Children fallback | `<option>` children render when `options` is omitted |
+| Options precedence | `options` win over `children` when both are provided |
+| Invalid state | `aria-invalid="true"` only when `invalid` (omitted otherwise); `invalid` class applied |
+| Sizes | `md` class by default; `size="sm"` applies the `sm` class |
+| Forwarded attributes | `name`, `disabled` reach the native select |
+| Selection | `selectOptions` fires `onChange` and updates the selected value |
+
+Every framework implementation must pass an equivalent matrix (per
+`docs/DEVELOPMENT_STRATEGY.md`).

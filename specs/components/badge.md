@@ -58,6 +58,14 @@ Non-interactive span; no focus or activation semantics.
 
 ## Tests
 
-No `.test.tsx` exists for this component in the react framework; no automated
-assertions are defined. Every framework implementation must pass an equivalent
-matrix (per `docs/DEVELOPMENT_STRATEGY.md`).
+| Scenario | Assertion |
+|---|---|
+| Renders children | a `<span>` with the child text |
+| Default tone/variant | class names include `neutral` and `soft` |
+| Tone prop | class name includes the tone (`primary`, `success`, `danger`, `warning`) |
+| Variant prop | class name includes the variant (`solid`, `outline`) |
+| Extra props + className | forwarded to the span (`aria-label`, custom class) |
+| Ref | forwarded to the `<span>` element |
+
+Every framework implementation must pass an equivalent matrix (per
+`docs/DEVELOPMENT_STRATEGY.md`).

@@ -53,7 +53,12 @@ rendered. Keyboard access depends entirely on content passed via `action`.
 
 | Scenario | Assertion |
 |---|---|
-| No automated tests shipped with v0.2.0 (no `EmptyState.test.tsx` in `frameworks/react/lib/components/EmptyState/`) | — |
+| Renders title | title text is in the document |
+| All slots provided | icon, description, and action render (action keeps its button role) |
+| Optional slots omitted | only the title slot renders (single child div) |
+| Slot order | children render in fixed order: icon, title, description, action |
+| `className` | applied to the container div |
+| Action interactivity | button inside `action` is not disabled and remains clickable |
 
 Every framework implementation must pass an equivalent matrix (per
 `docs/DEVELOPMENT_STRATEGY.md`).

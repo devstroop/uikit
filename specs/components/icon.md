@@ -48,7 +48,13 @@ SVG is never a tab stop.
 
 | Scenario | Assertion |
 |---|---|
-| No automated tests shipped with v0.2.0 (no `Icon.test.tsx` in `frameworks/react/lib/components/Icon/`) | — |
+| Defaults | inline `<svg>` with `aria-hidden="true"` and `focusable="false"` |
+| Default size/stroke | `width`/`height` 16, `viewBox="0 0 24 24"`, `stroke-width` 2 |
+| `size` / `strokeWidth` | attributes updated to the given values |
+| Glyph | one or more `<path>` elements for the requested name |
+| Override a11y | `aria-hidden={false}` + `role` override the defaults |
+| className / ref | forwarded to the `<svg>` |
+| `iconNames` export | array of 40 names including `check`, `settings`, `link` |
 
 Every framework implementation must pass an equivalent matrix (per
 `docs/DEVELOPMENT_STRATEGY.md`).

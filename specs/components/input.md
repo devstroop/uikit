@@ -63,7 +63,12 @@ the keyboard focus indicator; pointer focus shows no ring.
 
 | Scenario | Assertion |
 |---|---|
-| No automated tests shipped with v0.2.0 (no `Input.test.tsx` in `frameworks/react/lib/components/Input/`) | — |
+| Renders a native input with an accessible name | `role="textbox"` with accessible name from `aria-label` |
+| Default size | `md` size class applied; `size="sm"` applies the `sm` class |
+| Invalid state | `aria-invalid="true"` only when `invalid` (omitted otherwise); `invalid` class applied |
+| Forwarded attributes | `type`, `placeholder`, `disabled` reach the native input |
+| Custom `className` | merged onto the input |
+| Text entry | typing fires `onChange`; a disabled input ignores typing |
 
 Every framework implementation must pass an equivalent matrix (per
 `docs/DEVELOPMENT_STRATEGY.md`).

@@ -43,7 +43,11 @@ controls per browser behavior) transfers focus to the labeled control via
 
 | Scenario | Assertion |
 |---|---|
-| No automated tests shipped with v0.2.0 (no `Label.test.tsx` in `frameworks/react/lib/components/Label/`) | — |
+| Renders a native label | `<label>` element in the DOM with the given text |
+| Label association | a control is discoverable via `getByLabelText` when `htmlFor` matches its `id` |
+| Click activation | clicking the label transfers focus to the associated control |
+| Forwarded attributes | `id`, `aria-*`, `onClick` reach the native `<label>` |
+| Custom `className` | merged onto the label |
 
 Every framework implementation must pass an equivalent matrix (per
 `docs/DEVELOPMENT_STRATEGY.md`).

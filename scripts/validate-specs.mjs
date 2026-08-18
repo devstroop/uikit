@@ -4,14 +4,15 @@
  *   1. required frontmatter fields with correct types
  *   2. each listed token exists in the token schema (tier.token)
  *   3. status === "implemented" requires an implementation: the component
- *      source dir must exist for every framework listed in `frameworks`
+ *      source dir must exist for every framework listed in `frameworks`,
+ *      and the react implementation must ship a test file covering it
  *
  *   node scripts/validate-specs.mjs
  *
  * Exit 1 on any violation.
  */
 
-import { readFile, readdir } from "node:fs/promises";
+import { access, readFile, readdir } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parse as parseYaml } from "yaml";
@@ -88,6 +89,17 @@ async function validateSpec(file) {
               `implemented in ${technology} but no source dir: ` +
                 `frameworks/${technology}/lib/components/${meta.name}/`,
             );
+            continue;
+          }
+          if (technology === "react") {
+            try {
+              await access(join(dir, `${meta.name}.test.tsx`));
+            } catch {
+              fail(
+                `implemented in ${technology} but no test file: ` +
+                  `${meta.name}.test.tsx`,
+              );
+            }
           }
         }
       }
