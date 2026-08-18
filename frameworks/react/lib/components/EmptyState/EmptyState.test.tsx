@@ -26,9 +26,9 @@ describe("EmptyState", () => {
   it("renders only the title slot when other slots are omitted", () => {
     const { container } = render(<EmptyState title="Only title" />);
     const root = container.firstElementChild as HTMLElement;
-    const [title] = Array.from(root.children) as HTMLElement[];
-    expect(title.className).toContain("title");
-    expect(title).toHaveTextContent("Only title");
+    const [title] = Array.from(root.children);
+    expect((title as HTMLElement).className).toContain("title");
+    expect(title as HTMLElement).toHaveTextContent("Only title");
   });
 
   it("renders slots in fixed order: icon, title, description, action", () => {
@@ -41,11 +41,11 @@ describe("EmptyState", () => {
       />,
     );
     const root = container.firstElementChild as HTMLElement;
-    const [icon, title, description, action] = Array.from(root.children) as HTMLElement[];
-    expect(icon.className).toContain("icon");
-    expect(title.className).toContain("title");
-    expect(description.className).toContain("description");
-    expect(action.className).toContain("action");
+    const [icon, title, description, action] = Array.from(root.children);
+    expect((icon as HTMLElement).className).toContain("icon");
+    expect((title as HTMLElement).className).toContain("title");
+    expect((description as HTMLElement).className).toContain("description");
+    expect((action as HTMLElement).className).toContain("action");
   });
 
   it("applies className to the container", () => {
