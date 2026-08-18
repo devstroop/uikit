@@ -9,3 +9,7 @@
   flex: 1;
   min-width: 0;
 }
+
+.se-layout-row:has(.se-sidebar--overlay) {
+  position: relative;
+}

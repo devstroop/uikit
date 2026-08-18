@@ -6,7 +6,7 @@
     size     --sm (28px) | --md (36px) | --lg (48px)   (default: --md)
     status   --online | --offline | --away             (omitted when absent)
     palette  --palette-0..--palette-5                  (hash of the name,
-             selects one of the six hardcoded hex colors)
+             selects one of the six per-mode palette tokens)
   Parts:
     initials  <span class="se-avatar-initials" aria-hidden="true">
     image     <img class="se-avatar-image">
@@ -14,7 +14,8 @@
   The server template derives the initials (first letters of up to the
   first two whitespace-separated words, uppercased; "?" when no name) and
   the palette index (the react hash: h = (h*31 + c) >>> 0 over the name,
-  then h % 6). The palette is hardcoded hex, not tokenized.
+  then h % 6). The palette resolves per-mode via --se-color-palette-0..5
+  tokens (see scripts/derive-tone-tokens.mjs).
 -->
 
 <span class="se-avatar se-avatar--md se-avatar--palette-1" role="img" aria-label="Jane Doe">

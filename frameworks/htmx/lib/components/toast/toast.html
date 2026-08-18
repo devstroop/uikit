@@ -1,14 +1,20 @@
 <!--
   Toast — reference markup for server templates.
-  Viewport: <div class="se-toast-viewport" data-se-toast aria-live="polite">
-    (behaviors.js creates it automatically if absent)
+  Viewport: <div class="se-toast-viewport [se-toast-viewport--top-left |
+    --top-right | --bottom-left]" data-se-toast aria-live="polite">
+    (defaults to bottom-right, the base style; behaviors.js creates the
+    viewport automatically if absent, honoring seToast({ position }) for
+    the auto-created container only — a static viewport carries its own
+    corner class)
   Item: <div class="se-toast se-toast--<tone>" data-se-dismissable role="status">
     tone  --info (default) | --success | --warning | --danger
   Dismiss: <button class="se-toast-dismiss" type="button" data-se-dismiss
            aria-label="Dismiss notification">×</button>
   Static items are rendered by the server; dynamic ones use
-  window.seToast({ title, description, tone, durationMs }).
+  window.seToast({ title, description, tone, durationMs, position }).
 -->
+
+<div class="se-toast-viewport se-toast-viewport--top-left" data-se-toast aria-live="polite"></div>
 
 <div class="se-toast-viewport" data-se-toast aria-live="polite">
   <div class="se-toast se-toast--success" data-se-dismissable role="status">

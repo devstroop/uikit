@@ -12,7 +12,10 @@
  *   Dismiss     [data-se-dismiss] removes the closest [data-se-dismissable]
  *   Interactive [data-se-interactive] Enter/Space dispatch click
  *   Sidebar     [data-se-sidebar-toggle="#id"] toggles --collapsed on the
- *               target sidebar and mirrors aria-expanded on the trigger
+ *               target sidebar and mirrors aria-expanded on the trigger;
+ *               [data-se-sidebar-mask="#id"] closes the target drawer
+ *               (Escape closes any open drawer)
+ *   Theme       [data-se-theme-switch] flips data-theme on <html>
  */
 
 (function () {
@@ -115,6 +118,7 @@
       trigger?.setAttribute("aria-describedby", bubble.id || bubble.getAttribute("data-se-tooltip-id") || "");
     } else {
       bubble.hidden = true;
+      trigger?.removeAttribute("aria-describedby");
     }
   }
 
@@ -147,33 +151,39 @@
 
   /* ---------------- Toast ---------------- */
 
-  function toastDefaults() {
+  function toastDefaults(position) {
     let container = document.querySelector("[data-se-toast]");
     if (!container) {
       container = document.createElement("div");
       container.setAttribute("data-se-toast", "");
       container.setAttribute("aria-live", "polite");
+      container.className = `se-toast-viewport se-toast-viewport--${position ?? "bottom-right"}`;
       document.body.appendChild(container);
     }
     return container;
   }
 
   function showToast(options) {
-    const container = toastDefaults();
+    const container = toastDefaults(options.position);
     const item = document.createElement("div");
     item.className = `se-toast se-toast--${options.tone ?? "info"}`;
     item.setAttribute("data-se-dismissable", "");
     item.setAttribute("role", options.tone === "danger" ? "alert" : "status");
-    const title = document.createElement("div");
-    title.className = "se-toast-title";
-    title.textContent = options.title ?? "";
-    item.appendChild(title);
+    const content = document.createElement("div");
+    content.className = "se-toast-content";
+    if (options.title) {
+      const title = document.createElement("div");
+      title.className = "se-toast-title";
+      title.textContent = options.title;
+      content.appendChild(title);
+    }
     if (options.description) {
       const body = document.createElement("div");
-      body.className = "se-toast-body";
+      body.className = "se-toast-description";
       body.textContent = options.description;
-      item.appendChild(body);
+      content.appendChild(body);
     }
+    item.appendChild(content);
     const dismiss = document.createElement("button");
     dismiss.type = "button";
     dismiss.className = "se-toast-dismiss";
@@ -211,6 +221,46 @@
     if (!target) return;
     const collapsed = target.classList.toggle("se-sidebar--collapsed");
     trigger.setAttribute("aria-expanded", String(!collapsed));
+    if (selector) {
+      const mask = document.querySelector(`[data-se-sidebar-mask="${selector}"]`);
+      mask?.classList.toggle("se-layout-mask--hidden", collapsed);
+    }
+  });
+
+  /* ---------------- Sidebar overlay mask ---------------- */
+
+  on("[data-se-sidebar-mask]", "click", (mask) => {
+    const selector = mask.getAttribute("data-se-sidebar-mask");
+    const target = selector ? document.querySelector(selector) : null;
+    if (!target) return;
+    target.classList.add("se-sidebar--collapsed");
+    mask.classList.add("se-layout-mask--hidden");
+    if (selector) {
+      const trigger = document.querySelector(`[aria-controls="${selector.replace(/^#/, "")}"]`);
+      trigger?.setAttribute("aria-expanded", "false");
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape") return;
+    document
+      .querySelectorAll("[data-se-sidebar-mask]:not(.se-layout-mask--hidden)")
+      .forEach((mask) => mask.click());
+  });
+
+  /* ---------------- Theme switch ---------------- */
+
+  function initThemeSwitches() {
+    document.querySelectorAll("[data-se-theme-switch]").forEach((input) => {
+      input.checked = document.documentElement.dataset.theme === "dark";
+    });
+  }
+
+  initThemeSwitches();
+  document.addEventListener("htmx:afterSettle", initThemeSwitches);
+
+  on("[data-se-theme-switch]", "change", (input) => {
+    document.documentElement.dataset.theme = input.checked ? "dark" : "light";
   });
 
   /* ---------------- API ---------------- */

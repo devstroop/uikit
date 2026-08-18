@@ -4,6 +4,8 @@
   align-items: center;
   gap: var(--se-space-2);
   padding: var(--se-space-6);
+  width: 100%;
+  box-sizing: border-box;
   text-align: center;
   font-family: var(--se-font-sans);
 }

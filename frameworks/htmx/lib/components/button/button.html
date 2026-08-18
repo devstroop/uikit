@@ -3,7 +3,8 @@
   Root: <button class="se-button se-button--<variant>">
   Modifiers:
     variant  --primary | --secondary | --ghost | --danger   (default: --primary)
-    size     --sm | --lg                                   (default: md)
+    size     --xs | --sm | --lg                            (default: md)
+    shape    --icon-only (circular; the button MUST carry an aria-label)
     state    --full-width | disabled attribute
   A server template composes the class string; a loading state adds
   --loading plus aria-busy="true".
@@ -15,6 +16,9 @@
 <button class="se-button se-button--danger" type="button">Danger</button>
 <button class="se-button se-button--primary se-button--sm" type="button">Small</button>
 <button class="se-button se-button--primary se-button--lg" type="button">Large</button>
+<button class="se-button se-button--primary se-button--xs" type="button">Extra small</button>
+<button class="se-button se-button--primary se-button--icon-only" type="button" aria-label="Add item">+</button>
+<button class="se-button se-button--secondary se-button--sm se-button--icon-only" type="button" aria-label="Settings">⚙</button>
 <button class="se-button se-button--primary" type="button" disabled>Disabled</button>
 <button class="se-button se-button--primary se-button--full-width" type="button">Full width</button>
 <button class="se-button se-button--primary se-button--loading" type="button" aria-busy="true">Saving…</button>

@@ -12,16 +12,19 @@
 .se-avatar--sm {
   width: 28px;
   height: 28px;
+  font-size: 16px;
 }
 
 .se-avatar--md {
   width: 36px;
   height: 36px;
+  font-size: 20px;
 }
 
 .se-avatar--lg {
   width: 48px;
   height: 48px;
+  font-size: 26px;
 }
 
 .se-avatar-initials {
@@ -73,12 +76,22 @@
 
 .se-avatar-status {
   position: absolute;
-  right: -1px;
-  bottom: -1px;
-  width: 9px;
-  height: 9px;
+  right: -2px;
+  bottom: -2px;
+  width: 12px;
+  height: 12px;
   border: 2px solid var(--se-color-surface);
   border-radius: 50%;
+}
+
+.se-avatar--sm .se-avatar-status {
+  width: 10px;
+  height: 10px;
+}
+
+.se-avatar--lg .se-avatar-status {
+  width: 14px;
+  height: 14px;
 }
 
 .se-avatar--online .se-avatar-status {

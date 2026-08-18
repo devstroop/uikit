@@ -224,7 +224,8 @@ describe("toast", () => {
     const item = document.querySelector("[data-se-toast] > div");
     expect(item.className).toBe("se-toast se-toast--success");
     expect(item.querySelector(".se-toast-title").textContent).toBe("Saved");
-    expect(item.querySelector(".se-toast-body").textContent).toBe("Done");
+    expect(item.querySelector(".se-toast-description").textContent).toBe("Done");
+    expect(item.querySelector(".se-toast-content")).not.toBeNull();
     expect(item.getAttribute("role")).toBe("status");
   });
 

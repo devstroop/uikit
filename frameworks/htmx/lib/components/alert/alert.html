@@ -4,6 +4,7 @@
   Modifiers:
     tone --info | --success | --warning | --danger   (default: --info)
   Parts:
+    icon     <span class="se-alert-icon">            (severity glyph, inherits tone color)
     content  <div class="se-alert-content">          (wraps title + body)
     title    <div class="se-alert-title">
     body     <div class="se-alert-body">
@@ -14,6 +15,7 @@
 -->
 
 <div role="alert" class="se-alert se-alert--info">
+  <span class="se-alert-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path d="M12 16v-4M12 8h.01" /></svg></span>
   <div class="se-alert-content">
     <div class="se-alert-title">Heads up</div>
     <div class="se-alert-body">A new version is available.</div>
@@ -21,6 +23,7 @@
 </div>
 
 <div role="alert" class="se-alert se-alert--success">
+  <span class="se-alert-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path d="M8 12.5l2.5 2.5L16 9.5" /></svg></span>
   <div class="se-alert-content">
     <div class="se-alert-title">Saved</div>
     <div class="se-alert-body">Your changes have been applied.</div>
@@ -28,6 +31,7 @@
 </div>
 
 <div role="alert" class="se-alert se-alert--warning">
+  <span class="se-alert-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z" /><path d="M12 9v4M12 17h.01" /></svg></span>
   <div class="se-alert-content">
     <div class="se-alert-title">Low disk space</div>
     <div class="se-alert-body">You are running out of space.</div>
@@ -35,6 +39,7 @@
 </div>
 
 <div role="alert" class="se-alert se-alert--danger">
+  <span class="se-alert-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path d="M15 9l-6 6M9 9l6 6" /></svg></span>
   <div class="se-alert-content">
     <div class="se-alert-title">Connection failed</div>
     <div class="se-alert-body">Could not reach the server.</div>
@@ -42,6 +47,7 @@
 </div>
 
 <div role="alert" class="se-alert se-alert--info" data-se-dismissable>
+  <span class="se-alert-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path d="M12 16v-4M12 8h.01" /></svg></span>
   <div class="se-alert-content">
     <div class="se-alert-title">Dismissible</div>
     <div class="se-alert-body">Click the × to remove this alert.</div>
@@ -50,6 +56,7 @@
 </div>
 
 <div role="alert" class="se-alert se-alert--warning" data-se-dismissable>
+  <span class="se-alert-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z" /><path d="M12 9v4M12 17h.01" /></svg></span>
   <div class="se-alert-content">
     <div class="se-alert-body">Title-less, dismissible body only.</div>
   </div>

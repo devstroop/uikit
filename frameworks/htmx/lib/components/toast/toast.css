@@ -10,6 +10,23 @@
   pointer-events: none;
 }
 
+.se-toast-viewport--top-left {
+  top: var(--se-space-5);
+  left: var(--se-space-5);
+  bottom: auto;
+  right: auto;
+}
+
+.se-toast-viewport--top-right {
+  top: var(--se-space-5);
+  bottom: auto;
+}
+
+.se-toast-viewport--bottom-left {
+  left: var(--se-space-5);
+  right: auto;
+}
+
 .se-toast {
   display: flex;
   align-items: flex-start;
@@ -17,12 +34,31 @@
   padding: var(--se-space-3) var(--se-space-4);
   border-radius: var(--se-radius-md);
   border: 1px solid var(--se-color-border);
-  border-left-width: 3px;
   background: var(--se-color-surface);
   color: var(--se-color-text);
   box-shadow: var(--se-shadow-lg);
   pointer-events: auto;
   animation: se-toast-in var(--se-transition-base) var(--se-ease-out);
+}
+
+.se-toast--info {
+  border-color: var(--se-color-primary);
+  background-color: color-mix(in srgb, var(--se-color-primary) 12%, var(--se-color-surface));
+}
+
+.se-toast--success {
+  border-color: var(--se-color-success);
+  background-color: color-mix(in srgb, var(--se-color-success) 12%, var(--se-color-surface));
+}
+
+.se-toast--warning {
+  border-color: var(--se-color-warning);
+  background-color: color-mix(in srgb, var(--se-color-warning) 12%, var(--se-color-surface));
+}
+
+.se-toast--danger {
+  border-color: var(--se-color-danger);
+  background-color: color-mix(in srgb, var(--se-color-danger) 12%, var(--se-color-surface));
 }
 
 @keyframes se-toast-in {
@@ -36,22 +72,6 @@
   }
 }
 
-.se-toast--info {
-  border-left-color: var(--se-color-primary);
-}
-
-.se-toast--success {
-  border-left-color: var(--se-color-success);
-}
-
-.se-toast--warning {
-  border-left-color: var(--se-color-warning);
-}
-
-.se-toast--danger {
-  border-left-color: var(--se-color-danger);
-}
-
 .se-toast-content {
   flex: 1;
   min-width: 0;
@@ -61,6 +81,23 @@
   font-size: var(--se-font-size-sm);
   font-weight: var(--se-font-weight-bold);
   line-height: 1.4;
+  color: var(--se-color-text);
+}
+
+.se-toast--info .se-toast-title {
+  color: var(--se-color-text-primary);
+}
+
+.se-toast--success .se-toast-title {
+  color: var(--se-color-text-success);
+}
+
+.se-toast--warning .se-toast-title {
+  color: var(--se-color-text-warning);
+}
+
+.se-toast--danger .se-toast-title {
+  color: var(--se-color-text-danger);
 }
 
 .se-toast-description {
@@ -78,7 +115,7 @@
   border-radius: var(--se-radius-sm);
   background: transparent;
   color: var(--se-color-text-muted);
-  font-size: 16px;
+  font-size: var(--se-font-size-md);
   line-height: 1;
   cursor: pointer;
   transition: background var(--se-transition-fast), color var(--se-transition-fast);

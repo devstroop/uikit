@@ -44,3 +44,46 @@
     transform: translateX(350%);
   }
 }
+
+.se-progress-circular {
+  transform: rotate(-90deg);
+}
+
+.se-progress-circular circle {
+  fill: none;
+  stroke-width: 6px;
+}
+
+.se-progress-circular .se-progress-track {
+  stroke: var(--se-color-surface-hover);
+}
+
+.se-progress-circular .se-progress-fill {
+  stroke: var(--se-color-primary);
+  transition: stroke-dashoffset var(--se-transition-base) var(--se-ease-out);
+}
+
+.se-progress-circular.se-progress--success .se-progress-fill {
+  stroke: var(--se-color-success);
+}
+
+.se-progress-circular.se-progress--warning .se-progress-fill {
+  stroke: var(--se-color-warning);
+}
+
+.se-progress-circular.se-progress--danger .se-progress-fill {
+  stroke: var(--se-color-danger);
+}
+
+.se-progress-circular.se-progress--indeterminate {
+  animation: se-progress-spin var(--se-motion-sweep) linear infinite;
+}
+
+@keyframes se-progress-spin {
+  from {
+    transform: rotate(-90deg);
+  }
+  to {
+    transform: rotate(270deg);
+  }
+}

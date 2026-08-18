@@ -13,6 +13,16 @@
   animation: se-skeleton-shimmer var(--se-motion-shimmer) infinite;
 }
 
+[data-theme="dark"] .se-skeleton {
+  background-image: linear-gradient(
+    90deg,
+    transparent,
+    var(--se-color-surface-hover),
+    color-mix(in srgb, var(--se-color-border-strong) 60%, transparent),
+    transparent
+  );
+}
+
 @keyframes se-skeleton-shimmer {
   from {
     background-position: 200% 0;
