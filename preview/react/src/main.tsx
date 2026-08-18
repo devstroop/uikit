@@ -2,7 +2,7 @@ import { StrictMode, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { THEMES } from "./themes";
 import { App } from "./App";
-import "./demo.css";
+import "./preview.css";
 
 function Root() {
   const [themeId, setThemeId] = useState(THEMES[0]?.id ?? "default");
@@ -26,7 +26,7 @@ function Root() {
     <div className="chrome">
       <header className="chrome-header">
         <h1>@devstroop/react-ui</h1>
-        <p>23 components, 6 design systems — all driven by the same tokens</p>
+        <p>30 components, 6 design systems — all driven by the same tokens</p>
         <div className="chrome-controls">
           <label>
             Theme

@@ -4,6 +4,7 @@ import {
   Alert,
   Avatar,
   Badge,
+  Body,
   Button,
   Card,
   Checkbox,
@@ -11,12 +12,16 @@ import {
   Dialog,
   EmptyState,
   Field,
+  Footer,
+  Header,
   Icon,
   Input,
   Label,
+  Layout,
   Progress,
   Row,
   Select,
+  Sidebar,
   Skeleton,
   Stat,
   Switch,
@@ -30,9 +35,9 @@ import {
 
 const TONES = ["primary", "success", "warning", "danger"] as const;
 
-function Layout() {
+function Grid() {
   return (
-    <Section title="Layout · Row · Column">
+    <Section title="Grid · Row · Column">
       <div className="layout-grid">
         <Row>
           <Column size={12} className="grid-cell">
@@ -97,6 +102,63 @@ function Layout() {
           </Column>
         </Row>
       </div>
+    </Section>
+  );
+}
+
+function AppShell() {
+  const [expanded, setExpanded] = useState(true);
+  return (
+    <Section title="App Shell · Layout · Header · Sidebar · Body · Footer">
+      <Layout
+        style={{
+          width: "100%",
+          minHeight: 420,
+          border: "1px dashed var(--se-color-border)",
+          borderRadius: "var(--se-radius-md)",
+          overflow: "hidden",
+        }}
+      >
+        <Header aria-label="App shell header">
+          <span style={{ fontWeight: 600 }}>App title</span>
+          <span style={{ flexGrow: 1 }} />
+          <Button
+            size="sm"
+            variant="ghost"
+            onClick={() => setExpanded(!expanded)}
+            aria-expanded={expanded}
+            aria-controls="shell-sidebar"
+          >
+            {expanded ? "Collapse sidebar" : "Expand sidebar"}
+          </Button>
+        </Header>
+        <Sidebar id="shell-sidebar" aria-label="App shell navigation" expanded={expanded}>
+          <nav aria-label="Demo navigation">
+            <ul className="shell-nav">
+              {["Dashboard", "Users", "Settings"].map((item) => (
+                <li key={item}>
+                  <Button variant="ghost" size="sm" style={{ width: "100%", justifyContent: "flex-start" }}>
+                    {item}
+                  </Button>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </Sidebar>
+        <Body as="div" aria-label="App shell body">
+          <Row>
+            <Column size={12} sizeMd={6} className="grid-cell">
+              Body content
+            </Column>
+            <Column size={12} sizeMd={6} className="grid-cell">
+              Row/Column inside the shell
+            </Column>
+          </Row>
+        </Body>
+        <Footer aria-label="App shell footer">
+          <span style={{ color: "var(--se-color-text-muted)" }}>© 2026 Example</span>
+        </Footer>
+      </Layout>
     </Section>
   );
 }
@@ -370,7 +432,8 @@ export function App() {
   return (
     <ToastProvider>
       <main>
-        <Layout />
+        <Grid />
+        <AppShell />
         <Buttons />
         <FormControls />
         <Tables />
