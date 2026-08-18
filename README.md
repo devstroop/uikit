@@ -26,6 +26,11 @@ demo/           per-stack playgrounds (demo/react/ showcases all themes)
 - **Theme-agnostic frameworks** — components consume `--se-*` custom
   properties exclusively; consumers pick a theme by importing its
   `tokens.css`.
+- **React + htmx, same contracts** — `frameworks/react` ships the 23
+  components as a JS package (`@devstroop/react-ui`); `frameworks/htmx`
+  ships them as server-rendered HTML fragments + plain CSS + a 4 KB
+  behaviors script (`@devstroop/uikit-htmx`). Both frameworks are
+  validated against the same specs (token parity enforced).
 
 ## Repositories
 
@@ -46,10 +51,14 @@ npm run parity:validate       # spec token lists vs. actual component usage
 # react framework
 npm run lint && npm run typecheck && npm test && npm run build --prefix frameworks/react
 
-# theme playground (demo/react): all 6 themes, light/dark
-npm run demo                  # dev server
-npm run demo:build            # production build
+# htmx framework
+npm run build --prefix frameworks/htmx        # dist/uikit.js + uikit.css
+
+# theme playgrounds (demo/react, demo/htmx): all 6 themes, light/dark
+npm run demo                  # react dev server
+npm run demo:build            # react production build
 npm run demo:typecheck        # demo sources type-checked
+(cd demo/htmx && python3 -m http.server)   # static htmx showcase
 ```
 
 ## License
