@@ -8,9 +8,18 @@
     "tokens:validate": "node scripts/validate-theme.mjs",
     "tokens:generate": "node scripts/generate-css.mjs",
     "specs:validate": "node scripts/validate-specs.mjs",
-    "parity:validate": "node scripts/validate-parity.mjs"
+    "parity:validate": "node scripts/validate-parity.mjs",
+    "demo": "vite demo/react",
+    "demo:build": "vite build demo/react",
+    "demo:typecheck": "tsc -p demo/react/tsconfig.json"
   },
   "devDependencies": {
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.6",
     "yaml": "^2.8.0"
   }
 }

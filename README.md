@@ -6,8 +6,9 @@ deliveries.
 ```
 specs/          component contracts + token schema (source of truth)
 themes/         design tokens per design system (data, validated, generated)
-scripts/        token generator + theme validator
+scripts/        token generator + validators
 frameworks/     per-technology implementations of the same contracts
+demo/           per-stack playgrounds (demo/react/ showcases all themes)
 ```
 
 - **Specs first** — every component and every token starts in `specs/`
@@ -28,8 +29,7 @@ frameworks/     per-technology implementations of the same contracts
 
 ## Repositories
 
-- GitHub: `devstroop/uikit` — canonical source.
-- Forgejo mirror: CI (see `.forgejo/workflows/`).
+- GitHub: `devstroop/uikit` — canonical source and CI (`.github/workflows/`).
 
 ## Development
 
@@ -37,7 +37,7 @@ Branch/PR/release protocol follows the org standard — see
 `frameworks/react/docs/DEVELOPMENT_STRATEGY.md`.
 
 ```bash
-npm ci                        # tooling deps (yaml parser)
+npm ci                        # tooling + demo deps
 npm run tokens:validate       # all themes must validate before commit
 npm run tokens:generate       # regenerate tokens.css (+ framework syncs)
 npm run specs:validate        # component specs vs. token schema + impls
@@ -45,6 +45,11 @@ npm run parity:validate       # spec token lists vs. actual component usage
 
 # react framework
 npm run lint && npm run typecheck && npm test && npm run build --prefix frameworks/react
+
+# theme playground (demo/react): all 6 themes, light/dark
+npm run demo                  # dev server
+npm run demo:build            # production build
+npm run demo:typecheck        # demo sources type-checked
 ```
 
 ## License

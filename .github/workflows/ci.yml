@@ -30,6 +30,19 @@ jobs:
       - run: npm run specs:validate
       - run: npm run parity:validate
 
+  demo:
+    name: Demo (react)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run demo:typecheck
+      - run: npm run demo:build
+
   react:
     name: React framework
     runs-on: ubuntu-latest
