@@ -1,6 +1,6 @@
 # uikit
 
-Framework-agnostic UI kit for Devstroop web apps. One contract — many
+Framework-agnostic UI kit for Devstroop app front-ends. One contract — many
 deliveries.
 
 ```
