@@ -46,12 +46,18 @@ function implDir(technology, componentName) {
   if (technology === "react") {
     return join(FRAMEWORKS_DIR, "react", "lib", "components", componentName);
   }
+  if (technology === "htmx") {
+    const kebab = componentName
+      .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
+      .toLowerCase();
+    return join(FRAMEWORKS_DIR, "htmx", "lib", "components", kebab);
+  }
   return null;
 }
 
 async function usedTokens(dir) {
   const files = (await readdir(dir, { withFileTypes: true }))
-    .filter((e) => e.isFile() && /\.(css|tsx|jsx)$/.test(e.name));
+    .filter((e) => e.isFile() && /\.(css|tsx|jsx|html)$/.test(e.name));
   const tokens = new Set();
   for (const file of files) {
     const source = await readFile(join(dir, file.name), "utf8");

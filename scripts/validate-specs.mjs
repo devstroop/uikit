@@ -34,6 +34,12 @@ function implDirFor(technology, componentName) {
   if (technology === "react") {
     return join(FRAMEWORKS_DIR, "react", "lib", "components", componentName);
   }
+  if (technology === "htmx") {
+    const kebab = componentName
+      .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
+      .toLowerCase();
+    return join(FRAMEWORKS_DIR, "htmx", "lib", "components", kebab);
+  }
   return null;
 }
 
@@ -99,6 +105,21 @@ async function validateSpec(file) {
                 `implemented in ${technology} but no test file: ` +
                   `${meta.name}.test.tsx`,
               );
+            }
+          }
+          if (technology === "htmx") {
+            const kebab = meta.name
+              .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
+              .toLowerCase();
+            for (const ext of ["html", "css"]) {
+              try {
+                await access(join(dir, `${kebab}.${ext}`));
+              } catch {
+                fail(
+                  `implemented in ${technology} but no ${ext} file: ` +
+                    `${kebab}.${ext}`,
+                );
+              }
             }
           }
         }

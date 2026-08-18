@@ -3,6 +3,7 @@ name: Badge
 status: implemented
 frameworks:
   react: v0.3.0
+  htmx: v0.1.0
 tokens:
   - "space.1"
   - "radius.full"

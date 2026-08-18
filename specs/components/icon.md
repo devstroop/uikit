@@ -3,6 +3,7 @@ name: Icon
 status: implemented
 frameworks:
   react: v0.3.0
+  htmx: v0.1.0
 tokens: []
 a11y:
   - "Renders an inline <svg> with defaults aria-hidden=\"true\" and focusable=\"false\" — decorative by default and skipped by assistive tech."

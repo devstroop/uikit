@@ -1,0 +1,37 @@
+<!--
+  Toast — reference markup for server templates.
+  Viewport: <div class="se-toast-viewport" data-se-toast aria-live="polite">
+    (behaviors.js creates it automatically if absent)
+  Item: <div class="se-toast se-toast--<tone>" data-se-dismissable role="status">
+    tone  --info (default) | --success | --warning | --danger
+  Dismiss: <button class="se-toast-dismiss" type="button" data-se-dismiss
+           aria-label="Dismiss notification">×</button>
+  Static items are rendered by the server; dynamic ones use
+  window.seToast({ title, description, tone, durationMs }).
+-->
+
+<div class="se-toast-viewport" data-se-toast aria-live="polite">
+  <div class="se-toast se-toast--success" data-se-dismissable role="status">
+    <div class="se-toast-content">
+      <div class="se-toast-title">Deployed</div>
+      <div class="se-toast-description">The release is live.</div>
+    </div>
+    <button class="se-toast-dismiss" type="button" data-se-dismiss aria-label="Dismiss notification">
+      ×
+    </button>
+  </div>
+  <div class="se-toast se-toast--danger" data-se-dismissable role="alert">
+    <div class="se-toast-content">
+      <div class="se-toast-title">Build failed</div>
+      <div class="se-toast-description">Check the pipeline logs.</div>
+    </div>
+    <button class="se-toast-dismiss" type="button" data-se-dismiss aria-label="Dismiss notification">
+      ×
+    </button>
+  </div>
+</div>
+
+<script>
+  // Dynamic toasts (optional, needs behaviors.js):
+  //   window.seToast({ title: "Saved", description: "Changes are synced.", tone: "success" });
+</script>

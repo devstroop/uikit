@@ -1,0 +1,46 @@
+.se-progress {
+  position: relative;
+  width: 100%;
+  height: 6px;
+  border-radius: var(--se-radius-full);
+  background: var(--se-color-surface-hover);
+  overflow: hidden;
+}
+
+.se-progress-bar {
+  position: absolute;
+  inset: 0 auto 0 0;
+  height: 100%;
+  border-radius: var(--se-radius-full);
+  transition: width var(--se-transition-base) var(--se-ease-out);
+}
+
+.se-progress--primary .se-progress-bar {
+  background: var(--se-color-primary);
+}
+
+.se-progress--success .se-progress-bar {
+  background: var(--se-color-success);
+}
+
+.se-progress--warning .se-progress-bar {
+  background: var(--se-color-warning);
+}
+
+.se-progress--danger .se-progress-bar {
+  background: var(--se-color-danger);
+}
+
+.se-progress--indeterminate .se-progress-bar {
+  width: 40%;
+  animation: se-progress-slide var(--se-transition-slow) infinite;
+}
+
+@keyframes se-progress-slide {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(350%);
+  }
+}

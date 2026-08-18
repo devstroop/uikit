@@ -1,0 +1,3 @@
+/* Icon — no styles. The react Icon has no CSS module and the spec declares
+   zero tokens: the glyph inherits its color via stroke="currentColor" and
+   sizing comes from the width/height/stroke-width attributes on the <svg>. */

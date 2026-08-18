@@ -3,6 +3,7 @@ name: Button
 status: implemented
 frameworks:
   react: v0.3.0
+  htmx: v0.1.0
 tokens:
   - "radius.md"
   - "space.2"

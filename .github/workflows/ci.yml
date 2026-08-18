@@ -30,6 +30,26 @@ jobs:
       - run: npm run specs:validate
       - run: npm run parity:validate
 
+  htmx:
+    name: htmx framework
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frameworks/htmx
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frameworks/htmx/package-lock.json
+      - run: npm ci
+      - run: npm run build
+      - name: Built bundle is in sync
+        run: |
+          node scripts/build.mjs
+          git diff --exit-code
+
   demo:
     name: Demo (react)
     runs-on: ubuntu-latest

@@ -1,0 +1,57 @@
+<!--
+  Alert — reference markup for server templates.
+  Root: <div role="alert" class="se-alert se-alert--<tone>">
+  Modifiers:
+    tone --info | --success | --warning | --danger   (default: --info)
+  Parts:
+    content  <div class="se-alert-content">          (wraps title + body)
+    title    <div class="se-alert-title">
+    body     <div class="se-alert-body">
+    dismiss  <button class="se-alert-dismiss">
+  Dismiss hooks: a dismissible alert carries data-se-dismissable on the
+  root; the dismiss button carries data-se-dismiss and aria-label="Dismiss
+  alert". behaviors.js removes the alert when the button is activated.
+-->
+
+<div role="alert" class="se-alert se-alert--info">
+  <div class="se-alert-content">
+    <div class="se-alert-title">Heads up</div>
+    <div class="se-alert-body">A new version is available.</div>
+  </div>
+</div>
+
+<div role="alert" class="se-alert se-alert--success">
+  <div class="se-alert-content">
+    <div class="se-alert-title">Saved</div>
+    <div class="se-alert-body">Your changes have been applied.</div>
+  </div>
+</div>
+
+<div role="alert" class="se-alert se-alert--warning">
+  <div class="se-alert-content">
+    <div class="se-alert-title">Low disk space</div>
+    <div class="se-alert-body">You are running out of space.</div>
+  </div>
+</div>
+
+<div role="alert" class="se-alert se-alert--danger">
+  <div class="se-alert-content">
+    <div class="se-alert-title">Connection failed</div>
+    <div class="se-alert-body">Could not reach the server.</div>
+  </div>
+</div>
+
+<div role="alert" class="se-alert se-alert--info" data-se-dismissable>
+  <div class="se-alert-content">
+    <div class="se-alert-title">Dismissible</div>
+    <div class="se-alert-body">Click the × to remove this alert.</div>
+  </div>
+  <button type="button" class="se-alert-dismiss" data-se-dismiss aria-label="Dismiss alert">×</button>
+</div>
+
+<div role="alert" class="se-alert se-alert--warning" data-se-dismissable>
+  <div class="se-alert-content">
+    <div class="se-alert-body">Title-less, dismissible body only.</div>
+  </div>
+  <button type="button" class="se-alert-dismiss" data-se-dismiss aria-label="Dismiss alert">×</button>
+</div>

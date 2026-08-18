@@ -1,0 +1,21 @@
+{
+  "name": "@devstroop/uikit-htmx",
+  "version": "0.1.0",
+  "description": "Server-rendered htmx implementation of the uikit specs — HTML fragments, plain CSS, tiny behaviors.",
+  "type": "module",
+  "license": "MIT",
+  "files": [
+    "lib"
+  ],
+  "exports": {
+    ".": "./lib/behaviors.js",
+    "./style.css": "./lib/uikit.css",
+    "./tokens.css": "./lib/styles/tokens.css"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  }
+}
