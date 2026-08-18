@@ -41,8 +41,21 @@ body {
   padding: 6px 8px;
   border: 1px solid var(--se-color-border);
   border-radius: var(--se-radius-sm);
-  background: var(--se-color-bg);
+  background-color: var(--se-color-bg);
   color: var(--se-color-text);
+}
+
+.chrome-controls .se-select {
+  display: inline-block;
+  width: auto;
+  margin-left: 8px;
+  padding: 6px 32px 6px 10px;
+  background-color: var(--se-color-bg);
+  border-color: var(--se-color-border);
+}
+
+.chrome-controls .se-switch {
+  margin-left: 6px;
 }
 
 .dark-toggle {
@@ -79,6 +92,10 @@ body {
   flex-direction: column;
   gap: 16px;
   width: 100%;
+}
+
+.layout-grid > button {
+  align-self: flex-start;
 }
 
 .grid-cell {

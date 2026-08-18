@@ -42,17 +42,28 @@ body {
 
 .chrome-controls select {
   margin-left: 8px;
-  padding: 6px 8px;
+  padding: 6px 32px 6px 10px;
   border: 1px solid var(--se-color-border);
   border-radius: var(--se-radius-sm);
-  background: var(--se-color-bg);
+  background-color: var(--se-color-bg);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
   color: var(--se-color-text);
+  appearance: none;
 }
 
 .dark-toggle {
   display: flex;
   gap: 6px;
   align-items: center;
+}
+
+/* Keep the drawer's own toggle clickable above the fixed scrim
+   (se-layout-mask z-index 10; drawer panel z-index 20). */
+.drawer-toggle {
+  position: relative;
+  z-index: 30;
 }
 
 .row {
@@ -83,6 +94,10 @@ body {
   flex-direction: column;
   gap: 16px;
   width: 100%;
+}
+
+.layout-grid > button {
+  align-self: flex-start;
 }
 
 .grid-cell {

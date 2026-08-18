@@ -227,7 +227,10 @@ for (const app of ["react", "htmx"]) {
   for (const theme of THEMES) {
     for (const mode of MODES) {
       await page.selectOption("select", theme);
-      const dark = page.locator(".dark-toggle input");
+      const dark =
+        app === "react"
+          ? page.locator(".chrome-controls input[type='checkbox']")
+          : page.locator(".dark-toggle input");
       mode === "dark" ? await dark.check() : await dark.uncheck();
       await page.waitForTimeout(200);
       const violations = app === "htmx" ? await auditContrast(page) : [];

@@ -1,5 +1,6 @@
 import { StrictMode, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
+import { ThemeSwitcher } from "@devstroop/react-ui";
 import { THEMES } from "./themes";
 import { App } from "./App";
 import "./preview.css";
@@ -38,10 +39,7 @@ function Root() {
               ))}
             </select>
           </label>
-          <label className="dark-toggle">
-            <input type="checkbox" checked={dark} onChange={(e) => setDark(e.target.checked)} />
-            Dark
-          </label>
+          <ThemeSwitcher defaultTheme={dark ? "dark" : "light"} onChange={(t) => setDark(t === "dark")} />
         </div>
       </header>
       <App />

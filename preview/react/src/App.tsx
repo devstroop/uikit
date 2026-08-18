@@ -108,6 +108,7 @@ function Grid() {
 
 function AppShell() {
   const [expanded, setExpanded] = useState(true);
+  const [drawerOpen, setDrawerOpen] = useState(false);
   return (
     <Section title="App Shell · Layout · Header · Sidebar · Body · Footer">
       <Layout
@@ -132,7 +133,7 @@ function AppShell() {
             {expanded ? "Collapse sidebar" : "Expand sidebar"}
           </Button>
         </Header>
-        <Sidebar id="shell-sidebar" aria-label="App shell navigation" expanded={expanded}>
+        <Sidebar id="shell-sidebar" aria-label="App shell navigation" expanded={expanded} responsive>
           <nav aria-label="Demo navigation">
             <ul className="shell-nav">
               {["Dashboard", "Users", "Settings"].map((item) => (
@@ -159,6 +160,58 @@ function AppShell() {
           <span style={{ color: "var(--se-color-text-muted)" }}>© 2026 Example</span>
         </Footer>
       </Layout>
+      <Layout
+        style={{
+          width: "100%",
+          minHeight: 320,
+          marginTop: 16,
+          border: "1px dashed var(--se-color-border)",
+          borderRadius: "var(--se-radius-md)",
+          overflow: "hidden",
+        }}
+      >
+        <Header aria-label="Drawer header">
+          <span style={{ fontWeight: 600 }}>Overlay drawer</span>
+          <span style={{ flexGrow: 1 }} />
+          <Button
+            size="sm"
+            variant="ghost"
+            className="drawer-toggle"
+            onClick={() => setDrawerOpen(!drawerOpen)}
+            aria-expanded={drawerOpen}
+            aria-controls="drawer-sidebar"
+          >
+            {drawerOpen ? "Close drawer" : "Open drawer"}
+          </Button>
+        </Header>
+        <Sidebar
+          id="drawer-sidebar"
+          position="right"
+          overlay
+          expanded={drawerOpen}
+          onClose={() => setDrawerOpen(false)}
+          aria-label="Drawer navigation"
+        >
+          <nav aria-label="Drawer demo navigation">
+            <ul className="shell-nav">
+              {["Dashboard", "Settings"].map((item) => (
+                <li key={item}>
+                  <Button variant="ghost" size="sm" style={{ width: "100%", justifyContent: "flex-start" }}>
+                    {item}
+                  </Button>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </Sidebar>
+        <Body as="div" aria-label="Drawer body">
+          <Row>
+            <Column size={12} className="grid-cell">
+              Body content — the drawer overlays this on the right.
+            </Column>
+          </Row>
+        </Body>
+      </Layout>
     </Section>
   );
 }
@@ -174,6 +227,8 @@ function Buttons() {
       <Button disabled>disabled</Button>
       <Button size="sm">sm</Button>
       <Button size="lg">lg</Button>
+      <Button size="xs">xs</Button>
+      <Button iconOnly aria-label="Add item">+</Button>
     </Section>
   );
 }
@@ -270,9 +325,19 @@ function Badges() {
 function Stats() {
   return (
     <Section title="Stat">
-      <Stat label="Active users" value="12,483" delta="+8.2%" hint="last 30 days" />
-      <Stat label="Error rate" value="0.31%" delta="-0.4%" deltaTone="success" />
-      <Stat label="Uptime" value="99.98%" deltaTone="danger" delta="-0.02%" />
+      <div className="layout-grid">
+        <Row>
+          <Column>
+            <Stat label="Active users" value="12,483" delta="+8.2%" hint="last 30 days" />
+          </Column>
+          <Column>
+            <Stat label="Error rate" value="0.31%" delta="-0.4%" deltaTone="success" />
+          </Column>
+          <Column>
+            <Stat label="Uptime" value="99.98%" deltaTone="danger" delta="-0.02%" />
+          </Column>
+        </Row>
+      </div>
     </Section>
   );
 }
@@ -329,6 +394,11 @@ function SkeletonProgress() {
       <Progress value={55} tone="warning" aria-label="Battery level" />
       <Progress value={30} tone="danger" aria-label="Errors found" />
       <Progress indeterminate aria-label="Downloading updates" />
+      <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+        <Progress value={62} variant="circular" aria-label="Storage used" />
+        <Progress value={100} variant="circular" tone="success" aria-label="Upload complete" />
+        <Progress variant="circular" indeterminate aria-label="Downloading updates" />
+      </div>
       <Skeleton width={180} variant="text" />
       <Skeleton width={48} height={48} variant="circle" />
       <Skeleton width={180} height={72} variant="rect" />
@@ -339,7 +409,7 @@ function SkeletonProgress() {
 function EmptyStates() {
   return (
     <Section title="EmptyState">
-      <EmptyState icon={<Icon name="folder" size={32} />} title="No projects yet" description="Create your first project to get started." action={<Button size="sm">New project</Button>} />
+      <EmptyState icon={<Icon name="folder" size={32} />} title="No projects yet" description="Create your first project to get started." action={<Button size="lg">New project</Button>} />
     </Section>
   );
 }
@@ -348,21 +418,23 @@ function Feedback() {
   const toast = useToast();
   return (
     <Section title="Alert · Toast">
-      <Alert tone="info" title="Heads up">
-        A new version is available.
-      </Alert>
-      <Alert tone="success" title="Deployed" dismissible>
-        The release is live.
-      </Alert>
-      <Alert tone="warning" title="Storage at 90%">
-        Clean up soon.
-      </Alert>
-      <Alert tone="danger" title="Build failed">
-        Check the pipeline logs.
-      </Alert>
-      <Button onClick={() => toast.toast({ title: "Saved", description: "Changes are synced.", tone: "success" })}>
-        Show toast
-      </Button>
+      <div className="layout-grid">
+        <Alert tone="info" title="Heads up" icon={<Icon name="info" size={18} />}>
+          A new version is available.
+        </Alert>
+        <Alert tone="success" title="Deployed" dismissible icon={<Icon name="check-circle" size={18} />}>
+          The release is live.
+        </Alert>
+        <Alert tone="warning" title="Storage at 90%" icon={<Icon name="alert" size={18} />}>
+          Clean up soon.
+        </Alert>
+        <Alert tone="danger" title="Build failed" icon={<Icon name="x-circle" size={18} />}>
+          Check the pipeline logs.
+        </Alert>
+        <Button onClick={() => toast.toast({ title: "Saved", description: "Changes are synced.", tone: "success" })}>
+          Show toast
+        </Button>
+      </div>
     </Section>
   );
 }
