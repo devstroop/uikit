@@ -28,7 +28,7 @@ tokens:
 a11y:
   - "Renders a semantic <span>; no interactive role — must not be used for interactive controls."
   - "Text-on-fill contrast >= 4.5:1: primary-fg on primary (solid primary), text on surface (solid neutral/success/warning/danger) per schema contrastRules."
-  - "Soft tones pair the tone color with a 12% color-mix tint background; the label uses the matching text-{tone} token (>= 4.5:1 on bg per schema contrastRules); outline tones carry the tone only in the border and use color.text for the label."
+  - "Soft tones pair the tone color with a 12% color-mix tint background; the label uses the matching text-{tone} token (>= 4.5:1 on the tint over both bg and surface per the derivation); outline tones carry the tone in the border and the label, also text-{tone}; the neutral outline variant uses color.text."
   - "Non-solid danger uses color.text-danger on tint (soft); solid danger uses color.danger-fg on color.danger (>= 4.5:1 per schema contrastRules in both modes)."
 ---
 # Badge

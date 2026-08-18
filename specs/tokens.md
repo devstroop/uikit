@@ -60,6 +60,17 @@ background token, both in the same mode. Default rules:
 | `primary-fg` | `primary` | 4.5 |
 | `danger-fg` | `danger` | 4.5 |
 
+Derived tokens carry their own contracts (see
+`scripts/derive-tone-tokens.mjs`):
+
+- `text-{primary,success,warning,danger}` walk the tone's lightness until
+  >= 4.55 on the 12% color-mix tint painted over **both** `bg` and `surface`
+  (soft badges and tinted alerts can sit on either container).
+- `border-strong` walks its lightness until >= 3.1 on both `bg` and `surface`
+  — WCAG 2.1 non-text contrast for interactive control boundaries (inputs,
+  selects, textareas, secondary buttons, checkboxes, outline badges). The
+  `border` token stays decorative (container separators only).
+
 Only opaque colors are checked; translucent values (`focus`, `backdrop`,
 alpha-bearing colors) are skipped.
 

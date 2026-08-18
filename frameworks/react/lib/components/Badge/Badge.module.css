@@ -71,16 +71,20 @@
 
 .outline.primary {
   border-color: var(--se-color-primary);
+  color: var(--se-color-text-primary);
 }
 
 .outline.success {
   border-color: var(--se-color-success);
+  color: var(--se-color-text-success);
 }
 
 .outline.warning {
   border-color: var(--se-color-warning);
+  color: var(--se-color-text-warning);
 }
 
 .outline.danger {
   border-color: var(--se-color-danger);
+  color: var(--se-color-text-danger);
 }

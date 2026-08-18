@@ -22,10 +22,14 @@ tokens:
   - "color.surface"
   - "color.surface-hover"
   - "color.text"
+  - "color.text-primary"
+  - "color.text-success"
+  - "color.text-warning"
+  - "color.text-danger"
 a11y:
   - "Root carries role=\"alert\" so the message is announced on mount."
   - "Dismiss control is a native <button> with aria-label=\"Dismiss alert\" and a visible focus-visible ring (--se-color-focus outline) when keyboard-focused."
-  - "Tone variants use a full 1px tone-colored border (all sides) on a 12% tone tint — color-mix(in srgb, <tone> 12%, transparent), the same painted tint the text-{tone} tokens are derived against (scripts/derive-tone-tokens.mjs), matching the badge soft variant."
+  - "Tone variants use a full 1px tone-colored border (all sides) on a 12% tone tint — color-mix(in srgb, <tone> 12%, transparent), the same painted tint the text-{tone} tokens are derived against (scripts/derive-tone-tokens.mjs), matching the badge soft variant. The alert foreground takes the tone: title/content use text-{tone} (>= 4.5:1 on the tint over both bg and surface per the derivation), body copy stays text-muted."
   - "Tone distinction is carried by the full border color and the tinted background; with the border plus the alert title/icon, tone is not conveyed by color alone for color-vision-impaired users (icon/emoji still optional; border is structural)."
   - "Dismissing removes the element from the DOM entirely (no stale region)."
 ---

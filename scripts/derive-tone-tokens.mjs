@@ -8,7 +8,12 @@
  *   text-{primary,success,...}  — hue of the theme's own mode-specific tone,
  *                                 lightness walked (darker first, then
  *                                 lighter) until >= 4.55 on the painted
- *                                 12% color-mix tint of that tone over bg
+ *                                 12% color-mix tint of that tone over BOTH
+ *                                 bg and surface (soft badges / tinted
+ *                                 alerts live on either container)
+ *   border-strong               — hue-preserving walk until >= 3.1 on both
+ *                                 bg and surface (interactive control
+ *                                 boundaries per WCAG 2.1 non-text contrast)
  *   palette-0..5                — fixed hue families walked so that surface
  *                                 on the palette fill >= 4.55 per mode
  *
@@ -96,12 +101,6 @@ function walkLightness(hsl, target, dir) {
   return hslToRgb(hsl);
 }
 
-function either(hsl, target) {
-  const darker = walkLightness(hsl, target, -1);
-  if (contrast(darker, target) >= MARGIN) return darker;
-  return walkLightness(hsl, target, 1);
-}
-
 const PALETTE_HUES = {
   "palette-0": "#2563eb",
   "palette-1": "#7c3aed",
@@ -149,14 +148,44 @@ for (const dir of dirs) {
     for (const tone of ["primary", "success", "warning", "danger"]) {
       const val = color[tone];
       const base = hexToRgb(typeof val === "string" ? val : val[mode]);
-      const tint = {
-        r: 0.12 * base.r + 0.88 * bg.r,
-        g: 0.12 * base.g + 0.88 * bg.g,
-        b: 0.12 * base.b + 0.88 * bg.b,
-      };
+      const tintOf = (container) => ({
+        r: 0.12 * base.r + 0.88 * container.r,
+        g: 0.12 * base.g + 0.88 * container.g,
+        b: 0.12 * base.b + 0.88 * container.b,
+      });
+      const tints = [tintOf(bg), tintOf(surface)];
+      const fits = (rgb) => tints.every((t) => contrast(rgb, t) >= MARGIN);
+      const hsl = rgbToHsl(base);
+      const dir = mode === "light" ? -1 : 1;
+      let l = hsl.l;
+      if (!fits(hslToRgb(hsl))) {
+        for (let i = 0; i < 100; i++) {
+          l += dir;
+          if (l < 3 || l > 97) break;
+          if (fits(hslToRgb({ ...hsl, l }))) break;
+        }
+      }
       color[`text-${tone}`] ??= {};
-      color[`text-${tone}`][mode] = rgbToHex(either(rgbToHsl(base), tint));
+      color[`text-${tone}`][mode] = rgbToHex(
+        hslToRgb({ ...hsl, l: Math.min(97, Math.max(3, l)) }),
+      );
     }
+
+    const borderStrong = hexToRgb(color["border-strong"][mode]);
+    const bsHsl = rgbToHsl(borderStrong);
+    const bsFits = (rgb) => [bg, surface].every((t) => contrast(rgb, t) >= 3.1);
+    let bsL = bsHsl.l;
+    if (!bsFits(borderStrong)) {
+      const step = darkerFill ? -1 : 1;
+      for (let i = 0; i < 100; i++) {
+        bsL += step;
+        if (bsL < 3 || bsL > 97) break;
+        if (bsFits(hslToRgb({ ...bsHsl, l: bsL }))) break;
+      }
+    }
+    color["border-strong"][mode] = rgbToHex(
+      hslToRgb({ ...bsHsl, l: Math.min(97, Math.max(3, bsL)) }),
+    );
   }
 
   await writeFile(path, `${JSON.stringify(theme, null, 2)}\n`);
