@@ -1,6 +1,6 @@
 {
   "name": "@devstroop/react-ui",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Generic React UI primitives for Devstroop web apps — presentational, themeable, project-agnostic.",
   "type": "module",
   "license": "MIT",
