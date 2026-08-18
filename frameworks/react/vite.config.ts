@@ -3,7 +3,13 @@ import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
 
 export default defineConfig({
-  plugins: [dts({ include: ["lib"], tsconfigPath: "./tsconfig.json" })],
+  plugins: [
+    dts({
+      include: ["lib"],
+      exclude: ["**/*.test.tsx", "**/*.test.d.ts"],
+      tsconfigPath: "./tsconfig.json",
+    }),
+  ],
   build: {
     lib: {
       entry: "lib/main.ts",
