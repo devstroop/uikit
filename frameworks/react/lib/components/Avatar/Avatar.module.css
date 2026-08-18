@@ -12,16 +12,19 @@
 .sm {
   width: 28px;
   height: 28px;
+  font-size: 16px;
 }
 
 .md {
   width: 36px;
   height: 36px;
+  font-size: 20px;
 }
 
 .lg {
   width: 48px;
   height: 48px;
+  font-size: 26px;
 }
 
 .initials {
@@ -48,12 +51,22 @@
 
 .status {
   position: absolute;
-  right: -1px;
-  bottom: -1px;
-  width: 9px;
-  height: 9px;
+  right: -2px;
+  bottom: -2px;
+  width: 12px;
+  height: 12px;
   border: 2px solid var(--se-color-surface);
   border-radius: 50%;
+}
+
+.sm .status {
+  width: 10px;
+  height: 10px;
+}
+
+.lg .status {
+  width: 14px;
+  height: 14px;
 }
 
 .online .status {

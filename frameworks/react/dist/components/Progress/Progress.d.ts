@@ -5,5 +5,7 @@ export interface ProgressProps extends Omit<HTMLAttributes<HTMLDivElement>, "rol
     max?: number;
     tone?: ProgressTone;
     indeterminate?: boolean;
+    variant?: "linear" | "circular";
+    size?: number;
 }
-export declare function Progress({ value, max, tone, indeterminate, className, ...props }: ProgressProps): import("react").JSX.Element;
+export declare function Progress({ value, max, tone, indeterminate, variant, size, className, ...props }: ProgressProps): import("react").JSX.Element;

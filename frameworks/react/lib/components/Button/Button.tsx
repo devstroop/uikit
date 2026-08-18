@@ -2,16 +2,25 @@ import { forwardRef, type ButtonHTMLAttributes } from "react";
 import styles from "./Button.module.css";
 
 export type ButtonVariant = "primary" | "secondary" | "ghost" | "danger";
-export type ButtonSize = "sm" | "md" | "lg";
+export type ButtonSize = "xs" | "sm" | "md" | "lg";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   size?: ButtonSize;
   fullWidth?: boolean;
+  iconOnly?: boolean;
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
-  { variant = "primary", size = "md", fullWidth = false, className, type = "button", ...props },
+  {
+    variant = "primary",
+    size = "md",
+    fullWidth = false,
+    iconOnly = false,
+    className,
+    type = "button",
+    ...props
+  },
   ref,
 ) {
   const classNames = [
@@ -19,6 +28,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
     styles[variant],
     styles[size],
     fullWidth ? styles.fullWidth : null,
+    iconOnly ? styles.iconOnly : null,
     className,
   ]
     .filter(Boolean)

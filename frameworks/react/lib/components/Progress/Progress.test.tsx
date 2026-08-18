@@ -32,4 +32,30 @@ describe("Progress", () => {
     render(<Progress value={10} tone="success" />);
     expect(screen.getByRole("progressbar").className).toContain("success");
   });
+
+  it("renders circular progress on an svg with aria values", () => {
+    render(<Progress value={40} max={100} variant="circular" />);
+    const bar = screen.getByRole("progressbar");
+    expect(bar.tagName).toBe("svg");
+    expect(bar).toHaveAttribute("aria-valuenow", "40");
+    expect(bar).toHaveAttribute("aria-valuemin", "0");
+    expect(bar).toHaveAttribute("aria-valuemax", "100");
+    expect(bar.getAttribute("class")).toContain("circular");
+  });
+
+  it("computes circular dash geometry from the value", () => {
+    render(<Progress value={50} max={100} variant="circular" size={64} />);
+    const fill = document.querySelector("circle:nth-of-type(2)");
+    const radius = 32 - 6;
+    const circumference = 2 * Math.PI * radius;
+    expect(fill?.getAttribute("stroke-dasharray")).toBe(`${circumference} ${circumference}`);
+    expect(fill?.getAttribute("stroke-dashoffset")).toBeCloseTo(circumference * 0.5, 4);
+  });
+
+  it("rotates circular indeterminate without aria-valuenow", () => {
+    render(<Progress indeterminate variant="circular" />);
+    const bar = screen.getByRole("progressbar");
+    expect(bar).not.toHaveAttribute("aria-valuenow");
+    expect(bar.getAttribute("class")).toContain("indeterminate");
+  });
 });

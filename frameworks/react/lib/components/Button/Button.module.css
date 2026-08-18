@@ -64,6 +64,11 @@
 }
 
 /* Sizes */
+.xs {
+  padding: 4px 8px;
+  font-size: var(--se-font-size-xs);
+}
+
 .sm {
   padding: 6px 12px;
   font-size: var(--se-font-size-xs);
@@ -77,6 +82,28 @@
 .lg {
   padding: 12px 20px;
   font-size: var(--se-font-size-md);
+}
+
+.iconOnly {
+  padding: 0;
+  aspect-ratio: 1;
+  border-radius: var(--se-radius-full);
+}
+
+.iconOnly.xs {
+  width: 24px;
+}
+
+.iconOnly.sm {
+  width: 32px;
+}
+
+.iconOnly.md {
+  width: 40px;
+}
+
+.iconOnly.lg {
+  width: 48px;
 }
 
 .fullWidth {

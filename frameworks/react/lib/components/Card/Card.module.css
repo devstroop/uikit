@@ -41,6 +41,7 @@
 
 .body {
   padding: var(--se-space-4);
+  font-size: var(--se-font-size-sm);
   color: var(--se-color-text);
 }
 

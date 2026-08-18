@@ -45,4 +45,27 @@ describe("Toast", () => {
     );
     spy.mockRestore();
   });
+
+  it("anchors the viewport bottom-right by default", () => {
+    const { container } = render(
+      <ToastProvider>
+        <ToastTester />
+      </ToastProvider>,
+    );
+    const viewport = container.querySelector('[aria-live="polite"]');
+    // No bottomRight class exists in the module: the default anchors via
+    // the base .viewport rule. Only the three real modifiers can appear
+    // (vitest synthesizes hashed names for any other property access).
+    expect(viewport?.className).not.toMatch(/topLeft|topRight|bottomLeft/);
+  });
+
+  it("applies the position modifier class", () => {
+    const { container } = render(
+      <ToastProvider position="top-left">
+        <ToastTester />
+      </ToastProvider>,
+    );
+    const viewport = container.querySelector('[aria-live="polite"]');
+    expect(viewport?.className).toContain("topLeft");
+  });
 });

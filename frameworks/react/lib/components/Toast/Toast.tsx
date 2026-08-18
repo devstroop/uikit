@@ -40,12 +40,23 @@ export function useToast(): ToastContextValue {
 export interface ToastProviderProps {
   children: ReactNode;
   durationMs?: number;
+  position?: ToastPosition;
   className?: string;
 }
+
+export type ToastPosition = "top-left" | "top-right" | "bottom-left" | "bottom-right";
+
+const positionClass: Record<ToastPosition, string> = {
+  "top-left": "topLeft",
+  "top-right": "topRight",
+  "bottom-left": "bottomLeft",
+  "bottom-right": "bottomRight",
+};
 
 export function ToastProvider({
   children,
   durationMs = 4000,
+  position = "bottom-right",
   className,
 }: ToastProviderProps) {
   const [toasts, setToasts] = useState<ToastItem[]>([]);
@@ -79,14 +90,20 @@ export function ToastProvider({
     <ToastContext.Provider value={value}>
       {children}
       <div
-        className={[styles.viewport, className].filter(Boolean).join(" ")}
+        className={[
+          styles.viewport,
+          styles[positionClass[position]],
+          className,
+        ]
+          .filter(Boolean)
+          .join(" ")}
         aria-live="polite"
         aria-atomic="false"
       >
         {toasts.map((t) => (
           <div
             key={t.id}
-            role="status"
+            role={t.tone === "danger" ? "alert" : "status"}
             className={[styles.toast, styles[t.tone]].filter(Boolean).join(" ")}
           >
             <div className={styles.content}>

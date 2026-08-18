@@ -13,7 +13,9 @@ export declare function useToast(): ToastContextValue;
 export interface ToastProviderProps {
     children: ReactNode;
     durationMs?: number;
+    position?: ToastPosition;
     className?: string;
 }
-export declare function ToastProvider({ children, durationMs, className, }: ToastProviderProps): import("react").JSX.Element;
+export type ToastPosition = "top-left" | "top-right" | "bottom-left" | "bottom-right";
+export declare function ToastProvider({ children, durationMs, position, className, }: ToastProviderProps): import("react").JSX.Element;
 export {};

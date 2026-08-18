@@ -10,6 +10,23 @@
   pointer-events: none;
 }
 
+.topLeft {
+  top: var(--se-space-5);
+  left: var(--se-space-5);
+  bottom: auto;
+  right: auto;
+}
+
+.topRight {
+  top: var(--se-space-5);
+  bottom: auto;
+}
+
+.bottomLeft {
+  left: var(--se-space-5);
+  right: auto;
+}
+
 .toast {
   display: flex;
   align-items: flex-start;
@@ -17,7 +34,6 @@
   padding: var(--se-space-3) var(--se-space-4);
   border-radius: var(--se-radius-md);
   border: 1px solid var(--se-color-border);
-  border-left-width: 3px;
   background: var(--se-color-surface);
   color: var(--se-color-text);
   box-shadow: var(--se-shadow-lg);
@@ -37,19 +53,23 @@
 }
 
 .info {
-  border-left-color: var(--se-color-primary);
+  border-color: var(--se-color-primary);
+  background-color: color-mix(in srgb, var(--se-color-primary) 12%, var(--se-color-surface));
 }
 
 .success {
-  border-left-color: var(--se-color-success);
+  border-color: var(--se-color-success);
+  background-color: color-mix(in srgb, var(--se-color-success) 12%, var(--se-color-surface));
 }
 
 .warning {
-  border-left-color: var(--se-color-warning);
+  border-color: var(--se-color-warning);
+  background-color: color-mix(in srgb, var(--se-color-warning) 12%, var(--se-color-surface));
 }
 
 .danger {
-  border-left-color: var(--se-color-danger);
+  border-color: var(--se-color-danger);
+  background-color: color-mix(in srgb, var(--se-color-danger) 12%, var(--se-color-surface));
 }
 
 .content {
@@ -61,6 +81,23 @@
   font-size: var(--se-font-size-sm);
   font-weight: var(--se-font-weight-bold);
   line-height: 1.4;
+  color: var(--se-color-text);
+}
+
+.info .title {
+  color: var(--se-color-text-primary);
+}
+
+.success .title {
+  color: var(--se-color-text-success);
+}
+
+.warning .title {
+  color: var(--se-color-text-warning);
+}
+
+.danger .title {
+  color: var(--se-color-text-danger);
 }
 
 .description {
@@ -78,7 +115,7 @@
   border-radius: var(--se-radius-sm);
   background: transparent;
   color: var(--se-color-text-muted);
-  font-size: 16px;
+  font-size: var(--se-font-size-md);
   line-height: 1;
   cursor: pointer;
   transition: background var(--se-transition-fast), color var(--se-transition-fast);

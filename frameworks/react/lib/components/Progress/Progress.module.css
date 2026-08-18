@@ -44,3 +44,46 @@
     transform: translateX(350%);
   }
 }
+
+.circular {
+  transform: rotate(-90deg);
+}
+
+.circular circle {
+  fill: none;
+  stroke-width: 6px;
+}
+
+.track {
+  stroke: var(--se-color-surface-hover);
+}
+
+.fill {
+  stroke: var(--se-color-primary);
+  transition: stroke-dashoffset var(--se-transition-base) var(--se-ease-out);
+}
+
+.circular.success .fill {
+  stroke: var(--se-color-success);
+}
+
+.circular.warning .fill {
+  stroke: var(--se-color-warning);
+}
+
+.circular.danger .fill {
+  stroke: var(--se-color-danger);
+}
+
+.circular.indeterminate {
+  animation: se-progress-spin var(--se-motion-sweep) linear infinite;
+}
+
+@keyframes se-progress-spin {
+  from {
+    transform: rotate(-90deg);
+  }
+  to {
+    transform: rotate(270deg);
+  }
+}

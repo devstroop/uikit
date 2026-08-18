@@ -1,4 +1,4 @@
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useId, useRef, type ReactNode } from "react";
 import styles from "./Dialog.module.css";
 
 export type DialogSize = "sm" | "md" | "lg";
@@ -25,6 +25,8 @@ export function Dialog({
   className,
 }: DialogProps) {
   const ref = useRef<HTMLDialogElement>(null);
+  const titleId = useId();
+  const descId = useId();
 
   useEffect(() => {
     const dialog = ref.current;
@@ -43,17 +45,17 @@ export function Dialog({
       ref={ref}
       className={[styles.dialog, styles[size], className].filter(Boolean).join(" ")}
       onClose={onClose}
-      aria-labelledby="se-dialog-title"
-      aria-describedby={description ? "se-dialog-desc" : undefined}
+      aria-labelledby={title ? titleId : undefined}
+      aria-describedby={description ? descId : undefined}
     >
       {title && (
         <header className={styles.header}>
           <div>
-            <h2 id="se-dialog-title" className={styles.title}>
+            <h2 id={titleId} className={styles.title}>
               {title}
             </h2>
             {description && (
-              <p id="se-dialog-desc" className={styles.description}>
+              <p id={descId} className={styles.description}>
                 {description}
               </p>
             )}

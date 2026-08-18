@@ -22,4 +22,12 @@ describe("Alert", () => {
     await user.click(screen.getByRole("button", { name: "Dismiss alert" }));
     expect(screen.queryByRole("alert")).not.toBeInTheDocument();
   });
+
+  it("renders the icon aria-hidden before the content", () => {
+    render(<Alert title="Heads up" icon={<span>icon</span>} />);
+    const icon = screen.getByText("icon");
+    const wrapper = icon.parentElement;
+    expect(wrapper).toHaveAttribute("aria-hidden", "true");
+    expect(screen.getByRole("alert").firstElementChild).toBe(wrapper);
+  });
 });

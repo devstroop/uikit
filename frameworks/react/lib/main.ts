@@ -45,7 +45,7 @@ export { Dialog } from "./components/Dialog/Dialog";
 export type { DialogProps, DialogSize } from "./components/Dialog/Dialog";
 
 export { ToastProvider, useToast } from "./components/Toast/Toast";
-export type { ToastProviderProps, ToastOptions, ToastTone } from "./components/Toast/Toast";
+export type { ToastProviderProps, ToastOptions, ToastTone, ToastPosition } from "./components/Toast/Toast";
 
 export { Alert } from "./components/Alert/Alert";
 export type { AlertProps, AlertTone } from "./components/Alert/Alert";
@@ -76,6 +76,9 @@ export type { SidebarProps, SidebarPosition } from "./components/Sidebar/Sidebar
 
 export { Progress } from "./components/Progress/Progress";
 export type { ProgressProps, ProgressTone } from "./components/Progress/Progress";
+
+export { ThemeSwitcher } from "./components/ThemeSwitcher/ThemeSwitcher";
+export type { ThemeSwitcherProps, ThemeName } from "./components/ThemeSwitcher/ThemeSwitcher";
 
 export { Avatar } from "./components/Avatar/Avatar";
 export type { AvatarProps, AvatarSize, AvatarStatus } from "./components/Avatar/Avatar";

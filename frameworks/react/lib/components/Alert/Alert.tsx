@@ -6,6 +6,7 @@ export type AlertTone = "info" | "success" | "warning" | "danger";
 export interface AlertProps {
   tone?: AlertTone;
   title?: ReactNode;
+  icon?: ReactNode;
   children?: ReactNode;
   dismissible?: boolean;
   className?: string;
@@ -14,6 +15,7 @@ export interface AlertProps {
 export function Alert({
   tone = "info",
   title,
+  icon,
   children,
   dismissible = false,
   className,
@@ -29,6 +31,11 @@ export function Alert({
       role="alert"
       className={[styles.alert, styles[tone], className].filter(Boolean).join(" ")}
     >
+      {icon != null && (
+        <span className={styles.icon} aria-hidden="true">
+          {icon}
+        </span>
+      )}
       <div className={styles.content}>
         {title && <div className={styles.title}>{title}</div>}
         {children && <div className={styles.body}>{children}</div>}
