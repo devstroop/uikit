@@ -2,8 +2,8 @@
 name: Badge
 status: implemented
 frameworks:
-  react: v0.3.0
-  htmx: v0.1.0
+  react: v0.3.1
+  htmx: v0.1.1
 tokens:
   - "space.1"
   - "radius.full"
@@ -23,7 +23,7 @@ tokens:
 a11y:
   - "Renders a semantic <span>; no interactive role — must not be used for interactive controls."
   - "Text-on-fill contrast >= 4.5:1: primary-fg on primary (solid primary), text on surface (solid neutral/success/warning/danger) per schema contrastRules."
-  - "Soft/outline tones pair the tone color with a 12% color-mix tint or border of the same hue; tone-color-on-tint contrast is not covered by schema contrastRules."
+  - "Soft tones pair the tone color with a 12% color-mix tint background; outline tones carry the tone only in the border and use color.text for the label — tone-on-surface contrast is not guaranteed for authentic palettes, so outline labels must not use tone text."
   - "Non-solid danger uses color.danger on tint (soft/outline); solid danger uses color.surface on color.danger rather than danger-fg."
 ---
 # Badge
@@ -49,8 +49,7 @@ to the span.
   background with the tone color as text for the other tones.
 - Solid: filled with `primary` + `primary-fg`; all other solid tones use the
   tone color fill with `surface` text (neutral uses `text` fill on `surface`).
-- Outline: 1px `border-strong` + `text` for neutral; tone-colored border and
-  text for other tones.
+- Outline: 1px `border-strong` + `text` for neutral; tone-colored border with a `text`-colored label for other tones.
 - Layout: `inline-flex`, `radius.full`, xs font, 2px 8px padding (hardcoded).
 
 ## Keyboard

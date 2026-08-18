@@ -72,20 +72,16 @@
 
 .se-badge--outline.se-badge--primary {
   border-color: var(--se-color-primary);
-  color: var(--se-color-primary);
 }
 
 .se-badge--outline.se-badge--success {
   border-color: var(--se-color-success);
-  color: var(--se-color-success);
 }
 
 .se-badge--outline.se-badge--warning {
   border-color: var(--se-color-warning);
-  color: var(--se-color-warning);
 }
 
 .se-badge--outline.se-badge--danger {
   border-color: var(--se-color-danger);
-  color: var(--se-color-danger);
 }

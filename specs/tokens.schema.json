@@ -113,6 +113,11 @@
       "min": 4.5
     },
     {
+      "fg": "text-muted",
+      "bg": "surface-hover",
+      "min": 4.5
+    },
+    {
       "fg": "primary-fg",
       "bg": "primary",
       "min": 4.5
