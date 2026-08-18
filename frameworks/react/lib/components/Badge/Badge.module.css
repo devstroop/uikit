@@ -19,22 +19,22 @@
 
 .primary {
   background-color: color-mix(in srgb, var(--se-color-primary) 12%, transparent);
-  color: var(--se-color-primary);
+  color: var(--se-color-text-primary);
 }
 
 .success {
   background-color: color-mix(in srgb, var(--se-color-success) 12%, transparent);
-  color: var(--se-color-success);
+  color: var(--se-color-text-success);
 }
 
 .warning {
   background-color: color-mix(in srgb, var(--se-color-warning) 12%, transparent);
-  color: var(--se-color-warning);
+  color: var(--se-color-text-warning);
 }
 
 .danger {
   background-color: color-mix(in srgb, var(--se-color-danger) 12%, transparent);
-  color: var(--se-color-danger);
+  color: var(--se-color-text-danger);
 }
 
 /* Variant overrides */
@@ -60,7 +60,7 @@
 
 .solid.danger {
   background-color: var(--se-color-danger);
-  color: var(--se-color-surface);
+  color: var(--se-color-danger-fg);
 }
 
 .outline {

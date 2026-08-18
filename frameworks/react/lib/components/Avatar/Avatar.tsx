@@ -14,7 +14,14 @@ export interface AvatarProps {
   className?: string;
 }
 
-const PALETTE = ["#2563eb", "#7c3aed", "#059669", "#d97706", "#dc2626", "#0ea5e9"];
+const PALETTE = [
+  "var(--se-color-palette-0)",
+  "var(--se-color-palette-1)",
+  "var(--se-color-palette-2)",
+  "var(--se-color-palette-3)",
+  "var(--se-color-palette-4)",
+  "var(--se-color-palette-5)",
+];
 
 function initialsFor(name: string): string {
   return name

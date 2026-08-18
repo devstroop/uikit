@@ -189,7 +189,7 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  color: #fff;
+  color: var(--se-color-surface);
   font-size: 0.72em;
   font-weight: var(--se-font-weight-bold);
   text-transform: uppercase;
@@ -197,29 +197,29 @@
   user-select: none;
 }
 
-/* Hardcoded hash palette (mirrors the react PALETTE); not tokenized */
+/* Tokenized palette: per-mode fills, surface-on-palette >= 4.5 enforced */
 .se-avatar--palette-0 .se-avatar-initials {
-  background: #2563eb;
+  background: var(--se-color-palette-0);
 }
 
 .se-avatar--palette-1 .se-avatar-initials {
-  background: #7c3aed;
+  background: var(--se-color-palette-1);
 }
 
 .se-avatar--palette-2 .se-avatar-initials {
-  background: #059669;
+  background: var(--se-color-palette-2);
 }
 
 .se-avatar--palette-3 .se-avatar-initials {
-  background: #d97706;
+  background: var(--se-color-palette-3);
 }
 
 .se-avatar--palette-4 .se-avatar-initials {
-  background: #dc2626;
+  background: var(--se-color-palette-4);
 }
 
 .se-avatar--palette-5 .se-avatar-initials {
-  background: #0ea5e9;
+  background: var(--se-color-palette-5);
 }
 
 .se-avatar-image {
@@ -273,22 +273,22 @@
 
 .se-badge--soft.se-badge--primary {
   background-color: color-mix(in srgb, var(--se-color-primary) 12%, transparent);
-  color: var(--se-color-primary);
+  color: var(--se-color-text-primary);
 }
 
 .se-badge--soft.se-badge--success {
   background-color: color-mix(in srgb, var(--se-color-success) 12%, transparent);
-  color: var(--se-color-success);
+  color: var(--se-color-text-success);
 }
 
 .se-badge--soft.se-badge--warning {
   background-color: color-mix(in srgb, var(--se-color-warning) 12%, transparent);
-  color: var(--se-color-warning);
+  color: var(--se-color-text-warning);
 }
 
 .se-badge--soft.se-badge--danger {
   background-color: color-mix(in srgb, var(--se-color-danger) 12%, transparent);
-  color: var(--se-color-danger);
+  color: var(--se-color-text-danger);
 }
 
 /* Solid variant overrides */
@@ -314,7 +314,7 @@
 
 .se-badge--solid.se-badge--danger {
   background-color: var(--se-color-danger);
-  color: var(--se-color-surface);
+  color: var(--se-color-danger-fg);
 }
 
 /* Outline variant overrides */
@@ -673,7 +673,7 @@
 }
 
 .se-field-required {
-  color: var(--se-color-danger);
+  color: var(--se-color-text-danger);
   margin-left: 2px;
 }
 
@@ -684,7 +684,7 @@
 
 .se-field-error {
   font-size: var(--se-font-size-xs);
-  color: var(--se-color-danger);
+  color: var(--se-color-text-danger);
 }
 
 
@@ -914,11 +914,11 @@
 }
 
 .se-stat-delta--success {
-  color: var(--se-color-success);
+  color: var(--se-color-text-success);
 }
 
 .se-stat-delta--danger {
-  color: var(--se-color-danger);
+  color: var(--se-color-text-danger);
 }
 
 .se-stat-delta--neutral {

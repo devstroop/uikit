@@ -12,7 +12,7 @@
 }
 
 .required {
-  color: var(--se-color-danger);
+  color: var(--se-color-text-danger);
   margin-left: 2px;
 }
 
@@ -23,5 +23,5 @@
 
 .error {
   font-size: var(--se-font-size-xs);
-  color: var(--se-color-danger);
+  color: var(--se-color-text-danger);
 }

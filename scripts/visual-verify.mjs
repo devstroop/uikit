@@ -3,6 +3,7 @@ import { createServer } from "node:http";
 import { join, extname } from "node:path";
 import { spawn } from "node:child_process";
 import { chromium } from "playwright";
+import AxeBuilder from "@axe-core/playwright";
 
 const ROOT = join(import.meta.dirname, "..");
 const OUT = join(ROOT, "visual", "screenshots");
@@ -203,9 +204,18 @@ const preview = spawn(
 await waitFor(`http://localhost:${REACT_PORT}/`);
 const htmx = await serve(join(ROOT, "demo", "htmx"), HTMX_PORT);
 
+async function auditAxe(page) {
+  const results = await new AxeBuilder({ page }).analyze();
+  return results.violations.map((v) => {
+    const targets = [...new Set(v.nodes.flatMap((n) => n.target.join(" ")))].slice(0, 4);
+    return `${v.id} [${v.impact}] (${v.nodes.length}): ${targets.join(" · ")}`;
+  });
+}
+
 const errors = [];
 const browser = await chromium.launch();
-const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+const context = await browser.newContext();
+const page = await context.newPage({ viewport: { width: 1440, height: 900 } });
 page.on("console", (msg) => {
   if (msg.type() === "error") errors.push(`[console] ${msg.text()}`);
 });
@@ -222,9 +232,10 @@ for (const demo of ["react", "htmx"]) {
       await page.waitForTimeout(200);
       const violations = demo === "htmx" ? await auditContrast(page) : [];
       const tokenViolations = await auditTokens(page);
-      if (violations.length || tokenViolations.length) {
+      const axeViolations = await auditAxe(page);
+      if (violations.length || tokenViolations.length || axeViolations.length) {
         errors.push(
-          `${demo} ${theme}/${mode}: ${[...violations, ...tokenViolations].join(" | ")}`,
+          `${demo} ${theme}/${mode}: ${[...violations, ...tokenViolations, ...axeViolations].join(" | ")}`,
         );
       }
       await page.screenshot({

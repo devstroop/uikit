@@ -19,22 +19,22 @@
 
 .se-badge--soft.se-badge--primary {
   background-color: color-mix(in srgb, var(--se-color-primary) 12%, transparent);
-  color: var(--se-color-primary);
+  color: var(--se-color-text-primary);
 }
 
 .se-badge--soft.se-badge--success {
   background-color: color-mix(in srgb, var(--se-color-success) 12%, transparent);
-  color: var(--se-color-success);
+  color: var(--se-color-text-success);
 }
 
 .se-badge--soft.se-badge--warning {
   background-color: color-mix(in srgb, var(--se-color-warning) 12%, transparent);
-  color: var(--se-color-warning);
+  color: var(--se-color-text-warning);
 }
 
 .se-badge--soft.se-badge--danger {
   background-color: color-mix(in srgb, var(--se-color-danger) 12%, transparent);
-  color: var(--se-color-danger);
+  color: var(--se-color-text-danger);
 }
 
 /* Solid variant overrides */
@@ -60,7 +60,7 @@
 
 .se-badge--solid.se-badge--danger {
   background-color: var(--se-color-danger);
-  color: var(--se-color-surface);
+  color: var(--se-color-danger-fg);
 }
 
 /* Outline variant overrides */

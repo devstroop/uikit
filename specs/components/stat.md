@@ -2,8 +2,8 @@
 name: Stat
 status: implemented
 frameworks:
-  react: v0.3.0
-  htmx: v0.1.0
+  react: v0.3.2
+  htmx: v0.1.3
 tokens:
   - "font.sans"
   - "space.2"
@@ -13,12 +13,12 @@ tokens:
   - "font.size-lg"
   - "font.weight-bold"
   - "color.text"
-  - "color.success"
-  - "color.danger"
+  - "color.text-success"
+  - "color.text-danger"
 a11y:
   - "Non-interactive, not focusable; no keyboard or focus-visible behavior."
   - "label and value are plain text (no aria or semantic pairing like <dl>)."
-  - "Text contrast >= 4.5:1 (color.text-muted on color.bg for label/hint, color.text on color.bg for value)."
+  - "Text contrast >= 4.5:1 (color.text-muted on color.bg for label/hint, color.text on color.bg for value, text-{tone} on color.bg for deltas)."
 ---
 
 # Stat

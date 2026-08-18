@@ -21,6 +21,16 @@
         "danger-fg",
         "success",
         "warning",
+        "text-primary",
+        "text-success",
+        "text-warning",
+        "text-danger",
+        "palette-0",
+        "palette-1",
+        "palette-2",
+        "palette-3",
+        "palette-4",
+        "palette-5",
         "focus",
         "backdrop"
       ]
@@ -125,6 +135,66 @@
     {
       "fg": "danger-fg",
       "bg": "danger",
+      "min": 4.5
+    },
+    {
+      "fg": "surface",
+      "bg": "success",
+      "min": 4.5
+    },
+    {
+      "fg": "surface",
+      "bg": "warning",
+      "min": 4.5
+    },
+    {
+      "fg": "text-primary",
+      "bg": "bg",
+      "min": 4.5
+    },
+    {
+      "fg": "text-success",
+      "bg": "bg",
+      "min": 4.5
+    },
+    {
+      "fg": "text-warning",
+      "bg": "bg",
+      "min": 4.5
+    },
+    {
+      "fg": "text-danger",
+      "bg": "bg",
+      "min": 4.5
+    },
+    {
+      "fg": "surface",
+      "bg": "palette-0",
+      "min": 4.5
+    },
+    {
+      "fg": "surface",
+      "bg": "palette-1",
+      "min": 4.5
+    },
+    {
+      "fg": "surface",
+      "bg": "palette-2",
+      "min": 4.5
+    },
+    {
+      "fg": "surface",
+      "bg": "palette-3",
+      "min": 4.5
+    },
+    {
+      "fg": "surface",
+      "bg": "palette-4",
+      "min": 4.5
+    },
+    {
+      "fg": "surface",
+      "bg": "palette-5",
       "min": 4.5
     }
   ]

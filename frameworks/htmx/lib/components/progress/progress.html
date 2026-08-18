@@ -1,8 +1,8 @@
 <!--
   Progress — reference markup for server templates.
   Root: <div class="se-progress se-progress--<tone> [se-progress--indeterminate]"
-        role="progressbar" aria-valuemin="0" aria-valuemax="<max>"
-        [aria-valuenow="<value>"]>
+        role="progressbar" aria-label="<description>" aria-valuemin="0"
+        aria-valuemax="<max>" [aria-valuenow="<value>"]>
   Modifiers:
     tone  --primary | --success | --warning | --danger   (default: --primary)
     state --indeterminate (omits aria-valuenow; bar is fixed at 40% and
@@ -15,30 +15,30 @@
   No JS, no data-* hooks.
 -->
 
-<div class="se-progress se-progress--primary" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
+<div class="se-progress se-progress--primary" role="progressbar" aria-label="Storage used" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
   <div class="se-progress-bar" style="width: 40%"></div>
 </div>
 
-<div class="se-progress se-progress--primary" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+<div class="se-progress se-progress--primary" role="progressbar" aria-label="Import progress" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
   <div class="se-progress-bar" style="width: 75%"></div>
 </div>
 
-<div class="se-progress se-progress--success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+<div class="se-progress se-progress--success" role="progressbar" aria-label="Upload complete" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
   <div class="se-progress-bar" style="width: 100%"></div>
 </div>
 
-<div class="se-progress se-progress--warning" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="10">
+<div class="se-progress se-progress--warning" role="progressbar" aria-label="Battery level" aria-valuenow="5" aria-valuemin="0" aria-valuemax="10">
   <div class="se-progress-bar" style="width: 50%"></div>
 </div>
 
-<div class="se-progress se-progress--danger" role="progressbar" aria-valuenow="3" aria-valuemin="0" aria-valuemax="10">
+<div class="se-progress se-progress--danger" role="progressbar" aria-label="Errors found" aria-valuenow="3" aria-valuemin="0" aria-valuemax="10">
   <div class="se-progress-bar" style="width: 30%"></div>
 </div>
 
-<div class="se-progress se-progress--primary se-progress--indeterminate" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+<div class="se-progress se-progress--primary se-progress--indeterminate" role="progressbar" aria-label="Downloading updates" aria-valuemin="0" aria-valuemax="100">
   <div class="se-progress-bar"></div>
 </div>
 
-<div class="se-progress se-progress--primary" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+<div class="se-progress se-progress--primary" role="progressbar" aria-label="Empty queue" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
   <div class="se-progress-bar" style="width: 0%"></div>
 </div>

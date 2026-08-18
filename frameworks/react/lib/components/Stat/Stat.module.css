@@ -31,11 +31,11 @@
 }
 
 .delta.success {
-  color: var(--se-color-success);
+  color: var(--se-color-text-success);
 }
 
 .delta.danger {
-  color: var(--se-color-danger);
+  color: var(--se-color-text-danger);
 }
 
 .delta.neutral {

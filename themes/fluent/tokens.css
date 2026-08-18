@@ -26,6 +26,16 @@
   --se-color-warning: #9d5d00;
   --se-color-focus: rgba(0, 120, 212, 0.6);
   --se-color-backdrop: rgba(0, 0, 0, 0.4);
+  --se-color-text-primary: #0f69b8;
+  --se-color-text-success: #0e7000;
+  --se-color-text-warning: #985a00;
+  --se-color-text-danger: #c42b1c;
+  --se-color-palette-0: #2563eb;
+  --se-color-palette-1: #7c3aed;
+  --se-color-palette-2: #04825b;
+  --se-color-palette-3: #b16105;
+  --se-color-palette-4: #dc2626;
+  --se-color-palette-5: #0b7caf;
   /* radius */
   --se-radius-sm: 2px;
   --se-radius-md: 4px;
@@ -85,6 +95,16 @@
   --se-color-warning: #fce100;
   --se-color-focus: rgba(71, 158, 245, 0.6);
   --se-color-backdrop: rgba(0, 0, 0, 0.6);
+  --se-color-text-primary: #218eed;
+  --se-color-text-success: #14a60e;
+  --se-color-text-warning: #fce100;
+  --se-color-text-danger: #e65e51;
+  --se-color-palette-0: #5888f0;
+  --se-color-palette-1: #a172f2;
+  --se-color-palette-2: #05a070;
+  --se-color-palette-3: #d97706;
+  --se-color-palette-4: #e55f5f;
+  --se-color-palette-5: #0ea5e9;
   /* shadow */
   --se-shadow-sm: 0 0 2px rgba(0, 0, 0, 0.8), 0 2px 4px rgba(0, 0, 0, 0.8);
   --se-shadow-md: 0 0 2px rgba(0, 0, 0, 0.8), 0 4px 8px rgba(0, 0, 0, 0.8), 0 8px 16px rgba(0, 0, 0, 0.8);

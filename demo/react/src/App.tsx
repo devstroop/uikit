@@ -167,9 +167,9 @@ function Feedback() {
   const toast = useToast();
   return (
     <Row title="Progress · Skeleton · Alert · Toast">
-      <Progress value={62} />
-      <Progress value={140} max={100} />
-      <Progress indeterminate />
+      <Progress value={62} aria-label="Storage used" />
+      <Progress value={140} max={100} aria-label="Tasks complete" />
+      <Progress indeterminate aria-label="Downloading updates" />
       <Skeleton width={180} height={20} />
       <Alert tone="success" title="Deployed" dismissible>
         The release is live.
@@ -246,16 +246,18 @@ function Row({ title, children }: { title: string; children: ReactNode }) {
 export function App() {
   return (
     <ToastProvider>
-      <Buttons />
-      <Cards />
-      <Badges />
-      <Icons />
-      <Stats />
-      <Tables />
-      <EmptyStates />
-      <FormControls />
-      <Feedback />
-      <Overlays />
+      <main>
+        <Buttons />
+        <Cards />
+        <Badges />
+        <Icons />
+        <Stats />
+        <Tables />
+        <EmptyStates />
+        <FormControls />
+        <Feedback />
+        <Overlays />
+      </main>
     </ToastProvider>
   );
 }

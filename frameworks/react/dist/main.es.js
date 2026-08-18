@@ -46,15 +46,15 @@ const ee = "_button_g8pqx_1", te = "_primary_g8pqx_29", ne = "_secondary_g8pqx_3
       ]
     }
   );
-}), fe = "_badge_11zoy_1", ge = "_neutral_11zoy_15", ve = "_primary_11zoy_20", ye = "_success_11zoy_25", be = "_warning_11zoy_30", xe = "_danger_11zoy_35", we = "_solid_11zoy_41", Me = "_outline_11zoy_66", D = {
-  badge: fe,
-  neutral: ge,
-  primary: ve,
+}), ve = "_badge_1ou43_1", fe = "_neutral_1ou43_15", ge = "_primary_1ou43_20", ye = "_success_1ou43_25", be = "_warning_1ou43_30", we = "_danger_1ou43_35", ke = "_solid_1ou43_41", xe = "_outline_1ou43_66", D = {
+  badge: ve,
+  neutral: fe,
+  primary: ge,
   success: ye,
   warning: be,
-  danger: xe,
-  solid: we,
-  outline: Me
+  danger: we,
+  solid: ke,
+  outline: xe
 }, Dn = y(function({ tone: t = "neutral", variant: n = "soft", className: s, children: l, ...o }, i) {
   return /* @__PURE__ */ e(
     "span",
@@ -106,7 +106,7 @@ const ee = "_button_g8pqx_1", te = "_primary_g8pqx_29", ne = "_secondary_g8pqx_3
   "home",
   "key",
   "link"
-], $e = {
+], Me = {
   check: /* @__PURE__ */ e("path", { d: "M20 6L9 17l-5-5" }),
   close: /* @__PURE__ */ e("path", { d: "M18 6L6 18M6 6l12 12" }),
   "chevron-down": /* @__PURE__ */ e("path", { d: "M6 9l6 6 6-6" }),
@@ -235,11 +235,11 @@ const ee = "_button_g8pqx_1", te = "_primary_g8pqx_29", ne = "_secondary_g8pqx_3
       "aria-hidden": "true",
       focusable: "false",
       ...o,
-      children: $e[t]
+      children: Me[t]
     }
   );
-}), ke = "_stat_17lcz_1", Ne = "_label_17lcz_8", je = "_row_17lcz_16", ze = "_value_17lcz_22", Be = "_delta_17lcz_28", qe = "_success_17lcz_33", Le = "_danger_17lcz_37", He = "_neutral_17lcz_41", Ie = "_hint_17lcz_45", M = {
-  stat: ke,
+}), $e = "_stat_1ks65_1", Ne = "_label_1ks65_8", je = "_row_1ks65_16", ze = "_value_1ks65_22", Be = "_delta_1ks65_28", qe = "_success_1ks65_33", Le = "_danger_1ks65_37", He = "_neutral_1ks65_41", Ie = "_hint_1ks65_45", x = {
+  stat: $e,
   label: Ne,
   row: je,
   value: ze,
@@ -249,13 +249,13 @@ const ee = "_button_g8pqx_1", te = "_primary_g8pqx_29", ne = "_secondary_g8pqx_3
   neutral: He,
   hint: Ie
 }, Pn = y(function({ label: t, value: n, delta: s, deltaTone: l = "neutral", hint: o, className: i, ...d }, _) {
-  return /* @__PURE__ */ c("div", { ref: _, className: [M.stat, i].filter(Boolean).join(" "), ...d, children: [
-    /* @__PURE__ */ e("div", { className: M.label, children: t }),
-    /* @__PURE__ */ c("div", { className: M.row, children: [
-      /* @__PURE__ */ e("div", { className: M.value, children: n }),
-      s != null && /* @__PURE__ */ e("div", { className: [M.delta, M[l]].join(" "), children: s })
+  return /* @__PURE__ */ c("div", { ref: _, className: [x.stat, i].filter(Boolean).join(" "), ...d, children: [
+    /* @__PURE__ */ e("div", { className: x.label, children: t }),
+    /* @__PURE__ */ c("div", { className: x.row, children: [
+      /* @__PURE__ */ e("div", { className: x.value, children: n }),
+      s != null && /* @__PURE__ */ e("div", { className: [x.delta, x[l]].join(" "), children: s })
     ] }),
-    o != null && /* @__PURE__ */ e("div", { className: M.hint, children: o })
+    o != null && /* @__PURE__ */ e("div", { className: x.hint, children: o })
   ] });
 }), Ve = "_wrap_1x8tx_1", Ce = "_table_1x8tx_8", Te = "_start_1x8tx_40", Se = "_center_1x8tx_44", Ee = "_end_1x8tx_48", Ae = "_empty_1x8tx_52", B = {
   wrap: Ve,
@@ -304,7 +304,7 @@ function Wn({ icon: a, title: t, description: n, action: s, className: l }) {
     s != null && /* @__PURE__ */ e("div", { className: q.action, children: s })
   ] });
 }
-const We = "_field_1i47m_1", Oe = "_label_1i47m_8", Ue = "_required_1i47m_14", Ge = "_hint_1i47m_19", Je = "_error_1i47m_24", L = {
+const We = "_field_w9m4o_1", Oe = "_label_w9m4o_8", Ue = "_required_w9m4o_14", Ge = "_hint_w9m4o_19", Je = "_error_w9m4o_24", L = {
   field: We,
   label: Oe,
   required: Ue,
@@ -417,10 +417,10 @@ function Yn({
   };
   Q(() => {
     if (!d) return;
-    const f = (g) => {
-      g.key === "Escape" && m();
+    const v = (f) => {
+      f.key === "Escape" && m();
     };
-    return window.addEventListener("keydown", f), () => window.removeEventListener("keydown", f);
+    return window.addEventListener("keydown", v), () => window.removeEventListener("keydown", v);
   }, [d]);
   const h = G(t) ? J(
     t,
@@ -428,7 +428,7 @@ function Yn({
       "aria-describedby": [
         t.props["aria-describedby"],
         d ? o : null
-      ].filter((f) => typeof f == "string").join(" ") || void 0
+      ].filter((v) => typeof v == "string").join(" ") || void 0
     }
   ) : t;
   return /* @__PURE__ */ c(
@@ -457,18 +457,18 @@ function Yn({
     }
   );
 }
-const ft = "_dialog_1ji7h_1", gt = "_sm_1ji7h_30", vt = "_md_1ji7h_34", yt = "_lg_1ji7h_38", bt = "_header_1ji7h_42", xt = "_title_1ji7h_51", wt = "_description_1ji7h_58", Mt = "_close_1ji7h_65", $t = "_body_1ji7h_84", kt = "_footer_1ji7h_90", x = {
-  dialog: ft,
+const vt = "_dialog_1ji7h_1", ft = "_sm_1ji7h_30", gt = "_md_1ji7h_34", yt = "_lg_1ji7h_38", bt = "_header_1ji7h_42", wt = "_title_1ji7h_51", kt = "_description_1ji7h_58", xt = "_close_1ji7h_65", Mt = "_body_1ji7h_84", $t = "_footer_1ji7h_90", w = {
+  dialog: vt,
   "se-dialog-in": "_se-dialog-in_1ji7h_1",
-  sm: gt,
-  md: vt,
+  sm: ft,
+  md: gt,
   lg: yt,
   header: bt,
-  title: xt,
-  description: wt,
-  close: Mt,
-  body: $t,
-  footer: kt
+  title: wt,
+  description: kt,
+  close: xt,
+  body: Mt,
+  footer: $t
 };
 function Zn({
   open: a,
@@ -488,34 +488,34 @@ function Zn({
     "dialog",
     {
       ref: _,
-      className: [x.dialog, x[i], d].filter(Boolean).join(" "),
+      className: [w.dialog, w[i], d].filter(Boolean).join(" "),
       onClose: t,
       "aria-labelledby": "se-dialog-title",
       "aria-describedby": s ? "se-dialog-desc" : void 0,
       children: [
-        n && /* @__PURE__ */ c("header", { className: x.header, children: [
+        n && /* @__PURE__ */ c("header", { className: w.header, children: [
           /* @__PURE__ */ c("div", { children: [
-            /* @__PURE__ */ e("h2", { id: "se-dialog-title", className: x.title, children: n }),
-            s && /* @__PURE__ */ e("p", { id: "se-dialog-desc", className: x.description, children: s })
+            /* @__PURE__ */ e("h2", { id: "se-dialog-title", className: w.title, children: n }),
+            s && /* @__PURE__ */ e("p", { id: "se-dialog-desc", className: w.description, children: s })
           ] }),
           /* @__PURE__ */ e(
             "button",
             {
               type: "button",
-              className: x.close,
+              className: w.close,
               onClick: t,
               "aria-label": "Close dialog",
               children: "×"
             }
           )
         ] }),
-        l && /* @__PURE__ */ e("div", { className: x.body, children: l }),
-        o && /* @__PURE__ */ e("footer", { className: x.footer, children: o })
+        l && /* @__PURE__ */ e("div", { className: w.body, children: l }),
+        o && /* @__PURE__ */ e("footer", { className: w.footer, children: o })
       ]
     }
   );
 }
-const Nt = "_viewport_3d2q7_1", jt = "_toast_3d2q7_13", zt = "_info_3d2q7_39", Bt = "_success_3d2q7_43", qt = "_warning_3d2q7_47", Lt = "_danger_3d2q7_51", Ht = "_content_3d2q7_55", It = "_title_3d2q7_60", Vt = "_description_3d2q7_66", Ct = "_dismiss_3d2q7_73", $ = {
+const Nt = "_viewport_3d2q7_1", jt = "_toast_3d2q7_13", zt = "_info_3d2q7_39", Bt = "_success_3d2q7_43", qt = "_warning_3d2q7_47", Lt = "_danger_3d2q7_51", Ht = "_content_3d2q7_55", It = "_title_3d2q7_60", Vt = "_description_3d2q7_66", Ct = "_dismiss_3d2q7_73", M = {
   viewport: Nt,
   toast: jt,
   "se-toast-in": "_se-toast-in_3d2q7_1",
@@ -550,7 +550,7 @@ function ta({
         tone: r.tone ?? "info",
         durationMs: r.durationMs ?? t
       };
-      l((f) => [...f, h]), h.durationMs > 0 && window.setTimeout(() => i(m), h.durationMs);
+      l((v) => [...v, h]), h.durationMs > 0 && window.setTimeout(() => i(m), h.durationMs);
     },
     [t, i]
   ), _ = R(() => ({ toast: d }), [d]);
@@ -559,24 +559,24 @@ function ta({
     /* @__PURE__ */ e(
       "div",
       {
-        className: [$.viewport, n].filter(Boolean).join(" "),
+        className: [M.viewport, n].filter(Boolean).join(" "),
         "aria-live": "polite",
         "aria-atomic": "false",
         children: s.map((r) => /* @__PURE__ */ c(
           "div",
           {
             role: "status",
-            className: [$.toast, $[r.tone]].filter(Boolean).join(" "),
+            className: [M.toast, M[r.tone]].filter(Boolean).join(" "),
             children: [
-              /* @__PURE__ */ c("div", { className: $.content, children: [
-                /* @__PURE__ */ e("div", { className: $.title, children: r.title }),
-                r.description && /* @__PURE__ */ e("div", { className: $.description, children: r.description })
+              /* @__PURE__ */ c("div", { className: M.content, children: [
+                /* @__PURE__ */ e("div", { className: M.title, children: r.title }),
+                r.description && /* @__PURE__ */ e("div", { className: M.description, children: r.description })
               ] }),
               /* @__PURE__ */ e(
                 "button",
                 {
                   type: "button",
-                  className: $.dismiss,
+                  className: M.dismiss,
                   onClick: () => i(r.id),
                   "aria-label": "Dismiss notification",
                   children: "×"
@@ -699,7 +699,7 @@ function sa({
     }
   );
 }
-const nn = "_avatar_h5xoe_1", an = "_sm_h5xoe_12", sn = "_md_h5xoe_17", ln = "_lg_h5xoe_22", on = "_initials_h5xoe_27", cn = "_image_h5xoe_42", rn = "_status_h5xoe_49", dn = "_online_h5xoe_59", _n = "_offline_h5xoe_63", hn = "_away_h5xoe_67", j = {
+const nn = "_avatar_l2rr3_1", an = "_sm_l2rr3_12", sn = "_md_l2rr3_17", ln = "_lg_l2rr3_22", on = "_initials_l2rr3_27", cn = "_image_l2rr3_42", rn = "_status_l2rr3_49", dn = "_online_l2rr3_59", _n = "_offline_l2rr3_63", hn = "_away_l2rr3_67", j = {
   avatar: nn,
   sm: an,
   md: sn,
@@ -710,7 +710,14 @@ const nn = "_avatar_h5xoe_1", an = "_sm_h5xoe_12", sn = "_md_h5xoe_17", ln = "_l
   online: dn,
   offline: _n,
   away: hn
-}, E = ["#2563eb", "#7c3aed", "#059669", "#d97706", "#dc2626", "#0ea5e9"];
+}, E = [
+  "var(--se-color-palette-0)",
+  "var(--se-color-palette-1)",
+  "var(--se-color-palette-2)",
+  "var(--se-color-palette-3)",
+  "var(--se-color-palette-4)",
+  "var(--se-color-palette-5)"
+];
 function un(a) {
   return a.split(/\s+/).filter(Boolean).slice(0, 2).map((t) => t[0]?.toUpperCase() ?? "").join("");
 }
@@ -747,15 +754,15 @@ function la({
     }
   );
 }
-const mn = "_root_1k1gx_1", fn = "_tabList_1k1gx_6", gn = "_underline_1k1gx_12", vn = "_pills_1k1gx_16", yn = "_tab_1k1gx_6", bn = "_active_1k1gx_36", xn = "_disabled_1k1gx_50", wn = "_panel_1k1gx_64", k = {
+const mn = "_root_1k1gx_1", vn = "_tabList_1k1gx_6", fn = "_underline_1k1gx_12", gn = "_pills_1k1gx_16", yn = "_tab_1k1gx_6", bn = "_active_1k1gx_36", wn = "_disabled_1k1gx_50", kn = "_panel_1k1gx_64", $ = {
   root: mn,
-  tabList: fn,
-  underline: gn,
-  pills: vn,
+  tabList: vn,
+  underline: fn,
+  pills: gn,
   tab: yn,
   active: bn,
-  disabled: xn,
-  panel: wn
+  disabled: wn,
+  panel: kn
 };
 function oa({
   items: a,
@@ -767,23 +774,23 @@ function oa({
 }) {
   const i = H(), d = A(null), [_, r] = I(n ?? a[0]?.key ?? ""), m = t ?? _, h = (p) => {
     r(p), s?.(p);
-  }, f = (p) => {
-    const v = a.filter((V) => !V.disabled), W = v.findIndex((V) => V.key === m);
-    let w = -1;
-    p.key === "ArrowRight" ? w = (W + 1) % v.length : p.key === "ArrowLeft" ? w = (W - 1 + v.length) % v.length : p.key === "Home" ? w = 0 : p.key === "End" && (w = v.length - 1), w >= 0 && (p.preventDefault(), d.current?.querySelector(
-      `[data-tab-key="${CSS.escape(v[w]?.key ?? "")}"]`
-    )?.focus(), h(v[w]?.key ?? ""));
-  }, g = a.find((p) => p.key === m);
-  return /* @__PURE__ */ c("div", { className: [k.root, o].filter(Boolean).join(" "), children: [
+  }, v = (p) => {
+    const g = a.filter((V) => !V.disabled), W = g.findIndex((V) => V.key === m);
+    let k = -1;
+    p.key === "ArrowRight" ? k = (W + 1) % g.length : p.key === "ArrowLeft" ? k = (W - 1 + g.length) % g.length : p.key === "Home" ? k = 0 : p.key === "End" && (k = g.length - 1), k >= 0 && (p.preventDefault(), d.current?.querySelector(
+      `[data-tab-key="${CSS.escape(g[k]?.key ?? "")}"]`
+    )?.focus(), h(g[k]?.key ?? ""));
+  }, f = a.find((p) => p.key === m);
+  return /* @__PURE__ */ c("div", { className: [$.root, o].filter(Boolean).join(" "), children: [
     /* @__PURE__ */ e(
       "div",
       {
         ref: d,
         role: "tablist",
-        className: [k.tabList, k[l]].filter(Boolean).join(" "),
-        onKeyDown: f,
+        className: [$.tabList, $[l]].filter(Boolean).join(" "),
+        onKeyDown: v,
         children: a.map((p) => {
-          const v = p.key === m;
+          const g = p.key === m;
           return /* @__PURE__ */ e(
             "button",
             {
@@ -791,14 +798,14 @@ function oa({
               role: "tab",
               id: `${i}-tab-${p.key}`,
               "data-tab-key": p.key,
-              "aria-selected": v,
+              "aria-selected": g,
               "aria-controls": `${i}-panel-${p.key}`,
-              tabIndex: v ? 0 : -1,
+              tabIndex: g ? 0 : -1,
               disabled: p.disabled,
               className: [
-                k.tab,
-                v ? k.active : null,
-                p.disabled ? k.disabled : null
+                $.tab,
+                g ? $.active : null,
+                p.disabled ? $.disabled : null
               ].filter(Boolean).join(" "),
               onClick: () => h(p.key),
               children: p.label
@@ -808,22 +815,22 @@ function oa({
         })
       }
     ),
-    g && /* @__PURE__ */ e(
+    f && /* @__PURE__ */ e(
       "div",
       {
         role: "tabpanel",
-        id: `${i}-panel-${g.key}`,
-        "aria-labelledby": `${i}-tab-${g.key}`,
-        className: k.panel,
-        children: g.content
+        id: `${i}-panel-${f.key}`,
+        "aria-labelledby": `${i}-tab-${f.key}`,
+        className: $.panel,
+        children: f.content
       }
     )
   ] });
 }
-const Mn = "_root_1rcwz_1", $n = "_item_1rcwz_9", kn = "_heading_1rcwz_13", Nn = "_trigger_1rcwz_17", jn = "_disabled_1rcwz_34", zn = "_title_1rcwz_48", Bn = "_chevron_1rcwz_52", qn = "_open_1rcwz_59", Ln = "_content_1rcwz_63", b = {
-  root: Mn,
-  item: $n,
-  heading: kn,
+const xn = "_root_1rcwz_1", Mn = "_item_1rcwz_9", $n = "_heading_1rcwz_13", Nn = "_trigger_1rcwz_17", jn = "_disabled_1rcwz_34", zn = "_title_1rcwz_48", Bn = "_chevron_1rcwz_52", qn = "_open_1rcwz_59", Ln = "_content_1rcwz_63", b = {
+  root: xn,
+  item: Mn,
+  heading: $n,
   trigger: Nn,
   disabled: jn,
   title: zn,
@@ -840,19 +847,19 @@ function ia({
   className: o
 }) {
   const i = H(), [d, _] = I(s ?? []), r = n ?? d, m = (h) => {
-    const f = r.includes(h) ? r.filter((g) => g !== h) : t ? [...r, h] : [h];
-    _(f), l?.(f);
+    const v = r.includes(h) ? r.filter((f) => f !== h) : t ? [...r, h] : [h];
+    _(v), l?.(v);
   };
   return /* @__PURE__ */ e("div", { className: [b.root, o].filter(Boolean).join(" "), children: a.map((h) => {
-    const f = r.includes(h.key), g = `${i}-panel-${h.key}`, p = `${i}-trigger-${h.key}`;
+    const v = r.includes(h.key), f = `${i}-panel-${h.key}`, p = `${i}-trigger-${h.key}`;
     return /* @__PURE__ */ c("div", { className: b.item, children: [
       /* @__PURE__ */ e("h3", { className: b.heading, children: /* @__PURE__ */ c(
         "button",
         {
           type: "button",
           id: p,
-          "aria-expanded": f,
-          "aria-controls": g,
+          "aria-expanded": v,
+          "aria-controls": f,
           disabled: h.disabled,
           className: [
             b.trigger,
@@ -861,17 +868,17 @@ function ia({
           onClick: () => m(h.key),
           children: [
             /* @__PURE__ */ e("span", { className: b.title, children: h.title }),
-            /* @__PURE__ */ e("span", { className: [b.chevron, f ? b.open : null].filter(Boolean).join(" "), "aria-hidden": "true", children: "▾" })
+            /* @__PURE__ */ e("span", { className: [b.chevron, v ? b.open : null].filter(Boolean).join(" "), "aria-hidden": "true", children: "▾" })
           ]
         }
       ) }),
       /* @__PURE__ */ e(
         "div",
         {
-          id: g,
+          id: f,
           role: "region",
           "aria-labelledby": p,
-          hidden: !f,
+          hidden: !v,
           className: b.content,
           children: h.content
         }

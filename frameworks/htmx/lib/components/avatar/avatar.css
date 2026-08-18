@@ -31,7 +31,7 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  color: #fff;
+  color: var(--se-color-surface);
   font-size: 0.72em;
   font-weight: var(--se-font-weight-bold);
   text-transform: uppercase;
@@ -39,29 +39,29 @@
   user-select: none;
 }
 
-/* Hardcoded hash palette (mirrors the react PALETTE); not tokenized */
+/* Tokenized palette: per-mode fills, surface-on-palette >= 4.5 enforced */
 .se-avatar--palette-0 .se-avatar-initials {
-  background: #2563eb;
+  background: var(--se-color-palette-0);
 }
 
 .se-avatar--palette-1 .se-avatar-initials {
-  background: #7c3aed;
+  background: var(--se-color-palette-1);
 }
 
 .se-avatar--palette-2 .se-avatar-initials {
-  background: #059669;
+  background: var(--se-color-palette-2);
 }
 
 .se-avatar--palette-3 .se-avatar-initials {
-  background: #d97706;
+  background: var(--se-color-palette-3);
 }
 
 .se-avatar--palette-4 .se-avatar-initials {
-  background: #dc2626;
+  background: var(--se-color-palette-4);
 }
 
 .se-avatar--palette-5 .se-avatar-initials {
-  background: #0ea5e9;
+  background: var(--se-color-palette-5);
 }
 
 .se-avatar-image {

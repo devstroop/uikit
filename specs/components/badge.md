@@ -2,8 +2,8 @@
 name: Badge
 status: implemented
 frameworks:
-  react: v0.3.1
-  htmx: v0.1.1
+  react: v0.3.2
+  htmx: v0.1.3
 tokens:
   - "space.1"
   - "radius.full"
@@ -17,14 +17,19 @@ tokens:
   - "color.warning"
   - "color.danger"
   - "color.primary-fg"
+  - "color.danger-fg"
   - "color.text"
   - "color.surface"
   - "color.border-strong"
+  - "color.text-primary"
+  - "color.text-success"
+  - "color.text-warning"
+  - "color.text-danger"
 a11y:
   - "Renders a semantic <span>; no interactive role — must not be used for interactive controls."
   - "Text-on-fill contrast >= 4.5:1: primary-fg on primary (solid primary), text on surface (solid neutral/success/warning/danger) per schema contrastRules."
-  - "Soft tones pair the tone color with a 12% color-mix tint background; outline tones carry the tone only in the border and use color.text for the label — tone-on-surface contrast is not guaranteed for authentic palettes, so outline labels must not use tone text."
-  - "Non-solid danger uses color.danger on tint (soft/outline); solid danger uses color.surface on color.danger rather than danger-fg."
+  - "Soft tones pair the tone color with a 12% color-mix tint background; the label uses the matching text-{tone} token (>= 4.5:1 on bg per schema contrastRules); outline tones carry the tone only in the border and use color.text for the label."
+  - "Non-solid danger uses color.text-danger on tint (soft); solid danger uses color.danger-fg on color.danger (>= 4.5:1 per schema contrastRules in both modes)."
 ---
 # Badge
 
@@ -46,7 +51,8 @@ to the span.
 - Single `<span>`; classes are `badge` + tone + variant. Soft is the base
   style; `solid` and `outline` override it.
 - Soft: `surface-hover`/`text-muted` for neutral; 12% `color-mix` tint
-  background with the tone color as text for the other tones.
+  background with the matching `text-{tone}` color as text for the other
+  tones.
 - Solid: filled with `primary` + `primary-fg`; all other solid tones use the
   tone color fill with `surface` text (neutral uses `text` fill on `surface`).
 - Outline: 1px `border-strong` + `text` for neutral; tone-colored border with a `text`-colored label for other tones.

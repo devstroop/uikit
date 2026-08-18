@@ -2,8 +2,8 @@
 name: Avatar
 status: implemented
 frameworks:
-  react: v0.3.0
-  htmx: v0.1.0
+  react: v0.3.2
+  htmx: v0.1.3
 tokens:
   - "color.surface-hover"
   - "font.weight-bold"
@@ -11,11 +11,17 @@ tokens:
   - "color.success"
   - "color.text-muted"
   - "color.warning"
+  - "color.palette-0"
+  - "color.palette-1"
+  - "color.palette-2"
+  - "color.palette-3"
+  - "color.palette-4"
+  - "color.palette-5"
 a11y:
   - "Root is a span with role=\"img\" and aria-label (alt ?? name ?? \"avatar\")."
   - "Initials and the status dot are aria-hidden=\"true\" (decorative)."
   - "Image fallback: `<img alt={alt ?? name ?? \"\"}>` for a real image."
-  - "Initials text is #fff on a deterministic palette color — the palette is hardcoded (not tokenized); contrast is not guaranteed by tokens."
+  - "Initials text is color.surface on a deterministic tokenized palette (color.palette-0..5, per-mode values); surface-on-palette contrast >= 4.5:1 per schema contrastRules."
   - "Status dot contrast uses a color.surface border ring against the success / text-muted / warning fill."
 ---
 # Avatar
