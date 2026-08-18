@@ -43,3 +43,9 @@
   padding: 8px 12px;
   font-size: var(--se-font-size-sm);
 }
+
+.se-input--lg {
+  height: calc(var(--se-control-height) + 8px);
+  padding: 10px 16px;
+  font-size: var(--se-font-size-md);
+}

@@ -65,6 +65,9 @@
   --se-transition-fast: 120ms ease;
   --se-transition-base: 200ms ease;
   --se-transition-slow: 300ms ease;
+  /* motion */
+  --se-motion-shimmer: 1.6s;
+  --se-motion-sweep: 1.4s;
   /* ease */
   --se-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   /* z */

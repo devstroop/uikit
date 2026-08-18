@@ -10,7 +10,7 @@
     transparent
   );
   background-size: 200% 100%;
-  animation: se-skeleton-shimmer var(--se-transition-slow) infinite;
+  animation: se-skeleton-shimmer var(--se-motion-shimmer) infinite;
 }
 
 @keyframes se-skeleton-shimmer {

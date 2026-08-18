@@ -5,28 +5,24 @@
   padding: var(--se-space-3) var(--se-space-4);
   border-radius: var(--se-radius-md);
   border: 1px solid var(--se-color-border);
-  border-left-width: 3px;
+  background: var(--se-color-surface);
   font-size: var(--se-font-size-sm);
 }
 
 .se-alert--info {
-  border-left-color: var(--se-color-primary);
-  background: color-mix(in srgb, var(--se-color-primary) 8%, transparent);
+  border-color: var(--se-color-primary);
 }
 
 .se-alert--success {
-  border-left-color: var(--se-color-success);
-  background: color-mix(in srgb, var(--se-color-success) 8%, transparent);
+  border-color: var(--se-color-success);
 }
 
 .se-alert--warning {
-  border-left-color: var(--se-color-warning);
-  background: color-mix(in srgb, var(--se-color-warning) 8%, transparent);
+  border-color: var(--se-color-warning);
 }
 
 .se-alert--danger {
-  border-left-color: var(--se-color-danger);
-  background: color-mix(in srgb, var(--se-color-danger) 8%, transparent);
+  border-color: var(--se-color-danger);
 }
 
 .se-alert-content {
