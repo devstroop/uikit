@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@devstroop/uikit-htmx — theme playground</title>
+    <link rel="stylesheet" href="/vendor/uikit.css" />
+    <link rel="stylesheet" href="/vendor/tokens/default.css" data-theme-link="default" />
+    <link rel="stylesheet" href="/vendor/tokens/fluent.css" data-theme-link="fluent" disabled />
+    <link rel="stylesheet" href="/vendor/tokens/github.css" data-theme-link="github" disabled />
+    <link rel="stylesheet" href="/vendor/tokens/material.css" data-theme-link="material" disabled />
+    <link rel="stylesheet" href="/vendor/tokens/material-3.css" data-theme-link="material-3" disabled />
+    <link rel="stylesheet" href="/vendor/tokens/shadcn.css" data-theme-link="shadcn" disabled />
+    <link rel="stylesheet" href="/demo.css" />
+  </head>
+  <body>
+    <header class="chrome-header">
+      <h1>@devstroop/uikit-htmx</h1>
+      <p>Same 23 specs, server-rendered: HTML fragments + plain CSS + 4 KB behaviors.</p>
+      <div class="chrome-controls">
+        <label>
+          Theme
+          <select id="theme-select">
+            <option value="default">Default</option>
+            <option value="fluent">Fluent 2</option>
+            <option value="github">GitHub (Primer)</option>
+            <option value="material">Material 2</option>
+            <option value="material-3">Material 3</option>
+            <option value="shadcn">shadcn/ui</option>
+          </select>
+        </label>
+        <label class="dark-toggle">
+          <input type="checkbox" id="dark-toggle" />
+          Dark
+        </label>
+      </div>
+    </header>
+
+    <main>
+      <section class="row">
+        <h2>Button</h2>
+        <div class="row-content">
+          <button class="se-button se-button--primary" type="button">Primary</button>
+          <button class="se-button se-button--secondary" type="button">Secondary</button>
+          <button class="se-button se-button--ghost" type="button">Ghost</button>
+          <button class="se-button se-button--danger" type="button">Danger</button>
+          <button class="se-button se-button--primary" type="button" disabled>Disabled</button>
+          <button class="se-button se-button--primary se-button--sm" type="button">Small</button>
+          <button class="se-button se-button--primary se-button--lg" type="button">Large</button>
+          <button class="se-button se-button--primary" type="button" hx-get="/partials/loaded.html" hx-target="#hx-target">
+            htmx: load content
+          </button>
+          <div id="hx-target"></div>
+        </div>
+      </section>
+
+      <section class="row">
+        <h2>Card</h2>
+        <div class="row-content">
+          <div class="se-card se-card--elevated">
+            <div class="se-card-header">Deployments</div>
+            <div class="se-card-body">Your deployments are all healthy.</div>
+            <div class="se-card-footer">
+              <button class="se-button se-button--secondary" type="button">View all</button>
+            </div>
+          </div>
+          <div class="se-card se-card--outlined">
+            <div class="se-card-header">Usage</div>
+            <div class="se-card-body">This month: 48 GB of 100 GB.</div>
+          </div>
+          <div class="se-card se-card--interactive" tabindex="0" data-se-interactive>
+            <div class="se-card-header">Open pull requests</div>
+            <div class="se-card-body">Tab + Enter activates this card.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="row">
+        <h2>Badge</h2>
+        <div class="row-content">
+          <span class="se-badge se-badge--soft se-badge--neutral">neutral</span>
+          <span class="se-badge se-badge--soft se-badge--primary">primary</span>
+          <span class="se-badge se-badge--soft se-badge--success">success</span>
+          <span class="se-badge se-badge--soft se-badge--warning">warning</span>
+          <span class="se-badge se-badge--soft se-badge--danger">danger</span>
+          <span class="se-badge se-badge--solid se-badge--primary">solid</span>
+          <span class="se-badge se-badge--outline se-badge--primary">outline</span>
+        </div>
+      </section>
+
+      <section class="row">
+        <h2>Icon</h2>
+        <div class="row-content se-icon-row">
+          <svg class="se-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5" /></svg>
+          <svg class="se-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 8v4l2 2" /></svg>
+          <svg class="se-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 16v-4M12 8h.01" /></svg>
+          <svg class="se-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" /></svg>
+          <svg class="se-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15a3 3 0 100-6 3 3 0 000 6z" /><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z" /></svg>
+        </div>
+      </section>
+
+      <section class="row">
+        <h2>Stat</h2>
+        <div class="row-content">
+          <div class="se-stat">
+            <div class="se-stat-label">Active users</div>
+            <div class="se-stat-value">12,483</div>
+            <div class="se-stat-delta se-stat-delta--success">+8.2%</div>
+            <div class="se-stat-hint">last 30 days</div>
+          </div>
+          <div class="se-stat">
+            <div class="se-stat-label">Error rate</div>
+            <div class="se-stat-value">0.31%</div>
+            <div class="se-stat-delta se-stat-delta--success">-0.4%</div>
+          </div>
+          <div class="se-stat">
+            <div class="se-stat-label">Uptime</div>
+            <div class="se-stat-value">99.98%</div>
+            <div class="se-stat-delta se-stat-delta--danger">-0.02%</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="row">
+        <h2>Table</h2>
+        <div class="row-content">
+          <div class="se-table-wrap">
+            <table class="se-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th class="se-table-cell--center">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>alice</td>
+                  <td class="se-table-cell--center"><span class="se-badge se-badge--soft se-badge--success">active</span></td>
+                </tr>
+                <tr>
+                  <td>bob</td>
+                  <td class="se-table-cell--center"><span class="se-badge se-badge--soft se-badge--success">active</span></td>
+                </tr>
+                <tr>
+                  <td>carol</td>
+                  <td class="se-table-cell--center"><span class="se-badge se-badge--soft se-badge--warning">paused</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="row">
+        <h2>EmptyState</h2>
+        <div class="row-content">
+          <div class="se-empty-state">
+            <svg class="se-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" /></svg>
+            <div class="se-empty-state-title">No projects yet</div>
+            <div class="se-empty-state-description">Create your first project to get started.</div>
+            <button class="se-button se-button--primary se-button--sm" type="button">New project</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="row">
+        <h2>Field · Input · Select · Textarea · Checkbox · Switch</h2>
+        <div class="row-content se-form-grid">
+          <div class="se-field">
+            <label class="se-field-label" for="htmx-email">Email</label>
+            <input class="se-input se-input--md" id="htmx-email" type="email" placeholder="you@example.com" />
+            <div class="se-field-hint">We never share it.</div>
+          </div>
+          <div class="se-field">
+            <label class="se-field-label" for="htmx-name">Display name <span class="se-field-required" aria-hidden="true">*</span></label>
+            <input class="se-input se-input--md se-input--invalid" id="htmx-name" aria-invalid="true" aria-describedby="htmx-name-error" value="" />
+            <div class="se-field-error" id="htmx-name-error" role="alert">Name is required</div>
+          </div>
+          <div class="se-field">
+            <label class="se-field-label" for="htmx-fw">Framework</label>
+            <select class="se-select se-select--md" id="htmx-fw">
+              <option value="react">React</option>
+              <option value="htmx" selected>htmx</option>
+              <option value="blazor">Blazor</option>
+            </select>
+          </div>
+          <div class="se-field">
+            <label class="se-field-label" for="htmx-notes">Notes</label>
+            <textarea class="se-textarea se-textarea--md" id="htmx-notes" rows="3" placeholder="Anything else?"></textarea>
+          </div>
+          <label class="se-label" for="htmx-check">
+            <input class="se-checkbox" id="htmx-check" type="checkbox" checked />
+            Subscribe to updates
+          </label>
+          <label class="se-label" for="htmx-switch">
+            <input class="se-switch" id="htmx-switch" type="checkbox" role="switch" checked />
+            Dark mode in app
+          </label>
+        </div>
+      </section>
+
+      <section class="row">
+        <h2>Progress · Skeleton · Alert</h2>
+        <div class="row-content">
+          <div class="se-progress" role="progressbar" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100">
+            <div class="se-progress-bar" style="width: 62%"></div>
+          </div>
+          <div class="se-progress se-progress--indeterminate" role="progressbar">
+            <div class="se-progress-bar"></div>
+          </div>
+          <div class="se-skeleton" style="width: 180px; height: 20px"></div>
+          <div class="se-alert se-alert--success" data-se-dismissable>
+            <div class="se-alert-content">
+              <div class="se-alert-title">Deployed</div>
+              <div class="se-alert-body">The release is live.</div>
+            </div>
+            <button class="se-alert-dismiss" type="button" data-se-dismiss aria-label="Dismiss alert">×</button>
+          </div>
+          <div class="se-alert se-alert--danger">
+            <div class="se-alert-content">
+              <div class="se-alert-title">Build failed</div>
+              <div class="se-alert-body">Check the pipeline logs.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="row">
+        <h2>Tabs · Accordion · Tooltip · Avatar</h2>
+        <div class="row-content">
+          <div class="se-tabs" data-se-tabs>
+            <div class="se-tabs-tablist se-tabs-tablist--pills" role="tablist" data-se-tablist>
+              <button class="se-tabs-tab se-tabs-tab--active" type="button" role="tab" data-se-tab data-se-tab-key="one" id="demo-tab-one" aria-selected="true" aria-controls="demo-panel-one" tabindex="0">One</button>
+              <button class="se-tabs-tab" type="button" role="tab" data-se-tab data-se-tab-key="two" id="demo-tab-two" aria-selected="false" aria-controls="demo-panel-two" tabindex="-1">Two</button>
+            </div>
+            <div class="se-tabs-panel" role="tabpanel" data-se-tabpanel data-se-tab-key="one" id="demo-panel-one" aria-labelledby="demo-tab-one"><p>Panel one.</p></div>
+            <div class="se-tabs-panel" role="tabpanel" data-se-tabpanel data-se-tab-key="two" id="demo-panel-two" aria-labelledby="demo-tab-two" hidden><p>Panel two.</p></div>
+          </div>
+          <div class="se-accordion" data-se-accordion>
+            <div class="se-accordion-item" data-se-accordion-item>
+              <h3 class="se-accordion-heading">
+                <button class="se-accordion-trigger" type="button" data-se-accordion-trigger id="demo-acc-a" aria-expanded="false" aria-controls="demo-acc-panel-a">
+                  <span class="se-accordion-title">What is uikit?</span>
+                  <span class="se-accordion-chevron" aria-hidden="true">▾</span>
+                </button>
+              </h3>
+              <div class="se-accordion-panel" id="demo-acc-panel-a" role="region" aria-labelledby="demo-acc-a">
+                <p>One contract — many deliveries.</p>
+              </div>
+            </div>
+          </div>
+          <span class="se-tooltip" data-se-tooltip data-se-delay-ms="100">
+            <button class="se-button se-button--secondary" type="button">Hover me</button>
+            <span class="se-tooltip-bubble se-tooltip-bubble--top" role="tooltip" id="demo-tt" data-se-tooltip-content hidden>More information<span class="se-tooltip-arrow" aria-hidden="true"></span></span>
+          </span>
+          <div class="se-avatar se-avatar--palette-0" data-se-avatar>AL</div>
+          <div class="se-avatar se-avatar--palette-3" data-se-avatar>GH</div>
+          <div class="se-avatar se-avatar--palette-5" data-se-avatar>AT</div>
+        </div>
+      </section>
+
+      <section class="row">
+        <h2>Dialog · Toast</h2>
+        <div class="row-content">
+          <button class="se-button se-button--primary" type="button" data-se-dialog-open="#demo-dialog">Open dialog</button>
+          <dialog class="se-dialog se-dialog--md" data-se-dialog id="demo-dialog">
+            <div class="se-dialog-header">
+              <div>
+                <h2 class="se-dialog-title">Confirm deletion</h2>
+                <p class="se-dialog-description">This cannot be undone.</p>
+              </div>
+              <button class="se-dialog-close" type="button" data-se-dialog-close aria-label="Close dialog">×</button>
+            </div>
+            <div class="se-dialog-body"><p>The workspace and all of its branches will be removed.</p></div>
+            <div class="se-dialog-footer">
+              <button class="se-button se-button--secondary" type="button" data-se-dialog-close>Cancel</button>
+              <button class="se-button se-button--danger" type="button" data-se-dialog-close>Delete</button>
+            </div>
+          </dialog>
+          <button class="se-button se-button--secondary" type="button" id="demo-toast-btn">Show toast</button>
+        </div>
+      </section>
+
+      <section class="row">
+        <h2>htmx patterns</h2>
+        <div class="row-content">
+          <div class="se-field">
+            <label class="se-label" for="demo-search">Search projects (server filter)</label>
+            <input class="se-input se-input--md" id="demo-search" type="search" name="q" placeholder="Type to search…"
+                   hx-get="/partials/search.html" hx-trigger="input changed delay:300ms"
+                   hx-target="#search-results" hx-swap="innerHTML" />
+          </div>
+          <div id="search-results">
+            <ul class="se-list">
+              <li>uikit</li>
+              <li>react-ui</li>
+              <li>htmx-ui</li>
+            </ul>
+          </div>
+          <button class="se-button se-button--ghost" type="button"
+                  hx-get="/partials/load-more.html" hx-target="#load-more-target" hx-swap="beforeend">
+            Load more (append)
+          </button>
+          <div id="load-more-target"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="chrome-footer">
+      Theme CSS swapped by <code>disabled</code>-toggling <code>&lt;link&gt;</code> tags; contrast is WCAG AA enforced.
+    </footer>
+
+    <script src="/vendor/htmx.min.js"></script>
+    <script src="/vendor/uikit.js"></script>
+    <script>
+      const themeSelect = document.getElementById("theme-select");
+      themeSelect.addEventListener("change", () => {
+        document.querySelectorAll("[data-theme-link]").forEach((link) => {
+          link.disabled = link.dataset.themeLink !== themeSelect.value;
+        });
+      });
+      document.getElementById("dark-toggle").addEventListener("change", (e) => {
+        document.documentElement.dataset.theme = e.target.checked ? "dark" : "light";
+      });
+      document.getElementById("demo-toast-btn").addEventListener("click", () => {
+        window.seToast({ title: "Saved", description: "Changes are synced.", tone: "success" });
+      });
+    </script>
+  </body>
+</html>

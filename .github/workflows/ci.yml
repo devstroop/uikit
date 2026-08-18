@@ -49,6 +49,10 @@ jobs:
         run: |
           node scripts/build.mjs
           git diff --exit-code
+      - name: Demo vendor copies are in sync
+        run: |
+          cp dist/uikit.js dist/uikit.css ../../demo/htmx/vendor/
+          git diff --exit-code -- ../../demo/htmx/vendor/
 
   demo:
     name: Demo (react)
