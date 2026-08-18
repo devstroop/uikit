@@ -1,18 +1,19 @@
 #!/usr/bin/env node
 /**
- * Generate tokens.css from a theme's tokens.json and sync it into every
+ * Generate tokens.css from theme tokens.json files and sync into every
  * framework that declares a tokens.sync target in its uikit.yml registry.
  *
- *   node scripts/generate-css.mjs [themes/<name>]   # default: themes/default
+ *   node scripts/generate-css.mjs              # all themes
+ *   node scripts/generate-css.mjs themes/name  # one theme
  *
  * Output:
- *   themes/<name>/tokens.css                        canonical generated file
+ *   themes/<name>/tokens.css                   canonical generated file
  *   + one copy per frameworks registry entry
  *     (frameworks/<name>/uikit.yml -> tokens.sync)
  */
 
 import { readFile, writeFile, mkdir, readdir } from "node:fs/promises";
-import { dirname, join, relative, resolve } from "node:path";
+import { basename, dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parse as parseYaml } from "yaml";
 
@@ -102,30 +103,36 @@ function render(themeName, schema, values) {
 }
 
 async function main() {
-  const arg = process.argv[2] ?? "themes/default";
-  const themeDir = resolve(ROOT, arg);
-  const themeName = arg.split(/[\\/]/).pop();
-  const tokensPath = join(themeDir, "tokens.json");
-  const schemaPath = join(ROOT, "specs/tokens.schema.json");
-
-  const [tokens, schema] = await Promise.all([
-    readFile(tokensPath, "utf8").then(JSON.parse),
-    readFile(schemaPath, "utf8").then(JSON.parse),
-  ]);
-
-  const css = render(themeName, schema, tokens.values);
-  const outPath = join(themeDir, "tokens.css");
-  await writeFile(outPath, css);
-  console.log(`wrote ${relative(ROOT, outPath)}`);
+  const arg = process.argv[2];
+  const themeDirs = arg
+    ? [resolve(ROOT, arg)]
+    : (await readdir(join(ROOT, "themes"), { withFileTypes: true }))
+        .filter((e) => e.isDirectory())
+        .map((e) => join(ROOT, "themes", e.name));
 
   const targets = await frameworkSyncTargets();
   if (targets.length === 0) {
     console.warn("no frameworks/*/uikit.yml tokens.sync targets found");
   }
-  for (const targetPath of targets) {
-    await mkdir(dirname(targetPath), { recursive: true });
-    await writeFile(targetPath, css);
-    console.log(`synced ${relative(ROOT, targetPath)}`);
+
+  for (const themeDir of themeDirs) {
+    const themeName = basename(themeDir);
+    const tokensPath = join(themeDir, "tokens.json");
+    const [tokens, schema] = await Promise.all([
+      readFile(tokensPath, "utf8").then(JSON.parse),
+      readFile(join(ROOT, "specs/tokens.schema.json"), "utf8").then(JSON.parse),
+    ]);
+    const css = render(themeName, schema, tokens.values);
+    await writeFile(join(themeDir, "tokens.css"), css);
+    console.log(`wrote themes/${themeName}/tokens.css`);
+    const syncs = arg ? themeName === basename(arg) : themeName === "default";
+    if (syncs) {
+      for (const targetPath of targets) {
+        await mkdir(dirname(targetPath), { recursive: true });
+        await writeFile(targetPath, css);
+        console.log(`synced ${relative(ROOT, targetPath)}`);
+      }
+    }
   }
 }
 
