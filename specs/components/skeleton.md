@@ -8,7 +8,7 @@ tokens:
   - "color.surface-hover"
   - "radius.sm"
   - "color.border"
-  - "transition.slow"
+  - "motion.shimmer"
   - "radius.md"
 a11y:
   - "Renders a <span> with aria-hidden=\"true\" — purely decorative, excluded from the accessibility tree."

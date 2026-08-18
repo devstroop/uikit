@@ -84,6 +84,14 @@
         "slow"
       ]
     },
+    "motion": {
+      "kind": "duration",
+      "description": "Full-cycle animation durations (shimmer, sweep) — distinct from the interaction `transition` durations.",
+      "tokens": [
+        "shimmer",
+        "sweep"
+      ]
+    },
     "ease": {
       "kind": "easing",
       "tokens": [

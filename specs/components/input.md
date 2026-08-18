@@ -18,6 +18,7 @@ tokens:
   - "font.size-xs"
   - "control.height"
   - "font.size-sm"
+  - "font.size-md"
 a11y:
   - "Renders a native <input>, so all native semantics (text entry, label association via htmlFor/id) apply; remaining InputHTMLAttributes are forwarded."
   - "aria-invalid is set to \"true\" when `invalid` is true (and omitted otherwise), giving screen readers a state cue."
@@ -35,7 +36,7 @@ Text-entry control with size and validation states, wrapping the native
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `size` | `sm` \| `md` | `md` | Density tier (`sm` 6/10px padding, `md` 8/12px + control height) |
+| `size` | `sm` \| `md` \| `lg` | `md` | Density tier (`sm` 6/10px padding, `md` 8/12px + control height, `lg` 10/16px + control-height + 8px) |
 | `invalid` | `boolean` | `false` | Marks the control invalid (danger border) and sets `aria-invalid` |
 | ... | `InputHTMLAttributes<HTMLInputElement>` (minus `size`) | — | Forwarded to the native input (`type`, `value`, `placeholder`, `disabled`, `aria-*`, ...) |
 
@@ -44,7 +45,9 @@ The component is `forwardRef`d to `HTMLInputElement`.
 ## Behavior
 
 - `size="md"` uses `height: var(--se-control-height)` with `font.size-sm`;
-  `size="sm"` uses tighter padding with `font.size-xs`. Default `type` is
+  `size="sm"` uses tighter padding with `font.size-xs`; `size="lg"` uses
+  `height: calc(var(--se-control-height) + 8px)` with `font.size-md`.
+  Default `type` is
   whatever the consumer passes (no default set).
 - Invalid state: `color.danger` border plus a 25% danger `color-mix` halo,
   applied both at rest and on `:focus-visible`.

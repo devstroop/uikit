@@ -13,7 +13,7 @@ tokens:
   - "color.success"
   - "color.warning"
   - "color.danger"
-  - "transition.slow"
+  - "motion.sweep"
 a11y:
   - "Container carries role=\"progressbar\" with aria-valuemin=\"0\", aria-valuemax, and aria-valuenow (the raw value rounded and clamped to [0, max]).\""
   - "aria-valuenow is omitted when indeterminate, matching the ARIA pattern for unknown progress."

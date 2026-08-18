@@ -20,13 +20,14 @@ tokens:
   - "color.text-muted"
   - "radius.sm"
   - "transition.fast"
+  - "color.surface"
   - "color.surface-hover"
   - "color.text"
 a11y:
   - "Root carries role=\"alert\" so the message is announced on mount."
   - "Dismiss control is a native <button> with aria-label=\"Dismiss alert\" and a visible focus-visible ring (--se-color-focus outline) when keyboard-focused."
-  - "Tone backgrounds are 8% color-mix tints of the tone color over transparent; text contrast holds via color.text / color.text-muted on page background (bg) at >= 4.5:1 per schema contrastRules."
-  - "Left accent border (3px) plus tint distinguishes tones beyond color alone for color-vision-impaired users."
+  - "Tone variants use a full 1px tone-colored border (all sides) on a color.surface background — no hardcoded tint or accent; the tint value is not part of the theme, so it is not used."
+  - "Tone distinction is carried by the full border color; with the border plus the alert title/icon, tone is not conveyed by color alone for color-vision-impaired users (icon/emoji still optional; border is structural)."
   - "Dismissing removes the element from the DOM entirely (no stale region)."
 ---
 # Alert
@@ -51,8 +52,9 @@ accepts only the props above).
 
 - Renders `<div role="alert">` with tone class. Only `.title` and `.body`
   wrappers are emitted when the corresponding content is provided.
-- Tones set `border-left-color` and an 8% `color-mix` tinted background per
-  tone (info → primary, success, warning, danger).
+- Tones set a full 1px `border-color` per tone (info → primary, success,
+  warning, danger) on a `color.surface` background — fully tokenized, no
+  `color-mix` tint, no left accent bar.
 - `dismissible` renders a 22×22px × button; clicking sets internal dismissed
   state and the whole alert returns `null`.
 - Dismiss button hover: `surface-hover` background, `color.text` foreground.
