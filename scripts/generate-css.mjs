@@ -1,31 +1,57 @@
 #!/usr/bin/env node
 /**
  * Generate tokens.css from a theme's tokens.json and sync it into every
- * consuming framework.
+ * framework that declares a tokens.sync target in its uikit.yml registry.
  *
  *   node scripts/generate-css.mjs [themes/<name>]   # default: themes/default
  *
  * Output:
  *   themes/<name>/tokens.css                        canonical generated file
- *   + one copy per entry in SYNC_TARGETS (path relative to repo root)
+ *   + one copy per frameworks registry entry
+ *     (frameworks/<name>/uikit.yml -> tokens.sync)
  */
 
-import { readFile, writeFile, mkdir } from "node:fs/promises";
+import { readFile, writeFile, mkdir, readdir } from "node:fs/promises";
 import { dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { parse as parseYaml } from "yaml";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-
-const SYNC_TARGETS = [
-  // Framework copy kept in sync; validated in CI by re-running the generator
-  // and asserting a clean `git diff --exit-code`.
-  "frameworks/react/lib/styles/tokens.css",
-];
+const FRAMEWORKS_DIR = join(ROOT, "frameworks");
 
 const MODE_SELECTOR = {
   light: ":root",
   dark: '[data-theme="dark"]',
 };
+
+async function frameworkSyncTargets() {
+  const targets = [];
+  let entries;
+  try {
+    entries = await readdir(FRAMEWORKS_DIR, { withFileTypes: true });
+  } catch {
+    return targets;
+  }
+  for (const entry of entries) {
+    if (!entry.isDirectory()) continue;
+    const dir = join(FRAMEWORKS_DIR, entry.name);
+    const registryPath = join(dir, "uikit.yml");
+    let registry;
+    try {
+      registry = parseYaml(await readFile(registryPath, "utf8"));
+    } catch {
+      continue;
+    }
+    const sync = registry?.tokens?.sync;
+    if (typeof sync !== "string" || !sync) {
+      throw new Error(
+        `${relative(ROOT, registryPath)}: missing tokens.sync target`,
+      );
+    }
+    targets.push(join(dir, sync));
+  }
+  return targets;
+}
 
 function parseValue(value) {
   if (typeof value === "string") return { light: value };
@@ -52,17 +78,6 @@ function header(themeName) {
     " */",
     "",
   ].join("\n");
-}
-
-function emitSection(mode, tier, tokens, lines) {
-  const selector = MODE_SELECTOR[mode];
-  if (selector) lines.push(`${selector} {`);
-  for (const [token, value] of Object.entries(tokens)) {
-    const parsed = parseValue(value);
-    if (mode === "dark" && !("dark" in parsed)) continue;
-    lines.push(`  --se-${tier}-${token}: ${parsed[mode]};`);
-  }
-  if (selector) lines.push("}");
 }
 
 function render(themeName, schema, values) {
@@ -103,8 +118,11 @@ async function main() {
   await writeFile(outPath, css);
   console.log(`wrote ${relative(ROOT, outPath)}`);
 
-  for (const target of SYNC_TARGETS) {
-    const targetPath = resolve(ROOT, target);
+  const targets = await frameworkSyncTargets();
+  if (targets.length === 0) {
+    console.warn("no frameworks/*/uikit.yml tokens.sync targets found");
+  }
+  for (const targetPath of targets) {
     await mkdir(dirname(targetPath), { recursive: true });
     await writeFile(targetPath, css);
     console.log(`synced ${relative(ROOT, targetPath)}`);

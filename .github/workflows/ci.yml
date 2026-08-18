@@ -13,18 +13,21 @@ on:
 
 jobs:
   tokens:
-    name: Tokens
+    name: Tokens & specs
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: node scripts/validate-theme.mjs
+          cache: npm
+      - run: npm ci
+      - run: npm run tokens:validate
       - name: Generated CSS is in sync
         run: |
-          node scripts/generate-css.mjs
+          npm run tokens:generate
           git diff --exit-code
+      - run: npm run specs:validate
 
   react:
     name: React framework

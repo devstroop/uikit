@@ -1,0 +1,22 @@
+# Framework registry — consumed by scripts/ and CI.
+# Fields:
+#   name        published package name (git-tag distributed)
+#   technology  delivery technology
+#   description one-liner
+#   tokens.sync path (relative to this file) where the generated tokens.css
+#                is synced — see scripts/generate-css.mjs
+#   commands    local development commands (run from this directory)
+
+name: "@devstroop/react-ui"
+technology: react
+description: React implementation of the uikit specs — presentational, themeable, project-agnostic.
+
+tokens:
+  sync: lib/styles/tokens.css
+
+commands:
+  install: npm ci
+  lint: npm run lint
+  typecheck: npm run typecheck
+  test: npm test
+  build: npm run build

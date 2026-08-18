@@ -1,0 +1,15 @@
+{
+  "name": "@devstroop/uikit",
+  "private": true,
+  "description": "Framework-agnostic UI kit for Devstroop app front-ends — spec + token tooling.",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "tokens:validate": "node scripts/validate-theme.mjs",
+    "tokens:generate": "node scripts/generate-css.mjs",
+    "specs:validate": "node scripts/validate-specs.mjs"
+  },
+  "devDependencies": {
+    "yaml": "^2.8.0"
+  }
+}
