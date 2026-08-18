@@ -1,0 +1,133 @@
+.column {
+  min-width: 0;
+  flex: 1;
+}
+
+.Size1 { width: calc(1 / 12 * 100%); flex: none; }
+.Size2 { width: calc(2 / 12 * 100%); flex: none; }
+.Size3 { width: calc(3 / 12 * 100%); flex: none; }
+.Size4 { width: calc(4 / 12 * 100%); flex: none; }
+.Size5 { width: calc(5 / 12 * 100%); flex: none; }
+.Size6 { width: calc(6 / 12 * 100%); flex: none; }
+.Size7 { width: calc(7 / 12 * 100%); flex: none; }
+.Size8 { width: calc(8 / 12 * 100%); flex: none; }
+.Size9 { width: calc(9 / 12 * 100%); flex: none; }
+.Size10 { width: calc(10 / 12 * 100%); flex: none; }
+.Size11 { width: calc(11 / 12 * 100%); flex: none; }
+.Size12 { width: calc(12 / 12 * 100%); flex: none; }
+.Offset1 { margin-left: calc(1 / 12 * 100%); }
+.Offset2 { margin-left: calc(2 / 12 * 100%); }
+.Offset3 { margin-left: calc(3 / 12 * 100%); }
+.Offset4 { margin-left: calc(4 / 12 * 100%); }
+.Offset5 { margin-left: calc(5 / 12 * 100%); }
+.Offset6 { margin-left: calc(6 / 12 * 100%); }
+.Offset7 { margin-left: calc(7 / 12 * 100%); }
+.Offset8 { margin-left: calc(8 / 12 * 100%); }
+.Offset9 { margin-left: calc(9 / 12 * 100%); }
+.Offset10 { margin-left: calc(10 / 12 * 100%); }
+.Offset11 { margin-left: calc(11 / 12 * 100%); }
+
+@media (min-width: 576px) {
+.smSize1 { width: calc(1 / 12 * 100%); flex: none; }
+.smSize2 { width: calc(2 / 12 * 100%); flex: none; }
+.smSize3 { width: calc(3 / 12 * 100%); flex: none; }
+.smSize4 { width: calc(4 / 12 * 100%); flex: none; }
+.smSize5 { width: calc(5 / 12 * 100%); flex: none; }
+.smSize6 { width: calc(6 / 12 * 100%); flex: none; }
+.smSize7 { width: calc(7 / 12 * 100%); flex: none; }
+.smSize8 { width: calc(8 / 12 * 100%); flex: none; }
+.smSize9 { width: calc(9 / 12 * 100%); flex: none; }
+.smSize10 { width: calc(10 / 12 * 100%); flex: none; }
+.smSize11 { width: calc(11 / 12 * 100%); flex: none; }
+.smSize12 { width: calc(12 / 12 * 100%); flex: none; }
+.smOffset1 { margin-left: calc(1 / 12 * 100%); }
+.smOffset2 { margin-left: calc(2 / 12 * 100%); }
+.smOffset3 { margin-left: calc(3 / 12 * 100%); }
+.smOffset4 { margin-left: calc(4 / 12 * 100%); }
+.smOffset5 { margin-left: calc(5 / 12 * 100%); }
+.smOffset6 { margin-left: calc(6 / 12 * 100%); }
+.smOffset7 { margin-left: calc(7 / 12 * 100%); }
+.smOffset8 { margin-left: calc(8 / 12 * 100%); }
+.smOffset9 { margin-left: calc(9 / 12 * 100%); }
+.smOffset10 { margin-left: calc(10 / 12 * 100%); }
+.smOffset11 { margin-left: calc(11 / 12 * 100%); }
+}
+
+@media (min-width: 768px) {
+.mdSize1 { width: calc(1 / 12 * 100%); flex: none; }
+.mdSize2 { width: calc(2 / 12 * 100%); flex: none; }
+.mdSize3 { width: calc(3 / 12 * 100%); flex: none; }
+.mdSize4 { width: calc(4 / 12 * 100%); flex: none; }
+.mdSize5 { width: calc(5 / 12 * 100%); flex: none; }
+.mdSize6 { width: calc(6 / 12 * 100%); flex: none; }
+.mdSize7 { width: calc(7 / 12 * 100%); flex: none; }
+.mdSize8 { width: calc(8 / 12 * 100%); flex: none; }
+.mdSize9 { width: calc(9 / 12 * 100%); flex: none; }
+.mdSize10 { width: calc(10 / 12 * 100%); flex: none; }
+.mdSize11 { width: calc(11 / 12 * 100%); flex: none; }
+.mdSize12 { width: calc(12 / 12 * 100%); flex: none; }
+.mdOffset1 { margin-left: calc(1 / 12 * 100%); }
+.mdOffset2 { margin-left: calc(2 / 12 * 100%); }
+.mdOffset3 { margin-left: calc(3 / 12 * 100%); }
+.mdOffset4 { margin-left: calc(4 / 12 * 100%); }
+.mdOffset5 { margin-left: calc(5 / 12 * 100%); }
+.mdOffset6 { margin-left: calc(6 / 12 * 100%); }
+.mdOffset7 { margin-left: calc(7 / 12 * 100%); }
+.mdOffset8 { margin-left: calc(8 / 12 * 100%); }
+.mdOffset9 { margin-left: calc(9 / 12 * 100%); }
+.mdOffset10 { margin-left: calc(10 / 12 * 100%); }
+.mdOffset11 { margin-left: calc(11 / 12 * 100%); }
+}
+
+@media (min-width: 992px) {
+.lgSize1 { width: calc(1 / 12 * 100%); flex: none; }
+.lgSize2 { width: calc(2 / 12 * 100%); flex: none; }
+.lgSize3 { width: calc(3 / 12 * 100%); flex: none; }
+.lgSize4 { width: calc(4 / 12 * 100%); flex: none; }
+.lgSize5 { width: calc(5 / 12 * 100%); flex: none; }
+.lgSize6 { width: calc(6 / 12 * 100%); flex: none; }
+.lgSize7 { width: calc(7 / 12 * 100%); flex: none; }
+.lgSize8 { width: calc(8 / 12 * 100%); flex: none; }
+.lgSize9 { width: calc(9 / 12 * 100%); flex: none; }
+.lgSize10 { width: calc(10 / 12 * 100%); flex: none; }
+.lgSize11 { width: calc(11 / 12 * 100%); flex: none; }
+.lgSize12 { width: calc(12 / 12 * 100%); flex: none; }
+.lgOffset1 { margin-left: calc(1 / 12 * 100%); }
+.lgOffset2 { margin-left: calc(2 / 12 * 100%); }
+.lgOffset3 { margin-left: calc(3 / 12 * 100%); }
+.lgOffset4 { margin-left: calc(4 / 12 * 100%); }
+.lgOffset5 { margin-left: calc(5 / 12 * 100%); }
+.lgOffset6 { margin-left: calc(6 / 12 * 100%); }
+.lgOffset7 { margin-left: calc(7 / 12 * 100%); }
+.lgOffset8 { margin-left: calc(8 / 12 * 100%); }
+.lgOffset9 { margin-left: calc(9 / 12 * 100%); }
+.lgOffset10 { margin-left: calc(10 / 12 * 100%); }
+.lgOffset11 { margin-left: calc(11 / 12 * 100%); }
+}
+
+@media (min-width: 1200px) {
+.xlSize1 { width: calc(1 / 12 * 100%); flex: none; }
+.xlSize2 { width: calc(2 / 12 * 100%); flex: none; }
+.xlSize3 { width: calc(3 / 12 * 100%); flex: none; }
+.xlSize4 { width: calc(4 / 12 * 100%); flex: none; }
+.xlSize5 { width: calc(5 / 12 * 100%); flex: none; }
+.xlSize6 { width: calc(6 / 12 * 100%); flex: none; }
+.xlSize7 { width: calc(7 / 12 * 100%); flex: none; }
+.xlSize8 { width: calc(8 / 12 * 100%); flex: none; }
+.xlSize9 { width: calc(9 / 12 * 100%); flex: none; }
+.xlSize10 { width: calc(10 / 12 * 100%); flex: none; }
+.xlSize11 { width: calc(11 / 12 * 100%); flex: none; }
+.xlSize12 { width: calc(12 / 12 * 100%); flex: none; }
+.xlOffset1 { margin-left: calc(1 / 12 * 100%); }
+.xlOffset2 { margin-left: calc(2 / 12 * 100%); }
+.xlOffset3 { margin-left: calc(3 / 12 * 100%); }
+.xlOffset4 { margin-left: calc(4 / 12 * 100%); }
+.xlOffset5 { margin-left: calc(5 / 12 * 100%); }
+.xlOffset6 { margin-left: calc(6 / 12 * 100%); }
+.xlOffset7 { margin-left: calc(7 / 12 * 100%); }
+.xlOffset8 { margin-left: calc(8 / 12 * 100%); }
+.xlOffset9 { margin-left: calc(9 / 12 * 100%); }
+.xlOffset10 { margin-left: calc(10 / 12 * 100%); }
+.xlOffset11 { margin-left: calc(11 / 12 * 100%); }
+}
+

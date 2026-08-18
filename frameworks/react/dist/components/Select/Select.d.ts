@@ -1,5 +1,5 @@
 import { ReactNode, SelectHTMLAttributes } from 'react';
-export type SelectSize = "sm" | "md";
+export type SelectSize = "sm" | "md" | "lg";
 export interface SelectOption {
     value: string;
     label: string;

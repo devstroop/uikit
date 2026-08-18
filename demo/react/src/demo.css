@@ -72,10 +72,26 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
-  align-items: center;
+  align-items: start;
   padding: 16px;
   border: 1px dashed var(--se-color-border);
   border-radius: var(--se-radius-md);
+}
+
+.layout-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.grid-cell {
+  padding: 12px 16px;
+  border: 1px dashed var(--se-color-border);
+  border-radius: var(--se-radius-md);
+  color: var(--se-color-text-muted);
+  font-size: var(--se-font-size-sm);
+  text-align: center;
 }
 
 .chrome-footer {

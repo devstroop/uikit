@@ -16,7 +16,7 @@ export { Stat } from "./components/Stat/Stat";
 export type { StatProps, StatDeltaTone } from "./components/Stat/Stat";
 
 export { Table } from "./components/Table/Table";
-export type { TableProps, Column } from "./components/Table/Table";
+export type { TableProps, Column as TableColumn } from "./components/Table/Table";
 
 export { EmptyState } from "./components/EmptyState/EmptyState";
 export type { EmptyStateProps } from "./components/EmptyState/EmptyState";
@@ -52,6 +52,12 @@ export type { AlertProps, AlertTone } from "./components/Alert/Alert";
 
 export { Skeleton } from "./components/Skeleton/Skeleton";
 export type { SkeletonProps, SkeletonVariant } from "./components/Skeleton/Skeleton";
+
+export { Row } from "./components/Row/Row";
+export type { RowProps, RowAlign, RowJustify } from "./components/Row/Row";
+
+export { Column } from "./components/Column/Column";
+export type { ColumnProps, ColumnSize, ColumnOffset } from "./components/Column/Column";
 
 export { Progress } from "./components/Progress/Progress";
 export type { ProgressProps, ProgressTone } from "./components/Progress/Progress";

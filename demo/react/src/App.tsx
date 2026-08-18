@@ -7,6 +7,7 @@ import {
   Button,
   Card,
   Checkbox,
+  Column,
   Dialog,
   EmptyState,
   Field,
@@ -14,6 +15,7 @@ import {
   Input,
   Label,
   Progress,
+  Row,
   Select,
   Skeleton,
   Stat,
@@ -28,9 +30,80 @@ import {
 
 const TONES = ["primary", "success", "warning", "danger"] as const;
 
+function Layout() {
+  return (
+    <Section title="Layout · Row · Column">
+      <div className="layout-grid">
+        <Row>
+          <Column size={12} className="grid-cell">
+            12
+          </Column>
+        </Row>
+        <Row>
+          <Column size={6} className="grid-cell">
+            6
+          </Column>
+          <Column size={6} className="grid-cell">
+            6
+          </Column>
+        </Row>
+        <Row>
+          <Column size={4} className="grid-cell">
+            4
+          </Column>
+          <Column size={4} className="grid-cell">
+            4
+          </Column>
+          <Column size={4} className="grid-cell">
+            4
+          </Column>
+        </Row>
+        <Row>
+          <Column size={12} sizeMd={6} sizeLg={3} className="grid-cell">
+            12 · md-6 · lg-3
+          </Column>
+          <Column size={12} sizeMd={6} sizeLg={3} className="grid-cell">
+            12 · md-6 · lg-3
+          </Column>
+          <Column size={12} sizeMd={6} sizeLg={3} className="grid-cell">
+            12 · md-6 · lg-3
+          </Column>
+          <Column size={12} sizeMd={6} sizeLg={3} className="grid-cell">
+            12 · md-6 · lg-3
+          </Column>
+        </Row>
+        <Row>
+          <Column size={4} offset={4} className="grid-cell">
+            4 · offset-4
+          </Column>
+        </Row>
+        <Row justify="between">
+          <Column size={2} className="grid-cell">
+            2
+          </Column>
+          <Column size={2} className="grid-cell">
+            2
+          </Column>
+          <Column size={2} className="grid-cell">
+            2
+          </Column>
+        </Row>
+        <Row>
+          <Column className="grid-cell">
+            auto
+          </Column>
+          <Column className="grid-cell">
+            auto
+          </Column>
+        </Row>
+      </div>
+    </Section>
+  );
+}
+
 function Buttons() {
   return (
-    <Row title="Button">
+    <Section title="Button">
       {(["primary", "secondary", "ghost", "danger"] as const).map((v) => (
         <Button key={v} variant={v}>
           {v}
@@ -39,90 +112,7 @@ function Buttons() {
       <Button disabled>disabled</Button>
       <Button size="sm">sm</Button>
       <Button size="lg">lg</Button>
-    </Row>
-  );
-}
-
-function Cards() {
-  return (
-    <Row title="Card">
-      <Card header="Elevated" footer="footer">
-        Box-shadow + border, the default.
-      </Card>
-      <Card variant="outlined" header="Outlined">
-        Border only.
-      </Card>
-      <Card variant="interactive" header="Interactive" onClick={() => alert("card clicked")}>
-        Tab to it, press Enter — keyboard operable.
-      </Card>
-    </Row>
-  );
-}
-
-function Badges() {
-  return (
-    <Row title="Badge">
-      {(["soft", "solid", "outline"] as const).map((v) => (
-        <span key={v} style={{ display: "inline-flex", gap: 8 }}>
-          {TONES.map((t) => (
-            <Badge key={t} tone={t} variant={v}>
-              {t}
-            </Badge>
-          ))}
-        </span>
-      ))}
-    </Row>
-  );
-}
-
-function Icons() {
-  const names = ["check", "alert", "info", "search", "settings", "user", "mail", "lock", "globe", "shield"] as const;
-  return (
-    <Row title="Icon">
-      {names.map((n) => (
-        <span key={n} title={n}>
-          <Icon name={n} />
-        </span>
-      ))}
-    </Row>
-  );
-}
-
-function Stats() {
-  return (
-    <Row title="Stat">
-      <Stat label="Active users" value="12,483" delta="+8.2%" hint="last 30 days" />
-      <Stat label="Error rate" value="0.31%" delta="-0.4%" deltaTone="success" />
-      <Stat label="Uptime" value="99.98%" deltaTone="danger" delta="-0.02%" />
-    </Row>
-  );
-}
-
-function Tables() {
-  const rows = [
-    { id: 1, name: "alice", status: "active" },
-    { id: 2, name: "bob", status: "active" },
-    { id: 3, name: "carol", status: "paused" },
-  ];
-  return (
-    <Row title="Table">
-      <Table
-        columns={[
-          { key: "name", header: "Name" },
-          { key: "status", header: "Status", align: "center", render: (r) => <Badge tone={r.status === "active" ? "success" : "warning"}>{r.status}</Badge> },
-        ]}
-        rows={rows}
-        rowKey={(r) => String(r.id)}
-      />
-    </Row>
-  );
-}
-
-function EmptyStates() {
-  return (
-    <Row title="EmptyState">
-      <EmptyState icon={<Icon name="folder" size={32} />} title="No projects yet" description="Create your first project to get started." action={<Button size="sm">New project</Button>} />
-    </Row>
+    </Section>
   );
 }
 
@@ -130,14 +120,22 @@ function FormControls() {
   const [checked, setChecked] = useState(false);
   const [switched, setSwitched] = useState(true);
   return (
-    <Row title="Field · Label · Input · Select · Textarea · Checkbox · Switch">
+    <Section title="Field · Label · Input · Select · Textarea · Checkbox · Switch">
       <Field label="Email" htmlFor="f-email" hint="We never share it.">
+        <Input id="f-email-sm" size="sm" placeholder="small" />
         <Input id="f-email" type="email" placeholder="you@example.com" />
+        <Input id="f-email-lg" size="lg" placeholder="large" />
       </Field>
       <Field label="Display name" htmlFor="f-name" required error="Name is required">
         <Input id="f-name" defaultValue="" />
       </Field>
       <Field label="Framework" htmlFor="f-fw">
+        <Select
+          id="f-fw-sm"
+          size="sm"
+          aria-label="Framework (small)"
+          options={[{ value: "sm", label: "Small" }]}
+        />
         <Select
           id="f-fw"
           options={[
@@ -146,9 +144,17 @@ function FormControls() {
             { value: "blazor", label: "Blazor" },
           ]}
         />
+        <Select
+          id="f-fw-lg"
+          size="lg"
+          aria-label="Framework (large)"
+          options={[{ value: "lg", label: "Large" }]}
+        />
       </Field>
       <Field label="Notes" htmlFor="f-notes">
+        <Textarea id="f-notes-sm" size="sm" rows={2} placeholder="small" />
         <Textarea id="f-notes" rows={3} placeholder="Anything else?" />
+        <Textarea id="f-notes-lg" size="lg" rows={4} placeholder="large" />
       </Field>
       <Label htmlFor="f-naked">Standalone label</Label>
       <Label htmlFor="f-check">
@@ -159,20 +165,135 @@ function FormControls() {
         <Switch id="f-switch" checked={switched} onChange={() => setSwitched(!switched)} />
         Dark mode in app
       </Label>
-    </Row>
+    </Section>
+  );
+}
+
+function Tables() {
+  const rows = [
+    { id: 1, name: "alice", status: "active" },
+    { id: 2, name: "bob", status: "active" },
+    { id: 3, name: "carol", status: "paused" },
+  ];
+  return (
+    <Section title="Table">
+      <Table
+        columns={[
+          { key: "name", header: "Name" },
+          { key: "status", header: "Status", align: "center", render: (r) => <Badge tone={r.status === "active" ? "success" : "warning"}>{r.status}</Badge> },
+        ]}
+        rows={rows}
+        rowKey={(r) => String(r.id)}
+      />
+    </Section>
+  );
+}
+
+function Badges() {
+  return (
+    <Section title="Badge">
+      {(["soft", "solid", "outline"] as const).map((v) => (
+        <span key={v} style={{ display: "inline-flex", gap: 8 }}>
+          {TONES.map((t) => (
+            <Badge key={t} tone={t} variant={v}>
+              {t}
+            </Badge>
+          ))}
+        </span>
+      ))}
+    </Section>
+  );
+}
+
+function Stats() {
+  return (
+    <Section title="Stat">
+      <Stat label="Active users" value="12,483" delta="+8.2%" hint="last 30 days" />
+      <Stat label="Error rate" value="0.31%" delta="-0.4%" deltaTone="success" />
+      <Stat label="Uptime" value="99.98%" deltaTone="danger" delta="-0.02%" />
+    </Section>
+  );
+}
+
+function Cards() {
+  return (
+    <Section title="Card">
+      <Card header="Elevated" footer="footer">
+        Box-shadow + border, the default.
+      </Card>
+      <Card variant="outlined" header="Outlined">
+        Border only.
+      </Card>
+      <Card variant="interactive" header="Interactive" onClick={() => alert("card clicked")}>
+        Tab to it, press Enter — keyboard operable.
+      </Card>
+    </Section>
+  );
+}
+
+function Avatars() {
+  return (
+    <Section title="Avatar">
+      <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+        <Avatar name="Ada Lovelace" size="sm" />
+        <Avatar name="Grace Hopper" />
+        <Avatar name="Alan Turing" size="lg" />
+        <Avatar name="Rebecca Birbeck" status="online" />
+        <Avatar name="John Williams" status="away" />
+        <Avatar name="Alice Smith" status="offline" />
+      </div>
+    </Section>
+  );
+}
+
+function Icons() {
+  const names = ["check", "alert", "info", "search", "settings", "user", "mail", "lock", "globe", "shield"] as const;
+  return (
+    <Section title="Icon">
+      {names.map((n) => (
+        <span key={n} title={n}>
+          <Icon name={n} />
+        </span>
+      ))}
+    </Section>
+  );
+}
+
+function SkeletonProgress() {
+  return (
+    <Section title="Skeleton · Progress">
+      <Progress value={62} aria-label="Storage used" />
+      <Progress value={100} tone="success" aria-label="Upload complete" />
+      <Progress value={55} tone="warning" aria-label="Battery level" />
+      <Progress value={30} tone="danger" aria-label="Errors found" />
+      <Progress indeterminate aria-label="Downloading updates" />
+      <Skeleton width={180} variant="text" />
+      <Skeleton width={48} height={48} variant="circle" />
+      <Skeleton width={180} height={72} variant="rect" />
+    </Section>
+  );
+}
+
+function EmptyStates() {
+  return (
+    <Section title="EmptyState">
+      <EmptyState icon={<Icon name="folder" size={32} />} title="No projects yet" description="Create your first project to get started." action={<Button size="sm">New project</Button>} />
+    </Section>
   );
 }
 
 function Feedback() {
   const toast = useToast();
   return (
-    <Row title="Progress · Skeleton · Alert · Toast">
-      <Progress value={62} aria-label="Storage used" />
-      <Progress value={140} max={100} aria-label="Tasks complete" />
-      <Progress indeterminate aria-label="Downloading updates" />
-      <Skeleton width={180} height={20} />
+    <Section title="Alert · Toast">
+      <Alert tone="info" title="Heads up">
+        A new version is available.
+      </Alert>
       <Alert tone="success" title="Deployed" dismissible>
         The release is live.
+      </Alert>
+      <Alert tone="warning" title="Storage at 90%">
+        Clean up soon.
       </Alert>
       <Alert tone="danger" title="Build failed">
         Check the pipeline logs.
@@ -180,14 +301,14 @@ function Feedback() {
       <Button onClick={() => toast.toast({ title: "Saved", description: "Changes are synced.", tone: "success" })}>
         Show toast
       </Button>
-    </Row>
+    </Section>
   );
 }
 
 function Overlays() {
   const [open, setOpen] = useState(false);
   return (
-    <Row title="Dialog · Tabs · Accordion · Tooltip · Avatar">
+    <Section title="Dialog · Tooltip">
       <Dialog
         open={open}
         onClose={() => setOpen(false)}
@@ -207,6 +328,16 @@ function Overlays() {
         The workspace and all of its branches will be removed.
       </Dialog>
       <Button onClick={() => setOpen(true)}>Open dialog</Button>
+      <Tooltip content="Hover or focus me">
+        <Button>Tooltip</Button>
+      </Tooltip>
+    </Section>
+  );
+}
+
+function Navigation() {
+  return (
+    <Section title="Tabs · Accordion">
       <Tabs
         variant="pills"
         items={[
@@ -222,19 +353,11 @@ function Overlays() {
           { key: "b", title: "Which systems?", content: <p>Six design systems, one token model.</p> },
         ]}
       />
-      <Tooltip content="Hover or focus me">
-        <Button>Tooltip</Button>
-      </Tooltip>
-      <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-        <Avatar name="Ada Lovelace" status="online" />
-        <Avatar name="Grace Hopper" status="away" />
-        <Avatar name="Alan Turing" status="offline" />
-      </div>
-    </Row>
+    </Section>
   );
 }
 
-function Row({ title, children }: { title: string; children: ReactNode }) {
+function Section({ title, children }: { title: string; children: ReactNode }) {
   return (
     <section className="row">
       <h2>{title}</h2>
@@ -247,16 +370,20 @@ export function App() {
   return (
     <ToastProvider>
       <main>
+        <Layout />
         <Buttons />
-        <Cards />
-        <Badges />
-        <Icons />
-        <Stats />
-        <Tables />
-        <EmptyStates />
         <FormControls />
+        <Tables />
+        <Badges />
+        <Stats />
+        <Cards />
+        <Avatars />
+        <Icons />
+        <SkeletonProgress />
+        <EmptyStates />
         <Feedback />
         <Overlays />
+        <Navigation />
       </main>
     </ToastProvider>
   );

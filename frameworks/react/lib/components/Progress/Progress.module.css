@@ -33,7 +33,7 @@
 
 .indeterminate .bar {
   width: 40%;
-  animation: se-progress-slide var(--se-transition-slow) infinite;
+  animation: se-progress-slide var(--se-motion-sweep) infinite;
 }
 
 @keyframes se-progress-slide {

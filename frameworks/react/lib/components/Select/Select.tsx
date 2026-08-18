@@ -1,7 +1,7 @@
 import { forwardRef, type ReactNode, type SelectHTMLAttributes } from "react";
 import styles from "./Select.module.css";
 
-export type SelectSize = "sm" | "md";
+export type SelectSize = "sm" | "md" | "lg";
 
 export interface SelectOption {
   value: string;
