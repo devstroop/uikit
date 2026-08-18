@@ -44,4 +44,35 @@ describe("Tooltip", () => {
     const tooltip = await screen.findByRole("tooltip");
     expect(button).toHaveAttribute("aria-describedby", tooltip.id);
   });
+
+  it("preserves a consumer-supplied aria-describedby on the trigger", async () => {
+    const user = userEvent.setup();
+    render(
+      <Tooltip content="More info" delayMs={0}>
+        <button type="button" aria-describedby="hint-id">
+          Hover me
+        </button>
+      </Tooltip>,
+    );
+    const button = screen.getByRole("button");
+    await user.hover(button);
+    const tooltip = await screen.findByRole("tooltip");
+    expect(button).toHaveAttribute("aria-describedby", `hint-id ${tooltip.id}`);
+  });
+
+  it("closes on Escape", async () => {
+    const user = userEvent.setup();
+    render(
+      <Tooltip content="More info" delayMs={0}>
+        <button type="button">Hover me</button>
+      </Tooltip>,
+    );
+    const button = screen.getByRole("button");
+    await user.hover(button);
+    expect(await screen.findByRole("tooltip")).toBeInTheDocument();
+    await user.keyboard("{Escape}");
+    await waitFor(() =>
+      expect(screen.queryByRole("tooltip")).not.toBeInTheDocument(),
+    );
+  });
 });

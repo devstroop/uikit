@@ -15,7 +15,7 @@
   color: var(--se-color-text-muted);
 }
 
-.textarea:focus {
+.textarea:focus-visible {
   outline: none;
   border-color: var(--se-color-primary);
   box-shadow: 0 0 0 3px var(--se-color-focus);

@@ -27,6 +27,11 @@
   box-shadow: var(--se-shadow-sm);
 }
 
+.interactive:focus-visible {
+  outline: 2px solid var(--se-color-focus);
+  outline-offset: 2px;
+}
+
 .header {
   padding: var(--se-space-4) var(--se-space-4) 0;
   font-size: var(--se-font-size-md);

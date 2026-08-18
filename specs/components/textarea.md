@@ -18,7 +18,7 @@ tokens:
   - "color.focus"
 a11y:
   - "Renders a native <textarea>; all textarea attributes (`aria-label`, `aria-describedby`, `required`, `disabled`, ...) are forwarded."
-  - "Focus indicator on `:focus`: `primary` border plus 3px `focus` box-shadow ring."
+  - "Focus indicator on `:focus-visible`: `primary` border plus 3px `focus` box-shadow ring."
   - "Placeholder text rendered in `text-muted` (never a substitute for a label; no auto-labeling)."
   - "Text-on-fill contrast >= 4.5:1 (text on surface; text-muted on surface for placeholder)."
 ---

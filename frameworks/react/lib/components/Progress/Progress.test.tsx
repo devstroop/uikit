@@ -13,7 +13,12 @@ describe("Progress", () => {
 
   it("clamps value to the max", () => {
     render(<Progress value={150} max={100} />);
-    expect(screen.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "150");
+    expect(screen.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "100");
+  });
+
+  it("clamps negative values to zero", () => {
+    render(<Progress value={-20} max={100} />);
+    expect(screen.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "0");
   });
 
   it("renders indeterminate without aria-valuenow", () => {

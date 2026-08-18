@@ -13,6 +13,7 @@ tokens:
   - "color.success"
   - "color.warning"
   - "color.danger"
+  - "color.focus"
   - "font.weight-bold"
   - "space.1"
   - "color.text-muted"
@@ -22,7 +23,7 @@ tokens:
   - "color.text"
 a11y:
   - "Root carries role=\"alert\" so the message is announced on mount."
-  - "Dismiss control is a native <button> with aria-label=\"Dismiss alert\"."
+  - "Dismiss control is a native <button> with aria-label=\"Dismiss alert\" and a visible focus-visible ring (--se-color-focus outline) when keyboard-focused."
   - "Tone backgrounds are 8% color-mix tints of the tone color over transparent; text contrast holds via color.text / color.text-muted on page background (bg) at >= 4.5:1 per schema contrastRules."
   - "Left accent border (3px) plus tint distinguishes tones beyond color alone for color-vision-impaired users."
   - "Dismissing removes the element from the DOM entirely (no stale region)."

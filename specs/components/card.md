@@ -12,6 +12,7 @@ tokens:
   - "transition.fast"
   - "color.border-strong"
   - "shadow.sm"
+  - "color.focus"
   - "space.4"
   - "font.size-md"
   - "font.weight-bold"
@@ -19,7 +20,7 @@ tokens:
   - "space.3"
 a11y:
   - "Plain <div> with no semantic role; text-on-surface contrast >= 4.5:1 (color.text on color.surface) per schema contrastRules."
-  - "`interactive` variant is purely visual (cursor:pointer, hover border and shadow): no role, tabindex, focus-visible ring, or keyboard activation — consumers must add their own semantics."
+  - "`interactive` variant adds keyboard operability: `tabIndex={0}`, Enter/Space dispatch a click on the card, and a focus-visible ring uses `--se-color-focus`. The card carries no implicit role, so consumers may layer their own semantics (e.g. role=button or a nested link)."
   - "Header is styled as a bold title but has no heading element; consumers should provide one for structure."
 ---
 # Card

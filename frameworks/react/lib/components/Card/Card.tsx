@@ -10,12 +10,22 @@ export interface CardProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
-  { variant = "elevated", header, footer, className, children, ...props },
+  { variant = "elevated", header, footer, className, children, onKeyDown, ...props },
   ref,
 ) {
+  const interactive = variant === "interactive";
   return (
     <div
       ref={ref}
+      tabIndex={interactive ? 0 : undefined}
+      onKeyDown={(event) => {
+        onKeyDown?.(event);
+        if (!interactive || (event.key !== "Enter" && event.key !== " ")) {
+          return;
+        }
+        event.preventDefault();
+        event.currentTarget.click();
+      }}
       className={[styles.card, styles[variant], className].filter(Boolean).join(" ")}
       {...props}
     >

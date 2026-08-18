@@ -16,8 +16,8 @@ tokens:
   - "transition.fast"
 a11y:
   - "Tooltip element has `role=\"tooltip\"` with a `useId`-generated id."
-  - "When open, the trigger element is cloned with `aria-describedby` pointing at the tooltip id (attribute absent while closed)."
-  - "Opens on both hover and keyboard focus (wrapper `onMouseEnter`/`onFocus`), closes on leave/blur."
+  - "When open, the trigger element is cloned with `aria-describedby` pointing at the tooltip id (attribute absent while closed); a consumer-supplied `aria-describedby` on the child is preserved and space-joined."
+  - "Opens on both hover and keyboard focus (wrapper `onMouseEnter`/`onFocus`), closes on leave/blur, and on Escape keydown while open."
   - "Arrow span is `aria-hidden=\"true\"`; the tooltip has `pointer-events: none`."
   - "Text-on-fill contrast >= 4.5:1 (bg on text — inverted tooltip: `color.bg` foreground on `color.text` background)."
 ---

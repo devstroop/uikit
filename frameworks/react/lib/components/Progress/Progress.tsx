@@ -18,12 +18,13 @@ export function Progress({
   className,
   ...props
 }: ProgressProps) {
-  const percent = max > 0 ? Math.min(100, Math.max(0, (value / max) * 100)) : 0;
+  const clamped = max > 0 ? Math.min(max, Math.max(0, value)) : 0;
+  const percent = max > 0 ? (clamped / max) * 100 : 0;
 
   return (
     <div
       role="progressbar"
-      aria-valuenow={indeterminate ? undefined : Math.round(value)}
+      aria-valuenow={indeterminate ? undefined : Math.round(clamped)}
       aria-valuemin={0}
       aria-valuemax={max}
       className={[

@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import userEvent from "@testing-library/user-event";
+import { describe, expect, it, vi } from "vitest";
 import { Field } from "../Field/Field";
 import { Input } from "../Input/Input";
 import { Card } from "./Card";
@@ -20,6 +21,28 @@ describe("Card", () => {
     const { container } = render(<Card>Only body</Card>);
     expect(screen.getByText("Only body")).toBeInTheDocument();
     expect(container.querySelectorAll("div")).toHaveLength(2);
+  });
+
+  it("makes the interactive variant focusable and click-activated", async () => {
+    const user = userEvent.setup();
+    const onClick = vi.fn();
+    const { container } = render(
+      <Card variant="interactive" onClick={onClick}>
+        Clickable
+      </Card>,
+    );
+    const card = container.firstElementChild as HTMLElement;
+    expect(card).toHaveAttribute("tabindex", "0");
+    card.focus();
+    await user.keyboard("{Enter}");
+    expect(onClick).toHaveBeenCalledTimes(1);
+    await user.keyboard(" ");
+    expect(onClick).toHaveBeenCalledTimes(2);
+  });
+
+  it("keeps non-interactive variants out of the tab order", () => {
+    const { container } = render(<Card>Plain</Card>);
+    expect(container.firstElementChild).not.toHaveAttribute("tabindex");
   });
 });
 

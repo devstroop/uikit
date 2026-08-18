@@ -1,6 +1,7 @@
 import {
   cloneElement,
   isValidElement,
+  useEffect,
   useId,
   useRef,
   useState,
@@ -40,10 +41,29 @@ export function Tooltip({
     setOpen(false);
   };
 
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        hide();
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [open]);
+
   const trigger = isValidElement(children)
-    ? cloneElement(children, {
-        "aria-describedby": open ? id : undefined,
-      } as Record<string, unknown>)
+    ? cloneElement(
+        children,
+        {
+          "aria-describedby": [
+            (children.props as Record<string, unknown>)["aria-describedby"],
+            open ? id : null,
+          ]
+            .filter((v): v is string => typeof v === "string")
+            .join(" ") || undefined,
+        } as Record<string, unknown>,
+      )
     : children;
 
   return (

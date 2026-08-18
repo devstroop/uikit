@@ -66,15 +66,39 @@ describe("Field", () => {
     expect(screen.queryByText("Some hint")).not.toBeInTheDocument();
   });
 
-  it("does not wire aria-describedby or aria-invalid to the child control", () => {
+  it("wires aria-describedby and aria-invalid to the child when error is set", () => {
     render(
       <Field label="Email" htmlFor="email" error="Invalid email">
         <input id="email" />
       </Field>,
     );
     const input = screen.getByRole("textbox");
-    expect(input).not.toHaveAttribute("aria-describedby");
+    const alert = screen.getByRole("alert");
+    expect(input).toHaveAttribute("aria-describedby", alert.id);
+    expect(input).toHaveAttribute("aria-invalid", "true");
+  });
+
+  it("wires aria-describedby to the hint when no error is present", () => {
+    render(
+      <Field label="Email" htmlFor="email" hint="We never share it.">
+        <input id="email" />
+      </Field>,
+    );
+    const input = screen.getByRole("textbox");
+    const hint = screen.getByText("We never share it.");
+    expect(input).toHaveAttribute("aria-describedby", hint.id);
     expect(input).not.toHaveAttribute("aria-invalid");
+  });
+
+  it("preserves consumer-supplied aria-describedby when merging", () => {
+    render(
+      <Field label="Email" htmlFor="email" error="Invalid email">
+        <input id="email" aria-describedby="other" />
+      </Field>,
+    );
+    const input = screen.getByRole("textbox");
+    const alert = screen.getByRole("alert");
+    expect(input).toHaveAttribute("aria-describedby", `other ${alert.id}`);
   });
 
   it("renders children without a label", () => {

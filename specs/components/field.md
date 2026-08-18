@@ -16,6 +16,8 @@ a11y:
   - "Renders a native <label> with `htmlFor` association when `label` is provided (click focuses the target control)."
   - "Required marker is a <span aria-hidden=\"true\">*</span> so it is not announced; consumers must convey requiredness on the control (e.g. aria-required)."
   - "Error message renders in a <div role=\"alert\"> for immediate AT announcement."
+  - "When the child is a single element, it is cloned with `aria-describedby` pointing at the visible message (error id wins over hint id); consumer-supplied `aria-describedby` on the child is preserved and space-joined."
+  - "When `error` is set and the child is a single element, the clone also receives `aria-invalid=\"true\"` (a consumer-supplied `aria-invalid` is preserved)."
   - "Label uses color.text on color.bg >= 4.5:1; hint uses color.text-muted on color.bg >= 4.5:1; required marker and error use color.danger on color.bg."
 ---
 

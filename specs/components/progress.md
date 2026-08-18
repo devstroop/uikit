@@ -14,7 +14,7 @@ tokens:
   - "color.danger"
   - "transition.slow"
 a11y:
-  - "Container carries role=\"progressbar\" with aria-valuemin=\"0\", aria-valuemax, and aria-valuenow (the rounded raw value).\""
+  - "Container carries role=\"progressbar\" with aria-valuemin=\"0\", aria-valuemax, and aria-valuenow (the raw value rounded and clamped to [0, max]).\""
   - "aria-valuenow is omitted when indeterminate, matching the ARIA pattern for unknown progress."
   - "Component is non-interactive and not focusable (no keyboard or focus-visible handling)."
   - "Tone fill is a non-text visual indicator; the fill color on the track background is not a text pair (3:1 non-text contrast target applies)."
@@ -57,7 +57,7 @@ None — the element is not focusable and exposes no keyboard interaction.
 | Scenario | Assertion |
 |---|---|
 | Renders with value/max | `role="progressbar"` with `aria-valuenow=40`, `aria-valuemin=0`, `aria-valuemax=100` |
-| "Clamps value to the max" | `aria-valuenow` is `150` (raw value, not clamped) |
+| "Clamps value to the max" | `aria-valuenow` is `100` (clamped to max) |
 | Indeterminate | no `aria-valuenow`, `indeterminate` class applied |
 | Tone | `tone="success"` adds `success` class |
 
