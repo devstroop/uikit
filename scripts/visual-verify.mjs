@@ -198,11 +198,11 @@ async function auditContrast(page) {
 
 const preview = spawn(
   process.execPath,
-  [join(ROOT, "node_modules", "vite", "bin", "vite.js"), "preview", "demo/react", "--port", String(REACT_PORT), "--strictPort"],
+  [join(ROOT, "node_modules", "vite", "bin", "vite.js"), "preview", "preview/react", "--port", String(REACT_PORT), "--strictPort"],
   { cwd: ROOT, stdio: "ignore" },
 );
 await waitFor(`http://localhost:${REACT_PORT}/`);
-const htmx = await serve(join(ROOT, "demo", "htmx"), HTMX_PORT);
+const htmx = await serve(join(ROOT, "preview", "htmx"), HTMX_PORT);
 
 async function auditAxe(page) {
   const results = await new AxeBuilder({ page }).analyze();
@@ -221,8 +221,8 @@ page.on("console", (msg) => {
 });
 page.on("pageerror", (err) => errors.push(`[pageerror] ${err.message}`));
 
-for (const demo of ["react", "htmx"]) {
-  const url = demo === "react" ? `http://localhost:${REACT_PORT}/` : `http://localhost:${HTMX_PORT}/`;
+for (const app of ["react", "htmx"]) {
+  const url = app === "react" ? `http://localhost:${REACT_PORT}/` : `http://localhost:${HTMX_PORT}/`;
   await page.goto(url, { waitUntil: "networkidle" });
   for (const theme of THEMES) {
     for (const mode of MODES) {
@@ -230,16 +230,16 @@ for (const demo of ["react", "htmx"]) {
       const dark = page.locator(".dark-toggle input");
       mode === "dark" ? await dark.check() : await dark.uncheck();
       await page.waitForTimeout(200);
-      const violations = demo === "htmx" ? await auditContrast(page) : [];
+      const violations = app === "htmx" ? await auditContrast(page) : [];
       const tokenViolations = await auditTokens(page);
       const axeViolations = await auditAxe(page);
       if (violations.length || tokenViolations.length || axeViolations.length) {
         errors.push(
-          `${demo} ${theme}/${mode}: ${[...violations, ...tokenViolations, ...axeViolations].join(" | ")}`,
+          `${app} ${theme}/${mode}: ${[...violations, ...tokenViolations, ...axeViolations].join(" | ")}`,
         );
       }
       await page.screenshot({
-        path: join(OUT, `${demo}-${theme}-${mode}.png`),
+        path: join(OUT, `${app}-${theme}-${mode}.png`),
         fullPage: true,
       });
     }

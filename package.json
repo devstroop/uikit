@@ -9,9 +9,9 @@
     "tokens:generate": "node scripts/generate-css.mjs",
     "specs:validate": "node scripts/validate-specs.mjs",
     "parity:validate": "node scripts/validate-parity.mjs",
-    "demo": "vite demo/react",
-    "demo:build": "vite build demo/react",
-    "demo:typecheck": "tsc -p demo/react/tsconfig.json"
+    "preview": "vite preview/react",
+    "preview:build": "vite build preview/react",
+    "preview:typecheck": "tsc -p preview/react/tsconfig.json"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",

@@ -8,7 +8,7 @@ specs/          component contracts + token schema (source of truth)
 themes/         design tokens per design system (data, validated, generated)
 scripts/        token generator + validators
 frameworks/     per-technology implementations of the same contracts
-demo/           per-stack playgrounds (demo/react/ showcases all themes)
+preview/        per-stack playgrounds (preview/react/ showcases all themes)
 ```
 
 - **Specs first** — every component and every token starts in `specs/`
@@ -42,7 +42,7 @@ Branch/PR/release protocol follows the org standard — see
 `frameworks/react/docs/DEVELOPMENT_STRATEGY.md`.
 
 ```bash
-npm ci                        # tooling + demo deps
+npm ci                        # tooling + preview deps
 npm run tokens:validate       # all themes must validate before commit
 npm run tokens:generate       # regenerate tokens.css (+ framework syncs)
 npm run specs:validate        # component specs vs. token schema + impls
@@ -54,11 +54,11 @@ npm run lint && npm run typecheck && npm test && npm run build --prefix framewor
 # htmx framework
 npm run build --prefix frameworks/htmx        # dist/uikit.js + uikit.css
 
-# theme playgrounds (demo/react, demo/htmx): all 6 themes, light/dark
-npm run demo                  # react dev server
-npm run demo:build            # react production build
-npm run demo:typecheck        # demo sources type-checked
-(cd demo/htmx && python3 -m http.server)   # static htmx showcase
+# theme playgrounds (preview/react, preview/htmx): all 6 themes, light/dark
+npm run preview                # react dev server
+npm run preview:build          # react production build
+npm run preview:typecheck      # preview sources type-checked
+(cd preview/htmx && python3 -m http.server)  # static htmx showcase
 ```
 
 ## License

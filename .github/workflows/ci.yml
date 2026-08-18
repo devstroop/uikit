@@ -50,13 +50,13 @@ jobs:
         run: |
           node scripts/build.mjs
           git diff --exit-code
-      - name: Demo vendor copies are in sync
+      - name: Preview vendor copies are in sync
         run: |
-          cp dist/uikit.js dist/uikit.css ../../demo/htmx/vendor/
-          git diff --exit-code -- ../../demo/htmx/vendor/
+          cp dist/uikit.js dist/uikit.css ../../preview/htmx/vendor/
+          git diff --exit-code -- ../../preview/htmx/vendor/
 
-  demo:
-    name: Demo (react)
+  preview:
+    name: Preview (react)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -65,8 +65,8 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm run demo:typecheck
-      - run: npm run demo:build
+      - run: npm run preview:typecheck
+      - run: npm run preview:build
 
   visual:
     name: Visual verification
@@ -79,13 +79,13 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium
-      - name: Demo theme vendor copies are in sync
+      - name: Preview theme vendor copies are in sync
         run: |
           for t in default fluent github material material-3 shadcn; do
-            cp "themes/$t/tokens.css" "demo/htmx/vendor/tokens/$t.css"
+            cp "themes/$t/tokens.css" "preview/htmx/vendor/tokens/$t.css"
           done
-          git diff --exit-code -- demo/htmx/vendor/tokens/
-      - run: npm run demo:build
+          git diff --exit-code -- preview/htmx/vendor/tokens/
+      - run: npm run preview:build
       - run: node scripts/visual-verify.mjs
       - uses: actions/upload-artifact@v4
         if: always()
