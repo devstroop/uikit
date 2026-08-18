@@ -123,7 +123,7 @@
     if (!(dialog instanceof HTMLDialogElement)) return;
     if (typeof dialog.showModal === "function") dialog.showModal();
     else dialog.setAttribute("open", "");
-    trigger._seDialogOpener = trigger;
+    dialog._seDialogOpener = trigger;
   });
 
   on("[data-se-dialog-close]", "click", (button) => {
@@ -131,11 +131,17 @@
     dialog?.close();
   });
 
-  on("dialog", "close", (dialog) => {
-    const opener = dialog._seDialogOpener;
-    dialog._seDialogOpener = null;
-    opener?.focus();
-  });
+  document.addEventListener(
+    "close",
+    (e) => {
+      const dialog = e.target instanceof Element ? e.target.closest("dialog") : null;
+      if (!dialog) return;
+      const opener = dialog._seDialogOpener;
+      dialog._seDialogOpener = null;
+      opener?.focus();
+    },
+    true,
+  );
 
   /* ---------------- Toast ---------------- */
 

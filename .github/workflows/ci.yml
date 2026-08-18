@@ -45,6 +45,7 @@ jobs:
           cache-dependency-path: frameworks/htmx/package-lock.json
       - run: npm ci
       - run: npm run build
+      - run: npm test
       - name: Built bundle is in sync
         run: |
           node scripts/build.mjs
