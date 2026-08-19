@@ -41,6 +41,26 @@ describe("Tabs", () => {
     expect(screen.getByRole("tabpanel")).toHaveTextContent("Activity panel");
   });
 
+  it.each(["left", "right"] as const)("uses Up/Down arrows for the %s position", async (position) => {
+    const user = userEvent.setup();
+    render(<Tabs items={items} defaultValue="overview" position={position} />);
+    const overview = screen.getByRole("tab", { name: "Overview" });
+    const activity = screen.getByRole("tab", { name: "Activity" });
+    overview.focus();
+    await user.keyboard("{ArrowDown}");
+    expect(activity).toHaveFocus();
+    expect(activity).toHaveAttribute("aria-selected", "true");
+    await user.keyboard("{ArrowUp}");
+    expect(overview).toHaveFocus();
+    expect(overview).toHaveAttribute("aria-selected", "true");
+  });
+
+  it("applies the position class to root and tablist", () => {
+    render(<Tabs items={items} defaultValue="overview" position="bottom" />);
+    expect(screen.getByRole("tablist").parentElement?.className).toContain("bottom");
+    expect(screen.getByRole("tablist").className).toContain("bottom");
+  });
+
   it("ignores disabled tabs in keyboard navigation", async () => {
     const user = userEvent.setup();
     render(

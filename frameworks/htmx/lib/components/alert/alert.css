@@ -1,14 +1,62 @@
 .se-alert {
+  --alert-pad: var(--se-space-3);
+  --alert-gap: var(--se-space-2);
+  --alert-radius: var(--se-radius-md);
+  --alert-title-size: var(--se-font-size-md);
+  --alert-body-size: var(--se-font-size-sm);
+  --alert-dismiss-size: 22px;
+  --alert-dismiss-font: var(--se-font-size-md);
   display: flex;
   align-items: flex-start;
-  gap: var(--se-space-2);
-  padding: var(--se-space-3);
+  gap: var(--alert-gap);
+  padding: var(--alert-pad);
   margin: 0 0 var(--se-space-3);
-  border-radius: var(--se-radius-md);
+  border-radius: var(--alert-radius);
   border: 1px solid var(--se-color-border);
   background: var(--se-color-surface);
   color: var(--se-color-text);
   font-size: var(--se-font-size-sm);
+}
+
+/* Size tiers scale the whole banner (shared ComponentSize scale) */
+.se-alert--xs {
+  --alert-pad: var(--se-space-2);
+  --alert-gap: var(--se-space-1);
+  --alert-radius: var(--se-radius-sm);
+  --alert-title-size: var(--se-font-size-sm);
+  --alert-body-size: var(--se-font-size-xs);
+  --alert-dismiss-size: 18px;
+  --alert-dismiss-font: var(--se-font-size-xs);
+}
+
+.se-alert--sm {
+  --alert-pad: var(--se-space-2);
+  --alert-gap: var(--se-space-1);
+  --alert-radius: var(--se-radius-sm);
+  --alert-title-size: var(--se-font-size-sm);
+  --alert-body-size: var(--se-font-size-xs);
+  --alert-dismiss-size: 20px;
+  --alert-dismiss-font: var(--se-font-size-sm);
+}
+
+.se-alert--lg {
+  --alert-pad: var(--se-space-4);
+  --alert-gap: var(--se-space-2);
+  --alert-radius: var(--se-radius-lg);
+  --alert-title-size: var(--se-font-size-lg);
+  --alert-body-size: var(--se-font-size-sm);
+  --alert-dismiss-size: 26px;
+  --alert-dismiss-font: var(--se-font-size-lg);
+}
+
+.se-alert--xl {
+  --alert-pad: var(--se-space-4);
+  --alert-gap: var(--se-space-3);
+  --alert-radius: var(--se-radius-lg);
+  --alert-title-size: var(--se-font-size-lg);
+  --alert-body-size: var(--se-font-size-md);
+  --alert-dismiss-size: 30px;
+  --alert-dismiss-font: var(--se-font-size-lg);
 }
 
 /* Tones define the palette and the soft paint (default).
@@ -81,27 +129,28 @@
 }
 
 .se-alert-title {
-  font-size: var(--se-font-size-md);
+  font-size: var(--alert-title-size);
   font-weight: var(--se-font-weight-bold);
   line-height: 1.4;
 }
 
 .se-alert-body {
   margin-top: var(--se-space-1);
+  font-size: var(--alert-body-size);
   line-height: 1.5;
 }
 
 .se-alert-dismiss {
   flex-shrink: 0;
-  width: 22px;
-  height: 22px;
-  margin-top: calc(-1 * var(--se-space-3) / 2);
-  margin-right: calc(-1 * var(--se-space-4) / 2);
+  width: var(--alert-dismiss-size);
+  height: var(--alert-dismiss-size);
+  margin-top: calc(-1 * var(--alert-pad) / 2);
+  margin-right: calc(-1 * var(--alert-gap));
   border: none;
   border-radius: var(--se-radius-md);
   background: transparent;
   color: var(--se-color-text-muted);
-  font-size: var(--se-font-size-md);
+  font-size: var(--alert-dismiss-font);
   line-height: 1;
   cursor: pointer;
   transition: background var(--se-transition-fast), color var(--se-transition-fast);

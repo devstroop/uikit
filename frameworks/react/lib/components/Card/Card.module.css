@@ -22,6 +22,12 @@
     box-shadow var(--se-transition-fast);
 }
 
+.text {
+  border: none;
+  box-shadow: none;
+  background-color: transparent;
+}
+
 .interactive:hover {
   border-color: var(--se-color-border-strong);
   box-shadow: var(--se-shadow-sm);

@@ -219,7 +219,7 @@ function AppShell() {
 function Buttons() {
   return (
     <Section title="Button">
-      {(["primary", "secondary", "ghost", "danger"] as const).map((v) => (
+      {(["primary", "secondary", "ghost", "danger", "success", "info"] as const).map((v) => (
         <Button key={v} variant={v}>
           {v}
         </Button>
@@ -360,6 +360,9 @@ function Cards() {
       <Card variant="interactive" header="Interactive" onClick={() => alert("card clicked")}>
         Tab to it, press Enter — keyboard operable.
       </Card>
+      <Card variant="text" header="Text">
+        Flat — no border, no shadow, transparent background.
+      </Card>
     </Section>
   );
 }
@@ -460,6 +463,11 @@ function Feedback() {
         >
           Uses --se-color-danger-fg.
         </Alert>
+        {(["xs", "sm", "md", "lg", "xl"] as const).map((size) => (
+          <Alert key={size} size={size} tone="info" title={size} icon={<Icon name="info" size={16} />}>
+            {size === "md" ? "Default tier" : `${size} padding · type · radius`}
+          </Alert>
+        ))}
         <div className="button-row">
           <Button onClick={() => toast.toast({ title: "Saved", description: "Changes are synced.", tone: "success" })}>
             Show toast
@@ -572,6 +580,14 @@ function Navigation() {
         items={[
           { key: "a", title: "What is this?", content: <p>A theme playground.</p> },
           { key: "b", title: "Which systems?", content: <p>Six design systems, one token model.</p> },
+        ]}
+      />
+      <Tabs
+        position="left"
+        items={[
+          { key: "design", label: "Design", content: <p>Design content</p> },
+          { key: "code", label: "Code", content: <p>Code content</p> },
+          { key: "ship", label: "Ship", content: <p>Ship content</p> },
         ]}
       />
     </Section>
