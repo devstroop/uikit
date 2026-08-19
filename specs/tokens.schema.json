@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "devstroop/uikit theme token schema",
-  "description": "Canonical token vocabulary for devstroop/uikit themes. Every theme file in themes/<name>/tokens.json must contain exactly these tiers and tokens. A value is either a plain string (theme-invariant) or an object { light, dark }. The --se- CSS prefix is implied: tier 'color' + token 'bg' emits --se-color-bg.",
+  "description": "Canonical token vocabulary for devstroop/uikit themes. Every theme file in themes/<name>/tokens.json must contain exactly these tiers and tokens. A value is either a plain string (theme-invariant) or an object { light, dark }. The --dt- CSS prefix is implied: tier 'color' + token 'bg' emits --dt-color-bg.",
   "tiers": {
     "color": {
       "kind": "color",

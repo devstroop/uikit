@@ -26,7 +26,7 @@ a11y:
   - "Active tab is the only one in the tab order (`tabIndex={0}` vs `-1` roving tabindex)."
   - "Only the active tabpanel is rendered, with `role=\"tabpanel\"` and `aria-labelledby` pointing at its tab id."
   - "Arrow Left/Right (top/bottom) or Up/Down (left/right) and Home/End keyboard navigation (ARIA tabs pattern, orientation-aware); disabled tabs skipped."
-  - "`:focus-visible` ring via `--se-color-focus` (2px outline, 2px offset)."
+  - "`:focus-visible` ring via `--dt-color-focus` (2px outline, 2px offset)."
   - "Text-on-fill contrast >= 4.5:1 (primary-fg on primary for active pills; text-primary on surface for active underline tabs; text-muted on bg for inactive tabs)."
 ---
 

@@ -23,7 +23,7 @@ preview/        per-stack playgrounds (preview/react/ showcases all themes)
 - **Framework registry** — each framework declares its metadata in
   `frameworks/<name>/uikit.yml` (package name, token sync target, local
   commands). The generator syncs tokens.css into every registered target.
-- **Theme-agnostic frameworks** — components consume `--se-*` custom
+- **Theme-agnostic frameworks** — components consume `--dt-*` custom
   properties exclusively; consumers pick a theme by importing its
   `tokens.css`.
 - **React + htmx, same contracts** — `frameworks/react` ships the 23

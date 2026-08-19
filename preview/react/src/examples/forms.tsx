@@ -6,7 +6,7 @@ export function FormExamples() {
   const [checked, setChecked] = useState(false);
   const [switched, setSwitched] = useState(true);
   return (
-    <Section title="Field · Label · Input · Select · Textarea · Checkbox · Switch" className="se-form-grid">
+    <Section title="Field · Label · Input · Select · Textarea · Checkbox · Switch" className="dt-form-grid">
       <Field label="Email" htmlFor="f-email" hint="We never share it.">
         <Input id="f-email-sm" size="sm" placeholder="small" />
         <Input id="f-email" type="email" placeholder="you@example.com" />
