@@ -82,7 +82,7 @@ Throws when used outside `<ToastProvider>`.
   and schedules auto-dismiss via `window.setTimeout` when `durationMs > 0`.
 - Viewport: `position: fixed`, `z.toast`, `pointer-events: none`; toasts
   re-enable pointer events. One viewport per corner in use, each anchored
-  `space.5` from its edges (`se-toast-viewport--top-left` etc. modifiers;
+  `space.5` from its edges (`dt-toast-viewport--top-left` etc. modifiers;
   the base class is bottom-right).
 - Each toast: `surface` background tinted 12% of the tone via `color-mix`
   (the same tint language as Alert) with a 1px tone-colored border
@@ -90,8 +90,8 @@ Throws when used outside `<ToastProvider>`.
   foreground and the description stays `text-muted`. `shadow.lg`, entry
   animation (fade + 12px translateX, `transition.base` / `ease.out`).
 - Layout: `title` (bold `sm`) with optional `description` (`xs`,
-  `text-muted`), optional `actions` row (primary `se-toast-action` +
-  secondary `se-toast-cancel`, `xs` bold text buttons), plus a 22×22px `×`
+  `text-muted`), optional `actions` row (primary `dt-toast-action` +
+  secondary `dt-toast-cancel`, `xs` bold text buttons), plus a 22×22px `×`
   dismiss button with `aria-label` (omitted when `dismissible: false`).
 - `action`/`cancel` click: run `onClick`, then dismiss the toast (sonner:
   the toast closes; M3: an action means the user decided).
@@ -106,9 +106,9 @@ Throws when used outside `<ToastProvider>`.
   `ease.out`, ~200ms) before leaving the DOM; the leaving item is
   `pointer-events: none`. `onAutoClose` fires at timer expiry, `onDismiss`
   on any manual dismissal.
-- htmx: `window.seToast(options)` mirrors the react API (static server
-  markup uses the same classes/hooks; `data-se-toast-id` enables in-place
-  updates, `data-paused` reflects the paused state, `data-se-dismiss`
+- htmx: `window.dtToast(options)` mirrors the react API (static server
+  markup uses the same classes/hooks; `data-dt-toast-id` enables in-place
+  updates, `data-paused` reflects the paused state, `data-dt-dismiss`
   animates out).
 
 ## Keyboard

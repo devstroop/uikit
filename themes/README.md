@@ -36,15 +36,15 @@ to the release tag that matches your framework version, e.g. for
 Prefer vendoring: copy `themes/<name>/tokens.css` into your app and commit
 it, so app builds never depend on a network fetch at runtime.
 
-Themes override any subset of `--se-*` custom properties, so an app can
+Themes override any subset of `--dt-*` custom properties, so an app can
 also define a partial theme inline after the default import:
 
 ```css
 @import "@devstroop/react-ui/style.css";
 
 :root {
-  --se-color-primary: #0f6cbd;
-  --se-radius-sm: 2px;
+  --dt-color-primary: #0f6cbd;
+  --dt-radius-sm: 2px;
 }
 ```
 

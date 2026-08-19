@@ -31,8 +31,8 @@ Sizes are theme-derived, never hardcoded in components:
 
 | Dimension | Token per tier | CSS variable |
 |---|---|---|
-| Control height (button, input, select, avatar diameter, circular progress diameter) | `control.height-{tier}` | `--se-control-height-{tier}` |
-| Icon pixels | `font.size-{tier}` | `--se-font-size-{tier}` |
+| Control height (button, input, select, avatar diameter, circular progress diameter) | `control.height-{tier}` | `--dt-control-height-{tier}` |
+| Icon pixels | `font.size-{tier}` | `--dt-font-size-{tier}` |
 
 Labels use the **tier−1 pairing**: a `md` control renders 14px (`font.size-sm`)
 text, `lg` 16px (`font.size-md`), `xl` 18px (`font.size-lg`); `xs`/`sm` both use
@@ -40,7 +40,7 @@ text, `lg` 16px (`font.size-md`), `xl` 18px (`font.size-lg`); `xs`/`sm` both use
 that drives font-size from the tier directly). Avatar initials use a fixed px
 scale (10/12/15/18/22), not font tokens.
 
-`--se-control-height` remains the legacy alias for the `md` tier — consumers
+`--dt-control-height` remains the legacy alias for the `md` tier — consumers
 that override it (app token bridges) keep controlling the default size.
 
 ### Tier values (default theme, 36px base)
