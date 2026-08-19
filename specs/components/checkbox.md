@@ -16,7 +16,7 @@ tokens:
 a11y:
   - "Native <input type=\"checkbox\">: checked/indeterminate/disabled state semantics, Space toggle, and form integration come from the browser."
   - "Checkmark glyph is primary-fg on primary fill — contrast >= 4.5:1 per schema contrastRules (primary-fg on primary)."
-  - "Focus visible ring via --se-color-focus on :focus-visible only."
+  - "Focus visible ring via --dt-color-focus on :focus-visible only."
   - "Disabled uses native disabled attribute plus opacity 0.55."
   - "No built-in <label>: consumers must associate one (wrapping label or htmlFor/id) for an accessible name."
 ---
@@ -48,7 +48,7 @@ standard input props (`checked`, `indeterminate`, `disabled`, `onChange`,
 ## Keyboard
 
 Native checkbox semantics: Space toggles when focused; focus follows document
-order; `:focus-visible` outline (2px, `--se-color-focus`) is the focus
+order; `:focus-visible` outline (2px, `--dt-color-focus`) is the focus
 indicator; disabled inputs cannot be focused or toggled.
 
 ## Tests

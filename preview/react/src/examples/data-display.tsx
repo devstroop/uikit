@@ -28,7 +28,7 @@ function TableSection() {
       <Table
         columns={[
           { key: "name", header: "Name" },
-          { key: "role", header: "Role", render: (r) => <span style={{ color: "var(--se-color-text-muted)" }}>{r.role}</span> },
+          { key: "role", header: "Role", render: (r) => <span style={{ color: "var(--dt-color-text-muted)" }}>{r.role}</span> },
           { key: "status", header: "Status", align: "center", render: (r) => <Badge tone={r.status === "active" ? "success" : "warning"}>{r.status}</Badge> },
           { key: "actions", header: "Actions", align: "end", render: () => <Button variant="ghost" size="xs">…</Button> },
         ]}
@@ -132,7 +132,7 @@ function IconSection() {
           <Icon name={n} />
         </span>
       ))}
-      <div className="se-icon-row" style={{ display: "flex", gap: 8, alignItems: "center" }}>
+      <div className="dt-icon-row" style={{ display: "flex", gap: 8, alignItems: "center" }}>
         {(["xs", "sm", "md", "lg", "xl"] as const).map((s) => (
           <span key={s} title={s}>
             <Icon name="settings" size={s} />

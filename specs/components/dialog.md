@@ -30,7 +30,7 @@ tokens:
 a11y:
   - "Renders a native <dialog> element opened via showModal() (implicit role=\"dialog\", top-layer modal semantics, background made inert by the browser)."
   - "Each dialog instance generates unique ids for its title/description via useId(); `aria-labelledby` links the dialog to its <h2> title and is present only when a title is rendered."
-  - "aria-describedby=\"se-dialog-desc\" is set only when a description is rendered."
+  - "aria-describedby=\"dt-dialog-desc\" is set only when a description is rendered."
   - "Close button is a native <button type=\"button\"> with aria-label=\"Close dialog\" and onClick={onClose}."
   - "No custom focus trap or focus restore — focus entry/containment is delegated to native showModal()."
   - "Text-on-surface contrast >= 4.5:1 (color.text on color.surface); description uses color.text-muted on color.surface (>= 4.5:1)."
@@ -63,7 +63,7 @@ Modal container for focused tasks and confirmations, built on the native
   only when their props are non-null.
 - Sizes: `sm` 360px, `md` 520px, `lg` 720px `max-width`; shared
   `max-height: min(85vh, 720px)` with `overflow: auto`.
-- Entry animation `se-dialog-in` (fade + translate/scale) using
+- Entry animation `dt-dialog-in` (fade + translate/scale) using
   `transition.base` + `ease.out`; `::backdrop` uses `color.backdrop`.
 - Header/footer separated by `color.border` rules; close button shifts to
   `surface-hover`/`text` on hover.

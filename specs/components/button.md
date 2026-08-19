@@ -40,7 +40,7 @@ tokens:
   - "transition.fast"
 a11y:
   - "Renders a semantic <button> element (native Enter/Space activation)."
-  - "Focus visible ring via --se-color-focus (keyboard-only, :focus-visible)."
+  - "Focus visible ring via --dt-color-focus (keyboard-only, :focus-visible)."
   - "Disabled state blocks activation (native disabled attribute)."
   - "Text-on-fill contrast >= 4.5:1 (primary-fg on primary, danger-fg on danger, success-fg on success, info-fg on info)."
   - "Icon-only buttons MUST carry an accessible name (aria-label or aria-labelledby); there is no visible text to derive one."

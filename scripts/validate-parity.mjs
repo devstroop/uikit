@@ -3,7 +3,7 @@
  * Spec <-> implementation token parity.
  *
  * For every spec with status "implemented", diff the tokens declared in its
- * frontmatter against the var(--se-*) references actually used by the
+ * frontmatter against the var(--dt-*) references actually used by the
  * framework implementation:
  *
  *   missing  tokens the component uses but the spec does not declare  (spec drift)
@@ -25,7 +25,7 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const SPECS_DIR = join(ROOT, "specs/components");
 const FRAMEWORKS_DIR = join(ROOT, "frameworks");
 
-const VAR_RE = /var\(--se-([a-z0-9-]+)\)/g;
+const VAR_RE = /var\(--dt-([a-z0-9-]+)\)/g;
 
 function readFrontmatter(markdown) {
   const match = /^---\r?\n([\s\S]*?)\r?\n---\r?\n/.exec(markdown);
@@ -34,7 +34,7 @@ function readFrontmatter(markdown) {
 
 function tokenToVar(token) {
   const [tier, ...rest] = token.split(".");
-  return `--se-${tier}-${rest.join("-")}`;
+  return `--dt-${tier}-${rest.join("-")}`;
 }
 
 function varToToken(variable) {

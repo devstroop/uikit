@@ -39,7 +39,7 @@ The component is `forwardRef`d to `SVGSVGElement`.
   `fill="none"`, `stroke="currentColor"`.
 - `size` accepts a number (`width`/`height` in px) or a shared
   `ComponentSize` tier: tier classes size the box from
-  `font.size-{tier}` (`--se-font-size-xs` 12px → `xl` 22px in the default
+  `font.size-{tier}` (`--dt-font-size-xs` 12px → `xl` 22px in the default
   theme) so icons stay aligned with adjacent label text; the tier value is
   NOT inherited from the parent font — it is always resolved from the
   token. Default is `md` (16px).
