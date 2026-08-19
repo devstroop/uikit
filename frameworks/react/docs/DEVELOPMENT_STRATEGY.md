@@ -58,19 +58,23 @@ one level up**:
 
 ```
 features                          accumulator
-└── feat/10-examples              epic branch (issue #10)
-    ├── feat/10-examples/shell    part branch
-    │   └── feat/10-examples/shell/app-shell   unit branch
-    └── feat/10-examples/forms
+└── feat/10-examples              epic branch (issue #10)  ← PR into features
+    ├── feat/10-shell             part branch               ← PR into feat/10-examples
+    │   └── feat/10-shell-app     unit branch               ← PR into feat/10-shell
+    ├── feat/10-forms             part branch               ← PR into feat/10-examples
+    ├── feat/10-feedback          part branch               ← PR into feat/10-examples
+    │   └── feat/10-feedback-alert unit branch              ← PR into feat/10-feedback
+    └── feat/10-data-display      part branch               ← PR into feat/10-examples
 ```
 
 | Rule | Detail |
 |---|---|
-| Depth | Max 3 levels below the accumulator (`feat/<issue#>-<epic>[/<part>[/<unit>]]`). Anything deeper splits into a new epic |
+| Depth | Max 3 levels below the accumulator (`feat/<issue#>-<epic>` + part + unit). Anything deeper splits into a new epic |
 | Prefix | Nesting lives under the singular prefix refs (`feat/…`), never under the accumulator name (`features/…`) — the accumulator branch occupies that ref namespace |
+| Flattening | Ref names are flattened to one slash level — `feat/10-examples` + `feat/10-examples/shell` is impossible (a ref cannot nest under another ref: `refs/heads/feat/10-examples` is a file, `refs/heads/feat/10-examples/shell` needs a directory at the same path). The hierarchy is expressed by **PR targets** (unit → part → epic → accumulator), not by literal slash nesting |
 | Source | Each level branches from its parent branch, not from the accumulator directly |
 | PR chain | Every branch — including units and parts — opens a PR into its **immediate parent**. CI runs on every `pull_request`, so intermediate merges are always verified. Push-triggered CI only fires on trunk branches; nested branches rely on PRs |
-| Examples | Preview/demo-site work is a normal feature: `feat/<issue#>-examples/…` under `features` |
+| Examples | Preview/demo-site work is a normal feature: `feat/<issue#>-examples` under `features` |
 | Dist | Branches touching a framework rebuild `dist/` + preview vendor copies before their PR (CI in-sync gates). A parent regenerates after absorbing children and before its own PR; merged trees are regenerated after `develop` merges (resolve dist conflicts by rebuilding from the merged tree, never by hand) |
 
 ## 3. Issue lifecycle (repository host)
@@ -163,8 +167,16 @@ The visual job lives in its own workflow triggered **only by pull_request**.
 Push-triggered runs (post-merge verification on accumulators/develop) run the
 four core gates; they must not include the visual job — duplicate visual runs
 on the same commit have been observed to stall in runner provisioning and the
-stale/failed check context then blocks PR mergeability (require manual
-cancel + `gh run rerun --failed`).
+stale/failed check context then blocks PR mergeability.
+
+The visual job is hardened against stalls: Playwright browsers are cached
+(`~/.cache/ms-playwright`, keyed on `package-lock.json`), the job drops
+`--with-deps` (runners already ship the deps) and sets `timeout-minutes: 30`
+so a zombie run fails fast instead of hanging. With the cache the job finishes
+in ~1.5 min; the pre-cache 1.5–4.5 min log-less provisioning window looked
+like a stall and caused repeated manual cancels — do not cancel a run purely
+because it shows no log output within the first few minutes; wait for
+`timeout-minutes` to elapse first.
 
 Workflow triggers must match the repo's real default branch (see per-repo table).
 A workflow triggered on a branch that does not exist is a silent CI outage.
