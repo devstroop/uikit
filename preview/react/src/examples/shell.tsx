@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Body, Button, Column, Footer, Header, Layout, Row, Sidebar } from "@devstroop/react-ui";
+import { Body, Button, Column, Footer, Header, Layout, Row, Sidebar } from "@devstroop/react-uikitkit";
 import { Section } from "./section";
 
 export function ShellExamples() {
