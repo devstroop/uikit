@@ -1,24 +1,14 @@
-import { useEffect, useState } from "react";
-import { Button, Checkbox, email, Field, Form, Input, Label, required, runValidators, Select, Switch, Textarea, useFormContext } from "@devstroop/react-uikitkit";
+import { useState } from "react";
+import { Button, Checkbox, email, Field, Form, Input, Label, required, Select, Switch, Textarea, useFormField } from "@devstroop/react-uikitkit";
 import { Section } from "./section";
 
-function DemoField({ name, errors }: { name: string; errors: string[] }) {
-  const { registerField, unregisterField } = useFormContext();
-  useEffect(() => {
-    registerField({ name, validate: () => errors });
-    return () => unregisterField(name);
-  }, [name, errors, registerField, unregisterField]);
-  return <Input name={name} aria-label={name} defaultValue="" />;
-}
-
 function ValidatedField({ name }: { name: string }) {
-  const { registerField, unregisterField } = useFormContext();
-  const [value, setValue] = useState("");
-  useEffect(() => {
-    registerField({ name, validate: () => runValidators([required(), email()], value) });
-    return () => unregisterField(name);
-  }, [name, value, registerField, unregisterField]);
-  return <Input name={name} aria-label={name} value={value} onChange={(e) => setValue(e.target.value)} />;
+  const { value, setValue, errors } = useFormField(name, { validate: [required(), email()] });
+  return (
+    <Field label={name} htmlFor={name} error={errors[0]} hint={errors.length === 0 ? "Required, valid email" : undefined}>
+      <Input id={name} name={name} value={value ?? ""} onChange={(e) => setValue(e.target.value)} />
+    </Field>
+  );
 }
 
 export function FormContainerExamples() {
@@ -31,8 +21,7 @@ export function FormContainerExamples() {
         onSubmit={(m) => setResult(`Valid: ${(m as { email: string }).email}`)}
         onInvalidSubmit={(errors) => setResult(`Invalid fields: ${Object.keys(errors).join(", ")}`)}
       >
-        <DemoField name="email" errors={[]} />
-        <DemoField name="name" errors={["Name is required"]} />
+        <ValidatedField name="email" />
         <ValidatedField name="contact" />
         <Button type="submit">Submit</Button>
       </Form>
