@@ -156,7 +156,15 @@ Types: `feat` · `fix` · `chore` · `refactor` · `docs` · `ci` · `test` · `
 | typecheck | every PR + push to accumulators/develop | merge |
 | build | every PR + push to accumulators/develop | merge |
 | scripted tests (`test:*` package scripts) | every PR + push to accumulators/develop | merge |
+| **visual verification** | **pull_request only** (`visual.yml`) | merge |
 | deploy | push to `master` (post-release) | — |
+
+The visual job lives in its own workflow triggered **only by pull_request**.
+Push-triggered runs (post-merge verification on accumulators/develop) run the
+four core gates; they must not include the visual job — duplicate visual runs
+on the same commit have been observed to stall in runner provisioning and the
+stale/failed check context then blocks PR mergeability (require manual
+cancel + `gh run rerun --failed`).
 
 Workflow triggers must match the repo's real default branch (see per-repo table).
 A workflow triggered on a branch that does not exist is a silent CI outage.
