@@ -69,6 +69,42 @@ function GridSection() {
             2
           </Column>
         </Row>
+        <Row justify="center">
+          <Column size={2} className="grid-cell">
+            2
+          </Column>
+          <Column size={2} className="grid-cell">
+            2
+          </Column>
+        </Row>
+        <Row justify="end">
+          <Column size={3} className="grid-cell">
+            end
+          </Column>
+        </Row>
+        <Row align="center" style={{ minHeight: 96 }}>
+          <Column size={4} className="grid-cell">
+            align
+          </Column>
+          <Column size={4} className="grid-cell" style={{ paddingBlock: 24 }}>
+            center
+          </Column>
+          <Column size={4} className="grid-cell">
+            row
+          </Column>
+        </Row>
+        <Row>
+          <Column size={12} className="grid-cell">
+            <Row>
+              <Column size={6} className="grid-cell">
+                nested
+              </Column>
+              <Column size={6} className="grid-cell">
+                rows
+              </Column>
+            </Row>
+          </Column>
+        </Row>
         <Row>
           <Column className="grid-cell">
             auto
@@ -113,9 +149,14 @@ function AppShellSection() {
         <Sidebar id="shell-sidebar" aria-label="App shell navigation" expanded={expanded} responsive>
           <nav aria-label="Demo navigation">
             <ul className="shell-nav">
-              {["Dashboard", "Users", "Settings"].map((item) => (
+              {["Dashboard", "Users", "Settings"].map((item, index) => (
                 <li key={item}>
-                  <Button variant="ghost" size="sm" style={{ width: "100%", justifyContent: "flex-start" }}>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    style={{ width: "100%", justifyContent: "flex-start" }}
+                    aria-current={index === 0 ? "page" : undefined}
+                  >
                     {item}
                   </Button>
                 </li>

@@ -23,15 +23,35 @@
             <div class="se-row">
               <div class="se-column se-column--4 se-column--offset-4 grid-cell">4 · offset-4</div>
             </div>
-            <div class="se-row se-row--justify-between">
-              <div class="se-column se-column--2 grid-cell">2</div>
-              <div class="se-column se-column--2 grid-cell">2</div>
-              <div class="se-column se-column--2 grid-cell">2</div>
-            </div>
-            <div class="se-row">
-              <div class="se-column grid-cell">auto</div>
-              <div class="se-column grid-cell">auto</div>
-            </div>
+<div class="se-row se-row--justify-between">
+  <div class="se-column se-column--2 grid-cell">2</div>
+  <div class="se-column se-column--2 grid-cell">2</div>
+  <div class="se-column se-column--2 grid-cell">2</div>
+</div>
+<div class="se-row se-row--justify-center">
+  <div class="se-column se-column--2 grid-cell">2</div>
+  <div class="se-column se-column--2 grid-cell">2</div>
+</div>
+<div class="se-row se-row--justify-end">
+  <div class="se-column se-column--3 grid-cell">end</div>
+</div>
+<div class="se-row se-row--center" style="min-height: 96px">
+  <div class="se-column se-column--4 grid-cell">align</div>
+  <div class="se-column se-column--4 grid-cell" style="padding-block: 24px">center</div>
+  <div class="se-column se-column--4 grid-cell">row</div>
+</div>
+<div class="se-row">
+  <div class="se-column se-column--12 grid-cell">
+    <div class="se-row">
+      <div class="se-column se-column--6 grid-cell">nested</div>
+      <div class="se-column se-column--6 grid-cell">rows</div>
+    </div>
+  </div>
+</div>
+<div class="se-row">
+  <div class="se-column grid-cell">auto</div>
+  <div class="se-column grid-cell">auto</div>
+</div>
           </div>
         </div>
       </section>
@@ -47,11 +67,11 @@
             <div class="se-layout-row">
               <aside class="se-sidebar se-sidebar--left se-sidebar--responsive" id="preview-shell-sidebar" aria-label="App shell navigation">
                 <nav aria-label="Demo navigation">
-                  <ul class="shell-nav">
-                    <li><button class="se-button se-button--ghost se-button--sm" type="button" style="width: 100%; justify-content: flex-start">Dashboard</button></li>
-                    <li><button class="se-button se-button--ghost se-button--sm" type="button" style="width: 100%; justify-content: flex-start">Users</button></li>
-                    <li><button class="se-button se-button--ghost se-button--sm" type="button" style="width: 100%; justify-content: flex-start">Settings</button></li>
-                  </ul>
+<ul class="shell-nav">
+  <li><button class="se-button se-button--ghost se-button--sm" type="button" style="width: 100%; justify-content: flex-start" aria-current="page">Dashboard</button></li>
+  <li><button class="se-button se-button--ghost se-button--sm" type="button" style="width: 100%; justify-content: flex-start">Users</button></li>
+  <li><button class="se-button se-button--ghost se-button--sm" type="button" style="width: 100%; justify-content: flex-start">Settings</button></li>
+</ul>
                 </nav>
               </aside>
               <div class="se-body" aria-label="App shell body">
