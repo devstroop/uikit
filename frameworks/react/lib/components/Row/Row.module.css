@@ -4,6 +4,26 @@
   gap: var(--se-space-4);
 }
 
+.gapXs {
+  gap: var(--se-space-1);
+}
+
+.gapSm {
+  gap: var(--se-space-2);
+}
+
+.gapMd {
+  gap: var(--se-space-3);
+}
+
+.gapLg {
+  gap: var(--se-space-4);
+}
+
+.gapXl {
+  gap: var(--se-space-5);
+}
+
 .start {
   align-items: flex-start;
 }
