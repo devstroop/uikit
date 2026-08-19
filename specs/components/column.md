@@ -33,7 +33,7 @@ All other `HTMLAttributes<HTMLDivElement>` are spread onto the `<div>`.
 
 ## Behavior
 
-- DOM: `div[class~=se-column]`; `width: calc(size / 12 * 100%)`,
+- DOM: `div[class~=dt-column]`; `width: calc(size / 12 * 100%)`,
   `margin-left: calc(offset / 12 * 100%)`.
 - No `size` renders `flex: 1` (fills remaining space).
 - Responsive tiers compile to `@media (min-width: …)` rules; the base

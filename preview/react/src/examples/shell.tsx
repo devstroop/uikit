@@ -161,8 +161,8 @@ function AppShellSection() {
         style={{
           width: "100%",
           minHeight: 420,
-          border: "1px dashed var(--se-color-border)",
-          borderRadius: "var(--se-radius-md)",
+          border: "1px dashed var(--dt-color-border)",
+          borderRadius: "var(--dt-radius-md)",
           overflow: "hidden",
         }}
       >
@@ -208,7 +208,7 @@ function AppShellSection() {
           </Row>
         </Body>
         <Footer aria-label="App shell footer">
-          <span style={{ color: "var(--se-color-text-muted)" }}>© 2026 Example</span>
+          <span style={{ color: "var(--dt-color-text-muted)" }}>© 2026 Example</span>
         </Footer>
       </Layout>
       <Layout
@@ -216,8 +216,8 @@ function AppShellSection() {
           width: "100%",
           minHeight: 320,
           marginTop: 16,
-          border: "1px dashed var(--se-color-border)",
-          borderRadius: "var(--se-radius-md)",
+          border: "1px dashed var(--dt-color-border)",
+          borderRadius: "var(--dt-radius-md)",
           overflow: "hidden",
         }}
       >

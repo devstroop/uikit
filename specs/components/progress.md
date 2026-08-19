@@ -61,7 +61,7 @@ component is a plain function component (not `forwardRef`d).
   12 o'clock.
 - Circular sizes: the default is the `md` tier (`control.height-md`, 36px
   in the default theme) with the full `xs..xl` set — `circular-{tier}`
-  classes in react, `se-progress--{tier}` modifiers in htmx. Numeric sizes
+  classes in react, `dt-progress--{tier}` modifiers in htmx. Numeric sizes
   remain available for pixel-perfect geometry (react `size` prop; htmx
   servers may set `width`/`height` attributes with a matching
   `viewBox="0 0 <size> <size>"`).
