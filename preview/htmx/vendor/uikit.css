@@ -1074,6 +1074,10 @@
   border-top: 1px solid var(--dt-color-border);
 }
 
+.dt-form {
+  font-family: var(--dt-font-sans);
+}
+
 .dt-header {
   display: flex;
   flex-shrink: 0;
@@ -2307,3 +2311,8 @@
   top: 50%;
   margin: -3px 0 0 -3px;
 }
+
+/* Validators — no standalone styles. Validation state is styled by the
+   field component (dt-field-error, dt-input--invalid) via the field
+   contract; this file exists so the spec-to-directory parity check has
+   a home for the validators spec. */

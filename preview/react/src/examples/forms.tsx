@@ -1,6 +1,38 @@
 import { useState } from "react";
-import { Checkbox, Field, Input, Label, Select, Switch, Textarea } from "@devstroop/react-uikitkit";
+import { Button, Checkbox, email, Field, Form, Input, Label, required, Select, Switch, Textarea, useFormField } from "@devstroop/react-uikitkit";
 import { Section } from "./section";
+
+function ValidatedField({ name }: { name: string }) {
+  const { value, setValue, errors } = useFormField(name, { validate: [required(), email()] });
+  return (
+    <Field label={name} htmlFor={name} error={errors[0]} hint={errors.length === 0 ? "Required, valid email" : undefined}>
+      <Input id={name} name={name} value={value ?? ""} onChange={(e) => setValue(e.target.value)} />
+    </Field>
+  );
+}
+
+export function FormContainerExamples() {
+  const [result, setResult] = useState("Idle — press Submit");
+  const model = { email: "you@example.com", name: "" };
+  return (
+    <Section title="Form (container)">
+      <Form
+        model={model}
+        onSubmit={(m) => setResult(`Valid: ${(m as { email: string }).email}`)}
+        onInvalidSubmit={(errors) => setResult(`Invalid fields: ${Object.keys(errors).join(", ")}`)}
+      >
+        <ValidatedField name="email" />
+        <ValidatedField name="contact" />
+        <Button type="submit">Submit</Button>
+      </Form>
+      <p>{result}</p>
+      <Form model={model} action="/login" method="post">
+        <Input name="email" aria-label="Native email" defaultValue="" />
+        <Button type="submit">Native submit (action/method)</Button>
+      </Form>
+    </Section>
+  );
+}
 
 export function FormExamples() {
   const [checked, setChecked] = useState(false);

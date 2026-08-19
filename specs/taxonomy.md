@@ -25,7 +25,7 @@ with a single member signals a core primitive that warrants its own bucket
 actions: button
 data-display: avatar, badge, empty-state, icon, stat, table
 feedback: alert, dialog, progress, skeleton, toast, tooltip
-forms: checkbox, field, input, label, select, switch, textarea
+forms: checkbox, field, form, input, label, select, switch, textarea, validators
 layout: body, column, footer, header, layout, row
 navigation: sidebar, tabs
 surfaces: accordion, card
