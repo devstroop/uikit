@@ -25,6 +25,15 @@ describe("Row", () => {
     expect(container.firstElementChild?.getAttribute("style")).toContain("gap: 2rem");
   });
 
+  it("maps xs–xl gap tiers to token classes", () => {
+    const { container, rerender } = render(<Row gap="sm" />);
+    const element = container.firstElementChild as HTMLElement;
+    expect(element.className).toContain("gapSm");
+    expect(element.getAttribute("style")).toBeNull();
+    rerender(<Row gap="xl" />);
+    expect((container.firstElementChild as HTMLElement).className).toContain("gapXl");
+  });
+
   it("applies no-wrap when wrap is false", () => {
     const { container } = render(<Row wrap={false} />);
     expect(container.firstElementChild?.className).toContain("noWrap");
