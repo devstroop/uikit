@@ -1,4 +1,4 @@
-import { Avatar, Badge, Button, Card, Column, EmptyState, Icon, Row, Stat, Table } from "@devstroop/react-ui";
+import { Avatar, Badge, Button, Card, Column, EmptyState, Icon, Row, Stat, Table } from "@devstroop/react-uikitkit";
 import { Section } from "./section";
 
 const TONES = ["primary", "success", "warning", "danger"] as const;

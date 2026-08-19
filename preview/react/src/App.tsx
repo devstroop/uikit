@@ -1,4 +1,4 @@
-import { ToastProvider } from "@devstroop/react-ui";
+import { ToastProvider } from "@devstroop/react-uikitkit";
 import { DataDisplayExamples } from "./examples/data-display";
 import { FeedbackExamples } from "./examples/feedback";
 import { FormExamples } from "./examples/forms";
