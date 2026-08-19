@@ -20,6 +20,11 @@
         "danger-hover",
         "danger-fg",
         "success",
+        "success-hover",
+        "success-fg",
+        "info",
+        "info-hover",
+        "info-fg",
         "warning",
         "text-primary",
         "text-success",
@@ -149,6 +154,16 @@
     {
       "fg": "danger-fg",
       "bg": "danger",
+      "min": 4.5
+    },
+    {
+      "fg": "success-fg",
+      "bg": "success",
+      "min": 4.5
+    },
+    {
+      "fg": "info-fg",
+      "bg": "info",
       "min": 4.5
     },
     {

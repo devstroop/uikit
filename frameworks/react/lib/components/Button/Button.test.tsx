@@ -26,6 +26,14 @@ describe("Button", () => {
     expect(button.className).toContain("fullWidth");
   });
 
+  it.each(["primary", "secondary", "ghost", "danger", "success", "info"] as const)(
+    "applies the %s variant class",
+    (variant) => {
+      render(<Button variant={variant}>{variant}</Button>);
+      expect(screen.getByRole("button", { name: variant }).className).toContain(variant);
+    },
+  );
+
   it("forwards the click handler and is disabled", async () => {
     const user = userEvent.setup();
     const onClick = vi.fn();
