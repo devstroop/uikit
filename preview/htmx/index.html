@@ -20,7 +20,7 @@
       <div class="chrome-controls">
         <label>
           Theme
-          <select id="theme-select" class="se-select se-select--md">
+          <select id="theme-select" class="dt-select dt-select--md">
             <option value="default">Default</option>
             <option value="fluent">Fluent 2</option>
             <option value="github">GitHub (Primer)</option>
@@ -30,51 +30,51 @@
           </select>
         </label>
         <label class="dark-toggle">
-          <input type="checkbox" id="dark-toggle" class="se-switch" role="switch" data-se-theme-switch />
+          <input type="checkbox" id="dark-toggle" class="dt-switch" role="switch" data-dt-theme-switch />
           Dark
         </label>
       </div>
     </header>
 
     <main>
-      <div data-se-example="shell"></div>
+      <div data-dt-example="shell"></div>
 
-      <div data-se-example="misc"></div>
+      <div data-dt-example="misc"></div>
 
-      <div data-se-example="forms"></div>
+      <div data-dt-example="forms"></div>
 
-      <div data-se-example="data-display"></div>
+      <div data-dt-example="data-display"></div>
 
-      <div data-se-example="feedback"></div>
+      <div data-dt-example="feedback"></div>
 
       <section class="row">
         <h2>Tabs · Accordion</h2>
         <div class="row-content">
-          <div class="se-tabs" data-se-tabs>
-            <div class="se-tabs-tablist se-tabs-tablist--pills" role="tablist" data-se-tablist>
-              <button class="se-tabs-tab se-tabs-tab--active" type="button" role="tab" data-se-tab data-se-tab-key="one" id="preview-tab-one" aria-selected="true" aria-controls="preview-panel-one" tabindex="0">One</button>
-              <button class="se-tabs-tab" type="button" role="tab" data-se-tab data-se-tab-key="two" id="preview-tab-two" aria-selected="false" aria-controls="preview-panel-two" tabindex="-1">Two</button>
+          <div class="dt-tabs" data-dt-tabs>
+            <div class="dt-tabs-tablist dt-tabs-tablist--pills" role="tablist" data-dt-tablist>
+              <button class="dt-tabs-tab dt-tabs-tab--active" type="button" role="tab" data-dt-tab data-dt-tab-key="one" id="preview-tab-one" aria-selected="true" aria-controls="preview-panel-one" tabindex="0">One</button>
+              <button class="dt-tabs-tab" type="button" role="tab" data-dt-tab data-dt-tab-key="two" id="preview-tab-two" aria-selected="false" aria-controls="preview-panel-two" tabindex="-1">Two</button>
             </div>
-            <div class="se-tabs-panel" role="tabpanel" data-se-tabpanel data-se-tab-key="one" id="preview-panel-one" aria-labelledby="preview-tab-one"><p>Panel one.</p></div>
-            <div class="se-tabs-panel" role="tabpanel" data-se-tabpanel data-se-tab-key="two" id="preview-panel-two" aria-labelledby="preview-tab-two" hidden><p>Panel two.</p></div>
+            <div class="dt-tabs-panel" role="tabpanel" data-dt-tabpanel data-dt-tab-key="one" id="preview-panel-one" aria-labelledby="preview-tab-one"><p>Panel one.</p></div>
+            <div class="dt-tabs-panel" role="tabpanel" data-dt-tabpanel data-dt-tab-key="two" id="preview-panel-two" aria-labelledby="preview-tab-two" hidden><p>Panel two.</p></div>
           </div>
-          <div class="se-tabs se-tabs--left" data-se-tabs>
-            <div class="se-tabs-tablist se-tabs-tablist--underline se-tabs-tablist--left" role="tablist" data-se-tablist data-se-tablist-orientation="vertical">
-              <button class="se-tabs-tab se-tabs-tab--active" type="button" role="tab" data-se-tab data-se-tab-key="design" id="preview-tab-design" aria-selected="true" aria-controls="preview-panel-design" tabindex="0">Design</button>
-              <button class="se-tabs-tab" type="button" role="tab" data-se-tab data-se-tab-key="code" id="preview-tab-code" aria-selected="false" aria-controls="preview-panel-code" tabindex="-1">Code</button>
+          <div class="dt-tabs dt-tabs--left" data-dt-tabs>
+            <div class="dt-tabs-tablist dt-tabs-tablist--underline dt-tabs-tablist--left" role="tablist" data-dt-tablist data-dt-tablist-orientation="vertical">
+              <button class="dt-tabs-tab dt-tabs-tab--active" type="button" role="tab" data-dt-tab data-dt-tab-key="design" id="preview-tab-design" aria-selected="true" aria-controls="preview-panel-design" tabindex="0">Design</button>
+              <button class="dt-tabs-tab" type="button" role="tab" data-dt-tab data-dt-tab-key="code" id="preview-tab-code" aria-selected="false" aria-controls="preview-panel-code" tabindex="-1">Code</button>
             </div>
-            <div class="se-tabs-panel" role="tabpanel" data-se-tabpanel data-se-tab-key="design" id="preview-panel-design" aria-labelledby="preview-tab-design"><p>Left-positioned tabs.</p></div>
-            <div class="se-tabs-panel" role="tabpanel" data-se-tabpanel data-se-tab-key="code" id="preview-panel-code" aria-labelledby="preview-tab-code" hidden><p>Arrow Up/Down navigates.</p></div>
+            <div class="dt-tabs-panel" role="tabpanel" data-dt-tabpanel data-dt-tab-key="design" id="preview-panel-design" aria-labelledby="preview-tab-design"><p>Left-positioned tabs.</p></div>
+            <div class="dt-tabs-panel" role="tabpanel" data-dt-tabpanel data-dt-tab-key="code" id="preview-panel-code" aria-labelledby="preview-tab-code" hidden><p>Arrow Up/Down navigates.</p></div>
           </div>
-          <div class="se-accordion" data-se-accordion>
-            <div class="se-accordion-item" data-se-accordion-item>
-              <h3 class="se-accordion-heading">
-                <button class="se-accordion-trigger" type="button" data-se-accordion-trigger id="preview-acc-a" aria-expanded="false" aria-controls="preview-acc-panel-a">
-                  <span class="se-accordion-title">What is uikit?</span>
-                  <span class="se-accordion-chevron" aria-hidden="true">▾</span>
+          <div class="dt-accordion" data-dt-accordion>
+            <div class="dt-accordion-item" data-dt-accordion-item>
+              <h3 class="dt-accordion-heading">
+                <button class="dt-accordion-trigger" type="button" data-dt-accordion-trigger id="preview-acc-a" aria-expanded="false" aria-controls="preview-acc-panel-a">
+                  <span class="dt-accordion-title">What is uikit?</span>
+                  <span class="dt-accordion-chevron" aria-hidden="true">▾</span>
                 </button>
               </h3>
-              <div class="se-accordion-panel" id="preview-acc-panel-a" role="region" aria-labelledby="preview-acc-a">
+              <div class="dt-accordion-panel" id="preview-acc-panel-a" role="region" aria-labelledby="preview-acc-a">
                 <p>One contract — many deliveries.</p>
               </div>
             </div>
@@ -85,20 +85,20 @@
       <section class="row">
         <h2>htmx patterns</h2>
         <div class="row-content">
-          <div class="se-field">
-            <label class="se-label" for="preview-search">Search projects (server filter)</label>
-            <input class="se-input se-input--md" id="preview-search" type="search" name="q" placeholder="Type to search…"
+          <div class="dt-field">
+            <label class="dt-label" for="preview-search">Search projects (server filter)</label>
+            <input class="dt-input dt-input--md" id="preview-search" type="search" name="q" placeholder="Type to search…"
                    hx-get="/partials/search.html" hx-trigger="input changed delay:300ms"
                    hx-target="#search-results" hx-swap="innerHTML" />
           </div>
           <div id="search-results">
-            <ul class="se-list">
+            <ul class="dt-list">
               <li>uikit</li>
               <li>react-uikit</li>
               <li>htmx-ui</li>
             </ul>
           </div>
-          <button class="se-button se-button--ghost" type="button"
+          <button class="dt-button dt-button--ghost" type="button"
                   hx-get="/partials/load-more.html" hx-target="#load-more-target" hx-swap="beforeend">
             Load more (append)
           </button>
@@ -124,7 +124,7 @@
         const toggle = document.getElementById("preview-shell-toggle");
         if (toggle) {
           toggle.addEventListener("click", () => {
-            const collapsed = document.getElementById("preview-shell-sidebar").classList.contains("se-sidebar--collapsed");
+            const collapsed = document.getElementById("preview-shell-sidebar").classList.contains("dt-sidebar--collapsed");
             toggle.textContent = collapsed ? "Expand sidebar" : "Collapse sidebar";
           });
         }
@@ -138,23 +138,23 @@
           if (!drawerToggle || !drawerSidebar) return;
           const syncDrawerText = () => {
             setTimeout(() => {
-              drawerToggle.textContent = drawerSidebar.classList.contains("se-sidebar--collapsed") ? open : close;
+              drawerToggle.textContent = drawerSidebar.classList.contains("dt-sidebar--collapsed") ? open : close;
             });
           };
           drawerToggle.addEventListener("click", syncDrawerText);
-          const mask = document.querySelector(`[data-se-sidebar-mask="#${sidebar}"]`);
+          const mask = document.querySelector(`[data-dt-sidebar-mask="#${sidebar}"]`);
           if (mask) mask.addEventListener("click", syncDrawerText);
         });
         const toastBtn = document.getElementById("preview-toast-btn");
         if (toastBtn) {
           toastBtn.addEventListener("click", () => {
-            window.seToast({ title: "Saved", description: "Changes are synced.", tone: "success" });
+            window.dtToast({ title: "Saved", description: "Changes are synced.", tone: "success" });
           });
         }
         const toastActionBtn = document.getElementById("preview-toast-action-btn");
         if (toastActionBtn) {
           toastActionBtn.addEventListener("click", () => {
-            window.seToast({
+            window.dtToast({
               title: "Item removed",
               tone: "info",
               action: { label: "Undo", onClick: () => console.log("undo") },
@@ -167,7 +167,7 @@
         const toastPersistBtn = document.getElementById("preview-toast-persist-btn");
         if (toastPersistBtn) {
           toastPersistBtn.addEventListener("click", () => {
-            window.seToast({
+            window.dtToast({
               title: "Click me to dismiss",
               description: "Persistent, closeOnClick.",
               tone: "warning",
@@ -179,15 +179,15 @@
         const toastTopLeftBtn = document.getElementById("preview-toast-topleft-btn");
         if (toastTopLeftBtn) {
           toastTopLeftBtn.addEventListener("click", () => {
-            window.seToast({ title: "Top-left corner", position: "top-left", durationMs: 3000 });
+            window.dtToast({ title: "Top-left corner", position: "top-left", durationMs: 3000 });
           });
         }
       };
       const injectExamples = async () => {
-        const holders = [...document.querySelectorAll("[data-se-example]")];
+        const holders = [...document.querySelectorAll("[data-dt-example]")];
         await Promise.all(
           holders.map(async (holder) => {
-            const res = await fetch(`/examples/${holder.dataset.seExample}.html`);
+            const res = await fetch(`/examples/${holder.dataset.dtExample}.html`);
             if (res.ok) holder.innerHTML = await res.text();
           }),
         );

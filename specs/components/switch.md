@@ -16,7 +16,7 @@ tokens:
 a11y:
   - "Renders a native <input type=\"checkbox\"> with role=\"switch\", preserving native toggle semantics (aria-checked derived from :checked)."
   - "Accessible name must be supplied by the consumer (aria-label or a wrapping <label>)."
-  - "Focus-visible ring: 2px outline in --se-color-focus with 2px offset (keyboard-only, :focus-visible)."
+  - "Focus-visible ring: 2px outline in --dt-color-focus with 2px offset (keyboard-only, :focus-visible)."
   - "Disabled state blocks toggling (native disabled attribute, opacity 0.55)."
   - "Track/thumb are non-text indicators; thumb (color.surface) on track (border-strong unchecked / primary checked) is a non-text contrast pair."
 ---

@@ -9,8 +9,8 @@ vocabulary lives in [`tokens.schema.json`](./tokens.schema.json).
 
 A **theme** is a `tokens.json` file under `themes/<name>/`. It defines values
 for every token in the schema. Tokens are grouped into **tiers**; the tier and
-token name combine into the CSS custom property: `--se-<tier>-<token>`
-(e.g. tier `color` + token `bg` → `--se-color-bg`).
+token name combine into the CSS custom property: `--dt-<tier>-<token>`
+(e.g. tier `color` + token `bg` → `--dt-color-bg`).
 
 ### Value forms
 

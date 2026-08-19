@@ -28,7 +28,7 @@ tokens:
 a11y:
   - "Renders a native <input>, so all native semantics (text entry, label association via htmlFor/id) apply; remaining InputHTMLAttributes are forwarded."
   - "aria-invalid is set to \"true\" when `invalid` is true (and omitted otherwise), giving screen readers a state cue."
-  - "Keyboard focus indicator: :focus-visible draws a 3px --se-color-focus ring plus primary border (no :focus outline removal without the ring)."
+  - "Keyboard focus indicator: :focus-visible draws a 3px --dt-color-focus ring plus primary border (no :focus outline removal without the ring)."
   - "Placeholder text uses color.text-muted (>= 4.5:1 on color.surface per theme contrastRules)."
   - "Text on surface >= 4.5:1 (color.text on color.surface); disabled state lowers opacity to 0.55."
 ---

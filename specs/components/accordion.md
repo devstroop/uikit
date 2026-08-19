@@ -24,7 +24,7 @@ a11y:
   - "Each trigger is a semantic native <button> inside a fixed <h3> heading (Enter/Space activation; disabled triggers use the native disabled attr)."
   - "Triggers expose aria-expanded and aria-controls; panels are role=\"region\" with aria-labelledby pointing at their trigger."
   - "Decorative chevron is aria-hidden=\"true\"."
-  - "Focus visible ring via --se-color-focus on :focus-visible only."
+  - "Focus visible ring via --dt-color-focus on :focus-visible only."
   - "Text contrast on page background: color.text on color.bg >= 4.5:1; color.text-muted on color.bg >= 4.5:1 (per schema contrastRules)."
   - "Panel content is hidden with the native `hidden` attribute when closed."
 ---
@@ -61,7 +61,7 @@ otherwise it manages state internally seeded from `defaultValue`.
 - Disabled items: `opacity 0.5`, `cursor: not-allowed`, hover styles skipped
   (`.trigger:hover:not(.disabled)`).
 - Content animates in (opacity + translateY) on open via keyframes
-  `se-accordion-in`.
+  `dt-accordion-in`.
 
 ## Keyboard
 

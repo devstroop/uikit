@@ -27,7 +27,7 @@ tokens:
 a11y:
   - "Renders a native <select>, preserving single-line combobox semantics, value change events, and form behavior."
   - "aria-invalid=\"true\" is set when the invalid prop is true (omitted otherwise)."
-  - "Focus indicator via border-color primary plus a 3px focus ring (--se-color-focus), keyboard-only (:focus-visible)."
+  - "Focus indicator via border-color primary plus a 3px focus ring (--dt-color-focus), keyboard-only (:focus-visible)."
   - "Accessible name comes from a native <label> or aria-label forwarded through the native element."
   - "Text-on-surface contrast >= 4.5:1 (color.text on color.surface)."
   - "Disabled state via the native disabled attribute (opacity 0.55, cursor not-allowed)."
