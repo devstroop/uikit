@@ -1,13 +1,17 @@
 import { useState, type ReactNode } from "react";
+import type { ComponentSize } from "../../sizes";
 import styles from "./Alert.module.css";
 
 export type AlertTone = "info" | "success" | "warning" | "danger";
 
 export type AlertVariant = "soft" | "outline" | "solid";
 
+export type AlertSize = ComponentSize;
+
 export interface AlertProps {
   tone?: AlertTone;
   variant?: AlertVariant;
+  size?: AlertSize;
   title?: ReactNode;
   icon?: ReactNode;
   children?: ReactNode;
@@ -19,6 +23,7 @@ export interface AlertProps {
 export function Alert({
   tone = "info",
   variant = "soft",
+  size = "md",
   title,
   icon,
   children,
@@ -40,7 +45,7 @@ export function Alert({
   return (
     <div
       role="alert"
-      className={[styles.alert, styles[tone], styles[variant], className]
+      className={[styles.alert, styles[tone], styles[variant], styles[size], className]
         .filter(Boolean)
         .join(" ")}
     >

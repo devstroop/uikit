@@ -6,12 +6,18 @@ frameworks:
   react: v0.3.5
   htmx: v0.1.6
 tokens:
+  - "space.1"
+  - "space.2"
   - "space.3"
   - "space.4"
+  - "radius.sm"
   - "radius.md"
+  - "radius.lg"
   - "color.border"
+  - "font.size-xs"
   - "font.size-sm"
   - "font.size-md"
+  - "font.size-lg"
   - "color.primary"
   - "color.success"
   - "color.warning"
@@ -50,6 +56,7 @@ optional dismiss action.
 |---|---|---|---|
 | `tone` | `info` \| `success` \| `warning` \| `danger` | `info` | Status tone |
 | `variant` | `soft` \| `outline` \| `solid` | `soft` | Paint variant (Badge parity; Radzen `Variant` parity) |
+| `size` | `xs` \| `sm` \| `md` \| `lg` \| `xl` | `md` | Density tier (shared `ComponentSize` scale; Radzen `AlertStyle.Size` parity) — scales padding, title/body type, corner radius, and dismiss hitbox |
 | `title` | `ReactNode` | `undefined` | Bold title line |
 | `icon` | `ReactNode` | `undefined` | Severity glyph rendered before the content (rendered `aria-hidden`; tone color inherited) |
 | `children` | `ReactNode` | `undefined` | Body text |
@@ -82,6 +89,14 @@ accepts only the props above).
 - The alert carries `margin: 0 0 space.3` (theme spacing) so stacked alerts
   and surrounding content are separated; internal padding is `space.3` with
   `space.2` between icon/content.
+- `size` scales the whole banner through root-level custom properties
+  (`--alert-pad`, `--alert-gap`, `--alert-radius`, `--alert-title-size`,
+  `--alert-body-size`, `--alert-dismiss-size`, `--alert-dismiss-font`):
+  `xs`/`sm` use `space.2` padding + `radius.sm`; `md` is the default
+  (`space.3` + `radius.md`); `lg`/`xl` use `space.4` + `radius.lg`. Title
+  type runs `size-sm` (xs/sm) → `size-md` (md) → `size-lg` (lg/xl); body
+  runs `size-xs` (xs/sm) → `size-sm` (md/lg) → `size-md` (xl). The dismiss
+  hitbox scales 18/20/22/26/30px per tier.
 - `dismissible` renders a 22×22px × button; clicking sets internal dismissed
   state, calls `onDismiss` (if given), and the whole alert returns `null`.
 - Dismiss button hover: `surface-hover` background, `color.text` foreground.
@@ -102,6 +117,7 @@ a `--se-color-focus` outline on `:focus-visible`.
 | Renders title + body | `role="alert"` contains both texts |
 | Tone prop | tone class (e.g. `danger`) present on the alert |
 | Variant prop | variant class (e.g. `solid`) present on the alert |
+| Size prop | size class (e.g. `lg`) present on the alert |
 | Dismissible + click dismiss | alert is removed from the document |
 | `onDismiss` callback | called once when the alert is dismissed |
 

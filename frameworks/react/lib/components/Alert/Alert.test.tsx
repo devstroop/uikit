@@ -36,6 +36,11 @@ describe("Alert", () => {
     expect(screen.getByRole("alert").className).toContain("solid");
   });
 
+  it.each(["xs", "sm", "md", "lg", "xl"] as const)("applies the %s size class", (size) => {
+    render(<Alert title="Heads up" size={size} />);
+    expect(screen.getByRole("alert").className).toContain(size);
+  });
+
   it("renders the icon aria-hidden before the content", () => {
     render(<Alert title="Heads up" icon={<span>icon</span>} />);
     const icon = screen.getByText("icon");

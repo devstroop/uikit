@@ -5,6 +5,8 @@
     tone    --info | --success | --warning | --danger   (default: --info)
     variant --outline | --solid                          (default: soft paint
             on the tone class; omit the modifier for soft)
+    size    --xs | --sm | --lg | --xl                    (default: md; omitting
+            the modifier keeps the default tier)
   Parts:
     icon     <span class="se-alert-icon">            (severity glyph, inherits tone color)
     content  <div class="se-alert-content">          (wraps title + body)
@@ -66,6 +68,20 @@
   <div class="se-alert-content">
     <div class="se-alert-title">Solid</div>
     <div class="se-alert-body">Tone fill, surface text.</div>
+  </div>
+</div>
+
+<!-- Size tiers: --xs | --sm | --lg | --xl (md is the default) -->
+<div role="alert" class="se-alert se-alert--info se-alert--xs">
+  <div class="se-alert-content">
+    <div class="se-alert-title">Extra small</div>
+  </div>
+</div>
+
+<div role="alert" class="se-alert se-alert--info se-alert--lg">
+  <div class="se-alert-content">
+    <div class="se-alert-title">Large</div>
+    <div class="se-alert-body">Tiered padding, type, and corner radius.</div>
   </div>
 </div>
 
