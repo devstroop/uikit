@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 export type TabsVariant = "underline" | "pills";
+export type TabsPosition = "top" | "left" | "right" | "bottom";
 export interface TabItem {
     key: string;
     label: ReactNode;
@@ -12,6 +13,7 @@ export interface TabsProps {
     defaultValue?: string;
     onChange?: (key: string) => void;
     variant?: TabsVariant;
+    position?: TabsPosition;
     className?: string;
 }
-export declare function Tabs({ items, value, defaultValue, onChange, variant, className, }: TabsProps): import("react").JSX.Element;
+export declare function Tabs({ items, value, defaultValue, onChange, variant, position, className, }: TabsProps): import("react").JSX.Element;

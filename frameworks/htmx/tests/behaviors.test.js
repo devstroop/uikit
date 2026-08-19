@@ -55,6 +55,27 @@ describe("tabs", () => {
     expect(two.getAttribute("aria-selected")).toBe("true");
   });
 
+  it("navigates vertical tablists with Up/Down arrows", () => {
+    fixture(`
+      <div data-se-tabs>
+        <div data-se-tablist role="tablist" data-se-tablist-orientation="vertical">
+          <button data-se-tab data-se-tab-key="one">One</button>
+          <button data-se-tab data-se-tab-key="two">Two</button>
+        </div>
+        <div data-se-tabpanel data-se-tab-key="one" hidden></div>
+        <div data-se-tabpanel data-se-tab-key="two" hidden></div>
+      </div>`);
+    const [one, two] = document.querySelectorAll("[data-se-tab]");
+    one.focus();
+    one.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true }));
+    expect(two.getAttribute("aria-selected")).toBe("true");
+    expect(document.activeElement).toBe(two);
+    two.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowUp", bubbles: true }));
+    expect(one.getAttribute("aria-selected")).toBe("true");
+    two.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true }));
+    expect(one.getAttribute("aria-selected")).toBe("true");
+  });
+
   it("skips disabled tabs when navigating", () => {
     fixture(`
       <div data-se-tabs>

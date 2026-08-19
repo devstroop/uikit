@@ -55,11 +55,17 @@
     const tabs = [...list.querySelectorAll("[data-se-tab]")].filter((t) => !t.disabled);
     const index = tabs.indexOf(document.activeElement);
     if (index < 0) return;
+    const vertical = list.dataset.seTablistOrientation === "vertical";
     let next = -1;
-    if (e.key === "ArrowRight") next = (index + 1) % tabs.length;
-    else if (e.key === "ArrowLeft") next = (index - 1 + tabs.length) % tabs.length;
-    else if (e.key === "Home") next = 0;
-    else if (e.key === "End") next = tabs.length - 1;
+    if ((!vertical && e.key === "ArrowRight") || (vertical && e.key === "ArrowDown")) {
+      next = (index + 1) % tabs.length;
+    } else if ((!vertical && e.key === "ArrowLeft") || (vertical && e.key === "ArrowUp")) {
+      next = (index - 1 + tabs.length) % tabs.length;
+    } else if (e.key === "Home") {
+      next = 0;
+    } else if (e.key === "End") {
+      next = tabs.length - 1;
+    }
     if (next >= 0) {
       e.preventDefault();
       activateTab(tabs[next]);

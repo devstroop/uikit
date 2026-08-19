@@ -29,13 +29,13 @@ a11y:
 # Card
 
 A surface container grouping related content into header, body, and footer
-sections, with three visual variants.
+sections, with four visual variants.
 
 ## API
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `variant` | `elevated` \| `outlined` \| `interactive` | `elevated` | Visual treatment |
+| `variant` | `elevated` \| `outlined` \| `interactive` \| `text` | `elevated` | Visual treatment |
 | `header` | `ReactNode` | `undefined` | Renders `.header` section |
 | `footer` | `ReactNode` | `undefined` | Renders `.footer` section |
 
@@ -49,7 +49,8 @@ always wrapped in `.body`.
   (children), optional `.footer`. `overflow: hidden` clips corners.
 - `elevated`: `shadow.md` + 1px border; `outlined`: 1px border, no shadow;
   `interactive`: border + `cursor: pointer`, hover swaps border to
-  `border-strong` and lifts to `shadow.sm`.
+  `border-strong` and lifts to `shadow.sm`; `text`: flat — no border, no
+  shadow, transparent background (inherits the parent's surface).
 - Header spacing collapses into body (`header + body` reduces top padding to
   `space.3`); body padding is `space.4`.
 - Typography: header is `font.size-md` / `weight-bold` (heading-md tier);
@@ -65,9 +66,10 @@ No keyboard support: the `interactive` variant adds no focus handling, no
 ## Tests
 
 | Scenario | Assertion |
-|---|---|
+|---|---|---|
 | Renders with header/footer | `Title`, `Body`, `Footer` text all present |
 | Header/footer omitted | only the card root and body div render (2 divs) |
+| Variant classes | `elevated`, `outlined`, `interactive`, `text` each map to their class |
 
 Every framework implementation must pass an equivalent matrix (per
 `docs/DEVELOPMENT_STRATEGY.md`).
