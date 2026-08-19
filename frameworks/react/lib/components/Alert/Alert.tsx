@@ -3,21 +3,27 @@ import styles from "./Alert.module.css";
 
 export type AlertTone = "info" | "success" | "warning" | "danger";
 
+export type AlertVariant = "soft" | "outline" | "solid";
+
 export interface AlertProps {
   tone?: AlertTone;
+  variant?: AlertVariant;
   title?: ReactNode;
   icon?: ReactNode;
   children?: ReactNode;
   dismissible?: boolean;
+  onDismiss?: () => void;
   className?: string;
 }
 
 export function Alert({
   tone = "info",
+  variant = "soft",
   title,
   icon,
   children,
   dismissible = false,
+  onDismiss,
   className,
 }: AlertProps) {
   const [dismissed, setDismissed] = useState(false);
@@ -26,10 +32,17 @@ export function Alert({
     return null;
   }
 
+  const dismiss = () => {
+    setDismissed(true);
+    onDismiss?.();
+  };
+
   return (
     <div
       role="alert"
-      className={[styles.alert, styles[tone], className].filter(Boolean).join(" ")}
+      className={[styles.alert, styles[tone], styles[variant], className]
+        .filter(Boolean)
+        .join(" ")}
     >
       {icon != null && (
         <span className={styles.icon} aria-hidden="true">
@@ -44,7 +57,7 @@ export function Alert({
         <button
           type="button"
           className={styles.dismiss}
-          onClick={() => setDismissed(true)}
+          onClick={dismiss}
           aria-label="Dismiss alert"
         >
           ×
