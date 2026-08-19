@@ -463,6 +463,11 @@ function Feedback() {
         >
           Uses --se-color-danger-fg.
         </Alert>
+        {(["xs", "sm", "md", "lg", "xl"] as const).map((size) => (
+          <Alert key={size} size={size} tone="info" title={size} icon={<Icon name="info" size={16} />}>
+            {size === "md" ? "Default tier" : `${size} padding · type · radius`}
+          </Alert>
+        ))}
         <div className="button-row">
           <Button onClick={() => toast.toast({ title: "Saved", description: "Changes are synced.", tone: "success" })}>
             Show toast
