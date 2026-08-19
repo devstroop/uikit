@@ -65,10 +65,15 @@ Reference markup (`lib/components/form/form.html`):
 
 `data-dt-form` (behaviors.js) runs on submit:
 
-- A field is `[data-dt-field]` and invalid when `aria-invalid="true"` or
-  the `data-dt-invalid` attribute is present (set by validators).
-- Any invalid field (disabled fields skipped): `preventDefault()` +
-  `dt:invalid` event, `detail: { fields: [{ name, element }] }`.
+- Rules declared on `[data-dt-field]` elements are evaluated at submit
+  time (`data-dt-required`, `data-dt-email`, `data-dt-pattern`,
+  `data-dt-min`, `data-dt-max`, `data-dt-minlength`, `data-dt-maxlength` —
+  see the validators spec); native constraints (required/min/max/...)
+  are respected via the validity API. Empty values pass every rule
+  except required.
+- Failing fields get `aria-invalid="true"` + `data-dt-invalid` and block
+  the submit: `preventDefault()` + `dt:invalid` event with
+  `detail: { fields: [{ name, element, messages }] }`.
 - All valid: `dt:submit` event, `detail: { form, data: FormData }`; the
   native submit proceeds (server round-trip or htmx attributes).
 
@@ -77,7 +82,7 @@ Events bubble for delegation:
 | Event | detail | When |
 |---|---|---|
 | `dt:submit` | `{ form, data: FormData }` | Valid submit, not blocked |
-| `dt:invalid` | `{ fields: [{ name, element }] }` | Invalid fields blocked the submit |
+| `dt:invalid` | `{ fields: [{ name, element, messages }] }` | Invalid fields blocked the submit |
 
 ## Keyboard
 
