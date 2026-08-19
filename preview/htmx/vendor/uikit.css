@@ -1307,6 +1307,90 @@
   white-space: nowrap;
 }
 
+.dt-datalist {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.dt-datalist-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.dt-datalist[data-dt-datalist-wrap] .dt-datalist-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  gap: 0.75rem;
+}
+
+.dt-datalist-item {
+  border: 1px solid var(--dt-color-border, #d0d7de);
+  border-radius: var(--dt-radius, 0.375rem);
+  padding: 0.75rem;
+}
+
+.dt-datalist-empty {
+  padding: 2rem 1rem;
+  text-align: center;
+  color: var(--dt-color-fg-muted, #57606a);
+  font-size: 0.875rem;
+}
+
+.dt-datalist-pager {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.dt-datalist-pager-summary {
+  font-size: 0.875rem;
+  color: var(--dt-color-fg-muted, #57606a);
+}
+
+.dt-datalist-pager-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.dt-datalist-pager-button {
+  min-width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--dt-color-border, #d0d7de);
+  background: none;
+  color: var(--dt-color-fg, inherit);
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.dt-datalist-pager-button--active {
+  background: var(--dt-color-primary, #0969da);
+  border-color: var(--dt-color-primary, #0969da);
+  color: #fff;
+}
+
+.dt-datalist-pager-button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.dt-datalist-pager-ellipsis {
+  padding: 0 0.25rem;
+  color: var(--dt-color-fg-muted, #57606a);
+}
+
+.dt-datalist-pager-size {
+  font-size: 0.875rem;
+  color: var(--dt-color-fg-muted, #57606a);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
 .dt-dialog {
   z-index: var(--dt-z-modal);
   border: 1px solid var(--dt-color-border);
@@ -2154,6 +2238,54 @@
   padding: var(--dt-space-6);
   color: var(--dt-color-text-muted);
   text-align: center;
+}
+
+.dt-table-caption {
+  caption-side: top;
+  text-align: start;
+  padding: var(--dt-space-2) var(--dt-space-3);
+  font-size: var(--dt-font-size-xs);
+  font-weight: var(--dt-font-weight-medium);
+  color: var(--dt-color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.dt-table--grid-none .dt-table thead th,
+.dt-table--grid-none .dt-table tbody td {
+  border: none;
+}
+
+.dt-table--grid-horizontal .dt-table thead th,
+.dt-table--grid-horizontal .dt-table tbody td {
+  border-left: none;
+  border-right: none;
+}
+
+.dt-table--grid-vertical .dt-table thead th {
+  border-bottom: 1px solid var(--dt-color-border);
+  border-right: 1px solid var(--dt-color-border);
+}
+
+.dt-table--grid-vertical .dt-table thead th:last-child {
+  border-right: none;
+}
+
+.dt-table--grid-vertical .dt-table tbody td {
+  border-bottom: none;
+  border-right: 1px solid var(--dt-color-border);
+}
+
+.dt-table--grid-vertical .dt-table tbody td:last-child {
+  border-right: none;
+}
+
+.dt-table--no-alternating .dt-table tbody tr:nth-child(even) {
+  background-color: initial;
+}
+
+.dt-table tbody tr:nth-child(even) {
+  background-color: var(--dt-color-surface-hover);
 }
 
 
