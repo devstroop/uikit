@@ -30,13 +30,19 @@ tokens:
   - "color.danger"
   - "color.danger-hover"
   - "color.danger-fg"
+  - "color.success"
+  - "color.success-hover"
+  - "color.success-fg"
+  - "color.info"
+  - "color.info-hover"
+  - "color.info-fg"
   - "color.focus"
   - "transition.fast"
 a11y:
   - "Renders a semantic <button> element (native Enter/Space activation)."
   - "Focus visible ring via --se-color-focus (keyboard-only, :focus-visible)."
   - "Disabled state blocks activation (native disabled attribute)."
-  - "Text-on-fill contrast >= 4.5:1 (primary-fg on primary, danger-fg on danger)."
+  - "Text-on-fill contrast >= 4.5:1 (primary-fg on primary, danger-fg on danger, success-fg on success, info-fg on info)."
   - "Icon-only buttons MUST carry an accessible name (aria-label or aria-labelledby); there is no visible text to derive one."
 ---
 
@@ -48,7 +54,7 @@ Primary action control for forms, toolbars, and empty states.
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `variant` | `primary` \| `secondary` \| `ghost` \| `danger` | `primary` | Visual emphasis tier |
+| `variant` | `primary` \| `secondary` \| `ghost` \| `danger` \| `success` \| `info` | `primary` | Visual emphasis tier |
 | `size` | `xs` \| `sm` \| `md` \| `lg` \| `xl` | `md` | Density tier (shared `ComponentSize` scale: `control.height-xs` 20px → `xl` 52px in default theme) |
 | `fullWidth` | `boolean` | `false` | Stretch to fill the parent's width |
 | `iconOnly` | `boolean` | `false` | Circular icon button: no text, square aspect ratio sized to the tier (Radzen FAB pattern); requires `aria-label` |
@@ -62,6 +68,10 @@ All remaining props are forwarded to the native `<button>` element
   `type="submit"` (never change the default).
 - `variant="danger"` is reserved for destructive actions; no confirmation
   dialog is implied by the component itself.
+- `variant="success"` confirms positive outcomes (saved, completed); `variant="info"`
+  signals neutral/guidance actions. Both follow the solid-fill pattern: fill token
+  + mode-tuned `-fg` (white in light themes, black in dark where the dark fill is
+  too light for white) + darkened/lightened hover state, all >= 4.5:1.
 - Disabled: `opacity 0.55`, `cursor: not-allowed`, native activation
   suppression. Hover styles never apply while disabled.
 - Sizes set `height` from the `control.height-{tier}` scale and the label

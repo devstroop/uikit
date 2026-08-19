@@ -219,7 +219,7 @@ function AppShell() {
 function Buttons() {
   return (
     <Section title="Button">
-      {(["primary", "secondary", "ghost", "danger"] as const).map((v) => (
+      {(["primary", "secondary", "ghost", "danger", "success", "info"] as const).map((v) => (
         <Button key={v} variant={v}>
           {v}
         </Button>
