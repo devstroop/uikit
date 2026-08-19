@@ -17,6 +17,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: recursive
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -38,6 +40,8 @@ jobs:
         working-directory: frameworks/htmx
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: recursive
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -53,13 +57,15 @@ jobs:
       - name: Preview vendor copies are in sync
         run: |
           cp dist/uikit.js dist/uikit.css ../../preview/htmx/vendor/
-          git diff --exit-code -- ../../preview/htmx/vendor/
+          git -C ../.. diff --exit-code -- preview/htmx/vendor/
 
   preview:
     name: Preview (react)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: recursive
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -76,6 +82,8 @@ jobs:
         working-directory: frameworks/react
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: recursive
       - uses: actions/setup-node@v4
         with:
           node-version: 22

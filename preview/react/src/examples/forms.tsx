@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Checkbox, Field, Input, Label, Select, Switch, Textarea } from "@devstroop/react-ui";
+import { Checkbox, Field, Input, Label, Select, Switch, Textarea } from "@devstroop/react-uikitkit";
 import { Section } from "./section";
 
 export function FormExamples() {
