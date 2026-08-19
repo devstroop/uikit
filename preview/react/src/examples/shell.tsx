@@ -105,6 +105,39 @@ function GridSection() {
             </Row>
           </Column>
         </Row>
+        <Row gap={8}>
+          <Column size={4} className="grid-cell">
+            gap-8
+          </Column>
+          <Column size={4} className="grid-cell">
+            px
+          </Column>
+          <Column size={4} className="grid-cell">
+            gutter
+          </Column>
+        </Row>
+        <Row gap="sm">
+          <Column size={4} className="grid-cell">
+            gap sm
+          </Column>
+          <Column size={4} className="grid-cell">
+            space-2
+          </Column>
+          <Column size={4} className="grid-cell">
+            (8 px)
+          </Column>
+        </Row>
+        <Row gap="xl">
+          <Column size={4} className="grid-cell">
+            gap xl
+          </Column>
+          <Column size={4} className="grid-cell">
+            space-5
+          </Column>
+          <Column size={4} className="grid-cell">
+            (24 px)
+          </Column>
+        </Row>
         <Row>
           <Column className="grid-cell">
             auto
