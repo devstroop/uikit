@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Body, Button, Column, Footer, Header, Layout, Row, Sidebar } from "@devstroop/react-uikitkit";
+import { Body, Button, Column, Footer, Header, Layout, Row, Sidebar, Stack } from "@devstroop/react-uikitkit";
 import { Section } from "./section";
 
 export function ShellExamples() {
   return (
     <>
       <GridSection />
+      <StackSection />
       <AppShellSection />
     </>
   );
@@ -146,6 +147,67 @@ function GridSection() {
             auto
           </Column>
         </Row>
+        <Row wrap="wrap-reverse" justify="space-between" rowGap="md" style={{ minHeight: 72 }}>
+          <Column size={3} className="grid-cell">
+            wrap-reverse
+          </Column>
+          <Column size={3} className="grid-cell">
+            space-between
+          </Column>
+          <Column size={3} className="grid-cell">
+            rowGap md
+          </Column>
+        </Row>
+        <Row>
+          <Column size={4} className="grid-cell">
+            order default
+          </Column>
+          <Column size={4} orderSm="last" className="grid-cell">
+            orderSm last
+          </Column>
+          <Column size={4} className="grid-cell">
+            third
+          </Column>
+        </Row>
+        <Row>
+          <Column sizeXxl={6} className="grid-cell">
+            sizeXxl 6 (≥ 2560px)
+          </Column>
+          <Column sizeXxl={6} className="grid-cell">
+            sizeXxl 6
+          </Column>
+        </Row>
+      </div>
+    </Section>
+  );
+}
+
+function StackSection() {
+  return (
+    <Section title="Stack">
+      <div className="layout-grid">
+        <Stack orientation="vertical" gap="md">
+          <div style={{ border: "1px solid var(--dt-color-border)", padding: "0.5rem" }}>
+            Stack vertical · gap md
+          </div>
+          <div style={{ border: "1px solid var(--dt-color-border)", padding: "0.5rem" }}>
+            Item 2
+          </div>
+          <div style={{ border: "1px solid var(--dt-color-border)", padding: "0.5rem" }}>
+            Item 3
+          </div>
+        </Stack>
+        <Stack orientation="horizontal" wrap="wrap-reverse" justify="space-between" gap="sm">
+          <div style={{ border: "1px solid var(--dt-color-border)", padding: "0.5rem" }}>A</div>
+          <div style={{ border: "1px solid var(--dt-color-border)", padding: "0.5rem" }}>B</div>
+          <div style={{ border: "1px solid var(--dt-color-border)", padding: "0.5rem" }}>C</div>
+        </Stack>
+        <Stack orientation="horizontal" reverse align="center" gap="lg">
+          <div style={{ border: "1px solid var(--dt-color-border)", padding: "0.5rem" }}>
+            First (renders right)
+          </div>
+          <div style={{ border: "1px solid var(--dt-color-border)", padding: "1rem" }}>Second</div>
+        </Stack>
       </div>
     </Section>
   );
