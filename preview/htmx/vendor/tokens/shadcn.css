@@ -36,6 +36,11 @@
   --se-color-palette-3: #b16105;
   --se-color-palette-4: #dc2626;
   --se-color-palette-5: #0b7caf;
+  --se-color-success-hover: #117c38;
+  --se-color-success-fg: #ffffff;
+  --se-color-info: #0b7caf;
+  --se-color-info-hover: #086193;
+  --se-color-info-fg: #ffffff;
   /* radius */
   --se-radius-sm: 4px;
   --se-radius-md: 8px;
@@ -114,6 +119,11 @@
   --se-color-palette-3: #d97706;
   --se-color-palette-4: #e03c3c;
   --se-color-palette-5: #0ea5e9;
+  --se-color-success-hover: #2fc868;
+  --se-color-success-fg: #000000;
+  --se-color-info: #0b7caf;
+  --se-color-info-hover: #086193;
+  --se-color-info-fg: #ffffff;
   /* shadow */
   --se-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.4);
   --se-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);

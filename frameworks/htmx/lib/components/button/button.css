@@ -65,6 +65,24 @@
   background-color: var(--se-color-danger-hover);
 }
 
+.se-button--success {
+  background-color: var(--se-color-success);
+  color: var(--se-color-success-fg);
+}
+
+.se-button--success:hover:not(:disabled) {
+  background-color: var(--se-color-success-hover);
+}
+
+.se-button--info {
+  background-color: var(--se-color-info);
+  color: var(--se-color-info-fg);
+}
+
+.se-button--info:hover:not(:disabled) {
+  background-color: var(--se-color-info-hover);
+}
+
 .se-button--xs {
   height: var(--se-control-height-xs);
   padding: 0 8px;
