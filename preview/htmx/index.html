@@ -128,17 +128,23 @@
             toggle.textContent = collapsed ? "Expand sidebar" : "Collapse sidebar";
           });
         }
-        const syncDrawerText = () => {
-          setTimeout(() => {
-            const collapsed = document.getElementById("preview-drawer-sidebar").classList.contains("se-sidebar--collapsed");
-            const drawerToggle = document.getElementById("preview-drawer-toggle");
-            if (drawerToggle) drawerToggle.textContent = collapsed ? "Open drawer" : "Close drawer";
-          });
-        };
-        const drawerToggle = document.getElementById("preview-drawer-toggle");
-        const drawerMask = document.getElementById("preview-drawer-mask");
-        if (drawerToggle) drawerToggle.addEventListener("click", syncDrawerText);
-        if (drawerMask) drawerMask.addEventListener("click", syncDrawerText);
+        const drawers = [
+          { toggle: "preview-drawer-left-toggle", sidebar: "preview-drawer-left-sidebar", open: "Open left", close: "Close left" },
+          { toggle: "preview-drawer-right-toggle", sidebar: "preview-drawer-right-sidebar", open: "Open right", close: "Close right" },
+        ];
+        drawers.forEach(({ toggle, sidebar, open, close }) => {
+          const drawerToggle = document.getElementById(toggle);
+          const drawerSidebar = document.getElementById(sidebar);
+          if (!drawerToggle || !drawerSidebar) return;
+          const syncDrawerText = () => {
+            setTimeout(() => {
+              drawerToggle.textContent = drawerSidebar.classList.contains("se-sidebar--collapsed") ? open : close;
+            });
+          };
+          drawerToggle.addEventListener("click", syncDrawerText);
+          const mask = document.querySelector(`[data-se-sidebar-mask="#${sidebar}"]`);
+          if (mask) mask.addEventListener("click", syncDrawerText);
+        });
         const toastBtn = document.getElementById("preview-toast-btn");
         if (toastBtn) {
           toastBtn.addEventListener("click", () => {
