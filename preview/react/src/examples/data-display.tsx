@@ -52,6 +52,7 @@ const PEOPLE = [
 
 function DataGridSection() {
   const [selected, setSelected] = useState<(string | number)[]>([]);
+  const [people, setPeople] = useState(PEOPLE);
   return (
     <Section title="DataGrid">
       <DataGrid
@@ -61,7 +62,7 @@ function DataGridSection() {
           { property: "role", title: "Role", type: "string", filterable: true },
           { property: "status", title: "Status", type: "enum", filterable: true },
         ]}
-        rows={PEOPLE}
+        rows={people}
         rowKey={(r) => String(r.id)}
         allowSorting
         allowMultiColumnSorting
@@ -77,11 +78,21 @@ function DataGridSection() {
         showColumnPicker
         allowColumnResize
         allowColumnReorder
+        allowGrouping
+        groupPanelText="Drag a column here to group"
+        groupExpanded
+        editMode="EditRow"
+        allowRowCreate
+        onRowUpdate={(original, updated) =>
+          setPeople((rows) => rows.map((r) => (r.id === original.id ? { ...r, ...updated } : r)))
+        }
+        onRowCreate={(row) => setPeople((rows) => [...rows, { ...row, id: Math.max(...rows.map((r) => r.id)) + 1 }])}
+        onRowDelete={(row) => setPeople((rows) => rows.filter((r) => r.id !== row.id))}
         ariaLabel="People grid"
         onRowClick={(r) => console.log("row", r.name)}
       />
       <p style={{ marginTop: "0.5rem", fontSize: "0.875rem", color: "var(--dt-color-fg-muted)" }}>
-        Selected: {selected.join(", ") || "none"}
+        Selected: {selected.join(", ") || "none"} — group by drag onto the panel, inline-edit rows, add new rows.
       </p>
     </Section>
   );
