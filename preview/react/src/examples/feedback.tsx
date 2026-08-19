@@ -23,27 +23,31 @@ export function FeedbackExamples() {
 
 function AlertToastSection() {
   const toast = useToast();
+  const matrix = [
+    { tone: "info", icon: "info", title: "Info" },
+    { tone: "success", icon: "check-circle", title: "Success" },
+    { tone: "warning", icon: "alert", title: "Warning" },
+    { tone: "danger", icon: "x-circle", title: "Danger" },
+  ] as const;
   return (
     <Section title="Alert · Toast">
       <div className="layout-grid">
-        <Alert tone="info" title="Heads up" icon={<Icon name="info" size={18} />}>
-          A new version is available.
-        </Alert>
-        <Alert tone="success" title="Deployed" dismissible icon={<Icon name="check-circle" size={18} />}>
-          The release is live.
-        </Alert>
-        <Alert tone="warning" title="Storage at 90%" icon={<Icon name="alert" size={18} />}>
-          Clean up soon.
-        </Alert>
-        <Alert tone="danger" title="Build failed" icon={<Icon name="x-circle" size={18} />}>
-          Check the pipeline logs.
-        </Alert>
-        <Alert variant="outline" tone="info" title="Outline" icon={<Icon name="info" size={18} />}>
-          Tone border, no tint.
-        </Alert>
-        <Alert variant="solid" tone="success" title="Solid" icon={<Icon name="check-circle" size={18} />}>
-          Tone fill, contrast text.
-        </Alert>
+        {(["soft", "outline", "solid"] as const).map((variant) => (
+          <Alert
+            key={variant}
+            variant={variant}
+            tone={variant === "solid" ? "danger" : "info"}
+            title={variant}
+            icon={<Icon name={variant === "solid" ? "check-circle" : "info"} size={18} />}
+          >
+            {variant === "soft" ? "Tone tint, default." : variant === "outline" ? "Tone border, no tint." : "Tone fill, contrast text."}
+          </Alert>
+        ))}
+        {matrix.map(({ tone, icon, title }) => (
+          <Alert key={tone} tone={tone} title={title} dismissible icon={<Icon name={icon} size={18} />}>
+            {tone === "info" ? "A new version is available." : tone === "success" ? "The release is live." : tone === "warning" ? "Clean up soon." : "Check the pipeline logs."}
+          </Alert>
+        ))}
         <Alert
           variant="solid"
           tone="danger"
