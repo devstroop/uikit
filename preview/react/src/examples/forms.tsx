@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Checkbox, Field, Form, Input, Label, Select, Switch, Textarea, useFormContext } from "@devstroop/react-uikitkit";
+import { Button, Checkbox, email, Field, Form, Input, Label, required, runValidators, Select, Switch, Textarea, useFormContext } from "@devstroop/react-uikitkit";
 import { Section } from "./section";
 
 function DemoField({ name, errors }: { name: string; errors: string[] }) {
@@ -9,6 +9,16 @@ function DemoField({ name, errors }: { name: string; errors: string[] }) {
     return () => unregisterField(name);
   }, [name, errors, registerField, unregisterField]);
   return <Input name={name} aria-label={name} defaultValue="" />;
+}
+
+function ValidatedField({ name }: { name: string }) {
+  const { registerField, unregisterField } = useFormContext();
+  const [value, setValue] = useState("");
+  useEffect(() => {
+    registerField({ name, validate: () => runValidators([required(), email()], value) });
+    return () => unregisterField(name);
+  }, [name, value, registerField, unregisterField]);
+  return <Input name={name} aria-label={name} value={value} onChange={(e) => setValue(e.target.value)} />;
 }
 
 export function FormContainerExamples() {
@@ -23,6 +33,7 @@ export function FormContainerExamples() {
       >
         <DemoField name="email" errors={[]} />
         <DemoField name="name" errors={["Name is required"]} />
+        <ValidatedField name="contact" />
         <Button type="submit">Submit</Button>
       </Form>
       <p>{result}</p>
