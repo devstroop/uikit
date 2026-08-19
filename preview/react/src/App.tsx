@@ -444,9 +444,83 @@ function Feedback() {
         <Alert tone="danger" title="Build failed" icon={<Icon name="x-circle" size={18} />}>
           Check the pipeline logs.
         </Alert>
-        <Button onClick={() => toast.toast({ title: "Saved", description: "Changes are synced.", tone: "success" })}>
-          Show toast
-        </Button>
+        <Alert variant="outline" tone="info" title="Outline" icon={<Icon name="info" size={18} />}>
+          Tone border, no tint.
+        </Alert>
+        <Alert variant="solid" tone="success" title="Solid" icon={<Icon name="check-circle" size={18} />}>
+          Tone fill, contrast text.
+        </Alert>
+        <Alert
+          variant="solid"
+          tone="danger"
+          title="Solid danger"
+          dismissible
+          icon={<Icon name="x-circle" size={18} />}
+          onDismiss={() => console.log("alert dismissed")}
+        >
+          Uses --se-color-danger-fg.
+        </Alert>
+        <div className="button-row">
+          <Button onClick={() => toast.toast({ title: "Saved", description: "Changes are synced.", tone: "success" })}>
+            Show toast
+          </Button>
+          <Button
+            onClick={() =>
+              toast.toast({
+                title: "Item removed",
+                tone: "info",
+                action: { label: "Undo", onClick: () => console.log("undo") },
+                cancel: { label: "Dismiss" },
+                showProgress: true,
+                durationMs: 6000,
+              })
+            }
+          >
+            Toast with action
+          </Button>
+          <Button
+            onClick={() => {
+              toast.toast({ title: "Building…", id: "build", durationMs: 0, tone: "info" });
+              window.setTimeout(
+                () =>
+                  toast.toast({
+                    id: "build",
+                    title: "Build succeeded",
+                    description: "All checks passed.",
+                    tone: "success",
+                  }),
+                1500,
+              );
+            }}
+          >
+            Loading → success
+          </Button>
+          <Button
+            onClick={() =>
+              toast.toast({
+                title: "Click me to dismiss",
+                description: "Persistent, closeOnClick.",
+                tone: "warning",
+                durationMs: 0,
+                closeOnClick: true,
+                showProgress: false,
+              })
+            }
+          >
+            Persistent toast
+          </Button>
+          <Button
+            onClick={() =>
+              toast.toast({
+                title: "Top-left corner",
+                position: "top-left",
+                durationMs: 3000,
+              })
+            }
+          >
+            Toast top-left
+          </Button>
+        </div>
       </div>
     </Section>
   );

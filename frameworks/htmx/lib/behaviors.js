@@ -151,24 +151,118 @@
 
   /* ---------------- Toast ---------------- */
 
-  function toastDefaults(position) {
-    let container = document.querySelector("[data-se-toast]");
+  const TOAST_EXIT_MS = 200;
+
+  function toastViewport(position) {
+    const corner = position ?? "bottom-right";
+    let container = document.querySelector(`.se-toast-viewport--${corner}`);
+    if (!container && corner === "bottom-right") {
+      container = document.querySelector(".se-toast-viewport:not([class*='--'])");
+    }
     if (!container) {
       container = document.createElement("div");
       container.setAttribute("data-se-toast", "");
       container.setAttribute("aria-live", "polite");
-      container.className = `se-toast-viewport se-toast-viewport--${position ?? "bottom-right"}`;
+      container.className = `se-toast-viewport se-toast-viewport--${corner}`;
       document.body.appendChild(container);
     }
     return container;
   }
 
-  function showToast(options) {
-    const container = toastDefaults(options.position);
-    const item = document.createElement("div");
+  function pauseToastTimer(item) {
+    const timer = item._seToastTimer;
+    if (!timer) return;
+    clearTimeout(item._seToastTimeout);
+    timer.remaining = Math.max(0, timer.remaining - (Date.now() - timer.startedAt));
+    item.setAttribute("data-paused", "true");
+  }
+
+  function resumeToastTimer(item) {
+    const timer = item._seToastTimer;
+    if (!timer || timer.remaining <= 0) return;
+    timer.startedAt = Date.now();
+    item._seToastTimeout = setTimeout(() => expireToast(item), timer.remaining);
+    item.setAttribute("data-paused", "false");
+  }
+
+  function expireToast(item) {
+    if (!item || item.classList.contains("se-toast--leaving")) return;
+    stopToastTimer(item);
+    item._seToastOnAutoClose?.();
+    removeToastItem(item);
+  }
+
+  function dismissToast(item) {
+    if (!item || item.classList.contains("se-toast--leaving")) return;
+    stopToastTimer(item);
+    item._seToastOnDismiss?.();
+    removeToastItem(item);
+  }
+
+  function removeToastItem(item) {
+    item.classList.add("se-toast--leaving");
+    setTimeout(() => item.remove(), TOAST_EXIT_MS);
+  }
+
+  function startToastTimer(item, duration) {
+    if (duration <= 0) return;
+    item._seToastTimer = { remaining: duration, startedAt: Date.now() };
+    item._seToastTimeout = setTimeout(() => expireToast(item), duration);
+  }
+
+  function stopToastTimer(item) {
+    clearTimeout(item._seToastTimeout);
+    item._seToastTimer = null;
+  }
+
+  function pauseAllToasts() {
+    document.querySelectorAll(".se-toast").forEach(pauseToastTimer);
+  }
+
+  function resumeAllToasts() {
+    document.querySelectorAll(".se-toast").forEach(resumeToastTimer);
+  }
+
+  document.addEventListener(
+    "mouseover",
+    (e) => {
+      const target = e.target instanceof Element ? e.target.closest(".se-toast") : null;
+      if (target) pauseAllToasts();
+    },
+    true,
+  );
+
+  document.addEventListener(
+    "mouseout",
+    (e) => {
+      const target = e.target instanceof Element ? e.target.closest(".se-toast") : null;
+      if (target) resumeAllToasts();
+    },
+    true,
+  );
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      pauseAllToasts();
+    } else {
+      resumeAllToasts();
+    }
+  });
+
+  function buildToastItem(item, options) {
     item.className = `se-toast se-toast--${options.tone ?? "info"}`;
-    item.setAttribute("data-se-dismissable", "");
+    item.classList.remove("se-toast--leaving");
     item.setAttribute("role", options.tone === "danger" ? "alert" : "status");
+    item.setAttribute("data-se-dismissable", "");
+    if (options.id != null) {
+      item.setAttribute("data-se-toast-id", String(options.id));
+    }
+    item._seToastOnAutoClose = options.onAutoClose;
+    item._seToastOnDismiss = options.onDismiss;
+    item._seToastClickClose = options.closeOnClick === true;
+    item.classList.toggle("se-toast--clickable", item._seToastClickClose);
+    item.onclick = item._seToastClickClose ? () => dismissToast(item) : null;
+
     const content = document.createElement("div");
     content.className = "se-toast-content";
     if (options.title) {
@@ -178,28 +272,79 @@
       content.appendChild(title);
     }
     if (options.description) {
-      const body = document.createElement("div");
-      body.className = "se-toast-description";
-      body.textContent = options.description;
-      content.appendChild(body);
+      const desc = document.createElement("div");
+      desc.className = "se-toast-description";
+      desc.textContent = options.description;
+      content.appendChild(desc);
     }
-    item.appendChild(content);
-    const dismiss = document.createElement("button");
-    dismiss.type = "button";
-    dismiss.className = "se-toast-dismiss";
-    dismiss.setAttribute("aria-label", "Dismiss notification");
-    dismiss.setAttribute("data-se-dismiss", "");
-    dismiss.textContent = "\u00d7";
-    item.appendChild(dismiss);
-    container.appendChild(item);
-    const duration = options.durationMs ?? 5000;
-    if (duration > 0) {
-      setTimeout(() => item.remove(), duration);
+    const actionButtons = [
+      ["se-toast-action", options.action],
+      ["se-toast-cancel", options.cancel],
+    ].filter(([, action]) => action);
+    if (actionButtons.length > 0) {
+      const row = document.createElement("div");
+      row.className = "se-toast-actions";
+      for (const [buttonClass, action] of actionButtons) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = buttonClass;
+        button.textContent = action.label;
+        button.addEventListener("click", () => {
+          action.onClick?.();
+          dismissToast(item);
+        });
+        row.appendChild(button);
+      }
+      content.appendChild(row);
     }
+    item.replaceChildren(content);
+
+    if (options.dismissible !== false) {
+      const dismiss = document.createElement("button");
+      dismiss.type = "button";
+      dismiss.className = "se-toast-dismiss";
+      dismiss.setAttribute("aria-label", "Dismiss notification");
+      dismiss.setAttribute("data-se-dismiss", "");
+      dismiss.textContent = "\u00d7";
+      item.appendChild(dismiss);
+    }
+
+    const duration = options.durationMs ?? 4000;
+    if (options.showProgress && duration > 0) {
+      const bar = document.createElement("div");
+      bar.className = "se-toast-progress";
+      bar.style.animationDuration = `${duration}ms`;
+      item.appendChild(bar);
+    }
+
+    return duration;
+  }
+
+  function showToast(options) {
+    let item = null;
+    if (options.id != null) {
+      item = document.querySelector(`[data-se-toast-id="${CSS.escape(String(options.id))}"]`);
+    }
+    if (item) {
+      const duration = buildToastItem(item, options);
+      stopToastTimer(item);
+      startToastTimer(item, duration);
+      return;
+    }
+    item = document.createElement("div");
+    const duration = buildToastItem(item, options);
+    toastViewport(options.position).appendChild(item);
+    startToastTimer(item, duration);
   }
 
   on("[data-se-dismiss]", "click", (button) => {
-    button.closest("[data-se-dismissable]")?.remove();
+    const target = button.closest("[data-se-dismissable]");
+    if (!target) return;
+    if (target.classList.contains("se-toast")) {
+      dismissToast(target);
+    } else {
+      target.remove();
+    }
   });
 
   /* ---------------- Interactive (clickable cards etc.) ---------------- */

@@ -4,13 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@devstroop/uikit-htmx — theme playground</title>
-    <link rel="stylesheet" href="/vendor/uikit.css" />
-    <link rel="stylesheet" href="/vendor/tokens/default.css" data-theme-link="default" />
-    <link rel="stylesheet" href="/vendor/tokens/fluent.css" data-theme-link="fluent" disabled />
-    <link rel="stylesheet" href="/vendor/tokens/github.css" data-theme-link="github" disabled />
-    <link rel="stylesheet" href="/vendor/tokens/material.css" data-theme-link="material" disabled />
-    <link rel="stylesheet" href="/vendor/tokens/material-3.css" data-theme-link="material-3" disabled />
-    <link rel="stylesheet" href="/vendor/tokens/shadcn.css" data-theme-link="shadcn" disabled />
+    <link rel="stylesheet" href="/vendor/uikit.css?v=5" />
+    <link rel="stylesheet" href="/vendor/tokens/default.css?v=5" data-theme-link="default" />
+    <link rel="stylesheet" href="/vendor/tokens/fluent.css?v=5" data-theme-link="fluent" disabled />
+    <link rel="stylesheet" href="/vendor/tokens/github.css?v=5" data-theme-link="github" disabled />
+    <link rel="stylesheet" href="/vendor/tokens/material.css?v=5" data-theme-link="material" disabled />
+    <link rel="stylesheet" href="/vendor/tokens/material-3.css?v=5" data-theme-link="material-3" disabled />
+    <link rel="stylesheet" href="/vendor/tokens/shadcn.css?v=5" data-theme-link="shadcn" disabled />
     <link rel="stylesheet" href="/preview.css" />
   </head>
   <body>
@@ -438,7 +438,34 @@
               <div class="se-alert-body">Check the pipeline logs.</div>
             </div>
           </div>
-          <button class="se-button se-button--secondary" type="button" id="preview-toast-btn">Show toast</button>
+          <div role="alert" class="se-alert se-alert--info se-alert--outline">
+            <span class="se-alert-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path d="M12 16v-4M12 8h.01" /></svg></span>
+            <div class="se-alert-content">
+              <div class="se-alert-title">Outline</div>
+              <div class="se-alert-body">Tone border, no tint.</div>
+            </div>
+          </div>
+          <div role="alert" class="se-alert se-alert--success se-alert--solid">
+            <span class="se-alert-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path d="M8 12.5l2.5 2.5L16 9.5" /></svg></span>
+            <div class="se-alert-content">
+              <div class="se-alert-title">Solid</div>
+              <div class="se-alert-body">Tone fill, contrast text.</div>
+            </div>
+          </div>
+          <div role="alert" class="se-alert se-alert--danger se-alert--solid" data-se-dismissable>
+            <span class="se-alert-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path d="M15 9l-6 6M9 9l6 6" /></svg></span>
+            <div class="se-alert-content">
+              <div class="se-alert-title">Solid danger</div>
+              <div class="se-alert-body">Uses --se-color-danger-fg.</div>
+            </div>
+            <button class="se-alert-dismiss" type="button" data-se-dismiss aria-label="Dismiss alert">×</button>
+          </div>
+          <div class="button-row">
+            <button class="se-button se-button--secondary" type="button" id="preview-toast-btn">Show toast</button>
+            <button class="se-button se-button--secondary" type="button" id="preview-toast-action-btn">Toast with action</button>
+            <button class="se-button se-button--secondary" type="button" id="preview-toast-persist-btn">Persistent toast</button>
+            <button class="se-button se-button--secondary" type="button" id="preview-toast-topleft-btn">Toast top-left</button>
+          </div>
           </div>
         </div>
       </section>
@@ -524,8 +551,8 @@
       Theme CSS swapped by <code>disabled</code>-toggling <code>&lt;link&gt;</code> tags; contrast is WCAG AA enforced.
     </footer>
 
-    <script src="/vendor/htmx.min.js"></script>
-    <script src="/vendor/uikit.js"></script>
+    <script src="/vendor/htmx.min.js?v=5"></script>
+    <script src="/vendor/uikit.js?v=5"></script>
     <script>
       const themeSelect = document.getElementById("theme-select");
       themeSelect.addEventListener("change", () => {
@@ -547,6 +574,28 @@
       document.getElementById("preview-drawer-mask").addEventListener("click", syncDrawerText);
       document.getElementById("preview-toast-btn").addEventListener("click", () => {
         window.seToast({ title: "Saved", description: "Changes are synced.", tone: "success" });
+      });
+      document.getElementById("preview-toast-action-btn").addEventListener("click", () => {
+        window.seToast({
+          title: "Item removed",
+          tone: "info",
+          action: { label: "Undo", onClick: () => console.log("undo") },
+          cancel: { label: "Dismiss" },
+          showProgress: true,
+          durationMs: 6000,
+        });
+      });
+      document.getElementById("preview-toast-persist-btn").addEventListener("click", () => {
+        window.seToast({
+          title: "Click me to dismiss",
+          description: "Persistent, closeOnClick.",
+          tone: "warning",
+          durationMs: 0,
+          closeOnClick: true,
+        });
+      });
+      document.getElementById("preview-toast-topleft-btn").addEventListener("click", () => {
+        window.seToast({ title: "Top-left corner", position: "top-left", durationMs: 3000 });
       });
     </script>
   </body>
