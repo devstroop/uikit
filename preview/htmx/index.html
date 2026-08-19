@@ -37,480 +37,15 @@
     </header>
 
     <main>
-      <section class="row">
-        <h2>Grid · Row · Column</h2>
-        <div class="row-content">
-          <div class="layout-grid">
-            <div class="se-row">
-              <div class="se-column se-column--12 grid-cell">12</div>
-            </div>
-            <div class="se-row">
-              <div class="se-column se-column--6 grid-cell">6</div>
-              <div class="se-column se-column--6 grid-cell">6</div>
-            </div>
-            <div class="se-row">
-              <div class="se-column se-column--4 grid-cell">4</div>
-              <div class="se-column se-column--4 grid-cell">4</div>
-              <div class="se-column se-column--4 grid-cell">4</div>
-            </div>
-            <div class="se-row">
-              <div class="se-column se-column--12 se-column--md-6 se-column--lg-3 grid-cell">12 · md-6 · lg-3</div>
-              <div class="se-column se-column--12 se-column--md-6 se-column--lg-3 grid-cell">12 · md-6 · lg-3</div>
-              <div class="se-column se-column--12 se-column--md-6 se-column--lg-3 grid-cell">12 · md-6 · lg-3</div>
-              <div class="se-column se-column--12 se-column--md-6 se-column--lg-3 grid-cell">12 · md-6 · lg-3</div>
-            </div>
-            <div class="se-row">
-              <div class="se-column se-column--4 se-column--offset-4 grid-cell">4 · offset-4</div>
-            </div>
-            <div class="se-row se-row--justify-between">
-              <div class="se-column se-column--2 grid-cell">2</div>
-              <div class="se-column se-column--2 grid-cell">2</div>
-              <div class="se-column se-column--2 grid-cell">2</div>
-            </div>
-            <div class="se-row">
-              <div class="se-column grid-cell">auto</div>
-              <div class="se-column grid-cell">auto</div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <div data-se-example="shell"></div>
 
-      <section class="row">
-        <h2>App Shell · Layout · Header · Sidebar · Body · Footer</h2>
-        <div class="row-content">
-          <div class="se-layout" style="width: 100%; min-height: 420px; border: 1px dashed var(--se-color-border); border-radius: var(--se-radius-md); overflow: hidden">
-            <header class="se-header" aria-label="App shell header">
-              <span style="font-weight: 600">App title</span>
-              <span style="flex-grow: 1"></span>
-              <button class="se-button se-button--ghost se-button--sm" type="button" id="preview-shell-toggle" data-se-sidebar-toggle="#preview-shell-sidebar" aria-expanded="true" aria-controls="preview-shell-sidebar">Collapse sidebar</button>
-            </header>
-            <div class="se-layout-row">
-              <aside class="se-sidebar se-sidebar--left se-sidebar--responsive" id="preview-shell-sidebar" aria-label="App shell navigation">
-                <nav aria-label="Demo navigation">
-                  <ul class="shell-nav">
-                    <li><button class="se-button se-button--ghost se-button--sm" type="button" style="width: 100%; justify-content: flex-start">Dashboard</button></li>
-                    <li><button class="se-button se-button--ghost se-button--sm" type="button" style="width: 100%; justify-content: flex-start">Users</button></li>
-                    <li><button class="se-button se-button--ghost se-button--sm" type="button" style="width: 100%; justify-content: flex-start">Settings</button></li>
-                  </ul>
-                </nav>
-              </aside>
-              <div class="se-body" aria-label="App shell body">
-                <div class="se-row">
-                  <div class="se-column se-column--12 se-column--md-6 grid-cell">Body content</div>
-                  <div class="se-column se-column--12 se-column--md-6 grid-cell">Row/Column inside the shell</div>
-                </div>
-              </div>
-            </div>
-            <footer class="se-footer" aria-label="App shell footer">
-              <span style="color: var(--se-color-text-muted)">© 2026 Example</span>
-            </footer>
-          </div>
-          <div class="se-layout" style="width: 100%; min-height: 320px; border: 1px dashed var(--se-color-border); border-radius: var(--se-radius-md); overflow: hidden; margin-top: 16px">
-            <header class="se-header" aria-label="Drawer header">
-              <span style="font-weight: 600">Overlay drawer</span>
-              <span style="flex-grow: 1"></span>
-              <button class="se-button se-button--ghost se-button--sm" type="button" id="preview-drawer-toggle" data-se-sidebar-toggle="#preview-drawer-sidebar" aria-expanded="false" aria-controls="preview-drawer-sidebar">Open drawer</button>
-            </header>
-            <div class="se-layout-row">
-              <div class="se-layout-mask se-layout-mask--hidden" id="preview-drawer-mask" data-se-sidebar-mask="#preview-drawer-sidebar"></div>
-              <aside class="se-sidebar se-sidebar--right se-sidebar--overlay se-sidebar--collapsed" id="preview-drawer-sidebar" aria-label="Drawer navigation">
-                <nav aria-label="Drawer demo navigation">
-                  <ul class="shell-nav">
-                    <li><button class="se-button se-button--ghost se-button--sm" type="button" style="width: 100%; justify-content: flex-start">Dashboard</button></li>
-                    <li><button class="se-button se-button--ghost se-button--sm" type="button" style="width: 100%; justify-content: flex-start">Settings</button></li>
-                  </ul>
-                </nav>
-              </aside>
-              <div class="se-body" aria-label="Drawer body">
-                <div class="se-row">
-                  <div class="se-column se-column--12 grid-cell">Body content — the drawer overlays this on the right.</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <div data-se-example="misc"></div>
 
-      <section class="row">
-        <h2>Button</h2>
-        <div class="row-content">
-          <button class="se-button se-button--primary" type="button">Primary</button>
-          <button class="se-button se-button--secondary" type="button">Secondary</button>
-          <button class="se-button se-button--ghost" type="button">Ghost</button>
-          <button class="se-button se-button--danger" type="button">Danger</button>
-          <button class="se-button se-button--success" type="button">Success</button>
-          <button class="se-button se-button--info" type="button">Info</button>
-          <button class="se-button se-button--primary" type="button" disabled>Disabled</button>
-          <button class="se-button se-button--primary se-button--sm" type="button">Small</button>
-          <button class="se-button se-button--primary se-button--lg" type="button">Large</button>
-          <button class="se-button se-button--primary se-button--xs" type="button">Extra small</button>
-          <button class="se-button se-button--primary se-button--icon-only" type="button" aria-label="Add item">+</button>
-          <button class="se-button se-button--primary" type="button" hx-get="/partials/loaded.html" hx-target="#hx-target">
-            htmx: load content
-          </button>
-          <div id="hx-target"></div>
-        </div>
-      </section>
+      <div data-se-example="forms"></div>
 
-      <section class="row">
-        <h2>Field · Label · Input · Select · Textarea · Checkbox · Switch</h2>
-        <div class="row-content se-form-grid">
-          <div class="se-field">
-            <label class="se-field-label" for="htmx-email">Email</label>
-            <input class="se-input se-input--sm" id="htmx-email-sm" type="email" placeholder="small" />
-            <input class="se-input se-input--md" id="htmx-email" type="email" placeholder="you@example.com" />
-            <input class="se-input se-input--lg" id="htmx-email-lg" type="email" placeholder="large" />
-            <div class="se-field-hint">We never share it.</div>
-          </div>
-          <div class="se-field">
-            <label class="se-field-label" for="htmx-name">Display name <span class="se-field-required" aria-hidden="true">*</span></label>
-            <input class="se-input se-input--md se-input--invalid" id="htmx-name" aria-invalid="true" aria-describedby="htmx-name-error" value="" />
-            <div class="se-field-error" id="htmx-name-error" role="alert">Name is required</div>
-          </div>
-          <div class="se-field">
-            <label class="se-field-label" for="htmx-fw">Framework</label>
-            <select class="se-select se-select--sm" id="htmx-fw-sm" aria-label="Framework (small)">
-              <option>Small</option>
-            </select>
-            <select class="se-select se-select--md" id="htmx-fw">
-              <option value="react">React</option>
-              <option value="htmx" selected>htmx</option>
-              <option value="blazor">Blazor</option>
-            </select>
-            <select class="se-select se-select--lg" id="htmx-fw-lg" aria-label="Framework (large)">
-              <option>Large</option>
-            </select>
-          </div>
-          <div class="se-field">
-            <label class="se-field-label" for="htmx-notes">Notes</label>
-            <textarea class="se-textarea se-textarea--sm" id="htmx-notes-sm" rows="2" placeholder="small"></textarea>
-            <textarea class="se-textarea se-textarea--md" id="htmx-notes" rows="3" placeholder="Anything else?"></textarea>
-            <textarea class="se-textarea se-textarea--lg" id="htmx-notes-lg" rows="4" placeholder="large"></textarea>
-          </div>
-          <label class="se-label" for="htmx-check">
-            <input class="se-checkbox" id="htmx-check" type="checkbox" checked />
-            Subscribe to updates
-          </label>
-          <label class="se-label" for="htmx-switch">
-            <input class="se-switch" id="htmx-switch" type="checkbox" role="switch" checked />
-            Dark mode in app
-          </label>
-        </div>
-      </section>
+      <div data-se-example="data-display"></div>
 
-      <section class="row">
-        <h2>Table</h2>
-        <div class="row-content">
-          <div class="se-table-wrap">
-            <table class="se-table">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th class="se-table-cell--center">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>alice</td>
-                  <td class="se-table-cell--center"><span class="se-badge se-badge--soft se-badge--success">active</span></td>
-                </tr>
-                <tr>
-                  <td>bob</td>
-                  <td class="se-table-cell--center"><span class="se-badge se-badge--soft se-badge--success">active</span></td>
-                </tr>
-                <tr>
-                  <td>carol</td>
-                  <td class="se-table-cell--center"><span class="se-badge se-badge--soft se-badge--warning">paused</span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      <section class="row">
-        <h2>Badge</h2>
-        <div class="row-content">
-          <span class="se-badge se-badge--soft se-badge--neutral">neutral</span>
-          <span class="se-badge se-badge--soft se-badge--primary">primary</span>
-          <span class="se-badge se-badge--soft se-badge--success">success</span>
-          <span class="se-badge se-badge--soft se-badge--warning">warning</span>
-          <span class="se-badge se-badge--soft se-badge--danger">danger</span>
-          <span class="se-badge se-badge--solid se-badge--neutral">solid</span>
-          <span class="se-badge se-badge--solid se-badge--primary">solid</span>
-          <span class="se-badge se-badge--solid se-badge--success">solid</span>
-          <span class="se-badge se-badge--solid se-badge--warning">solid</span>
-          <span class="se-badge se-badge--solid se-badge--danger">solid</span>
-          <span class="se-badge se-badge--outline se-badge--neutral">outline</span>
-          <span class="se-badge se-badge--outline se-badge--primary">outline</span>
-          <span class="se-badge se-badge--outline se-badge--success">outline</span>
-          <span class="se-badge se-badge--outline se-badge--warning">outline</span>
-          <span class="se-badge se-badge--outline se-badge--danger">outline</span>
-        </div>
-      </section>
-
-      <section class="row">
-        <h2>Stat</h2>
-        <div class="row-content">
-          <div class="se-row" style="width: 100%">
-            <div class="se-column">
-              <div class="se-card se-card--outlined">
-                <div class="se-card-body">
-                  <div class="se-stat">
-                    <div class="se-stat-label">Active users</div>
-                    <div class="se-stat-value">12,483</div>
-                    <div class="se-stat-delta se-stat-delta--success">+8.2%</div>
-                    <div class="se-stat-hint">last 30 days</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="se-column">
-              <div class="se-card se-card--outlined">
-                <div class="se-card-body">
-                  <div class="se-stat">
-                    <div class="se-stat-label">Error rate</div>
-                    <div class="se-stat-value">0.31%</div>
-                    <div class="se-stat-delta se-stat-delta--success">-0.4%</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="se-column">
-              <div class="se-card se-card--outlined">
-                <div class="se-card-body">
-                  <div class="se-stat">
-                    <div class="se-stat-label">Uptime</div>
-                    <div class="se-stat-value">99.98%</div>
-                    <div class="se-stat-delta se-stat-delta--danger">-0.02%</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="row">
-        <h2>Card</h2>
-        <div class="row-content">
-          <div class="se-card se-card--elevated">
-            <div class="se-card-header">Deployments</div>
-            <div class="se-card-body">Your deployments are all healthy.</div>
-            <div class="se-card-footer">
-              <button class="se-button se-button--secondary" type="button">View all</button>
-            </div>
-          </div>
-          <div class="se-card se-card--outlined">
-            <div class="se-card-header">Usage</div>
-            <div class="se-card-body">This month: 48 GB of 100 GB.</div>
-          </div>
-          <div class="se-card se-card--interactive" tabindex="0" data-se-interactive>
-            <div class="se-card-header">Open pull requests</div>
-            <div class="se-card-body">Tab + Enter activates this card.</div>
-          </div>
-          <div class="se-card se-card--text">
-            <div class="se-card-header">Flat text card</div>
-            <div class="se-card-body">No border, no shadow, transparent background.</div>
-          </div>
-        </div>
-      </section>
-
-      <section class="row">
-        <h2>Avatar</h2>
-        <div class="row-content">
-          <div class="se-avatar se-avatar--sm se-avatar--palette-0" role="img" aria-label="Ada Lovelace"><span class="se-avatar-initials" aria-hidden="true">AL</span></div>
-          <div class="se-avatar se-avatar--md se-avatar--palette-1" role="img" aria-label="Samantha Miller"><span class="se-avatar-initials" aria-hidden="true">SM</span></div>
-          <div class="se-avatar se-avatar--lg se-avatar--palette-2" role="img" aria-label="Grace Hopper"><span class="se-avatar-initials" aria-hidden="true">GH</span></div>
-          <div class="se-avatar se-avatar--md se-avatar--palette-3 se-avatar--online" role="img" aria-label="Jane Wu"><span class="se-avatar-initials" aria-hidden="true">JW</span><span class="se-avatar-status" aria-hidden="true"></span></div>
-          <div class="se-avatar se-avatar--md se-avatar--palette-4 se-avatar--away" role="img" aria-label="Rhea Bhatt"><span class="se-avatar-initials" aria-hidden="true">RB</span><span class="se-avatar-status" aria-hidden="true"></span></div>
-          <div class="se-avatar se-avatar--md se-avatar--palette-5 se-avatar--offline" role="img" aria-label="Ava Torres"><span class="se-avatar-initials" aria-hidden="true">AT</span><span class="se-avatar-status" aria-hidden="true"></span></div>
-        </div>
-      </section>
-
-      <section class="row">
-        <h2>Icon</h2>
-        <div class="row-content se-icon-row">
-          <svg class="se-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5" /></svg>
-          <svg class="se-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 8v4l2 2" /></svg>
-          <svg class="se-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 16v-4M12 8h.01" /></svg>
-          <svg class="se-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" /></svg>
-          <svg class="se-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15a3 3 0 100-6 3 3 0 000 6z" /><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z" /></svg>
-        </div>
-      </section>
-
-      <section class="row">
-        <h2>Skeleton · Progress</h2>
-        <div class="row-content">
-          <div class="se-progress" role="progressbar" aria-label="Storage used" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100">
-            <div class="se-progress-bar" style="width: 62%"></div>
-          </div>
-          <div class="se-progress se-progress--success" role="progressbar" aria-label="Upload complete" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-            <div class="se-progress-bar" style="width: 100%"></div>
-          </div>
-          <div class="se-progress se-progress--warning" role="progressbar" aria-label="Battery level" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100">
-            <div class="se-progress-bar" style="width: 55%"></div>
-          </div>
-          <div class="se-progress se-progress--danger" role="progressbar" aria-label="Errors found" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">
-            <div class="se-progress-bar" style="width: 30%"></div>
-          </div>
-          <div class="se-progress se-progress--indeterminate" role="progressbar" aria-label="Downloading updates">
-            <div class="se-progress-bar"></div>
-          </div>
-          <div style="display: flex; gap: 12px; align-items: center">
-            <svg class="se-progress-circular se-progress--primary" viewBox="0 0 24 24" role="progressbar" aria-label="Storage used" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100">
-              <circle class="se-progress-track" cx="12" cy="12" r="10.5"></circle>
-              <circle class="se-progress-fill" cx="12" cy="12" r="10.5" stroke-dasharray="65.97" stroke-dashoffset="25.07"></circle>
-            </svg>
-            <svg class="se-progress-circular se-progress--success" viewBox="0 0 24 24" role="progressbar" aria-label="Upload complete" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-              <circle class="se-progress-track" cx="12" cy="12" r="10.5"></circle>
-              <circle class="se-progress-fill" cx="12" cy="12" r="10.5" stroke-dasharray="65.97" stroke-dashoffset="0"></circle>
-            </svg>
-            <svg class="se-progress-circular se-progress--primary se-progress--indeterminate" viewBox="0 0 24 24" role="progressbar" aria-label="Downloading updates" aria-valuemin="0" aria-valuemax="100">
-              <circle class="se-progress-track" cx="12" cy="12" r="10.5"></circle>
-              <circle class="se-progress-fill" cx="12" cy="12" r="10.5" stroke-dasharray="49.48 65.97" stroke-dashoffset="0"></circle>
-            </svg>
-          </div>
-          <div style="display: flex; gap: 12px; align-items: center">
-            <svg class="se-progress-circular se-progress--primary se-progress--xs" viewBox="0 0 24 24" role="progressbar" aria-label="Extra small" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
-              <circle class="se-progress-track" cx="12" cy="12" r="10.5"></circle>
-              <circle class="se-progress-fill" cx="12" cy="12" r="10.5" stroke-dasharray="65.97" stroke-dashoffset="26.39"></circle>
-            </svg>
-            <svg class="se-progress-circular se-progress--primary se-progress--sm" viewBox="0 0 24 24" role="progressbar" aria-label="Small" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
-              <circle class="se-progress-track" cx="12" cy="12" r="10.5"></circle>
-              <circle class="se-progress-fill" cx="12" cy="12" r="10.5" stroke-dasharray="65.97" stroke-dashoffset="26.39"></circle>
-            </svg>
-            <svg class="se-progress-circular se-progress--primary se-progress--md" viewBox="0 0 24 24" role="progressbar" aria-label="Medium" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
-              <circle class="se-progress-track" cx="12" cy="12" r="10.5"></circle>
-              <circle class="se-progress-fill" cx="12" cy="12" r="10.5" stroke-dasharray="65.97" stroke-dashoffset="26.39"></circle>
-            </svg>
-            <svg class="se-progress-circular se-progress--primary se-progress--lg" viewBox="0 0 24 24" role="progressbar" aria-label="Large" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
-              <circle class="se-progress-track" cx="12" cy="12" r="10.5"></circle>
-              <circle class="se-progress-fill" cx="12" cy="12" r="10.5" stroke-dasharray="65.97" stroke-dashoffset="26.39"></circle>
-            </svg>
-            <svg class="se-progress-circular se-progress--primary se-progress--xl" viewBox="0 0 24 24" role="progressbar" aria-label="Extra large" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
-              <circle class="se-progress-track" cx="12" cy="12" r="10.5"></circle>
-              <circle class="se-progress-fill" cx="12" cy="12" r="10.5" stroke-dasharray="65.97" stroke-dashoffset="26.39"></circle>
-            </svg>
-          </div>
-          <div class="se-skeleton se-skeleton--text" style="width: 180px"></div>
-          <div class="se-skeleton se-skeleton--circle" style="width: 48px; height: 48px"></div>
-          <div class="se-skeleton se-skeleton--rect" style="width: 180px; height: 72px"></div>
-        </div>
-      </section>
-
-      <section class="row">
-        <h2>EmptyState</h2>
-        <div class="row-content">
-          <div class="se-empty-state">
-            <svg class="se-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" /></svg>
-            <div class="se-empty-state-title">No projects yet</div>
-            <div class="se-empty-state-description">Create your first project to get started.</div>
-            <button class="se-button se-button--primary se-button--lg" type="button">New project</button>
-          </div>
-        </div>
-      </section>
-
-      <section class="row">
-        <h2>Alert · Toast</h2>
-        <div class="row-content">
-          <div class="layout-grid">
-          <div role="alert" class="se-alert se-alert--info">
-            <span class="se-alert-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path d="M12 16v-4M12 8h.01" /></svg></span>
-            <div class="se-alert-content">
-              <div class="se-alert-title">Heads up</div>
-              <div class="se-alert-body">A new version is available.</div>
-            </div>
-          </div>
-          <div role="alert" class="se-alert se-alert--success" data-se-dismissable>
-            <span class="se-alert-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path d="M8 12.5l2.5 2.5L16 9.5" /></svg></span>
-            <div class="se-alert-content">
-              <div class="se-alert-title">Deployed</div>
-              <div class="se-alert-body">The release is live.</div>
-            </div>
-            <button class="se-alert-dismiss" type="button" data-se-dismiss aria-label="Dismiss alert">×</button>
-          </div>
-          <div role="alert" class="se-alert se-alert--warning">
-            <span class="se-alert-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z" /><path d="M12 9v4M12 17h.01" /></svg></span>
-            <div class="se-alert-content">
-              <div class="se-alert-title">Storage at 90%</div>
-              <div class="se-alert-body">Clean up soon.</div>
-            </div>
-          </div>
-          <div role="alert" class="se-alert se-alert--danger">
-            <span class="se-alert-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path d="M15 9l-6 6M9 9l6 6" /></svg></span>
-            <div class="se-alert-content">
-              <div class="se-alert-title">Build failed</div>
-              <div class="se-alert-body">Check the pipeline logs.</div>
-            </div>
-          </div>
-          <div role="alert" class="se-alert se-alert--info se-alert--outline">
-            <span class="se-alert-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path d="M12 16v-4M12 8h.01" /></svg></span>
-            <div class="se-alert-content">
-              <div class="se-alert-title">Outline</div>
-              <div class="se-alert-body">Tone border, no tint.</div>
-            </div>
-          </div>
-          <div role="alert" class="se-alert se-alert--success se-alert--solid">
-            <span class="se-alert-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path d="M8 12.5l2.5 2.5L16 9.5" /></svg></span>
-            <div class="se-alert-content">
-              <div class="se-alert-title">Solid</div>
-              <div class="se-alert-body">Tone fill, contrast text.</div>
-            </div>
-          </div>
-          <div role="alert" class="se-alert se-alert--danger se-alert--solid" data-se-dismissable>
-            <span class="se-alert-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path d="M15 9l-6 6M9 9l6 6" /></svg></span>
-            <div class="se-alert-content">
-              <div class="se-alert-title">Solid danger</div>
-              <div class="se-alert-body">Uses --se-color-danger-fg.</div>
-            </div>
-            <button class="se-alert-dismiss" type="button" data-se-dismiss aria-label="Dismiss alert">×</button>
-          </div>
-          <div role="alert" class="se-alert se-alert--info se-alert--xs">
-            <div class="se-alert-content">
-              <div class="se-alert-title">xs</div>
-            </div>
-          </div>
-          <div role="alert" class="se-alert se-alert--info se-alert--lg">
-            <div class="se-alert-content">
-              <div class="se-alert-title">lg</div>
-              <div class="se-alert-body">Tiered padding · type · radius.</div>
-            </div>
-          </div>
-          <div class="button-row">
-            <button class="se-button se-button--secondary" type="button" id="preview-toast-btn">Show toast</button>
-            <button class="se-button se-button--secondary" type="button" id="preview-toast-action-btn">Toast with action</button>
-            <button class="se-button se-button--secondary" type="button" id="preview-toast-persist-btn">Persistent toast</button>
-            <button class="se-button se-button--secondary" type="button" id="preview-toast-topleft-btn">Toast top-left</button>
-          </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="row">
-        <h2>Dialog · Tooltip</h2>
-        <div class="row-content">
-          <button class="se-button se-button--primary" type="button" data-se-dialog-open="#preview-dialog">Open dialog</button>
-          <dialog class="se-dialog se-dialog--md" data-se-dialog id="preview-dialog">
-            <div class="se-dialog-header">
-              <div>
-                <h2 class="se-dialog-title">Confirm deletion</h2>
-                <p class="se-dialog-description">This cannot be undone.</p>
-              </div>
-              <button class="se-dialog-close" type="button" data-se-dialog-close aria-label="Close dialog">×</button>
-            </div>
-            <div class="se-dialog-body"><p>The workspace and all of its branches will be removed.</p></div>
-            <div class="se-dialog-footer">
-              <button class="se-button se-button--secondary" type="button" data-se-dialog-close>Cancel</button>
-              <button class="se-button se-button--danger" type="button" data-se-dialog-close>Delete</button>
-            </div>
-          </dialog>
-          <span class="se-tooltip" data-se-tooltip data-se-delay-ms="100">
-            <button class="se-button se-button--secondary" type="button">Hover me</button>
-            <span class="se-tooltip-bubble se-tooltip-bubble--top" role="tooltip" id="preview-tt" data-se-tooltip-content hidden>More information<span class="se-tooltip-arrow" aria-hidden="true"></span></span>
-          </span>
-        </div>
-      </section>
+      <div data-se-example="feedback"></div>
 
       <section class="row">
         <h2>Tabs · Accordion</h2>
@@ -585,43 +120,80 @@
           link.disabled = link.dataset.themeLink !== themeSelect.value;
         });
       });
-      document.getElementById("preview-shell-toggle").addEventListener("click", () => {
-        const collapsed = document.getElementById("preview-shell-sidebar").classList.contains("se-sidebar--collapsed");
-        document.getElementById("preview-shell-toggle").textContent = collapsed ? "Expand sidebar" : "Collapse sidebar";
-      });
-      const syncDrawerText = () => {
-        setTimeout(() => {
-          const collapsed = document.getElementById("preview-drawer-sidebar").classList.contains("se-sidebar--collapsed");
-          document.getElementById("preview-drawer-toggle").textContent = collapsed ? "Open drawer" : "Close drawer";
+      const bindExampleWidgets = () => {
+        const toggle = document.getElementById("preview-shell-toggle");
+        if (toggle) {
+          toggle.addEventListener("click", () => {
+            const collapsed = document.getElementById("preview-shell-sidebar").classList.contains("se-sidebar--collapsed");
+            toggle.textContent = collapsed ? "Expand sidebar" : "Collapse sidebar";
+          });
+        }
+        const drawers = [
+          { toggle: "preview-drawer-left-toggle", sidebar: "preview-drawer-left-sidebar", open: "Open left", close: "Close left" },
+          { toggle: "preview-drawer-right-toggle", sidebar: "preview-drawer-right-sidebar", open: "Open right", close: "Close right" },
+        ];
+        drawers.forEach(({ toggle, sidebar, open, close }) => {
+          const drawerToggle = document.getElementById(toggle);
+          const drawerSidebar = document.getElementById(sidebar);
+          if (!drawerToggle || !drawerSidebar) return;
+          const syncDrawerText = () => {
+            setTimeout(() => {
+              drawerToggle.textContent = drawerSidebar.classList.contains("se-sidebar--collapsed") ? open : close;
+            });
+          };
+          drawerToggle.addEventListener("click", syncDrawerText);
+          const mask = document.querySelector(`[data-se-sidebar-mask="#${sidebar}"]`);
+          if (mask) mask.addEventListener("click", syncDrawerText);
         });
+        const toastBtn = document.getElementById("preview-toast-btn");
+        if (toastBtn) {
+          toastBtn.addEventListener("click", () => {
+            window.seToast({ title: "Saved", description: "Changes are synced.", tone: "success" });
+          });
+        }
+        const toastActionBtn = document.getElementById("preview-toast-action-btn");
+        if (toastActionBtn) {
+          toastActionBtn.addEventListener("click", () => {
+            window.seToast({
+              title: "Item removed",
+              tone: "info",
+              action: { label: "Undo", onClick: () => console.log("undo") },
+              cancel: { label: "Dismiss" },
+              showProgress: true,
+              durationMs: 6000,
+            });
+          });
+        }
+        const toastPersistBtn = document.getElementById("preview-toast-persist-btn");
+        if (toastPersistBtn) {
+          toastPersistBtn.addEventListener("click", () => {
+            window.seToast({
+              title: "Click me to dismiss",
+              description: "Persistent, closeOnClick.",
+              tone: "warning",
+              durationMs: 0,
+              closeOnClick: true,
+            });
+          });
+        }
+        const toastTopLeftBtn = document.getElementById("preview-toast-topleft-btn");
+        if (toastTopLeftBtn) {
+          toastTopLeftBtn.addEventListener("click", () => {
+            window.seToast({ title: "Top-left corner", position: "top-left", durationMs: 3000 });
+          });
+        }
       };
-      document.getElementById("preview-drawer-toggle").addEventListener("click", syncDrawerText);
-      document.getElementById("preview-drawer-mask").addEventListener("click", syncDrawerText);
-      document.getElementById("preview-toast-btn").addEventListener("click", () => {
-        window.seToast({ title: "Saved", description: "Changes are synced.", tone: "success" });
-      });
-      document.getElementById("preview-toast-action-btn").addEventListener("click", () => {
-        window.seToast({
-          title: "Item removed",
-          tone: "info",
-          action: { label: "Undo", onClick: () => console.log("undo") },
-          cancel: { label: "Dismiss" },
-          showProgress: true,
-          durationMs: 6000,
-        });
-      });
-      document.getElementById("preview-toast-persist-btn").addEventListener("click", () => {
-        window.seToast({
-          title: "Click me to dismiss",
-          description: "Persistent, closeOnClick.",
-          tone: "warning",
-          durationMs: 0,
-          closeOnClick: true,
-        });
-      });
-      document.getElementById("preview-toast-topleft-btn").addEventListener("click", () => {
-        window.seToast({ title: "Top-left corner", position: "top-left", durationMs: 3000 });
-      });
+      const injectExamples = async () => {
+        const holders = [...document.querySelectorAll("[data-se-example]")];
+        await Promise.all(
+          holders.map(async (holder) => {
+            const res = await fetch(`/examples/${holder.dataset.seExample}.html`);
+            if (res.ok) holder.innerHTML = await res.text();
+          }),
+        );
+        bindExampleWidgets();
+      };
+      injectExamples();
     </script>
   </body>
 </html>
