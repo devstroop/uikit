@@ -8,6 +8,7 @@ import {
 import styles from "./Tabs.module.css";
 
 export type TabsVariant = "underline" | "pills";
+export type TabsPosition = "top" | "left" | "right" | "bottom";
 
 export interface TabItem {
   key: string;
@@ -22,6 +23,7 @@ export interface TabsProps {
   defaultValue?: string;
   onChange?: (key: string) => void;
   variant?: TabsVariant;
+  position?: TabsPosition;
   className?: string;
 }
 
@@ -31,12 +33,14 @@ export function Tabs({
   defaultValue,
   onChange,
   variant = "underline",
+  position = "top",
   className,
 }: TabsProps) {
   const baseId = useId();
   const tabListRef = useRef<HTMLDivElement>(null);
   const [internalValue, setInternalValue] = useState(defaultValue ?? items[0]?.key ?? "");
   const activeKey = value ?? internalValue;
+  const vertical = position === "left" || position === "right";
 
   const select = (key: string) => {
     setInternalValue(key);
@@ -47,9 +51,9 @@ export function Tabs({
     const enabled = items.filter((i) => !i.disabled);
     const index = enabled.findIndex((i) => i.key === activeKey);
     let next = -1;
-    if (event.key === "ArrowRight") {
+    if (event.key === "ArrowRight" || (vertical && event.key === "ArrowDown")) {
       next = (index + 1) % enabled.length;
-    } else if (event.key === "ArrowLeft") {
+    } else if (event.key === "ArrowLeft" || (vertical && event.key === "ArrowUp")) {
       next = (index - 1 + enabled.length) % enabled.length;
     } else if (event.key === "Home") {
       next = 0;
@@ -69,11 +73,11 @@ export function Tabs({
   const activeItem = items.find((i) => i.key === activeKey);
 
   return (
-    <div className={[styles.root, className].filter(Boolean).join(" ")}>
+    <div className={[styles.root, styles[position], className].filter(Boolean).join(" ")}>
       <div
         ref={tabListRef}
         role="tablist"
-        className={[styles.tabList, styles[variant]].filter(Boolean).join(" ")}
+        className={[styles.tabList, styles[variant], styles[position]].filter(Boolean).join(" ")}
         onKeyDown={handleKeyDown}
       >
         {items.map((item) => {
