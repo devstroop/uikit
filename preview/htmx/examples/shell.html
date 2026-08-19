@@ -1,0 +1,92 @@
+      <section class="row">
+        <h2>Grid · Row · Column</h2>
+        <div class="row-content">
+          <div class="layout-grid">
+            <div class="se-row">
+              <div class="se-column se-column--12 grid-cell">12</div>
+            </div>
+            <div class="se-row">
+              <div class="se-column se-column--6 grid-cell">6</div>
+              <div class="se-column se-column--6 grid-cell">6</div>
+            </div>
+            <div class="se-row">
+              <div class="se-column se-column--4 grid-cell">4</div>
+              <div class="se-column se-column--4 grid-cell">4</div>
+              <div class="se-column se-column--4 grid-cell">4</div>
+            </div>
+            <div class="se-row">
+              <div class="se-column se-column--12 se-column--md-6 se-column--lg-3 grid-cell">12 · md-6 · lg-3</div>
+              <div class="se-column se-column--12 se-column--md-6 se-column--lg-3 grid-cell">12 · md-6 · lg-3</div>
+              <div class="se-column se-column--12 se-column--md-6 se-column--lg-3 grid-cell">12 · md-6 · lg-3</div>
+              <div class="se-column se-column--12 se-column--md-6 se-column--lg-3 grid-cell">12 · md-6 · lg-3</div>
+            </div>
+            <div class="se-row">
+              <div class="se-column se-column--4 se-column--offset-4 grid-cell">4 · offset-4</div>
+            </div>
+            <div class="se-row se-row--justify-between">
+              <div class="se-column se-column--2 grid-cell">2</div>
+              <div class="se-column se-column--2 grid-cell">2</div>
+              <div class="se-column se-column--2 grid-cell">2</div>
+            </div>
+            <div class="se-row">
+              <div class="se-column grid-cell">auto</div>
+              <div class="se-column grid-cell">auto</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="row">
+        <h2>App Shell · Layout · Header · Sidebar · Body · Footer</h2>
+        <div class="row-content">
+          <div class="se-layout" style="width: 100%; min-height: 420px; border: 1px dashed var(--se-color-border); border-radius: var(--se-radius-md); overflow: hidden">
+            <header class="se-header" aria-label="App shell header">
+              <span style="font-weight: 600">App title</span>
+              <span style="flex-grow: 1"></span>
+              <button class="se-button se-button--ghost se-button--sm" type="button" id="preview-shell-toggle" data-se-sidebar-toggle="#preview-shell-sidebar" aria-expanded="true" aria-controls="preview-shell-sidebar">Collapse sidebar</button>
+            </header>
+            <div class="se-layout-row">
+              <aside class="se-sidebar se-sidebar--left se-sidebar--responsive" id="preview-shell-sidebar" aria-label="App shell navigation">
+                <nav aria-label="Demo navigation">
+                  <ul class="shell-nav">
+                    <li><button class="se-button se-button--ghost se-button--sm" type="button" style="width: 100%; justify-content: flex-start">Dashboard</button></li>
+                    <li><button class="se-button se-button--ghost se-button--sm" type="button" style="width: 100%; justify-content: flex-start">Users</button></li>
+                    <li><button class="se-button se-button--ghost se-button--sm" type="button" style="width: 100%; justify-content: flex-start">Settings</button></li>
+                  </ul>
+                </nav>
+              </aside>
+              <div class="se-body" aria-label="App shell body">
+                <div class="se-row">
+                  <div class="se-column se-column--12 se-column--md-6 grid-cell">Body content</div>
+                  <div class="se-column se-column--12 se-column--md-6 grid-cell">Row/Column inside the shell</div>
+                </div>
+              </div>
+            </div>
+            <footer class="se-footer" aria-label="App shell footer">
+              <span style="color: var(--se-color-text-muted)">© 2026 Example</span>
+            </footer>
+          </div>
+          <div class="se-layout" style="width: 100%; min-height: 320px; border: 1px dashed var(--se-color-border); border-radius: var(--se-radius-md); overflow: hidden; margin-top: 16px">
+            <header class="se-header" aria-label="Drawer header">
+              <span style="font-weight: 600">Overlay drawer</span>
+              <span style="flex-grow: 1"></span>
+              <button class="se-button se-button--ghost se-button--sm" type="button" id="preview-drawer-toggle" data-se-sidebar-toggle="#preview-drawer-sidebar" aria-expanded="false" aria-controls="preview-drawer-sidebar">Open drawer</button>
+            </header>
+            <div class="se-layout-row">
+              <div class="se-layout-mask se-layout-mask--hidden" id="preview-drawer-mask" data-se-sidebar-mask="#preview-drawer-sidebar"></div>
+              <aside class="se-sidebar se-sidebar--right se-sidebar--overlay se-sidebar--collapsed" id="preview-drawer-sidebar" aria-label="Drawer navigation">
+                <nav aria-label="Drawer demo navigation">
+                  <ul class="shell-nav">
+                    <li><button class="se-button se-button--ghost se-button--sm" type="button" style="width: 100%; justify-content: flex-start">Dashboard</button></li>
+                    <li><button class="se-button se-button--ghost se-button--sm" type="button" style="width: 100%; justify-content: flex-start">Settings</button></li>
+                  </ul>
+                </nav>
+              </aside>
+              <div class="se-body" aria-label="Drawer body">
+                <div class="se-row">
+                  <div class="se-column se-column--12 grid-cell">Body content — the drawer overlays this on the right.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>

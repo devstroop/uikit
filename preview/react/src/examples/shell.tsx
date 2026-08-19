@@ -1,0 +1,193 @@
+import { useState } from "react";
+import { Body, Button, Column, Footer, Header, Layout, Row, Sidebar } from "@devstroop/react-ui";
+import { Section } from "./section";
+
+export function ShellExamples() {
+  return (
+    <>
+      <GridSection />
+      <AppShellSection />
+    </>
+  );
+}
+
+function GridSection() {
+  return (
+    <Section title="Grid · Row · Column">
+      <div className="layout-grid">
+        <Row>
+          <Column size={12} className="grid-cell">
+            12
+          </Column>
+        </Row>
+        <Row>
+          <Column size={6} className="grid-cell">
+            6
+          </Column>
+          <Column size={6} className="grid-cell">
+            6
+          </Column>
+        </Row>
+        <Row>
+          <Column size={4} className="grid-cell">
+            4
+          </Column>
+          <Column size={4} className="grid-cell">
+            4
+          </Column>
+          <Column size={4} className="grid-cell">
+            4
+          </Column>
+        </Row>
+        <Row>
+          <Column size={12} sizeMd={6} sizeLg={3} className="grid-cell">
+            12 · md-6 · lg-3
+          </Column>
+          <Column size={12} sizeMd={6} sizeLg={3} className="grid-cell">
+            12 · md-6 · lg-3
+          </Column>
+          <Column size={12} sizeMd={6} sizeLg={3} className="grid-cell">
+            12 · md-6 · lg-3
+          </Column>
+          <Column size={12} sizeMd={6} sizeLg={3} className="grid-cell">
+            12 · md-6 · lg-3
+          </Column>
+        </Row>
+        <Row>
+          <Column size={4} offset={4} className="grid-cell">
+            4 · offset-4
+          </Column>
+        </Row>
+        <Row justify="between">
+          <Column size={2} className="grid-cell">
+            2
+          </Column>
+          <Column size={2} className="grid-cell">
+            2
+          </Column>
+          <Column size={2} className="grid-cell">
+            2
+          </Column>
+        </Row>
+        <Row>
+          <Column className="grid-cell">
+            auto
+          </Column>
+          <Column className="grid-cell">
+            auto
+          </Column>
+        </Row>
+      </div>
+    </Section>
+  );
+}
+
+function AppShellSection() {
+  const [expanded, setExpanded] = useState(true);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  return (
+    <Section title="App Shell · Layout · Header · Sidebar · Body · Footer">
+      <Layout
+        style={{
+          width: "100%",
+          minHeight: 420,
+          border: "1px dashed var(--se-color-border)",
+          borderRadius: "var(--se-radius-md)",
+          overflow: "hidden",
+        }}
+      >
+        <Header aria-label="App shell header">
+          <span style={{ fontWeight: 600 }}>App title</span>
+          <span style={{ flexGrow: 1 }} />
+          <Button
+            size="sm"
+            variant="ghost"
+            onClick={() => setExpanded(!expanded)}
+            aria-expanded={expanded}
+            aria-controls="shell-sidebar"
+          >
+            {expanded ? "Collapse sidebar" : "Expand sidebar"}
+          </Button>
+        </Header>
+        <Sidebar id="shell-sidebar" aria-label="App shell navigation" expanded={expanded} responsive>
+          <nav aria-label="Demo navigation">
+            <ul className="shell-nav">
+              {["Dashboard", "Users", "Settings"].map((item) => (
+                <li key={item}>
+                  <Button variant="ghost" size="sm" style={{ width: "100%", justifyContent: "flex-start" }}>
+                    {item}
+                  </Button>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </Sidebar>
+        <Body as="div" aria-label="App shell body">
+          <Row>
+            <Column size={12} sizeMd={6} className="grid-cell">
+              Body content
+            </Column>
+            <Column size={12} sizeMd={6} className="grid-cell">
+              Row/Column inside the shell
+            </Column>
+          </Row>
+        </Body>
+        <Footer aria-label="App shell footer">
+          <span style={{ color: "var(--se-color-text-muted)" }}>© 2026 Example</span>
+        </Footer>
+      </Layout>
+      <Layout
+        style={{
+          width: "100%",
+          minHeight: 320,
+          marginTop: 16,
+          border: "1px dashed var(--se-color-border)",
+          borderRadius: "var(--se-radius-md)",
+          overflow: "hidden",
+        }}
+      >
+        <Header aria-label="Drawer header">
+          <span style={{ fontWeight: 600 }}>Overlay drawer</span>
+          <span style={{ flexGrow: 1 }} />
+          <Button
+            size="sm"
+            variant="ghost"
+            className="drawer-toggle"
+            onClick={() => setDrawerOpen(!drawerOpen)}
+            aria-expanded={drawerOpen}
+            aria-controls="drawer-sidebar"
+          >
+            {drawerOpen ? "Close drawer" : "Open drawer"}
+          </Button>
+        </Header>
+        <Sidebar
+          id="drawer-sidebar"
+          position="right"
+          overlay
+          expanded={drawerOpen}
+          onClose={() => setDrawerOpen(false)}
+          aria-label="Drawer navigation"
+        >
+          <nav aria-label="Drawer demo navigation">
+            <ul className="shell-nav">
+              {["Dashboard", "Settings"].map((item) => (
+                <li key={item}>
+                  <Button variant="ghost" size="sm" style={{ width: "100%", justifyContent: "flex-start" }}>
+                    {item}
+                  </Button>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </Sidebar>
+        <Body as="div" aria-label="Drawer body">
+          <Row>
+            <Column size={12} className="grid-cell">
+              Body content — the drawer overlays this on the right.
+            </Column>
+          </Row>
+        </Body>
+      </Layout>
+    </Section>
+  );
+}
