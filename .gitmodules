@@ -1,0 +1,3 @@
+[submodule "frameworks/react"]
+	path = frameworks/react
+	url = https://github.com/devstroop/react-uikit.git
