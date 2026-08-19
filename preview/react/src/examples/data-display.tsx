@@ -19,16 +19,18 @@ export function DataDisplayExamples() {
 
 function TableSection() {
   const rows = [
-    { id: 1, name: "alice", status: "active" },
-    { id: 2, name: "bob", status: "active" },
-    { id: 3, name: "carol", status: "paused" },
+    { id: 1, name: "alice", role: "admin", status: "active" },
+    { id: 2, name: "bob", role: "editor", status: "active" },
+    { id: 3, name: "carol", role: "viewer", status: "paused" },
   ];
   return (
     <Section title="Table">
       <Table
         columns={[
           { key: "name", header: "Name" },
+          { key: "role", header: "Role", render: (r) => <span style={{ color: "var(--se-color-text-muted)" }}>{r.role}</span> },
           { key: "status", header: "Status", align: "center", render: (r) => <Badge tone={r.status === "active" ? "success" : "warning"}>{r.status}</Badge> },
+          { key: "actions", header: "Actions", align: "end", render: () => <Button variant="ghost" size="xs">…</Button> },
         ]}
         rows={rows}
         rowKey={(r) => String(r.id)}
@@ -49,6 +51,13 @@ function BadgeSection() {
           ))}
         </span>
       ))}
+      <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+        {(["xs", "sm", "md", "lg", "xl"] as const).map((s) => (
+          <Badge key={s} tone="primary" size={s}>
+            {s}
+          </Badge>
+        ))}
+      </div>
     </Section>
   );
 }
@@ -105,6 +114,7 @@ function AvatarSection() {
         <Avatar name="Ada Lovelace" size="sm" />
         <Avatar name="Grace Hopper" />
         <Avatar name="Alan Turing" size="lg" />
+        <Avatar name="Kathleen Booth" size="xl" />
         <Avatar name="Rebecca Birbeck" status="online" />
         <Avatar name="John Williams" status="away" />
         <Avatar name="Alice Smith" status="offline" />
@@ -114,7 +124,7 @@ function AvatarSection() {
 }
 
 function IconSection() {
-  const names = ["check", "alert", "info", "search", "settings", "user", "mail", "lock", "globe", "shield"] as const;
+  const names = ["check", "alert", "info", "search", "settings", "user", "mail", "lock", "globe", "shield", "folder", "plus"] as const;
   return (
     <Section title="Icon">
       {names.map((n) => (
@@ -122,6 +132,13 @@ function IconSection() {
           <Icon name={n} />
         </span>
       ))}
+      <div className="se-icon-row" style={{ display: "flex", gap: 8, alignItems: "center" }}>
+        {(["xs", "sm", "md", "lg", "xl"] as const).map((s) => (
+          <span key={s} title={s}>
+            <Icon name="settings" size={s} />
+          </span>
+        ))}
+      </div>
     </Section>
   );
 }
