@@ -48,7 +48,6 @@
     </div>
   </div>
 </div>
-<<<<<<< HEAD
 <div class="dt-row dt-row--gap-sm">
   <div class="dt-column dt-column--4 grid-cell">gap 8</div>
   <div class="dt-column dt-column--4 grid-cell">8 px</div>
@@ -64,8 +63,6 @@
   <div class="dt-column dt-column--4 grid-cell">space-5</div>
   <div class="dt-column dt-column--4 grid-cell">(24 px)</div>
 </div>
-=======
->>>>>>> origin/master
 <div class="dt-row">
   <div class="dt-column grid-cell">auto</div>
   <div class="dt-column grid-cell">auto</div>
@@ -138,5 +135,22 @@
     </aside>
   </div>
 </div>
+        </div>
+      </section>
+      <section class="row">
+        <h2>Form</h2>
+        <div class="row-content">
+          <form class="dt-form" data-dt-form style="max-width: 360px">
+            <div class="dt-field">
+              <label class="dt-field-label" for="preview-form-name">Name</label>
+              <input id="preview-form-name" class="dt-input dt-input--md" type="text" name="name" data-dt-field placeholder="Full name" />
+            </div>
+            <div class="dt-field">
+              <label class="dt-field-label" for="preview-form-email">Email</label>
+              <input id="preview-form-email" class="dt-input dt-input--md" type="email" name="email" data-dt-field placeholder="you@example.com" />
+            </div>
+            <button class="dt-button dt-button--primary" type="submit">Submit</button>
+            <p style="font-size: var(--dt-font-size-xs); color: var(--dt-color-text-muted)">Valid submit dispatches <code>dt:submit</code> (FormData in detail) and proceeds; fields marked invalid (<code>aria-invalid</code>/<code>data-dt-invalid</code>) block it and dispatch <code>dt:invalid</code>.</p>
+          </form>
         </div>
       </section>
