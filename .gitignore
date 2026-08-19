@@ -1,5 +1,7 @@
 node_modules/
 dist/
+!frameworks/react/dist/
+!frameworks/htmx/dist/
 preview/*/dist/
 visual/screenshots/
 *.log
