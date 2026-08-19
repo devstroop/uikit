@@ -1,3 +1,6 @@
 [submodule "frameworks/react"]
 	path = frameworks/react
 	url = https://github.com/devstroop/react-uikit.git
+[submodule "frameworks/htmx"]
+	path = frameworks/htmx
+	url = https://github.com/devstroop/htmx-uikit.git

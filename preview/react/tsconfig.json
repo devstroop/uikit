@@ -16,7 +16,7 @@
     "noEmit": true,
     "types": ["vite/client"],
     "paths": {
-      "@devstroop/react-ui": ["../../frameworks/react/lib/main.ts"]
+      "@devstroop/react-uikitkit": ["../../frameworks/react/lib/main.ts"]
     }
   },
   "include": ["src"]
