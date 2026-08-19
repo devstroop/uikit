@@ -38,7 +38,7 @@
       <section class="row">
         <h2>DataGrid</h2>
         <div class="row-content">
-          <p class="dt-text-muted">Client-side grid: sort (multi with <code>data-dt-datagrid-multisort</code>), per-column filter, pager, row selection (<code>data-dt-datagrid-select="multiple"</code> fires <code>dt:grid-select</code>), column picker, resize, drag-to-reorder, frozen first column. Fires <code>dt:grid-change</code> (pageNumber, sorts, filters, filterString, oDataFilterString) — server round-trips via <code>hx-get</code> swap the <code>data-dt-datagrid-rows</code> region.</p>
+          <p class="dt-text-muted">Client-side grid: sort (multi with <code>data-dt-datagrid-multisort</code>), per-column filter, pager, row selection (<code>data-dt-datagrid-select="multiple"</code> fires <code>dt:grid-select</code>), column picker, resize, drag-to-reorder, drag-to-group, inline edit/add/delete rows, frozen first column. Fires <code>dt:grid-change</code> (pageNumber, sorts, filters, filterString, oDataFilterString) — server round-trips via <code>hx-get</code> swap the <code>data-dt-datagrid-rows</code> region.</p>
           <div class="dt-datagrid" data-dt-datagrid
                data-dt-datagrid-properties='[
                  {"property":"name","title":"Name","type":"string","sortable":true,"frozen":true,"width":"9rem"},
@@ -53,6 +53,10 @@
                data-dt-datagrid-column-picker
                data-dt-datagrid-resize
                data-dt-datagrid-reorder
+               data-dt-datagrid-groupable
+               data-dt-datagrid-edit
+               data-dt-datagrid-delete
+               data-dt-datagrid-create
                data-dt-datagrid-pagesize="3"
                data-dt-datagrid-pagesize-options="[3,5,10]"
                data-dt-datagrid-pagenumbers="5"
