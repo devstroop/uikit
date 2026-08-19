@@ -73,7 +73,7 @@ function DataGridSection() {
         pagerPosition="TopAndBottom"
         selectionMode="Multiple"
         selectedKeys={selected}
-        onSelectionChange={setSelected}
+        onSelectionChange={(keys) => setSelected([...keys])}
         showColumnPicker
         allowColumnResize
         allowColumnReorder
