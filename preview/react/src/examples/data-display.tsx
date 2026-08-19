@@ -33,7 +33,7 @@ function TableSection() {
         columns={[
           { key: "name", header: "Name" },
           { key: "role", header: "Role", render: (r) => <span style={{ color: "var(--dt-color-text-muted)" }}>{r.role}</span> },
-          { key: "status", header: "Status", align: "center", render: (r) => <Badge tone={r.status === "active" ? "success" : "warning"}>{r.status}</Badge> },
+          { key: "status", header: "Status", align: "center", render: (r) => <Badge tone={r.status === "active" ? "success" : "warning"} variant="solid">{r.status}</Badge> },
           { key: "actions", header: "Actions", align: "end", render: () => <Button variant="ghost" size="xs">…</Button> },
         ]}
         rows={rows}
