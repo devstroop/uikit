@@ -9,7 +9,7 @@ import {
   Skeleton,
   Tooltip,
   useToast,
-} from "@devstroop/react-ui";
+} from "@devstroop/react-uikitkit";
 import { Section } from "./section";
 
 export function FeedbackExamples() {
