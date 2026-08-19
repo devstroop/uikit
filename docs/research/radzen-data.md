@@ -122,11 +122,27 @@ Count, Subgroups}), aggregates `Sum/Average/Min/Max(type)`,
 `ToFilterString<T>(columns)`, `ToFilterString(filters)`,
 `ToODataFilterString<T>(columns|dataFilter|filters)`, `AsODataEnumerable`.
 
-## Table (`RadzenTable<TItem>`)
-Layout-only. `Columns`/`Rows` render fragments built from `RadzenTableHeader`,
-`RadzenTableHeaderRow`, `RadzenTableHeaderCell`, `RadzenTableRow`,
-`RadzenTableCell`. Params: `AllowAlternatingRows`, `GridLines` (Default/Both/
-None/Horizontal/Vertical). No data binding, no events.
+## Table (`RadzenTable`) — plain component, distinct from DataGrid
+
+**Important distinction**: `RadzenTable` is a *layout-only composition
+primitive* (the "plain table" pattern common in node/JS projects, e.g.
+react-table/TanStack — you own the data + state, the table just renders).
+`RadzenDataGrid` is a *data-bound visualization engine* (data, columns,
+sort/filter/page/group, selection, editing, virtualization, LoadData).
+Same visual language: Table reuses the grid's CSS classes, so a shared
+"table CSS" foundation serves both.
+
+RadzenTable markup (verified from sources):
+- `RadzenTable` → `<div class="rz-data-grid rz-datatable rz-datatable-scrollable[ rz-has-height]">` > `<div class="rz-data-grid-data">` > `<table class="rz-grid-table rz-grid-table-fixed[ rz-grid-table-striped][ rz-grid-gridlines-{gridlines}]">` > ChildContent. Params: `GridLines` (Default/Both/None/Horizontal/Vertical), `AllowAlternatingRows` (default true).
+- `RadzenTableHeader` → `<thead>`
+- `RadzenTableHeaderRow` → `<tr>`
+- `RadzenTableHeaderCell` → `<th style="padding: var(--rz-grid-cell-padding)">`
+- `RadzenTableRow` → `<tr class="rz-data-row">`
+- `RadzenTableCell` → `<td><span class="rz-cell-data">…</span></td>`
+
+All are `RadzenComponentWithChildren` (Style/Attributes/Visible/Class). No
+data binding, no events, no selection — columns/rows are user-composed
+render fragments.
 
 ## Pager (`RadzenPager`)
 Standalone. `Count`, `PageSize`, `PageSizeOptions`, `PageNumbersCount`,
