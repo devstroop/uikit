@@ -3,7 +3,7 @@ import { defineConfig } from "vite";
 export default defineConfig({
   resolve: {
     alias: {
-      "@devstroop/react-ui": new URL(
+      "@devstroop/react-uikitkit": new URL(
         "../../frameworks/react/lib/main.ts",
         import.meta.url,
       ).pathname,
