@@ -27,19 +27,41 @@
               <option>Large</option>
             </select>
           </div>
-          <div class="se-field">
-            <label class="se-field-label" for="htmx-notes">Notes</label>
-            <textarea class="se-textarea se-textarea--sm" id="htmx-notes-sm" rows="2" placeholder="small"></textarea>
-            <textarea class="se-textarea se-textarea--md" id="htmx-notes" rows="3" placeholder="Anything else?"></textarea>
-            <textarea class="se-textarea se-textarea--lg" id="htmx-notes-lg" rows="4" placeholder="large"></textarea>
-          </div>
+<div class="se-field">
+  <label class="se-field-label" for="htmx-notes">Notes</label>
+  <textarea class="se-textarea se-textarea--sm" id="htmx-notes-sm" rows="2" placeholder="small"></textarea>
+  <textarea class="se-textarea se-textarea--md" id="htmx-notes" rows="3" placeholder="Anything else?"></textarea>
+  <textarea class="se-textarea se-textarea--lg" id="htmx-notes-lg" rows="4" placeholder="large"></textarea>
+</div>
+<div class="se-field">
+  <label class="se-field-label" for="htmx-password">Other types</label>
+  <input class="se-input se-input--md" id="htmx-password" type="password" placeholder="password" aria-label="Password" />
+  <input class="se-input se-input--md" id="htmx-number" type="number" placeholder="number" value="42" aria-label="Number" />
+  <input class="se-input se-input--md" id="htmx-date" type="date" aria-label="Date" />
+</div>
+<div class="se-field">
+  <label class="se-field-label" for="htmx-disabled">Disabled</label>
+  <input class="se-input se-input--md" id="htmx-disabled" value="Locked" disabled />
+  <select class="se-select se-select--md" id="htmx-disabled-select" aria-label="Disabled select" disabled>
+    <option>Locked</option>
+  </select>
+  <div class="se-field-hint">Not editable.</div>
+</div>
           <label class="se-label" for="htmx-check">
             <input class="se-checkbox" id="htmx-check" type="checkbox" checked />
             Subscribe to updates
           </label>
-          <label class="se-label" for="htmx-switch">
-            <input class="se-switch" id="htmx-switch" type="checkbox" role="switch" checked />
-            Dark mode in app
-          </label>
+<label class="se-label" for="htmx-switch">
+  <input class="se-switch" id="htmx-switch" type="checkbox" role="switch" checked />
+  Dark mode in app
+</label>
+<label class="se-label" for="htmx-check-disabled">
+  <input class="se-checkbox" id="htmx-check-disabled" type="checkbox" disabled />
+  Disabled checkbox
+</label>
+<label class="se-label" for="htmx-switch-disabled">
+  <input class="se-switch" id="htmx-switch-disabled" type="checkbox" role="switch" disabled />
+  Disabled switch
+</label>
         </div>
       </section>
