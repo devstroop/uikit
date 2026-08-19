@@ -237,7 +237,7 @@ function FormControls() {
   const [checked, setChecked] = useState(false);
   const [switched, setSwitched] = useState(true);
   return (
-    <Section title="Field · Label · Input · Select · Textarea · Checkbox · Switch">
+    <Section title="Field · Label · Input · Select · Textarea · Checkbox · Switch" className="se-form-grid">
       <Field label="Email" htmlFor="f-email" hint="We never share it.">
         <Input id="f-email-sm" size="sm" placeholder="small" />
         <Input id="f-email" type="email" placeholder="you@example.com" />
@@ -328,13 +328,19 @@ function Stats() {
       <div className="layout-grid">
         <Row>
           <Column>
-            <Stat label="Active users" value="12,483" delta="+8.2%" hint="last 30 days" />
+            <Card variant="outlined">
+              <Stat label="Active users" value="12,483" delta="+8.2%" hint="last 30 days" />
+            </Card>
           </Column>
           <Column>
-            <Stat label="Error rate" value="0.31%" delta="-0.4%" deltaTone="success" />
+            <Card variant="outlined">
+              <Stat label="Error rate" value="0.31%" delta="-0.4%" deltaTone="success" />
+            </Card>
           </Column>
           <Column>
-            <Stat label="Uptime" value="99.98%" deltaTone="danger" delta="-0.02%" />
+            <Card variant="outlined">
+              <Stat label="Uptime" value="99.98%" deltaTone="danger" delta="-0.02%" />
+            </Card>
           </Column>
         </Row>
       </div>
@@ -398,6 +404,13 @@ function SkeletonProgress() {
         <Progress value={62} variant="circular" aria-label="Storage used" />
         <Progress value={100} variant="circular" tone="success" aria-label="Upload complete" />
         <Progress variant="circular" indeterminate aria-label="Downloading updates" />
+      </div>
+      <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+        <Progress value={60} variant="circular" size="xs" aria-label="Extra small" />
+        <Progress value={60} variant="circular" size="sm" aria-label="Small" />
+        <Progress value={60} variant="circular" size="md" aria-label="Medium" />
+        <Progress value={60} variant="circular" size="lg" aria-label="Large" />
+        <Progress value={60} variant="circular" size="xl" aria-label="Extra large" />
       </div>
       <Skeleton width={180} variant="text" />
       <Skeleton width={48} height={48} variant="circle" />
@@ -491,11 +504,11 @@ function Navigation() {
   );
 }
 
-function Section({ title, children }: { title: string; children: ReactNode }) {
+function Section({ title, children, className }: { title: string; children: ReactNode; className?: string }) {
   return (
     <section className="row">
       <h2>{title}</h2>
-      <div className="row-content">{children}</div>
+      <div className={["row-content", className].filter(Boolean).join(" ")}>{children}</div>
     </section>
   );
 }

@@ -1,5 +1,6 @@
 import { TextareaHTMLAttributes } from 'react';
-export type TextareaSize = "sm" | "md" | "lg";
+import { ComponentSize } from '../../sizes';
+export type TextareaSize = ComponentSize;
 export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
     size?: TextareaSize;
     resize?: "none" | "vertical" | "horizontal" | "both";

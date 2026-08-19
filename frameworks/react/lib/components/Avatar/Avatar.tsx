@@ -1,7 +1,8 @@
 import { useMemo } from "react";
+import type { ComponentSize } from "../../sizes";
 import styles from "./Avatar.module.css";
 
-export type AvatarSize = "sm" | "md" | "lg";
+export type AvatarSize = ComponentSize;
 
 export type AvatarStatus = "online" | "offline" | "away";
 

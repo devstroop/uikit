@@ -57,6 +57,7 @@
   --se-font-weight-regular: 400;
   --se-font-weight-medium: 500;
   --se-font-weight-bold: 600;
+  --se-font-size-xl: 22px;
   /* shadow */
   --se-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --se-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
@@ -77,6 +78,11 @@
   --se-z-toast: 3000;
   /* control */
   --se-control-height: 36px;
+  --se-control-height-xs: 20px;
+  --se-control-height-sm: 28px;
+  --se-control-height-md: 36px;
+  --se-control-height-lg: 44px;
+  --se-control-height-xl: 52px;
 }
 
 [data-theme="dark"] {

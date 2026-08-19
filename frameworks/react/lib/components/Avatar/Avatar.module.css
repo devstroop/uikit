@@ -9,22 +9,34 @@
   overflow: visible;
 }
 
+.xs {
+  width: var(--se-control-height-xs);
+  height: var(--se-control-height-xs);
+  font-size: 10px;
+}
+
 .sm {
-  width: 28px;
-  height: 28px;
-  font-size: 16px;
+  width: var(--se-control-height-sm);
+  height: var(--se-control-height-sm);
+  font-size: 12px;
 }
 
 .md {
-  width: 36px;
-  height: 36px;
-  font-size: 20px;
+  width: var(--se-control-height-md);
+  height: var(--se-control-height-md);
+  font-size: 15px;
 }
 
 .lg {
-  width: 48px;
-  height: 48px;
-  font-size: 26px;
+  width: var(--se-control-height-lg);
+  height: var(--se-control-height-lg);
+  font-size: 18px;
+}
+
+.xl {
+  width: var(--se-control-height-xl);
+  height: var(--se-control-height-xl);
+  font-size: 22px;
 }
 
 .initials {

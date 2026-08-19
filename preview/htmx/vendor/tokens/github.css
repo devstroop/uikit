@@ -57,6 +57,7 @@
   --se-font-weight-regular: 400;
   --se-font-weight-medium: 500;
   --se-font-weight-bold: 600;
+  --se-font-size-xl: 24px;
   /* shadow */
   --se-shadow-sm: 0 1px 0 rgba(31, 35, 40, 0.04);
   --se-shadow-md: 0 3px 6px rgba(140, 149, 159, 0.15);
@@ -77,6 +78,11 @@
   --se-z-toast: 3000;
   /* control */
   --se-control-height: 32px;
+  --se-control-height-xs: 16px;
+  --se-control-height-sm: 24px;
+  --se-control-height-md: 32px;
+  --se-control-height-lg: 40px;
+  --se-control-height-xl: 48px;
 }
 
 [data-theme="dark"] {

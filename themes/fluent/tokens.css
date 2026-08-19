@@ -57,6 +57,7 @@
   --se-font-weight-regular: 400;
   --se-font-weight-medium: 500;
   --se-font-weight-bold: 600;
+  --se-font-size-xl: 24px;
   /* shadow */
   --se-shadow-sm: 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.14);
   --se-shadow-md: 0 0 2px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.14), 0 8px 16px rgba(0, 0, 0, 0.14);
@@ -77,6 +78,11 @@
   --se-z-toast: 3000;
   /* control */
   --se-control-height: 32px;
+  --se-control-height-xs: 16px;
+  --se-control-height-sm: 24px;
+  --se-control-height-md: 32px;
+  --se-control-height-lg: 40px;
+  --se-control-height-xl: 48px;
 }
 
 [data-theme="dark"] {
