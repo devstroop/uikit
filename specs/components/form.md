@@ -65,19 +65,28 @@ Reference markup (`lib/components/form/form.html`):
 
 `data-dt-form` (behaviors.js) runs on submit:
 
-- A field is `[data-dt-field]` and invalid when `aria-invalid="true"` or
-  the `data-dt-invalid` attribute is present (set by validators).
-- Any invalid field (disabled fields skipped): `preventDefault()` +
-  `dt:invalid` event, `detail: { fields: [{ name, element }] }`.
+- Rules declared on `[data-dt-field]` elements are evaluated at submit
+  time (`data-dt-required`, `data-dt-email`, `data-dt-pattern`,
+  `data-dt-min`, `data-dt-max`, `data-dt-minlength`, `data-dt-maxlength` —
+  see the validators spec); native constraints (required/min/max/...)
+  are respected via the validity API. Empty values pass every rule
+  except required.
+- Failing fields get `aria-invalid="true"` + `data-dt-invalid` and block
+  the submit: `preventDefault()` + `dt:invalid` event with
+  `detail: { fields: [{ name, element, messages }] }`. Messages are also
+  written into the field's `[data-dt-field-error]` element (see the
+  field spec) and its id is merged into `aria-describedby`.
 - All valid: `dt:submit` event, `detail: { form, data: FormData }`; the
   native submit proceeds (server round-trip or htmx attributes).
+- Editing a field after an invalid submit clears its invalid state;
+  validity is re-evaluated on the next submit.
 
 Events bubble for delegation:
 
 | Event | detail | When |
 |---|---|---|
 | `dt:submit` | `{ form, data: FormData }` | Valid submit, not blocked |
-| `dt:invalid` | `{ fields: [{ name, element }] }` | Invalid fields blocked the submit |
+| `dt:invalid` | `{ fields: [{ name, element, messages }] }` | Invalid fields blocked the submit |
 
 ## Keyboard
 
@@ -93,10 +102,13 @@ buttons activate with Enter/Space. The container adds no key handling.
 | Invalid field (react) | `onInvalidSubmit` receives `{ name: ["message"] }`; `onSubmit` not called |
 | Errors update between submits | second submit reflects latest `validate` results |
 | Unmounted field | unregisters; later submits ignore it |
+| `useFormField` validates | field registers with the form; invalid submit reports rule errors |
+| `useFormField` reveals errors | errors appear only after an invalid submit, clear on change, re-appear on the next invalid submit |
 | `action` + `method` (react) | native attributes rendered; no SPA events fired |
 | `useFormContext` outside `<Form>` | throws |
 | Valid submit (htmx) | `dt:submit` dispatched with `FormData`; default not prevented |
 | Invalid field (htmx) | `dt:invalid` dispatched with the field's `name`; default prevented; `dt:submit` not dispatched |
+| Error element (htmx) | messages written into `[data-dt-field-error]`; error id merged into `aria-describedby` |
 | `data-dt-invalid` without aria | treated as invalid |
 | Disabled invalid field (htmx) | skipped; submit proceeds |
 

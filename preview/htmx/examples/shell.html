@@ -143,14 +143,16 @@
           <form class="dt-form" data-dt-form style="max-width: 360px">
             <div class="dt-field">
               <label class="dt-field-label" for="preview-form-name">Name</label>
-              <input id="preview-form-name" class="dt-input dt-input--md" type="text" name="name" data-dt-field placeholder="Full name" />
+              <input id="preview-form-name" class="dt-input dt-input--md" type="text" name="name" data-dt-field data-dt-required data-dt-minlength="2" placeholder="Full name" />
+              <div id="preview-form-name-error" class="dt-field-error" aria-live="polite" data-dt-field-error></div>
             </div>
             <div class="dt-field">
               <label class="dt-field-label" for="preview-form-email">Email</label>
-              <input id="preview-form-email" class="dt-input dt-input--md" type="email" name="email" data-dt-field placeholder="you@example.com" />
+              <input id="preview-form-email" class="dt-input dt-input--md" type="email" name="email" data-dt-field data-dt-required data-dt-email placeholder="you@example.com" />
+              <div id="preview-form-email-error" class="dt-field-error" aria-live="polite" data-dt-field-error></div>
             </div>
             <button class="dt-button dt-button--primary" type="submit">Submit</button>
-            <p style="font-size: var(--dt-font-size-xs); color: var(--dt-color-text-muted)">Valid submit dispatches <code>dt:submit</code> (FormData in detail) and proceeds; fields marked invalid (<code>aria-invalid</code>/<code>data-dt-invalid</code>) block it and dispatch <code>dt:invalid</code>.</p>
+            <p style="font-size: var(--dt-font-size-xs); color: var(--dt-color-text-muted)">Submit validates rules (<code>data-dt-required</code>, <code>data-dt-email</code>, <code>data-dt-minlength</code>): failures block the submit, render into <code>[data-dt-field-error]</code>, set <code>aria-invalid</code> and dispatch <code>dt:invalid</code>; editing clears the error; a valid submit dispatches <code>dt:submit</code> with FormData.</p>
           </form>
         </div>
       </section>
