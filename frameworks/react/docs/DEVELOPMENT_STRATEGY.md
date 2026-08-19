@@ -31,22 +31,47 @@ master                 production — protected; only via release PR from develo
     ├── chores          accumulator for maintenance (deps, CI, refactors, tooling)
     │   └── chore/<issue#>-<slug>
     └── docs            accumulator for documentation (guides, strategy, policies)
-        └── docs/<issue#>-<slug>
+        └── doc/<issue#>-<slug>
 ```
 
 > Git branch names cannot end in `/` — accumulators are slash-free (`fixes`,
 > `features`, ...) while implementation branches carry the slash prefix
-> (`fix/…`, `feat/…`, `chore/…`, `docs/…`).
+> (`fix/…`, `feat/…`, `chore/…`, `doc/…`). Documentation branches use the
+> singular `doc/` prefix because git refs cannot nest under an existing branch:
+> `refs/heads/docs/…` is impossible while the `docs` accumulator branch exists.
 
 ### Branch rules
 
 | Rule | Detail |
 |---|---|
 | Source | Every implementation branch is created **from its accumulator branch**, never from `master` or `develop` directly |
-| Naming | `feat/123-profile-page`, `fix/45-header-spacing`, `chore/67-ci-triggers`, `docs/12-strategy` — slug is kebab-case, issue number first |
+| Naming | `feat/123-profile-page`, `fix/45-header-spacing`, `chore/67-ci-triggers`, `doc/12-strategy` — slug is kebab-case, issue number first |
 | Freshness | Before creating a new branch, merge `develop` into the accumulator (accumulators must never drift behind `develop`) |
 | Lifecycle | Implementation branches are short-lived (hours–days). Accumulator branches live for a cycle. `develop` is permanent. `master` is permanent |
 | Protection | `master` and `develop` require PR review + green CI; direct pushes are rejected |
+
+### 2.1 Nesting (large work)
+
+Large issues decompose into a hierarchy under the accumulator. Nested branches
+carry their own issue number at each level and are created from the **branch
+one level up**:
+
+```
+features                          accumulator
+└── feat/10-examples              epic branch (issue #10)
+    ├── feat/10-examples/shell    part branch
+    │   └── feat/10-examples/shell/app-shell   unit branch
+    └── feat/10-examples/forms
+```
+
+| Rule | Detail |
+|---|---|
+| Depth | Max 3 levels below the accumulator (`feat/<issue#>-<epic>[/<part>[/<unit>]]`). Anything deeper splits into a new epic |
+| Prefix | Nesting lives under the singular prefix refs (`feat/…`), never under the accumulator name (`features/…`) — the accumulator branch occupies that ref namespace |
+| Source | Each level branches from its parent branch, not from the accumulator directly |
+| PR chain | Every branch — including units and parts — opens a PR into its **immediate parent**. CI runs on every `pull_request`, so intermediate merges are always verified. Push-triggered CI only fires on trunk branches; nested branches rely on PRs |
+| Examples | Preview/demo-site work is a normal feature: `feat/<issue#>-examples/…` under `features` |
+| Dist | Branches touching a framework rebuild `dist/` + preview vendor copies before their PR (CI in-sync gates). A parent regenerates after absorbing children and before its own PR; merged trees are regenerated after `develop` merges (resolve dist conflicts by rebuilding from the merged tree, never by hand) |
 
 ## 3. Issue lifecycle (repository host)
 
@@ -59,7 +84,7 @@ Draft (local) → Finalize (GitHub) → Assign (labels + milestone) → Implemen
 | **Draft** | Planning rounds happen in discussion first. Each draft is categorized (feature / fix / chore / refactor / docs) and recorded under `docs/planning/` (one file per cycle) |
 | **Finalize** | The finalized breakdown becomes GitHub issues. Large work becomes an **epic** (parent) with native **sub-issues**; each sub-issue is independently branchable |
 | **Label taxonomy** | `feature` · `fix` · `chore` · `refactor` · `docs` · `tech-debt` · `release` |
-| **Milestones** | One milestone per release cycle (e.g. `v0.10`). Every issue in the cycle is attached to it. Milestone closes = release ships |
+| **Milestones** | One milestone per release cycle (e.g. `v0.10`). Every issue in the cycle is attached to it. Milestone closes = release ships. Repos shipping two packages (uikit) name the milestone after the primary package and pair it with the secondary's version in the planning record |
 | **Estimation** | Keep issues small — any issue that cannot be described in a few sentences or finished in days is split into sub-issues |
 
 ### Definition of Done (every issue)
@@ -89,6 +114,7 @@ cd ../SoftEther-Web.fix-123
 
 - One worktree per active branch → **parallel tasks never need stashing**.
 - Worktrees live as siblings of the checkout (`../<repo>.<issue#>-<slug>`).
+- Accumulator worktrees use `<repo>.<accumulator>` (e.g. `uikit.features` — no issue number exists for them); implementation worktrees keep `<repo>.<issue#>-<slug>`.
 - Each worktree builds and tests independently.
 - Remove the worktree after the branch merges: `git worktree remove <path>` then delete the branch.
 
