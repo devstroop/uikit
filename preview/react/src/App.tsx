@@ -360,6 +360,9 @@ function Cards() {
       <Card variant="interactive" header="Interactive" onClick={() => alert("card clicked")}>
         Tab to it, press Enter — keyboard operable.
       </Card>
+      <Card variant="text" header="Text">
+        Flat — no border, no shadow, transparent background.
+      </Card>
     </Section>
   );
 }
