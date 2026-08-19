@@ -63,6 +63,7 @@
         "size-sm",
         "size-md",
         "size-lg",
+        "size-xl",
         "weight-regular",
         "weight-medium",
         "weight-bold"
@@ -110,7 +111,12 @@
     "control": {
       "kind": "length",
       "tokens": [
-        "height"
+        "height",
+        "height-xs",
+        "height-sm",
+        "height-md",
+        "height-lg",
+        "height-xl"
       ]
     }
   },

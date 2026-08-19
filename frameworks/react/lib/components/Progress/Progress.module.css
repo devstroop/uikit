@@ -7,6 +7,27 @@
   overflow: hidden;
 }
 
+/* Linear thickness tiers (specs/sizes.md) */
+.linear-xs {
+  height: 4px;
+}
+
+.linear-sm {
+  height: 5px;
+}
+
+.linear-md {
+  height: 6px;
+}
+
+.linear-lg {
+  height: 8px;
+}
+
+.linear-xl {
+  height: 10px;
+}
+
 .bar {
   position: absolute;
   inset: 0 auto 0 0;
@@ -47,11 +68,38 @@
 
 .circular {
   transform: rotate(-90deg);
+  stroke-width: 2px;
+}
+
+/* Circular diameter tiers — control-height scale (specs/sizes.md) */
+.circular-xs {
+  width: var(--se-control-height-xs);
+  height: var(--se-control-height-xs);
+}
+
+.circular-sm {
+  width: var(--se-control-height-sm);
+  height: var(--se-control-height-sm);
+}
+
+.circular-md {
+  width: var(--se-control-height-md);
+  height: var(--se-control-height-md);
+}
+
+.circular-lg {
+  width: var(--se-control-height-lg);
+  height: var(--se-control-height-lg);
+}
+
+.circular-xl {
+  width: var(--se-control-height-xl);
+  height: var(--se-control-height-xl);
 }
 
 .circular circle {
   fill: none;
-  stroke-width: 6px;
+  stroke-width: 2px;
 }
 
 .track {

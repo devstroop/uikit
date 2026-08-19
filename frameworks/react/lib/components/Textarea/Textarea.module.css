@@ -1,5 +1,6 @@
 .textarea {
   width: 100%;
+  min-width: 0;
   background: var(--se-color-surface);
   border: 1px solid var(--se-color-border-strong);
   border-radius: var(--se-radius-md);
@@ -21,16 +22,29 @@
   box-shadow: 0 0 0 3px var(--se-color-focus);
 }
 
+.xs {
+  min-height: 40px;
+  font-size: var(--se-font-size-xs);
+}
+
 .sm {
   min-height: 56px;
+  font-size: var(--se-font-size-xs);
 }
 
 .md {
   min-height: 84px;
+  font-size: var(--se-font-size-sm);
 }
 
 .lg {
   min-height: 128px;
+  font-size: var(--se-font-size-md);
+}
+
+.xl {
+  min-height: 160px;
+  font-size: var(--se-font-size-lg);
 }
 
 .resize-none {

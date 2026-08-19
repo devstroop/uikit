@@ -65,23 +65,33 @@
 
 /* Sizes */
 .xs {
-  padding: 4px 8px;
+  height: var(--se-control-height-xs);
+  padding: 0 8px;
   font-size: var(--se-font-size-xs);
 }
 
 .sm {
-  padding: 6px 12px;
+  height: var(--se-control-height-sm);
+  padding: 0 12px;
   font-size: var(--se-font-size-xs);
 }
 
 .md {
-  padding: 9px 16px;
+  height: var(--se-control-height-md);
+  padding: 0 16px;
   font-size: var(--se-font-size-sm);
 }
 
 .lg {
-  padding: 12px 20px;
+  height: var(--se-control-height-lg);
+  padding: 0 20px;
   font-size: var(--se-font-size-md);
+}
+
+.xl {
+  height: var(--se-control-height-xl);
+  padding: 0 24px;
+  font-size: var(--se-font-size-lg);
 }
 
 .iconOnly {
@@ -91,19 +101,23 @@
 }
 
 .iconOnly.xs {
-  width: 24px;
+  width: var(--se-control-height-xs);
 }
 
 .iconOnly.sm {
-  width: 32px;
+  width: var(--se-control-height-sm);
 }
 
 .iconOnly.md {
-  width: 40px;
+  width: var(--se-control-height-md);
 }
 
 .iconOnly.lg {
-  width: 48px;
+  width: var(--se-control-height-lg);
+}
+
+.iconOnly.xl {
+  width: var(--se-control-height-xl);
 }
 
 .fullWidth {

@@ -17,9 +17,14 @@ tokens:
   - "color.focus"
   - "color.danger"
   - "font.size-xs"
-  - "control.height"
   - "font.size-sm"
   - "font.size-md"
+  - "font.size-lg"
+  - "control.height-xs"
+  - "control.height-sm"
+  - "control.height-md"
+  - "control.height-lg"
+  - "control.height-xl"
 a11y:
   - "Renders a native <input>, so all native semantics (text entry, label association via htmlFor/id) apply; remaining InputHTMLAttributes are forwarded."
   - "aria-invalid is set to \"true\" when `invalid` is true (and omitted otherwise), giving screen readers a state cue."
@@ -37,7 +42,7 @@ Text-entry control with size and validation states, wrapping the native
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `size` | `sm` \| `md` \| `lg` | `md` | Density tier (`sm` 6/10px padding, `md` 8/12px + control height, `lg` 10/16px + control-height + 8px) |
+| `size` | `xs` \| `sm` \| `md` \| `lg` \| `xl` | `md` | Density tier (shared `ComponentSize` scale: `control.height-xs` 20px → `xl` 52px in default theme) |
 | `invalid` | `boolean` | `false` | Marks the control invalid (danger border) and sets `aria-invalid` |
 | ... | `InputHTMLAttributes<HTMLInputElement>` (minus `size`) | — | Forwarded to the native input (`type`, `value`, `placeholder`, `disabled`, `aria-*`, ...) |
 
@@ -45,18 +50,20 @@ The component is `forwardRef`d to `HTMLInputElement`.
 
 ## Behavior
 
-- `size="md"` uses `height: var(--se-control-height)` with `font.size-sm`;
-  `size="sm"` uses tighter padding with `font.size-xs`; `size="lg"` uses
-  `height: calc(var(--se-control-height) + 8px)` with `font.size-md`.
-  Default `type` is
+- Sizes set `height` from the `control.height-{tier}` scale with the
+  tier−1 `font.size` pairing: `xs` 12px text, `sm` 12px, `md` 14px,
+  `lg` 16px, `xl` 18px; horizontal padding is 10/10/12/14/16px and
+  vertical padding 6/6/8/10/12px. Default `type` is
   whatever the consumer passes (no default set).
 - Invalid state: `color.danger` border plus a 25% danger `color-mix` halo,
   applied both at rest and on `:focus-visible`.
 - `:focus-visible` replaces the default outline with a primary border +
   `color.focus` ring; `:disabled` renders at `opacity 0.55` with
   `cursor: not-allowed`.
-- Full-width (`width: 100%`) block-level input with `border-strong`,
-  `radius.md`, and `surface` background.
+- Full-width (`width: 100%`, `min-width: 0`) block-level input with
+  `border-strong`, `radius.md`, and `surface` background. `min-width: 0`
+  lets the control shrink inside flex/grid rows (native inputs otherwise
+  refuse to go below their intrinsic UA width).
 
 ## Keyboard
 

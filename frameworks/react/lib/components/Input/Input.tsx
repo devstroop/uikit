@@ -1,7 +1,8 @@
 import { forwardRef, type InputHTMLAttributes } from "react";
+import type { ComponentSize } from "../../sizes";
 import styles from "./Input.module.css";
 
-export type InputSize = "sm" | "md" | "lg";
+export type InputSize = ComponentSize;
 
 export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   size?: InputSize;

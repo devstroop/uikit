@@ -1,8 +1,9 @@
 import { forwardRef, type ButtonHTMLAttributes } from "react";
+import type { ComponentSize } from "../../sizes";
 import styles from "./Button.module.css";
 
 export type ButtonVariant = "primary" | "secondary" | "ghost" | "danger";
-export type ButtonSize = "xs" | "sm" | "md" | "lg";
+export type ButtonSize = ComponentSize;
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;

@@ -12,16 +12,24 @@ describe("Icon", () => {
     expect(svg).toHaveAttribute("focusable", "false");
   });
 
-  it("applies default size, viewBox, and strokeWidth", () => {
+  it("applies default size (md tier), viewBox, and strokeWidth", () => {
     const { container } = render(<Icon name="check" />);
     const svg = container.querySelector("svg");
-    expect(svg).toHaveAttribute("width", "16");
-    expect(svg).toHaveAttribute("height", "16");
+    expect(svg).not.toHaveAttribute("width");
+    expect(svg).toHaveClass(/md/);
     expect(svg).toHaveAttribute("viewBox", "0 0 24 24");
     expect(svg).toHaveAttribute("stroke-width", "2");
   });
 
-  it("honors size and strokeWidth props", () => {
+  it("maps size tiers to the font-size scale classes", () => {
+    const { container, rerender } = render(<Icon name="user" size="xs" />);
+    const svg = container.querySelector("svg");
+    expect(svg).toHaveClass(/xs/);
+    rerender(<Icon name="user" size="xl" />);
+    expect(container.querySelector("svg")).toHaveClass(/xl/);
+  });
+
+  it("honors numeric size and strokeWidth props", () => {
     const { container } = render(<Icon name="user" size={24} strokeWidth={1.5} />);
     const svg = container.querySelector("svg");
     expect(svg).toHaveAttribute("width", "24");

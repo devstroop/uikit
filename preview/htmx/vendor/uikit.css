@@ -224,22 +224,34 @@
   overflow: visible;
 }
 
+.se-avatar--xs {
+  width: var(--se-control-height-xs);
+  height: var(--se-control-height-xs);
+  font-size: 10px;
+}
+
 .se-avatar--sm {
-  width: 28px;
-  height: 28px;
-  font-size: 16px;
+  width: var(--se-control-height-sm);
+  height: var(--se-control-height-sm);
+  font-size: 12px;
 }
 
 .se-avatar--md {
-  width: 36px;
-  height: 36px;
-  font-size: 20px;
+  width: var(--se-control-height-md);
+  height: var(--se-control-height-md);
+  font-size: 15px;
 }
 
 .se-avatar--lg {
-  width: 48px;
-  height: 48px;
-  font-size: 26px;
+  width: var(--se-control-height-lg);
+  height: var(--se-control-height-lg);
+  font-size: 18px;
+}
+
+.se-avatar--xl {
+  width: var(--se-control-height-xl);
+  height: var(--se-control-height-xl);
+  font-size: 22px;
 }
 
 .se-avatar-initials {
@@ -326,13 +338,38 @@
   display: inline-flex;
   align-items: center;
   gap: var(--se-space-1);
-  padding: 2px 8px;
   border-radius: var(--se-radius-full);
   font-family: var(--se-font-sans);
-  font-size: var(--se-font-size-xs);
+  font-size: var(--se-font-size-sm);
   font-weight: var(--se-font-weight-medium);
   line-height: 1.6;
   white-space: nowrap;
+}
+
+/* Size tiers */
+.se-badge--xs {
+  padding: 1px 6px;
+  font-size: var(--se-font-size-xs);
+}
+
+.se-badge--sm {
+  padding: 1px 8px;
+  font-size: var(--se-font-size-xs);
+}
+
+.se-badge--md {
+  padding: 2px 10px;
+  font-size: var(--se-font-size-sm);
+}
+
+.se-badge--lg {
+  padding: 3px 12px;
+  font-size: var(--se-font-size-md);
+}
+
+.se-badge--xl {
+  padding: 4px 14px;
+  font-size: var(--se-font-size-lg);
 }
 
 /* Tones (soft variant is the base) */
@@ -428,6 +465,9 @@
   align-items: center;
   justify-content: center;
   gap: var(--se-space-2);
+  height: var(--se-control-height-md);
+  padding: 0 16px;
+  font-size: var(--se-font-size-sm);
   border: 1px solid transparent;
   border-radius: var(--se-radius-md);
   font-family: var(--se-font-sans);
@@ -488,51 +528,60 @@
 }
 
 .se-button--xs {
-  padding: 4px 8px;
+  height: var(--se-control-height-xs);
+  padding: 0 8px;
   font-size: var(--se-font-size-xs);
 }
 
 .se-button--sm {
-  padding: 6px 12px;
+  height: var(--se-control-height-sm);
+  padding: 0 12px;
   font-size: var(--se-font-size-xs);
 }
 
 .se-button--lg {
-  padding: 12px 20px;
+  height: var(--se-control-height-lg);
+  padding: 0 20px;
   font-size: var(--se-font-size-md);
 }
 
-.se-button:not(.se-button--xs):not(.se-button--sm):not(.se-button--lg) {
-  padding: 9px 16px;
+.se-button--xl {
+  height: var(--se-control-height-xl);
+  padding: 0 24px;
+  font-size: var(--se-font-size-lg);
+}
+
+.se-button--md {
+  height: var(--se-control-height-md);
+  padding: 0 16px;
   font-size: var(--se-font-size-sm);
 }
 
 .se-button--icon-only {
   padding: 0;
+  width: var(--se-control-height-md);
   aspect-ratio: 1;
   border-radius: var(--se-radius-full);
 }
 
-/* md is the default tier, so it has no modifier class of its own; the
-   default-size icon-only button still gets the md width (40px). */
-.se-button--icon-only:not(.se-button--xs):not(.se-button--sm):not(.se-button--lg) {
-  width: 40px;
-}
-
 .se-button--icon-only.se-button--xs {
-  width: 24px;
+  width: var(--se-control-height-xs);
 }
 
 .se-button--icon-only.se-button--sm {
-  width: 32px;
+  width: var(--se-control-height-sm);
 }
 
 .se-button--icon-only.se-button--md {
-  width: 40px;
+  width: var(--se-control-height-md);
 }
 
 .se-button--icon-only.se-button--lg {
-  width: 48px;
+  width: var(--se-control-height-lg);
+}
+
+.se-button--icon-only.se-button--xl {
+  width: var(--se-control-height-xl);
 }
 
 .se-button--full-width {
@@ -960,14 +1009,39 @@
   border-bottom: 1px solid var(--se-color-border);
 }
 
-/* Icon — no styles. The react Icon has no CSS module and the spec declares
-   zero tokens: the glyph inherits its color via stroke="currentColor" and
-   sizing comes from the width/height/stroke-width attributes on the <svg>. */
+/* Icon — size tier modifiers. The glyph inherits its color via
+   stroke="currentColor". Sizing comes from the width/height attributes on
+   the <svg>, or from a size tier modifier when a server prefers classes:
+   each tier maps to the font-size scale. Default (no modifier) is md. */
+.se-icon--xs {
+  width: var(--se-font-size-xs);
+  height: var(--se-font-size-xs);
+}
 
+.se-icon--sm {
+  width: var(--se-font-size-sm);
+  height: var(--se-font-size-sm);
+}
+
+.se-icon--md {
+  width: var(--se-font-size-md);
+  height: var(--se-font-size-md);
+}
+
+.se-icon--lg {
+  width: var(--se-font-size-lg);
+  height: var(--se-font-size-lg);
+}
+
+.se-icon--xl {
+  width: var(--se-font-size-xl);
+  height: var(--se-font-size-xl);
+}
 
 .se-input {
   display: block;
   width: 100%;
+  min-width: 0;
   box-sizing: border-box;
   border: 1px solid var(--se-color-border-strong);
   border-radius: var(--se-radius-md);
@@ -1000,21 +1074,34 @@
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--se-color-danger) 25%, transparent);
 }
 
+.se-input--xs {
+  height: var(--se-control-height-xs);
+  padding: 6px 10px;
+  font-size: var(--se-font-size-xs);
+}
+
 .se-input--sm {
+  height: var(--se-control-height-sm);
   padding: 6px 10px;
   font-size: var(--se-font-size-xs);
 }
 
 .se-input--md {
-  height: var(--se-control-height);
+  height: var(--se-control-height-md);
   padding: 8px 12px;
   font-size: var(--se-font-size-sm);
 }
 
 .se-input--lg {
-  height: calc(var(--se-control-height) + 8px);
-  padding: 10px 16px;
+  height: var(--se-control-height-lg);
+  padding: 10px 14px;
   font-size: var(--se-font-size-md);
+}
+
+.se-input--xl {
+  height: var(--se-control-height-xl);
+  padding: 12px 16px;
+  font-size: var(--se-font-size-lg);
 }
 
 
@@ -1052,6 +1139,27 @@
   border-radius: var(--se-radius-full);
   background: var(--se-color-surface-hover);
   overflow: hidden;
+}
+
+/* Linear thickness tiers */
+.se-progress--xs {
+  height: 4px;
+}
+
+.se-progress--sm {
+  height: 5px;
+}
+
+.se-progress--md {
+  height: 6px;
+}
+
+.se-progress--lg {
+  height: 8px;
+}
+
+.se-progress--xl {
+  height: 10px;
 }
 
 .se-progress-bar {
@@ -1094,11 +1202,40 @@
 
 .se-progress-circular {
   transform: rotate(-90deg);
+  width: var(--se-control-height-md);
+  height: var(--se-control-height-md);
+  stroke-width: 2px;
+}
+
+/* Circular diameter tiers — control-height scale */
+.se-progress-circular.se-progress--xs {
+  width: var(--se-control-height-xs);
+  height: var(--se-control-height-xs);
+}
+
+.se-progress-circular.se-progress--sm {
+  width: var(--se-control-height-sm);
+  height: var(--se-control-height-sm);
+}
+
+.se-progress-circular.se-progress--md {
+  width: var(--se-control-height-md);
+  height: var(--se-control-height-md);
+}
+
+.se-progress-circular.se-progress--lg {
+  width: var(--se-control-height-lg);
+  height: var(--se-control-height-lg);
+}
+
+.se-progress-circular.se-progress--xl {
+  width: var(--se-control-height-xl);
+  height: var(--se-control-height-xl);
 }
 
 .se-progress-circular circle {
   fill: none;
-  stroke-width: 6px;
+  stroke-width: 2px;
 }
 
 .se-progress-circular .se-progress-track {
@@ -1184,6 +1321,7 @@
 .se-select {
   display: block;
   width: 100%;
+  min-width: 0;
   box-sizing: border-box;
   border: 1px solid var(--se-color-border-strong);
   border-radius: var(--se-radius-md);
@@ -1218,21 +1356,34 @@
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--se-color-danger) 25%, transparent);
 }
 
+.se-select--xs {
+  height: var(--se-control-height-xs);
+  padding: 6px 32px 6px 10px;
+  font-size: var(--se-font-size-xs);
+}
+
 .se-select--sm {
+  height: var(--se-control-height-sm);
   padding: 6px 32px 6px 10px;
   font-size: var(--se-font-size-xs);
 }
 
 .se-select--md {
-  height: var(--se-control-height);
+  height: var(--se-control-height-md);
   padding: 8px 32px 8px 12px;
   font-size: var(--se-font-size-sm);
 }
 
 .se-select--lg {
-  height: calc(var(--se-control-height) + 8px);
-  padding: 10px 32px 10px 16px;
+  height: var(--se-control-height-lg);
+  padding: 10px 32px 10px 14px;
   font-size: var(--se-font-size-md);
+}
+
+.se-select--xl {
+  height: var(--se-control-height-xl);
+  padding: 12px 32px 12px 16px;
+  font-size: var(--se-font-size-lg);
 }
 
 
@@ -1577,6 +1728,7 @@
 
 .se-textarea {
   width: 100%;
+  min-width: 0;
   box-sizing: border-box;
   background: var(--se-color-surface);
   border: 1px solid var(--se-color-border-strong);
@@ -1599,16 +1751,29 @@
   box-shadow: 0 0 0 3px var(--se-color-focus);
 }
 
+.se-textarea--xs {
+  min-height: 40px;
+  font-size: var(--se-font-size-xs);
+}
+
 .se-textarea--sm {
   min-height: 56px;
+  font-size: var(--se-font-size-xs);
 }
 
 .se-textarea--md {
   min-height: 84px;
+  font-size: var(--se-font-size-sm);
 }
 
 .se-textarea--lg {
   min-height: 128px;
+  font-size: var(--se-font-size-md);
+}
+
+.se-textarea--xl {
+  min-height: 160px;
+  font-size: var(--se-font-size-lg);
 }
 
 .se-textarea--resize-none {

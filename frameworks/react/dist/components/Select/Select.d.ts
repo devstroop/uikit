@@ -1,5 +1,6 @@
 import { ReactNode, SelectHTMLAttributes } from 'react';
-export type SelectSize = "sm" | "md" | "lg";
+import { ComponentSize } from '../../sizes';
+export type SelectSize = ComponentSize;
 export interface SelectOption {
     value: string;
     label: string;

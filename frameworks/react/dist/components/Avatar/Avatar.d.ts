@@ -1,4 +1,5 @@
-export type AvatarSize = "sm" | "md" | "lg";
+import { ComponentSize } from '../../sizes';
+export type AvatarSize = ComponentSize;
 export type AvatarStatus = "online" | "offline" | "away";
 export interface AvatarProps {
     name?: string;

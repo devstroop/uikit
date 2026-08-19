@@ -14,6 +14,12 @@ tokens:
   - "font.size-xs"
   - "font.size-sm"
   - "font.size-md"
+  - "font.size-lg"
+  - "control.height-xs"
+  - "control.height-sm"
+  - "control.height-md"
+  - "control.height-lg"
+  - "control.height-xl"
   - "color.primary"
   - "color.primary-hover"
   - "color.primary-fg"
@@ -43,7 +49,7 @@ Primary action control for forms, toolbars, and empty states.
 | Prop | Type | Default | Description |
 |---|---|---|---|
 | `variant` | `primary` \| `secondary` \| `ghost` \| `danger` | `primary` | Visual emphasis tier |
-| `size` | `xs` \| `sm` \| `md` \| `lg` | `md` | Density tier (Radzen `ButtonSize` parity: ExtraSmall…Large) |
+| `size` | `xs` \| `sm` \| `md` \| `lg` \| `xl` | `md` | Density tier (shared `ComponentSize` scale: `control.height-xs` 20px → `xl` 52px in default theme) |
 | `fullWidth` | `boolean` | `false` | Stretch to fill the parent's width |
 | `iconOnly` | `boolean` | `false` | Circular icon button: no text, square aspect ratio sized to the tier (Radzen FAB pattern); requires `aria-label` |
 
@@ -58,12 +64,12 @@ All remaining props are forwarded to the native `<button>` element
   dialog is implied by the component itself.
 - Disabled: `opacity 0.55`, `cursor: not-allowed`, native activation
   suppression. Hover styles never apply while disabled.
-- Sizes: `xs` 12px text / 4px 8px padding, `sm` 12px / 6px 12px, `md`
-  14px / 9px 16px, `lg` 16px / 12px 20px — all derived from the spacing
-  and type scales.
+- Sizes set `height` from the `control.height-{tier}` scale and the label
+  font from the tier−1 `font.size` pairing: `xs` 12px text, `sm` 12px,
+  `md` 14px, `lg` 16px, `xl` 18px; horizontal padding is 8/12/16/20/24px
+  (tier index × 4 + 4).
 - Icon-only: `padding: 0`, `border-radius: radius.full`, `aspect-ratio:
-  1`, glyph centered; tier widths: `xs` 24px, `sm` 32px, `md` 40px,
-  `lg` 48px.
+  1`, glyph centered; width equals the tier's `control.height-{tier}`.
 
 ## Keyboard
 
@@ -77,8 +83,7 @@ document order; `:focus-visible` ring is the only focus indicator.
 | Renders with default primary variant | `role="button"` with accessible name |
 | Default `type` | attribute is `button` |
 | Variant/size/fullWidth | class names applied |
-| `size="xs"` | xs class applied |
-| `iconOnly` | icon-only class applied |
+| `size="xs"` | xs class applied || `iconOnly` | icon-only class applied |
 | Disabled + click | click handler not invoked |
 
 Every framework implementation must pass an equivalent matrix (per

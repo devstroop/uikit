@@ -7,7 +7,7 @@ export { Card } from "./components/Card/Card";
 export type { CardProps, CardVariant } from "./components/Card/Card";
 
 export { Badge } from "./components/Badge/Badge";
-export type { BadgeProps, BadgeTone, BadgeVariant } from "./components/Badge/Badge";
+export type { BadgeProps, BadgeTone, BadgeVariant, BadgeSize } from "./components/Badge/Badge";
 
 export { Icon, iconNames } from "./components/Icon/Icon";
 export type { IconProps, IconName } from "./components/Icon/Icon";
@@ -76,6 +76,8 @@ export type { SidebarProps, SidebarPosition } from "./components/Sidebar/Sidebar
 
 export { Progress } from "./components/Progress/Progress";
 export type { ProgressProps, ProgressTone } from "./components/Progress/Progress";
+
+export type { ComponentSize } from "./sizes";
 
 export { ThemeSwitcher } from "./components/ThemeSwitcher/ThemeSwitcher";
 export type { ThemeSwitcherProps, ThemeName } from "./components/ThemeSwitcher/ThemeSwitcher";

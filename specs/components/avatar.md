@@ -18,6 +18,11 @@ tokens:
   - "color.palette-3"
   - "color.palette-4"
   - "color.palette-5"
+  - "control.height-xs"
+  - "control.height-sm"
+  - "control.height-md"
+  - "control.height-lg"
+  - "control.height-xl"
 a11y:
   - "Root is a span with role=\"img\" and aria-label (alt ?? name ?? \"avatar\")."
   - "Initials and the status dot are aria-hidden=\"true\" (decorative)."
@@ -37,7 +42,7 @@ derived initials on a deterministic hash-based background color.
 | `name` | `string` | `undefined` | Source for initials and fallback label |
 | `src` | `string` | `undefined` | Image URL; renders `<img>` when set |
 | `alt` | `string` | `undefined` | Overrides the aria-label and img alt |
-| `size` | `sm` \| `md` \| `lg` | `md` | Diameter tier (28 / 36 / 48px) |
+| `size` | `xs` \| `sm` \| `md` \| `lg` \| `xl` | `md` | Diameter tier (shared `ComponentSize` scale: `control.height-xs` 20px → `xl` 52px in default theme) |
 | `status` | `online` \| `offline` \| `away` | `undefined` | Presence dot |
 | `className` | `string` | `undefined` | Extra class on the root |
 
@@ -53,11 +58,10 @@ derived initials on a deterministic hash-based background color.
   by `scripts/derive-tone-tokens.mjs` so surface on the fill >= 4.55), applied
   via inline `style={{ background }}` in React and a `--palette-N` modifier
   class in htmx. Initials text is `color.surface`.
-- Sizes are hardcoded px (sm 28, md 36, lg 48); the root also anchors a
-  per-size `font-size` (sm 16, md 20, lg 26) so the initials (`0.72em`,
-  ≈ 11.5 / 14.4 / 18.7px) scale with the avatar; the status dot scales per
-  size (sm 10, md 12, lg 14) with a 2px `color.surface` ring positioned at
-  the bottom-right.
+- Sizes map the root diameter to `control.height-{tier}`; the initials
+  font is a fixed px scale (xs 10, sm 12, md 15, lg 18, xl 22) so the
+  initials (`0.72em`) scale with the avatar; the status dot scales per
+  size with a 2px `color.surface` ring positioned at the bottom-right.
 - Status fill colors: online → success, offline → text-muted, away → warning.
 
 ## Keyboard

@@ -10,6 +10,9 @@ tokens:
   - "radius.full"
   - "font.sans"
   - "font.size-xs"
+  - "font.size-sm"
+  - "font.size-md"
+  - "font.size-lg"
   - "font.weight-medium"
   - "color.surface-hover"
   - "color.text-muted"
@@ -42,6 +45,7 @@ A compact status or count label in soft, solid, or outline styles.
 |---|---|---|---|
 | `tone` | `neutral` \| `primary` \| `success` \| `warning` \| `danger` | `neutral` | Color tone |
 | `variant` | `soft` \| `solid` \| `outline` | `soft` | Fill style |
+| `size` | `xs` \| `sm` \| `md` \| `lg` \| `xl` | `md` | Density tier (shared `ComponentSize` scale) |
 
 All remaining props extend `HTMLAttributes<HTMLSpanElement>` and are spread
 onto the `<span>` (aria-label, className, ...). The component is forwardRef'd
@@ -57,7 +61,9 @@ to the span.
 - Solid: filled with `primary` + `primary-fg`; all other solid tones use the
   tone color fill with `surface` text (neutral uses `text` fill on `surface`).
 - Outline: 1px `border-strong` + `text` for neutral; tone-colored border with a `text`-colored label for other tones.
-- Layout: `inline-flex`, `radius.full`, xs font, 2px 8px padding (hardcoded).
+- Layout: `inline-flex`, `radius.full`; size tiers pair padding with the
+  font-size scale: `xs` 1/6px, `sm` 1/8px, `md` 2/10px, `lg` 3/12px,
+  `xl` 4/14px; fonts `xs`→`xs`, `sm`→`xs`, `md`→`sm`, `lg`→`md`, `xl`→`lg`.
 
 ## Keyboard
 
