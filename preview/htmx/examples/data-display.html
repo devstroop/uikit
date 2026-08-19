@@ -1,30 +1,38 @@
       <section class="row">
         <h2>Table</h2>
         <div class="row-content">
-          <div class="se-table-wrap">
-            <table class="se-table">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th class="se-table-cell--center">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>alice</td>
-                  <td class="se-table-cell--center"><span class="se-badge se-badge--soft se-badge--success">active</span></td>
-                </tr>
-                <tr>
-                  <td>bob</td>
-                  <td class="se-table-cell--center"><span class="se-badge se-badge--soft se-badge--success">active</span></td>
-                </tr>
-                <tr>
-                  <td>carol</td>
-                  <td class="se-table-cell--center"><span class="se-badge se-badge--soft se-badge--warning">paused</span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+<div class="se-table-wrap">
+  <table class="se-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Role</th>
+        <th class="se-table-cell--center">Status</th>
+        <th class="se-table-cell--right">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>alice</td>
+        <td style="color: var(--se-color-text-muted)">admin</td>
+        <td class="se-table-cell--center"><span class="se-badge se-badge--soft se-badge--success">active</span></td>
+        <td class="se-table-cell--right"><button class="se-button se-button--ghost se-button--xs" type="button" aria-label="Actions for alice">…</button></td>
+      </tr>
+      <tr>
+        <td>bob</td>
+        <td style="color: var(--se-color-text-muted)">editor</td>
+        <td class="se-table-cell--center"><span class="se-badge se-badge--soft se-badge--success">active</span></td>
+        <td class="se-table-cell--right"><button class="se-button se-button--ghost se-button--xs" type="button" aria-label="Actions for bob">…</button></td>
+      </tr>
+      <tr>
+        <td>carol</td>
+        <td style="color: var(--se-color-text-muted)">viewer</td>
+        <td class="se-table-cell--center"><span class="se-badge se-badge--soft se-badge--warning">paused</span></td>
+        <td class="se-table-cell--right"><button class="se-button se-button--ghost se-button--xs" type="button" aria-label="Actions for carol">…</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
         </div>
       </section>
       <section class="row">
@@ -40,11 +48,16 @@
           <span class="se-badge se-badge--solid se-badge--success">solid</span>
           <span class="se-badge se-badge--solid se-badge--warning">solid</span>
           <span class="se-badge se-badge--solid se-badge--danger">solid</span>
-          <span class="se-badge se-badge--outline se-badge--neutral">outline</span>
-          <span class="se-badge se-badge--outline se-badge--primary">outline</span>
-          <span class="se-badge se-badge--outline se-badge--success">outline</span>
-          <span class="se-badge se-badge--outline se-badge--warning">outline</span>
-          <span class="se-badge se-badge--outline se-badge--danger">outline</span>
+<span class="se-badge se-badge--outline se-badge--neutral">outline</span>
+  <span class="se-badge se-badge--outline se-badge--primary">outline</span>
+  <span class="se-badge se-badge--outline se-badge--success">outline</span>
+  <span class="se-badge se-badge--outline se-badge--warning">outline</span>
+  <span class="se-badge se-badge--outline se-badge--danger">outline</span>
+  <span class="se-badge se-badge--soft se-badge--primary se-badge--xs">xs</span>
+  <span class="se-badge se-badge--soft se-badge--primary se-badge--sm">sm</span>
+  <span class="se-badge se-badge--soft se-badge--primary se-badge--md">md</span>
+  <span class="se-badge se-badge--soft se-badge--primary se-badge--lg">lg</span>
+  <span class="se-badge se-badge--soft se-badge--primary se-badge--xl">xl</span>
         </div>
       </section>
       <section class="row">
@@ -115,12 +128,13 @@
       <section class="row">
         <h2>Avatar</h2>
         <div class="row-content">
-          <div class="se-avatar se-avatar--sm se-avatar--palette-0" role="img" aria-label="Ada Lovelace"><span class="se-avatar-initials" aria-hidden="true">AL</span></div>
-          <div class="se-avatar se-avatar--md se-avatar--palette-1" role="img" aria-label="Samantha Miller"><span class="se-avatar-initials" aria-hidden="true">SM</span></div>
-          <div class="se-avatar se-avatar--lg se-avatar--palette-2" role="img" aria-label="Grace Hopper"><span class="se-avatar-initials" aria-hidden="true">GH</span></div>
-          <div class="se-avatar se-avatar--md se-avatar--palette-3 se-avatar--online" role="img" aria-label="Jane Wu"><span class="se-avatar-initials" aria-hidden="true">JW</span><span class="se-avatar-status" aria-hidden="true"></span></div>
-          <div class="se-avatar se-avatar--md se-avatar--palette-4 se-avatar--away" role="img" aria-label="Rhea Bhatt"><span class="se-avatar-initials" aria-hidden="true">RB</span><span class="se-avatar-status" aria-hidden="true"></span></div>
-          <div class="se-avatar se-avatar--md se-avatar--palette-5 se-avatar--offline" role="img" aria-label="Ava Torres"><span class="se-avatar-initials" aria-hidden="true">AT</span><span class="se-avatar-status" aria-hidden="true"></span></div>
+<div class="se-avatar se-avatar--sm se-avatar--palette-0" role="img" aria-label="Ada Lovelace"><span class="se-avatar-initials" aria-hidden="true">AL</span></div>
+  <div class="se-avatar se-avatar--md se-avatar--palette-1" role="img" aria-label="Samantha Miller"><span class="se-avatar-initials" aria-hidden="true">SM</span></div>
+  <div class="se-avatar se-avatar--lg se-avatar--palette-2" role="img" aria-label="Grace Hopper"><span class="se-avatar-initials" aria-hidden="true">GH</span></div>
+  <div class="se-avatar se-avatar--xl se-avatar--palette-3" role="img" aria-label="Kathleen Booth"><span class="se-avatar-initials" aria-hidden="true">KB</span></div>
+  <div class="se-avatar se-avatar--md se-avatar--palette-4 se-avatar--online" role="img" aria-label="Jane Wu"><span class="se-avatar-initials" aria-hidden="true">JW</span><span class="se-avatar-status" aria-hidden="true"></span></div>
+  <div class="se-avatar se-avatar--md se-avatar--palette-5 se-avatar--away" role="img" aria-label="Rhea Bhatt"><span class="se-avatar-initials" aria-hidden="true">RB</span><span class="se-avatar-status" aria-hidden="true"></span></div>
+  <div class="se-avatar se-avatar--md se-avatar--palette-0 se-avatar--offline" role="img" aria-label="Ava Torres"><span class="se-avatar-initials" aria-hidden="true">AT</span><span class="se-avatar-status" aria-hidden="true"></span></div>
         </div>
       </section>
       <section class="row">
@@ -130,7 +144,12 @@
           <svg class="se-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 8v4l2 2" /></svg>
           <svg class="se-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 16v-4M12 8h.01" /></svg>
           <svg class="se-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" /></svg>
-          <svg class="se-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15a3 3 0 100-6 3 3 0 000 6z" /><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z" /></svg>
+          <svg class="se-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
+  <svg class="se-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15a3 3 0 100-6 3 3 0 000 6z" /><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z" /></svg>
+  <svg class="se-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15a3 3 0 100-6 3 3 0 000 6z" /><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z" /></svg>
+  <svg class="se-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15a3 3 0 100-6 3 3 0 000 6z" /><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z" /></svg>
+  <svg class="se-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15a3 3 0 100-6 3 3 0 000 6z" /><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z" /></svg>
+  <svg class="se-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15a3 3 0 100-6 3 3 0 000 6z" /><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z" /></svg>
         </div>
       </section>
       <section class="row">
