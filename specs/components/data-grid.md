@@ -3,8 +3,8 @@ name: DataGrid
 status: implemented
 category: data
 frameworks:
-  react: v0.8.0
-  htmx: v0.6.0
+  react: v0.9.0
+  htmx: v0.7.0
 tokens: []
 a11y:
   - "Grid table carries role=grid with aria-rowcount on the data region; sorted columns expose aria-sort (ascending/descending/none) on the th."
@@ -12,6 +12,8 @@ a11y:
   - "Per-column filter UI is a labelled form control (label element + value input + operator select), never color- or icon-only state."
   - "The pager is a labelled navigation landmark region: page buttons carry aria-current=page, ellipsis spans are aria-hidden, and the page summary is announced via the same live region."
   - "Empty message and loading overlay are announced (aria-live=polite); loading state exposes aria-busy on the grid region."
+  - "Selectable rows expose aria-selected on the tr; frozen columns keep sticky cells in the accessibility tree (role gridcell, not aria-hidden)."
+  - "Column resize handles are separator roles with aria-orientation=vertical and per-column aria-labels; the column picker is an aria-expanded menu of labelled checkboxes."
 ---
 
 # DataGrid
@@ -77,6 +79,37 @@ Radzen `RadzenDataGridColumn<TItem>` parity subset:
 - Page is clamped after filter/sort changes (radzen resets to page 1 on
   filter change; keeps page on sort).
 
+## Selection
+
+- `selectionMode`: `None` \| `Single` \| `Multiple` (Radzen `SelectionMode`
+  parity). Rows expose `aria-selected` and a `selected` row class.
+- Controlled keys via `selectedKeys` + `onSelectionChange(keys)` (react);
+  htmx: `data-dt-datagrid-select="single|multiple"`, `data-dt-row-key` per
+  row, event `dt:grid-select` with `{ keys }`.
+- Row clicks that land on interactive controls (sort buttons, filter
+  inputs, resize handles, links) do not toggle selection.
+
+## Column picker
+
+- `showColumnPicker` (react) / `data-dt-datagrid-column-picker` (htmx):
+  toolbar button toggling an `aria-expanded` menu of labelled checkboxes.
+- `column.visible: false` columns are hidden initially but still listed in
+  the picker (Radzen `Columns` visibility parity); picker text customizable
+  via `columnPickerText` / `data-dt-datagrid-picker-text`.
+
+## Column resize / reorder / frozen
+
+- `allowColumnResize` (react) / `data-dt-datagrid-resize` (htmx): separator
+  handle per column header; dragging updates the colgroup width
+  (min 48px).
+- `allowColumnReorder` (react) / `data-dt-datagrid-reorder` (htmx):
+  drag-and-drop on headers reorders columns; htmx fires
+  `dt:grid-column-reorder` with `{ from, to }`.
+- Frozen columns: `frozen: true` pins the column to the left edge with
+  sticky positioning; multiple frozen columns stack offsets computed from
+  their widths (react helper `gridFrozenOffsets`, htmx synced to body
+  cells on every view change).
+
 ## Grid DOM
 
 - `.dt-datagrid` wrapper > optional top pager > `.dt-datagrid-data`
@@ -130,4 +163,9 @@ page) and the OData string helpers give consumers a server path via
 | sorting: single/multi cycle, aria-sort, sort index | grid tests | `dt:grid-sort` + th classes |
 | filtering: per-column, default ops, pipeline reuse, case sensitivity | grid tests | `dt:grid-filter` + hidden payload |
 | paging: pageSize options, clamp, summary, pager positions | Pager tests | pager clicks + summary text |
+| selection: single/multiple, aria-selected, interactive-target guard | DataGrid tests | `dt:grid-select` + aria-selected |
+| column picker: toggle visibility, visible=false initial, picker text | DataGrid tests | `dt:grid-column-pick` + panel render |
+| resize: drag to colgroup width, min clamp | DataGrid tests | handle mousedown/mousemove |
+| reorder: drag/drop order change | DataGrid tests | dragstart/drop + `dt:grid-column-reorder` |
+| frozen: sticky offsets stacking | DataGrid tests | th/td sticky + left offsets |
 | empty message, loading overlay, aria roles | DataGrid tests | markup assertions |
