@@ -51,11 +51,12 @@ const PEOPLE = [
 ];
 
 function DataGridSection() {
+  const [selected, setSelected] = useState<(string | number)[]>([]);
   return (
     <Section title="DataGrid">
       <DataGrid
         columns={[
-          { property: "name", title: "Name", type: "string", sortable: true },
+          { property: "name", title: "Name", type: "string", sortable: true, frozen: true, width: "9rem" },
           { property: "age", title: "Age", type: "number", align: "center", sortable: true },
           { property: "role", title: "Role", type: "string", filterable: true },
           { property: "status", title: "Status", type: "enum", filterable: true },
@@ -70,9 +71,18 @@ function DataGridSection() {
         pageSize={3}
         pageSizeOptions={[3, 5, 10]}
         pagerPosition="TopAndBottom"
+        selectionMode="Multiple"
+        selectedKeys={selected}
+        onSelectionChange={setSelected}
+        showColumnPicker
+        allowColumnResize
+        allowColumnReorder
         ariaLabel="People grid"
         onRowClick={(r) => console.log("row", r.name)}
       />
+      <p style={{ marginTop: "0.5rem", fontSize: "0.875rem", color: "var(--dt-color-fg-muted)" }}>
+        Selected: {selected.join(", ") || "none"}
+      </p>
     </Section>
   );
 }
