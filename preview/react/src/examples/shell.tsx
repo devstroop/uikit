@@ -84,7 +84,8 @@ function GridSection() {
 
 function AppShellSection() {
   const [expanded, setExpanded] = useState(true);
-  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [leftOpen, setLeftOpen] = useState(false);
+  const [rightOpen, setRightOpen] = useState(false);
   return (
     <Section title="App Shell · Layout · Header · Sidebar · Body · Footer">
       <Layout
@@ -146,31 +147,46 @@ function AppShellSection() {
           overflow: "hidden",
         }}
       >
-        <Header aria-label="Drawer header">
-          <span style={{ fontWeight: 600 }}>Overlay drawer</span>
+        <Header aria-label="Drawers header">
+          <span style={{ fontWeight: 600 }}>Overlay drawers</span>
           <span style={{ flexGrow: 1 }} />
           <Button
             size="sm"
             variant="ghost"
-            className="drawer-toggle"
-            onClick={() => setDrawerOpen(!drawerOpen)}
-            aria-expanded={drawerOpen}
-            aria-controls="drawer-sidebar"
+            onClick={() => setLeftOpen(!leftOpen)}
+            aria-expanded={leftOpen}
+            aria-controls="drawer-left"
           >
-            {drawerOpen ? "Close drawer" : "Open drawer"}
+            {leftOpen ? "Close left" : "Open left"}
+          </Button>
+          <Button
+            size="sm"
+            variant="ghost"
+            onClick={() => setRightOpen(!rightOpen)}
+            aria-expanded={rightOpen}
+            aria-controls="drawer-right"
+          >
+            {rightOpen ? "Close right" : "Open right"}
           </Button>
         </Header>
+        <Body as="div" aria-label="Drawers body">
+          <Row>
+            <Column size={12} className="grid-cell">
+              Body content — drawers overlay this from either edge. Escape or the mask closes them.
+            </Column>
+          </Row>
+        </Body>
         <Sidebar
-          id="drawer-sidebar"
-          position="right"
+          id="drawer-left"
+          position="left"
           overlay
-          expanded={drawerOpen}
-          onClose={() => setDrawerOpen(false)}
-          aria-label="Drawer navigation"
+          expanded={leftOpen}
+          onClose={() => setLeftOpen(false)}
+          aria-label="Left drawer navigation"
         >
-          <nav aria-label="Drawer demo navigation">
+          <nav aria-label="Left drawer demo navigation">
             <ul className="shell-nav">
-              {["Dashboard", "Settings"].map((item) => (
+              {["Inbox", "Sent", "Archive"].map((item) => (
                 <li key={item}>
                   <Button variant="ghost" size="sm" style={{ width: "100%", justifyContent: "flex-start" }}>
                     {item}
@@ -180,13 +196,26 @@ function AppShellSection() {
             </ul>
           </nav>
         </Sidebar>
-        <Body as="div" aria-label="Drawer body">
-          <Row>
-            <Column size={12} className="grid-cell">
-              Body content — the drawer overlays this on the right.
-            </Column>
-          </Row>
-        </Body>
+        <Sidebar
+          id="drawer-right"
+          position="right"
+          overlay
+          expanded={rightOpen}
+          onClose={() => setRightOpen(false)}
+          aria-label="Right drawer navigation"
+        >
+          <nav aria-label="Right drawer demo navigation">
+            <ul className="shell-nav">
+              {["Dashboard", "Users", "Settings"].map((item) => (
+                <li key={item}>
+                  <Button variant="ghost" size="sm" style={{ width: "100%", justifyContent: "flex-start" }}>
+                    {item}
+                  </Button>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </Sidebar>
       </Layout>
     </Section>
   );
