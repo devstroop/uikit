@@ -63,6 +63,24 @@
   background-color: var(--se-color-danger-hover);
 }
 
+.success {
+  background-color: var(--se-color-success);
+  color: var(--se-color-success-fg);
+}
+
+.success:hover:not(:disabled) {
+  background-color: var(--se-color-success-hover);
+}
+
+.info {
+  background-color: var(--se-color-info);
+  color: var(--se-color-info-fg);
+}
+
+.info:hover:not(:disabled) {
+  background-color: var(--se-color-info-hover);
+}
+
 /* Sizes */
 .xs {
   height: var(--se-control-height-xs);
