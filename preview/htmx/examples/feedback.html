@@ -1,9 +1,12 @@
       <section class="row">
         <h2>Skeleton · Progress</h2>
         <div class="row-content">
-          <div class="se-progress" role="progressbar" aria-label="Storage used" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100">
-            <div class="se-progress-bar" style="width: 62%"></div>
-          </div>
+<div class="se-progress" role="progressbar" aria-label="Empty progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+  <div class="se-progress-bar" style="width: 0%"></div>
+</div>
+<div class="se-progress" role="progressbar" aria-label="Storage used" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100">
+  <div class="se-progress-bar" style="width: 62%"></div>
+</div>
           <div class="se-progress se-progress--success" role="progressbar" aria-label="Upload complete" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
             <div class="se-progress-bar" style="width: 100%"></div>
           </div>
@@ -52,9 +55,21 @@
               <circle class="se-progress-fill" cx="12" cy="12" r="10.5" stroke-dasharray="65.97" stroke-dashoffset="26.39"></circle>
             </svg>
           </div>
-          <div class="se-skeleton se-skeleton--text" style="width: 180px"></div>
-          <div class="se-skeleton se-skeleton--circle" style="width: 48px; height: 48px"></div>
-          <div class="se-skeleton se-skeleton--rect" style="width: 180px; height: 72px"></div>
+<div class="se-skeleton se-skeleton--text" style="width: 180px"></div>
+<div class="se-skeleton se-skeleton--circle" style="width: 48px; height: 48px"></div>
+<div class="se-skeleton se-skeleton--rect" style="width: 180px; height: 72px"></div>
+<div class="se-card se-card--outlined" style="max-width: 280px; width: 100%">
+  <div class="se-card-body">
+    <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 12px">
+      <div class="se-skeleton se-skeleton--circle" style="width: 40px; height: 40px"></div>
+      <div style="flex-grow: 1">
+        <div class="se-skeleton se-skeleton--text" style="width: 60%"></div>
+        <div class="se-skeleton se-skeleton--text" style="width: 85%"></div>
+      </div>
+    </div>
+    <div class="se-skeleton se-skeleton--rect" style="width: 100%; height: 64px"></div>
+  </div>
+</div>
         </div>
       </section>
       <section class="row">
@@ -178,9 +193,31 @@
               <button class="se-button se-button--danger" type="button" data-se-dialog-close>Delete</button>
             </div>
           </dialog>
-          <span class="se-tooltip" data-se-tooltip data-se-delay-ms="100">
-            <button class="se-button se-button--secondary" type="button">Hover me</button>
-            <span class="se-tooltip-bubble se-tooltip-bubble--top" role="tooltip" id="preview-tt" data-se-tooltip-content hidden>More information<span class="se-tooltip-arrow" aria-hidden="true"></span></span>
-          </span>
+<span class="se-tooltip" data-se-tooltip data-se-delay-ms="100">
+  <button class="se-button se-button--secondary" type="button">Hover me</button>
+  <span class="se-tooltip-bubble se-tooltip-bubble--top" role="tooltip" id="preview-tt" data-se-tooltip-content hidden>More information<span class="se-tooltip-arrow" aria-hidden="true"></span></span>
+</span>
+<div class="button-row">
+  <span class="se-tooltip" data-se-tooltip data-se-delay-ms="100">
+    <button class="se-button se-button--secondary" type="button">top</button>
+    <span class="se-tooltip-bubble se-tooltip-bubble--top" role="tooltip" data-se-tooltip-content hidden>top tooltip<span class="se-tooltip-arrow" aria-hidden="true"></span></span>
+  </span>
+  <span class="se-tooltip" data-se-tooltip data-se-delay-ms="100">
+    <button class="se-button se-button--secondary" type="button">bottom</button>
+    <span class="se-tooltip-bubble se-tooltip-bubble--bottom" role="tooltip" data-se-tooltip-content hidden>bottom tooltip<span class="se-tooltip-arrow" aria-hidden="true"></span></span>
+  </span>
+  <span class="se-tooltip" data-se-tooltip data-se-delay-ms="100">
+    <button class="se-button se-button--secondary" type="button">left</button>
+    <span class="se-tooltip-bubble se-tooltip-bubble--left" role="tooltip" data-se-tooltip-content hidden>left tooltip<span class="se-tooltip-arrow" aria-hidden="true"></span></span>
+  </span>
+  <span class="se-tooltip" data-se-tooltip data-se-delay-ms="100">
+    <button class="se-button se-button--secondary" type="button">right</button>
+    <span class="se-tooltip-bubble se-tooltip-bubble--right" role="tooltip" data-se-tooltip-content hidden>right tooltip<span class="se-tooltip-arrow" aria-hidden="true"></span></span>
+  </span>
+  <span class="se-tooltip" data-se-tooltip data-se-delay-ms="800">
+    <button class="se-button se-button--ghost" type="button">slow tooltip</button>
+    <span class="se-tooltip-bubble se-tooltip-bubble--top" role="tooltip" data-se-tooltip-content hidden>Appears after 800 ms<span class="se-tooltip-arrow" aria-hidden="true"></span></span>
+  </span>
+</div>
         </div>
       </section>

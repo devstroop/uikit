@@ -2,6 +2,7 @@ import { useState } from "react";
 import {
   Alert,
   Button,
+  Card,
   Dialog,
   Icon,
   Progress,
@@ -152,9 +153,16 @@ function OverlaySection() {
         The workspace and all of its branches will be removed.
       </Dialog>
       <Button onClick={() => setOpen(true)}>Open dialog</Button>
-      <Tooltip content="Hover or focus me">
-        <Button>Tooltip</Button>
-      </Tooltip>
+      <div className="button-row">
+        {(["top", "bottom", "left", "right"] as const).map((placement) => (
+          <Tooltip key={placement} content={`${placement} tooltip`} placement={placement}>
+            <Button variant="secondary">{placement}</Button>
+          </Tooltip>
+        ))}
+        <Tooltip content="Appears after 800 ms" delayMs={800}>
+          <Button variant="ghost">slow tooltip</Button>
+        </Tooltip>
+      </div>
     </Section>
   );
 }
@@ -162,6 +170,7 @@ function OverlaySection() {
 function SkeletonProgressSection() {
   return (
     <Section title="Skeleton · Progress">
+      <Progress value={0} aria-label="Empty progress" />
       <Progress value={62} aria-label="Storage used" />
       <Progress value={100} tone="success" aria-label="Upload complete" />
       <Progress value={55} tone="warning" aria-label="Battery level" />
@@ -182,6 +191,16 @@ function SkeletonProgressSection() {
       <Skeleton width={180} variant="text" />
       <Skeleton width={48} height={48} variant="circle" />
       <Skeleton width={180} height={72} variant="rect" />
+      <Card variant="outlined" style={{ maxWidth: 280, width: "100%" }}>
+        <div style={{ display: "flex", gap: 12, alignItems: "center", marginBottom: 12 }}>
+          <Skeleton width={40} height={40} variant="circle" />
+          <div style={{ flexGrow: 1 }}>
+            <Skeleton width="60%" variant="text" />
+            <Skeleton width="85%" variant="text" />
+          </div>
+        </div>
+        <Skeleton width="100%" height={64} variant="rect" />
+      </Card>
     </Section>
   );
 }
