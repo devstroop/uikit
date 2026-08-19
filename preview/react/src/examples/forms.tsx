@@ -42,6 +42,15 @@ export function FormExamples() {
         <Textarea id="f-notes" rows={3} placeholder="Anything else?" />
         <Textarea id="f-notes-lg" size="lg" rows={4} placeholder="large" />
       </Field>
+      <Field label="Other types" htmlFor="f-types">
+        <Input id="f-password" type="password" placeholder="password" aria-label="Password" />
+        <Input id="f-number" type="number" placeholder="number" defaultValue={42} aria-label="Number" />
+        <Input id="f-date" type="date" aria-label="Date" />
+      </Field>
+      <Field label="Disabled" htmlFor="f-disabled" hint="Not editable.">
+        <Input id="f-disabled" defaultValue="Locked" disabled />
+        <Select id="f-disabled-select" aria-label="Disabled select" disabled options={[{ value: "locked", label: "Locked" }]} />
+      </Field>
       <Label htmlFor="f-naked">Standalone label</Label>
       <Label htmlFor="f-check">
         <Checkbox id="f-check" checked={checked} onChange={() => setChecked(!checked)} />
@@ -50,6 +59,14 @@ export function FormExamples() {
       <Label htmlFor="f-switch">
         <Switch id="f-switch" checked={switched} onChange={() => setSwitched(!switched)} />
         Dark mode in app
+      </Label>
+      <Label htmlFor="f-check-disabled">
+        <Checkbox id="f-check-disabled" disabled />
+        Disabled checkbox
+      </Label>
+      <Label htmlFor="f-switch-disabled">
+        <Switch id="f-switch-disabled" disabled />
+        Disabled switch
       </Label>
     </Section>
   );
