@@ -34,16 +34,16 @@ All other `HTMLAttributes<HTMLDivElement>` are spread onto the `<div>`.
 
 ## Behavior
 
-- DOM: `div[class~=se-layout]` containing an inner
-  `div[class~=se-layout-row]` that holds the sidebars and body; the
+- DOM: `div[class~=dt-layout]` containing an inner
+  `div[class~=dt-layout-row]` that holds the sidebars and body; the
   header and footer sit directly in the layout, above and below the row.
-- CSS: `.se-layout { display: flex; flex-direction: column;
-  min-height: 100vh }`; `.se-layout-row { display: flex; flex: 1;
+- CSS: `.dt-layout { display: flex; flex-direction: column;
+  min-height: 100vh }`; `.dt-layout-row { display: flex; flex: 1;
   min-width: 0 }`. `min-height: 100vh` is a layout default and can be
   overridden via `style` for embedded shells.
 - An overlay sidebar (see `Sidebar`) becomes absolutely positioned, so
   the row turns into its positioning context:
-  `.se-layout-row:has(.se-sidebar--overlay) { position: relative }` —
+  `.dt-layout-row:has(.dt-sidebar--overlay) { position: relative }` —
   pure CSS, no prop.
 - Collapsing a sidebar (see `Sidebar`) shrinks the row automatically —
   flex adjusts, no re-render of siblings needed.

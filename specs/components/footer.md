@@ -32,10 +32,10 @@ All other `HTMLAttributes<HTMLElement>` are spread onto the `<footer>`.
 
 ## Behavior
 
-- DOM: `footer[class~=se-footer]` with `display: flex;
-  flex-shrink: 0; padding: var(--se-space-4);
-  background: var(--se-color-surface);
-  border-top: 1px solid var(--se-color-border)`.
+- DOM: `footer[class~=dt-footer]` with `display: flex;
+  flex-shrink: 0; padding: var(--dt-space-4);
+  background: var(--dt-color-surface);
+  border-top: 1px solid var(--dt-color-border)`.
 - No JS, no `data-*` hooks.
 
 ## Keyboard

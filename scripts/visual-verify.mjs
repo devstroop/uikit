@@ -66,27 +66,27 @@ function waitForExit(child) {
 
 const CONTRAST_PAIRS = [
   ["body", "background-color", "color"],
-  [".se-button--primary", "background-color", "color"],
-  [".se-button--secondary", "background-color", "color"],
-  [".se-button--ghost", "background-color", "color"],
-  [".se-button--danger", "background-color", "color"],
-  [".se-alert--success", "background-color", "color"],
-  [".se-alert--success .se-alert-title", "background-color", "color"],
-  [".se-badge--solid.se-badge--primary", "background-color", "color"],
-  [".se-badge--soft.se-badge--success", "background-color", "color"],
-  [".se-badge--outline.se-badge--primary", "background-color", "color"],
-  [".se-card-header", "background-color", "color"],
-  [".se-table th", "background-color", "color"],
-  [".se-table td", "background-color", "color"],
-  [".se-stat-value", "background-color", "color"],
-  [".se-stat-label", "background-color", "color"],
-  [".se-field-label", "background-color", "color"],
-  [".se-input--md", "background-color", "color"],
-  [".se-textarea--md", "background-color", "color"],
-  [".se-tabs-tab--active", "background-color", "color"],
-  [".se-accordion-trigger", "background-color", "color"],
-  [".se-dialog-title", "background-color", "color"],
-  [".se-empty-state-title", "background-color", "color"],
+  [".dt-button--primary", "background-color", "color"],
+  [".dt-button--secondary", "background-color", "color"],
+  [".dt-button--ghost", "background-color", "color"],
+  [".dt-button--danger", "background-color", "color"],
+  [".dt-alert--success", "background-color", "color"],
+  [".dt-alert--success .dt-alert-title", "background-color", "color"],
+  [".dt-badge--solid.dt-badge--primary", "background-color", "color"],
+  [".dt-badge--soft.dt-badge--success", "background-color", "color"],
+  [".dt-badge--outline.dt-badge--primary", "background-color", "color"],
+  [".dt-card-header", "background-color", "color"],
+  [".dt-table th", "background-color", "color"],
+  [".dt-table td", "background-color", "color"],
+  [".dt-stat-value", "background-color", "color"],
+  [".dt-stat-label", "background-color", "color"],
+  [".dt-field-label", "background-color", "color"],
+  [".dt-input--md", "background-color", "color"],
+  [".dt-textarea--md", "background-color", "color"],
+  [".dt-tabs-tab--active", "background-color", "color"],
+  [".dt-accordion-trigger", "background-color", "color"],
+  [".dt-dialog-title", "background-color", "color"],
+  [".dt-empty-state-title", "background-color", "color"],
   [".chrome-header h1", "background-color", "color"],
 ];
 
@@ -120,7 +120,7 @@ async function auditTokens(page) {
       return (l1 + 0.05) / (l2 + 0.05);
     };
     const root = getComputedStyle(document.documentElement);
-    const get = (name) => parse(root.getPropertyValue(`--se-color-${name}`).trim());
+    const get = (name) => parse(root.getPropertyValue(`--dt-color-${name}`).trim());
     const rules = [
       ["text", "bg", 4.5],
       ["text-muted", "bg", 4.5],

@@ -33,10 +33,10 @@ All other `HTMLAttributes<HTMLElement>` are spread onto the `<header>`.
 
 ## Behavior
 
-- DOM: `header[class~=se-header]` with `display: flex;
-  flex-shrink: 0; padding: var(--se-space-4);
-  background: var(--se-color-surface);
-  border-bottom: 1px solid var(--se-color-border)`.
+- DOM: `header[class~=dt-header]` with `display: flex;
+  flex-shrink: 0; padding: var(--dt-space-4);
+  background: var(--dt-color-surface);
+  border-bottom: 1px solid var(--dt-color-border)`.
 - No JS, no `data-*` hooks.
 
 ## Keyboard

@@ -31,8 +31,8 @@ All other `HTMLAttributes<HTMLElement>` are spread onto the `<main>`.
 
 ## Behavior
 
-- DOM: `main[class~=se-body]` with `display: flex;
-  flex: 1; min-width: 0; padding: var(--se-space-4);
+- DOM: `main[class~=dt-body]` with `display: flex;
+  flex: 1; min-width: 0; padding: var(--dt-space-4);
   overflow-y: auto`.
 - No JS, no `data-*` hooks.
 

@@ -94,7 +94,7 @@ function render(themeName, schema, values) {
       if (modeValues.length === 0) continue;
       lines.push(`  /* ${tier} */`);
       for (const [token, value] of modeValues) {
-        lines.push(`  --se-${tier}-${token}: ${parseValue(value)[mode]};`);
+        lines.push(`  --dt-${tier}-${token}: ${parseValue(value)[mode]};`);
       }
     }
     lines.push("}", "");

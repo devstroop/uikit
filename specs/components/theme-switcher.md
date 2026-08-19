@@ -41,7 +41,7 @@ folder + `data-theme="dark"`).
 - The component owns no tokens and no visual chrome beyond the switch —
   it is a behavior with a minimal shell; consumers place it in headers,
   toolbars, or shell chrome.
-- htmx: `<input type="checkbox" data-se-theme-switch>` — the behavior
+- htmx: `<input type="checkbox" data-dt-theme-switch>` — the behavior
   mirrors `data-theme` on `<html>` on `change`; the initial checked state
   is read from the attribute at load.
 - No persistence (localStorage) by default — the consumer owns storage.
