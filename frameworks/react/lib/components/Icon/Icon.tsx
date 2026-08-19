@@ -1,4 +1,6 @@
 import { forwardRef, type SVGProps } from "react";
+import type { ComponentSize } from "../../sizes";
+import styles from "./Icon.module.css";
 
 export const iconNames = [
   "check",
@@ -47,7 +49,7 @@ export type IconName = (typeof iconNames)[number];
 
 export interface IconProps extends Omit<SVGProps<SVGSVGElement>, "name"> {
   name: IconName;
-  size?: number;
+  size?: number | ComponentSize;
   strokeWidth?: number;
 }
 
@@ -226,15 +228,16 @@ const paths: Record<IconName, React.ReactNode> = {
 };
 
 export const Icon = forwardRef<SVGSVGElement, IconProps>(function Icon(
-  { name, size = 16, strokeWidth = 2, className, ...props },
+  { name, size = "md", strokeWidth = 2, className, ...props },
   ref,
 ) {
+  const tier = typeof size === "string";
   return (
     <svg
       ref={ref}
-      className={className}
-      width={size}
-      height={size}
+      className={[tier ? styles[size] : null, className].filter(Boolean).join(" ")}
+      width={tier ? undefined : size}
+      height={tier ? undefined : size}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"

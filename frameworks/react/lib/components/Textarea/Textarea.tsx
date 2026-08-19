@@ -1,7 +1,8 @@
 import { forwardRef, type TextareaHTMLAttributes } from "react";
+import type { ComponentSize } from "../../sizes";
 import styles from "./Textarea.module.css";
 
-export type TextareaSize = "sm" | "md" | "lg";
+export type TextareaSize = ComponentSize;
 
 export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   size?: TextareaSize;

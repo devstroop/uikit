@@ -1,5 +1,6 @@
 .se-textarea {
   width: 100%;
+  min-width: 0;
   box-sizing: border-box;
   background: var(--se-color-surface);
   border: 1px solid var(--se-color-border-strong);
@@ -22,16 +23,29 @@
   box-shadow: 0 0 0 3px var(--se-color-focus);
 }
 
+.se-textarea--xs {
+  min-height: 40px;
+  font-size: var(--se-font-size-xs);
+}
+
 .se-textarea--sm {
   min-height: 56px;
+  font-size: var(--se-font-size-xs);
 }
 
 .se-textarea--md {
   min-height: 84px;
+  font-size: var(--se-font-size-sm);
 }
 
 .se-textarea--lg {
   min-height: 128px;
+  font-size: var(--se-font-size-md);
+}
+
+.se-textarea--xl {
+  min-height: 160px;
+  font-size: var(--se-font-size-lg);
 }
 
 .se-textarea--resize-none {

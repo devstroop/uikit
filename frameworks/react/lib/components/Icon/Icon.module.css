@@ -1,0 +1,25 @@
+/* Size tiers — icon pixels source from the font-size scale (specs/sizes.md). */
+.xs {
+  width: var(--se-font-size-xs);
+  height: var(--se-font-size-xs);
+}
+
+.sm {
+  width: var(--se-font-size-sm);
+  height: var(--se-font-size-sm);
+}
+
+.md {
+  width: var(--se-font-size-md);
+  height: var(--se-font-size-md);
+}
+
+.lg {
+  width: var(--se-font-size-lg);
+  height: var(--se-font-size-lg);
+}
+
+.xl {
+  width: var(--se-font-size-xl);
+  height: var(--se-font-size-xl);
+}

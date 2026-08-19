@@ -11,7 +11,10 @@ tokens:
   - "radius.md"
   - "color.text"
   - "font.sans"
+  - "font.size-xs"
   - "font.size-sm"
+  - "font.size-md"
+  - "font.size-lg"
   - "space.2"
   - "space.3"
   - "transition.fast"
@@ -33,14 +36,14 @@ Multiline text input with size and resize control, used for long-form entry in f
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Height tier (min-height 56 / 84 / 128px) |
+| `size` | `xs` \| `sm` \| `md` \| `lg` \| `xl` | `md` | Height tier (min-height 40 / 56 / 84 / 128 / 160px) |
 | `resize` | `"none" \| "vertical" \| "horizontal" \| "both"` | `"none"` | CSS `resize` behavior |
 
 The component extends `TextareaHTMLAttributes<HTMLTextAreaElement>`; all remaining props are forwarded to the native element. It is `forwardRef`d.
 
 ## Behavior
 
-- DOM is a single `<textarea>` with `width: 100%`, `surface` background, `border-strong` border, `radius.md`, `sm` text.
+- DOM is a single `<textarea>` with `width: 100%` (`min-width: 0`), `surface` background, `border-strong` border, `radius.md`, `sm` text.
 - Size classes set `min-height` only; the element grows with content up to the given minimum.
 - Resize classes map 1:1 to the CSS `resize` property (`resize-none` is the default).
 - Focus: `outline: none`, border flips to `primary`, and a 3px `focus`-colored box-shadow ring is applied on `:focus` (any focus, not keyboard-only).

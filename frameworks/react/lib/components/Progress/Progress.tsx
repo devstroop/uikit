@@ -1,4 +1,5 @@
 import { type HTMLAttributes } from "react";
+import type { ComponentSize } from "../../sizes";
 import styles from "./Progress.module.css";
 
 export type ProgressTone = "primary" | "success" | "warning" | "danger";
@@ -9,7 +10,7 @@ export interface ProgressProps extends Omit<HTMLAttributes<HTMLDivElement>, "rol
   tone?: ProgressTone;
   indeterminate?: boolean;
   variant?: "linear" | "circular";
-  size?: number;
+  size?: number | ComponentSize;
 }
 
 export function Progress({
@@ -18,7 +19,7 @@ export function Progress({
   tone = "primary",
   indeterminate = false,
   variant = "linear",
-  size = 64,
+  size = "md",
   className,
   ...props
 }: ProgressProps) {
@@ -26,17 +27,18 @@ export function Progress({
   const percent = max > 0 ? (clamped / max) * 100 : 0;
 
   if (variant === "circular") {
-    const stroke = 6;
-    const radius = Math.max(size / 2 - stroke, 2);
+    const tier = typeof size === "string";
+    const stroke = 2;
+    const radius = 10.5;
     const circumference = 2 * Math.PI * radius;
     const dashLength = circumference * (indeterminate ? 0.75 : 1);
     const offset = indeterminate ? 0 : circumference * (1 - percent / 100);
 
     return (
       <svg
-        width={size}
-        height={size}
-        viewBox={`0 0 ${size} ${size}`}
+        width={tier ? undefined : size}
+        height={tier ? undefined : size}
+        viewBox="0 0 24 24"
         role="progressbar"
         aria-label={props["aria-label"]}
         aria-labelledby={props["aria-labelledby"]}
@@ -48,23 +50,20 @@ export function Progress({
         className={[
           styles.circular,
           styles[tone],
+          tier ? styles[`circular-${size}`] : null,
           indeterminate ? styles.indeterminate : null,
           className,
         ]
           .filter(Boolean)
           .join(" ")}
       >
-        <circle
-          className={styles.track}
-          cx={size / 2}
-          cy={size / 2}
-          r={radius}
-        />
+        <circle className={styles.track} cx={12} cy={12} r={radius} strokeWidth={stroke} />
         <circle
           className={styles.fill}
-          cx={size / 2}
-          cy={size / 2}
+          cx={12}
+          cy={12}
           r={radius}
+          strokeWidth={stroke}
           strokeDasharray={`${dashLength} ${circumference}`}
           strokeDashoffset={offset}
         />
@@ -81,6 +80,7 @@ export function Progress({
       className={[
         styles.track,
         styles[tone],
+        typeof size === "string" ? styles[`linear-${size}`] : null,
         indeterminate ? styles.indeterminate : null,
         className,
       ]
