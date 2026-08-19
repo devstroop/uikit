@@ -1,10 +1,10 @@
 ---
 name: DataGrid
-status: proposed
+status: implemented
 category: data
 frameworks:
-  react: v0.7.0
-  htmx: v0.5.0
+  react: v0.8.0
+  htmx: v0.6.0
 tokens: []
 a11y:
   - "Grid table carries role=grid with aria-rowcount on the data region; sorted columns expose aria-sort (ascending/descending/none) on the th."
