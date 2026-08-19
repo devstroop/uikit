@@ -582,6 +582,14 @@ function Navigation() {
           { key: "b", title: "Which systems?", content: <p>Six design systems, one token model.</p> },
         ]}
       />
+      <Tabs
+        position="left"
+        items={[
+          { key: "design", label: "Design", content: <p>Design content</p> },
+          { key: "code", label: "Code", content: <p>Code content</p> },
+          { key: "ship", label: "Ship", content: <p>Ship content</p> },
+        ]}
+      />
     </Section>
   );
 }
