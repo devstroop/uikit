@@ -1,0 +1,67 @@
+      <section class="row">
+        <h2>Field · Label · Input · Select · Textarea · Checkbox · Switch</h2>
+        <div class="row-content se-form-grid">
+          <div class="se-field">
+            <label class="se-field-label" for="htmx-email">Email</label>
+            <input class="se-input se-input--sm" id="htmx-email-sm" type="email" placeholder="small" />
+            <input class="se-input se-input--md" id="htmx-email" type="email" placeholder="you@example.com" />
+            <input class="se-input se-input--lg" id="htmx-email-lg" type="email" placeholder="large" />
+            <div class="se-field-hint">We never share it.</div>
+          </div>
+          <div class="se-field">
+            <label class="se-field-label" for="htmx-name">Display name <span class="se-field-required" aria-hidden="true">*</span></label>
+            <input class="se-input se-input--md se-input--invalid" id="htmx-name" aria-invalid="true" aria-describedby="htmx-name-error" value="" />
+            <div class="se-field-error" id="htmx-name-error" role="alert">Name is required</div>
+          </div>
+          <div class="se-field">
+            <label class="se-field-label" for="htmx-fw">Framework</label>
+            <select class="se-select se-select--sm" id="htmx-fw-sm" aria-label="Framework (small)">
+              <option>Small</option>
+            </select>
+            <select class="se-select se-select--md" id="htmx-fw">
+              <option value="react">React</option>
+              <option value="htmx" selected>htmx</option>
+              <option value="blazor">Blazor</option>
+            </select>
+            <select class="se-select se-select--lg" id="htmx-fw-lg" aria-label="Framework (large)">
+              <option>Large</option>
+            </select>
+          </div>
+<div class="se-field">
+  <label class="se-field-label" for="htmx-notes">Notes</label>
+  <textarea class="se-textarea se-textarea--sm" id="htmx-notes-sm" rows="2" placeholder="small"></textarea>
+  <textarea class="se-textarea se-textarea--md" id="htmx-notes" rows="3" placeholder="Anything else?"></textarea>
+  <textarea class="se-textarea se-textarea--lg" id="htmx-notes-lg" rows="4" placeholder="large"></textarea>
+</div>
+<div class="se-field">
+  <label class="se-field-label" for="htmx-password">Other types</label>
+  <input class="se-input se-input--md" id="htmx-password" type="password" placeholder="password" aria-label="Password" />
+  <input class="se-input se-input--md" id="htmx-number" type="number" placeholder="number" value="42" aria-label="Number" />
+  <input class="se-input se-input--md" id="htmx-date" type="date" aria-label="Date" />
+</div>
+<div class="se-field">
+  <label class="se-field-label" for="htmx-disabled">Disabled</label>
+  <input class="se-input se-input--md" id="htmx-disabled" value="Locked" disabled />
+  <select class="se-select se-select--md" id="htmx-disabled-select" aria-label="Disabled select" disabled>
+    <option>Locked</option>
+  </select>
+  <div class="se-field-hint">Not editable.</div>
+</div>
+          <label class="se-label" for="htmx-check">
+            <input class="se-checkbox" id="htmx-check" type="checkbox" checked />
+            Subscribe to updates
+          </label>
+<label class="se-label" for="htmx-switch">
+  <input class="se-switch" id="htmx-switch" type="checkbox" role="switch" checked />
+  Dark mode in app
+</label>
+<label class="se-label" for="htmx-check-disabled">
+  <input class="se-checkbox" id="htmx-check-disabled" type="checkbox" disabled />
+  Disabled checkbox
+</label>
+<label class="se-label" for="htmx-switch-disabled">
+  <input class="se-switch" id="htmx-switch-disabled" type="checkbox" role="switch" disabled />
+  Disabled switch
+</label>
+        </div>
+      </section>

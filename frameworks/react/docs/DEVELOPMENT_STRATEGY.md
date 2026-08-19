@@ -48,7 +48,7 @@ master                 production — protected; only via release PR from develo
 | Naming | `feat/123-profile-page`, `fix/45-header-spacing`, `chore/67-ci-triggers`, `doc/12-strategy` — slug is kebab-case, issue number first |
 | Freshness | Before creating a new branch, merge `develop` into the accumulator (accumulators must never drift behind `develop`) |
 | Lifecycle | Implementation branches are short-lived (hours–days). Accumulator branches live for a cycle. `develop` is permanent. `master` is permanent |
-| Protection | `master` and `develop` require PR review + green CI; direct pushes are rejected |
+| Protection | `master` and `develop` require green CI (strict, all required checks); direct pushes are rejected — no mandatory human review; merges are automated once CI passes |
 
 ### 2.1 Nesting (large work)
 
@@ -93,7 +93,7 @@ Draft (local) → Finalize (GitHub) → Assign (labels + milestone) → Implemen
 - [ ] Code follows repo conventions (linter clean, typed, no dead code)
 - [ ] Scripted tests relevant to the change pass locally (and in CI)
 - [ ] PR opened against the accumulator with `Closes #<issue>` in the description
-- [ ] CI green on the PR; reviewed and approved before merge
+- [ ] CI green on the PR (sole merge gate)
 - [ ] Issue closed automatically by the merged PR; sub-issues closed as they land
 
 ## 4. Local workflow (worktrees)
@@ -175,7 +175,7 @@ A workflow triggered on a branch that does not exist is a silent CI outage.
 2. A **release PR** `develop → master` is prepared with:
    - Version bump (conventional commit `chore: release vX.Y.Z`)
    - Changelog summary (collected from squash messages of the cycle)
-3. **A human reviews and merges** the release PR — releases are never automated end to end.
+3. The release PR is merged once CI is green — the sole gate (no mandatory human review).
 4. The merge is tagged `vX.Y.Z` and the milestone is closed.
 5. Accumulators are rebased onto the new `master`/`develop` state so the next
    cycle starts clean.
@@ -188,8 +188,8 @@ A workflow triggered on a branch that does not exist is a silent CI outage.
 | Long-lived implementation branches | Issues are small; branches live hours–days; stale branches get closed |
 | CI not running | Workflows must trigger on the real default branch (check the per-repo table) |
 | Lockfile churn / unrelated edits | PR checklist; build only on CI-verified platforms |
-| Secrets in commits | PR review gate + never commit keys/tokens (env vars only) |
-| Releases without a human gate | Release PRs are reviewed and merged by a person |
+| Secrets in commits | Never commit keys/tokens (env vars only); CI lint + secret scan |
+| Releases without CI | Release PRs merge only after green CI — releases are never automated past the CI gate |
 
 ## 9. Per-repository mapping
 
