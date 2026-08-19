@@ -2,7 +2,7 @@
   Card — reference markup for server templates.
   Root: <div class="se-card se-card--<variant>" [tabindex="0" when interactive]>
   Modifiers:
-    variant  --elevated (default) | --outlined | --interactive
+    variant  --elevated (default) | --outlined | --interactive | --text
   Parts:
     header  <div class="se-card-header">   (omitted when absent)
     body    <div class="se-card-body">      (always present, wraps children)
@@ -37,6 +37,11 @@
 
 <div class="se-card se-card--interactive" tabindex="0" data-se-interactive>
   <div class="se-card-body">Interactive body only.</div>
+</div>
+
+<div class="se-card se-card--text">
+  <div class="se-card-header">Flat text card</div>
+  <div class="se-card-body">No border, no shadow, transparent background — inherits the parent surface.</div>
 </div>
 
 <div class="se-card se-card--outlined">

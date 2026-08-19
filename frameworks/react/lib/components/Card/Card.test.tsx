@@ -44,6 +44,14 @@ describe("Card", () => {
     const { container } = render(<Card>Plain</Card>);
     expect(container.firstElementChild).not.toHaveAttribute("tabindex");
   });
+
+  it.each(["elevated", "outlined", "interactive", "text"] as const)(
+    "applies the %s variant class",
+    (variant) => {
+      const { container } = render(<Card variant={variant}>V</Card>);
+      expect(container.firstElementChild?.className).toContain(variant);
+    },
+  );
 });
 
 describe("Field", () => {
