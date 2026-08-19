@@ -3,8 +3,8 @@ name: Row
 status: implemented
 category: layout
 frameworks:
-  react: v0.3.5
-  htmx: v0.1.6
+  react: v0.13.0
+  htmx: v0.11.0
 tokens:
   - "space.1"
   - "space.2"
@@ -26,9 +26,10 @@ gutter (default `space.4`), following the Radzen Row/Column grid model.
 | Prop | Type | Default | Description |
 |---|---|---|---|
 | `gap` | `xs` \| `sm` \| `md` \| `lg` \| `xl` \| `number` \| `string` | `undefined` | Row gutter override; `xs`–`xl` map to `--dt-space-1..5`, numbers become `px`, other strings pass through (defaults to `space.4`) |
-| `align` | `start` \| `center` \| `end` \| `stretch` \| `baseline` | `stretch` | Cross-axis alignment (`align-items`) |
-| `justify` | `start` \| `center` \| `end` \| `between` \| `around` \| `evenly` | `start` | Main-axis distribution (`justify-content`) |
-| `wrap` | `boolean` | `true` | Allow items to wrap (`flex-wrap`) |
+| `rowGap` | `xs` \| `sm` \| `md` \| `lg` \| `xl` \| `number` \| `string` | `undefined` | Separate cross-axis gap (`row-gap`), Radzen `RowGap` parity |
+| `align` | `start` \| `center` \| `end` \| `stretch` \| `baseline` \| `normal` | `stretch` | Cross-axis alignment (`align-items`) |
+| `justify` | `start` \| `center` \| `end` \| `between` \| `around` \| `evenly` \| `normal` \| `left` \| `right` \| `stretch` \| `space-between` \| `space-around` \| `space-evenly` | `start` | Main-axis distribution (`justify-content`); `between`/`around`/`evenly` alias the `space-*` values, `left`/`right` alias `start`/`end` |
+| `wrap` | `boolean` \| `"nowrap"` \| `"wrap"` \| `"wrap-reverse"` | `true` | Wrap mode (`flex-wrap`), Radzen `FlexWrap` tri-state parity |
 | `className` | `string` | `undefined` | Extra classes |
 
 All other `HTMLAttributes<HTMLDivElement>` are spread onto the `<div>`.
