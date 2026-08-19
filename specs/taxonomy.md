@@ -23,7 +23,7 @@ with a single member signals a core primitive that warrants its own bucket
 ## Taxonomy
 
 actions: button
-data: data-grid
+data: data-grid, data-list
 data-display: avatar, badge, data-filter, empty-state, icon, stat, table
 feedback: alert, dialog, progress, skeleton, toast, tooltip
 forms: checkbox, field, form, input, label, select, switch, textarea, validators
