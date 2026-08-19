@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Avatar, Badge, Button, Card, Column, DataFilter, EmptyState, Icon, Row, Stat, Table } from "@devstroop/react-uikitkit";
+import { Avatar, Badge, Button, Card, Column, DataFilter, DataGrid, EmptyState, Icon, Row, Stat, Table } from "@devstroop/react-uikitkit";
 import { Section } from "./section";
 
 const TONES = ["primary", "success", "warning", "danger"] as const;
@@ -8,6 +8,7 @@ export function DataDisplayExamples() {
   return (
     <>
       <TableSection />
+      <DataGridSection />
       <DataFilterSection />
       <BadgeSection />
       <StatSection />
@@ -48,6 +49,33 @@ const PEOPLE = [
   { id: 4, name: "Alice Wong", role: "editor", status: "active", age: 22 },
   { id: 5, name: "Charlie Fox", role: "viewer", status: "paused", age: 35 },
 ];
+
+function DataGridSection() {
+  return (
+    <Section title="DataGrid">
+      <DataGrid
+        columns={[
+          { property: "name", title: "Name", type: "string", sortable: true },
+          { property: "age", title: "Age", type: "number", align: "center", sortable: true },
+          { property: "role", title: "Role", type: "string", filterable: true },
+          { property: "status", title: "Status", type: "enum", filterable: true },
+        ]}
+        rows={PEOPLE}
+        rowKey={(r) => String(r.id)}
+        allowSorting
+        allowMultiColumnSorting
+        showSortIndex
+        allowFiltering
+        allowPaging
+        pageSize={3}
+        pageSizeOptions={[3, 5, 10]}
+        pagerPosition="TopAndBottom"
+        ariaLabel="People grid"
+        onRowClick={(r) => console.log("row", r.name)}
+      />
+    </Section>
+  );
+}
 
 function DataFilterSection() {
   const [filtered, setFiltered] = useState(PEOPLE);
