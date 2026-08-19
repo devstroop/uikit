@@ -1,6 +1,6 @@
 ---
 name: DataFilter
-status: proposed
+status: implemented
 category: data-display
 frameworks:
   react: v0.7.0

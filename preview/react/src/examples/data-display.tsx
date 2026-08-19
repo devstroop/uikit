@@ -1,4 +1,5 @@
-import { Avatar, Badge, Button, Card, Column, EmptyState, Icon, Row, Stat, Table } from "@devstroop/react-uikitkit";
+import { useState } from "react";
+import { Avatar, Badge, Button, Card, Column, DataFilter, EmptyState, Icon, Row, Stat, Table } from "@devstroop/react-uikitkit";
 import { Section } from "./section";
 
 const TONES = ["primary", "success", "warning", "danger"] as const;
@@ -7,6 +8,7 @@ export function DataDisplayExamples() {
   return (
     <>
       <TableSection />
+      <DataFilterSection />
       <BadgeSection />
       <StatSection />
       <CardSection />
@@ -35,6 +37,50 @@ function TableSection() {
         rows={rows}
         rowKey={(r) => String(r.id)}
       />
+    </Section>
+  );
+}
+
+const PEOPLE = [
+  { id: 1, name: "John Carter", role: "admin", status: "active", age: 30 },
+  { id: 2, name: "Jane Doe", role: "editor", status: "active", age: 25 },
+  { id: 3, name: "Bob Vance", role: "viewer", status: "paused", age: 40 },
+  { id: 4, name: "Alice Wong", role: "editor", status: "active", age: 22 },
+  { id: 5, name: "Charlie Fox", role: "viewer", status: "paused", age: 35 },
+];
+
+function DataFilterSection() {
+  const [filtered, setFiltered] = useState(PEOPLE);
+  return (
+    <Section title="DataFilter">
+      <Row gap="md">
+        <Column>
+          <DataFilter
+            properties={[
+              { name: "name", title: "Name", type: "string" },
+              { name: "age", title: "Age", type: "number" },
+              { name: "status", title: "Status", type: "enum", values: [
+                { value: "active", label: "Active" },
+                { value: "paused", label: "Paused" },
+              ] },
+            ]}
+            items={PEOPLE}
+            viewChanged={(items) => setFiltered([...items])}
+          />
+        </Column>
+        <Column>
+          <Table
+            columns={[
+              { key: "name", header: "Name" },
+              { key: "role", header: "Role" },
+              { key: "age", header: "Age", align: "center" },
+            ]}
+            rows={filtered}
+            rowKey={(r) => String(r.id)}
+            empty="No rows match the filter"
+          />
+        </Column>
+      </Row>
     </Section>
   );
 }

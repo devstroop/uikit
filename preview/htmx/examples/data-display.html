@@ -36,6 +36,54 @@
         </div>
       </section>
       <section class="row">
+        <h2>DataFilter</h2>
+        <div class="row-content">
+          <p class="dt-text-muted">Builder fires <code>dt:filter-change</code> (filters + filterString + oDataFilterString) on any change; consumers re-request rows via <code>hx-get</code> with the descriptor JSON and swap the result region.</p>
+          <div class="dt-datafilter" data-dt-datafilter
+               data-dt-datafilter-properties='[{"name":"name","title":"Name","type":"string"},{"name":"age","title":"Age","type":"number"},{"name":"status","title":"Status","type":"enum","values":[{"value":"active","label":"Active"},{"value":"paused","label":"Paused"}]}]'
+               data-dt-datafilter-operator="And">
+            <div class="dt-datafilter-rows" data-dt-datafilter-rows>
+              <div class="dt-datafilter-row" data-dt-datafilter-row>
+                <label class="dt-datafilter-label">Name
+                  <select class="dt-select" data-dt-datafilter-property aria-label="Property"></select>
+                </label>
+                <label class="dt-datafilter-label">Operator
+                  <select class="dt-select" data-dt-datafilter-operator aria-label="Operator"></select>
+                </label>
+                <label class="dt-datafilter-label">Value
+                  <input class="dt-input dt-input--md" data-dt-datafilter-value aria-label="Value">
+                </label>
+                <button type="button" class="dt-button dt-button--ghost" data-dt-datafilter-remove aria-label="Remove condition">×</button>
+              </div>
+            </div>
+            <div class="dt-datafilter-bar">
+              <button type="button" class="dt-button dt-button--secondary" data-dt-datafilter-add>Add filter</button>
+              <div class="dt-datafilter-operator-bar" role="radiogroup" aria-label="Join filters">
+                <label><input type="radio" name="df-op" value="And" checked> AND</label>
+                <label><input type="radio" name="df-op" value="Or"> OR</label>
+              </div>
+              <input type="hidden" data-dt-datafilter-output name="filters">
+            </div>
+          </div>
+          <table class="dt-table" style="margin-top: 1rem">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Role</th>
+                <th class="dt-table-cell--center">Age</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>John Carter</td><td>admin</td><td class="dt-table-cell--center">30</td></tr>
+              <tr><td>Jane Doe</td><td>editor</td><td class="dt-table-cell--center">25</td></tr>
+              <tr><td>Bob Vance</td><td>viewer</td><td class="dt-table-cell--center">40</td></tr>
+              <tr><td>Alice Wong</td><td>editor</td><td class="dt-table-cell--center">22</td></tr>
+              <tr><td>Charlie Fox</td><td>viewer</td><td class="dt-table-cell--center">35</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="row">
         <h2>Badge</h2>
         <div class="row-content">
           <span class="dt-badge dt-badge--soft dt-badge--neutral">neutral</span>
