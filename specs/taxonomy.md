@@ -30,7 +30,7 @@ forms: checkbox, field, form, input, label, select, switch, textarea, validators
 layout: body, column, footer, header, layout, row, stack
 navigation: sidebar, tabs
 surfaces: accordion, card
-utilities: theme-switcher
+utilities: theme-switcher, utilities
 
 ## Placement notes
 
