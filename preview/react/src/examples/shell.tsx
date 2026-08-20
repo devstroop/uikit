@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Body, Button, Column, Footer, Header, Layout, Row, Sidebar, Stack } from "@devstroop/react-uikitkit";
+import { Body, Button, Column, Footer, Header, Layout, Row, Sidebar, Stack, Typography } from "@devstroop/react-uikitkit";
 import { Section } from "./section";
 
 export function ShellExamples() {
@@ -7,6 +7,7 @@ export function ShellExamples() {
     <>
       <GridSection />
       <StackSection />
+      <TypographySection />
       <UtilitiesSection />
       <TokenSamplesSection />
       <AppShellSection />
@@ -210,6 +211,36 @@ function StackSection() {
           </div>
           <div style={{ border: "1px solid var(--dt-color-border)", padding: "1rem" }}>Second</div>
         </Stack>
+      </div>
+    </Section>
+  );
+}
+
+function TypographySection() {
+  return (
+    <Section title="Typography">
+      <div className="layout-grid">
+        <div>
+          <Typography variant="display-1">Display 1 — fluid clamp() scale</Typography>
+          <Typography variant="display-2">Display 2 — tighter tracking</Typography>
+          <Typography variant="display-3">Display 3</Typography>
+          <Typography variant="display-4">Display 4</Typography>
+          <Typography variant="display-5">Display 5</Typography>
+          <Typography variant="display-6">Display 6</Typography>
+        </div>
+        <div>
+          <Typography variant="overline">Overline</Typography>
+          <Typography variant="body-1">
+            Body 1 — 0.875rem at 1.429 line-height. The default text style for
+            paragraphs and prose across the system.
+          </Typography>
+          <Typography variant="body-2">
+            Body 2 — same size at 1.5 line-height for relaxed reading.
+          </Typography>
+          <Typography variant="caption">
+            Caption — 0.75rem metadata in the muted text color.
+          </Typography>
+        </div>
       </div>
     </Section>
   );
