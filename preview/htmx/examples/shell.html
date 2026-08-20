@@ -960,3 +960,68 @@
           </div>
         </div>
       </section>
+
+      <section class="row">
+        <h2>SecurityCode</h2>
+        <div class="row-content">
+          <div class="preview-grid">
+<div class="dt-securitycode" data-dt-securitycode data-dt-length="6" role="group" aria-label="Security code">
+  <input class="dt-securitycode-cell dt-securitycode-cell--md" type="text" inputmode="numeric" maxlength="1" data-dt-securitycode-cell aria-label="Digit 1 of 6" />
+  <input class="dt-securitycode-cell dt-securitycode-cell--md" type="text" inputmode="numeric" maxlength="1" data-dt-securitycode-cell aria-label="Digit 2 of 6" />
+  <input class="dt-securitycode-cell dt-securitycode-cell--md" type="text" inputmode="numeric" maxlength="1" data-dt-securitycode-cell aria-label="Digit 3 of 6" />
+  <input class="dt-securitycode-cell dt-securitycode-cell--md" type="text" inputmode="numeric" maxlength="1" data-dt-securitycode-cell aria-label="Digit 4 of 6" />
+  <input class="dt-securitycode-cell dt-securitycode-cell--md" type="text" inputmode="numeric" maxlength="1" data-dt-securitycode-cell aria-label="Digit 5 of 6" />
+  <input class="dt-securitycode-cell dt-securitycode-cell--md" type="text" inputmode="numeric" maxlength="1" data-dt-securitycode-cell aria-label="Digit 6 of 6" />
+  <span class="dt-securitycode-live" data-dt-securitycode-live role="status" aria-live="polite"></span>
+</div>
+<div class="dt-securitycode" data-dt-securitycode data-dt-length="4" role="group" aria-label="PIN">
+  <input class="dt-securitycode-cell dt-securitycode-cell--sm" type="text" inputmode="numeric" maxlength="1" data-dt-securitycode-cell aria-label="Digit 1 of 4" />
+  <input class="dt-securitycode-cell dt-securitycode-cell--sm" type="text" inputmode="numeric" maxlength="1" data-dt-securitycode-cell aria-label="Digit 2 of 4" />
+  <input class="dt-securitycode-cell dt-securitycode-cell--sm" type="text" inputmode="numeric" maxlength="1" data-dt-securitycode-cell aria-label="Digit 3 of 4" />
+  <input class="dt-securitycode-cell dt-securitycode-cell--sm" type="text" inputmode="numeric" maxlength="1" data-dt-securitycode-cell aria-label="Digit 4 of 4" />
+  <span class="dt-securitycode-live" data-dt-securitycode-live role="status" aria-live="polite"></span>
+</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="row">
+        <h2>SignaturePad</h2>
+        <div class="row-content">
+          <div class="preview-grid">
+<div class="dt-signaturepad" data-dt-signaturepad>
+  <div class="dt-signaturepad-header">
+    <span class="dt-signaturepad-label">Signature</span>
+    <button class="dt-signaturepad-clear" type="button" data-dt-signaturepad-clear>Clear</button>
+  </div>
+  <canvas class="dt-signaturepad-canvas" role="img" aria-label="Signature" data-dt-signaturepad-canvas></canvas>
+</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="row">
+        <h2>Upload</h2>
+        <div class="row-content">
+          <div class="preview-grid">
+<div class="dt-upload" data-dt-upload data-dt-upload-url="/api/files" data-dt-upload-param="files" data-dt-upload-auto="true" data-dt-upload-multiple>
+  <button class="dt-upload-trigger" type="button" data-dt-upload-trigger>Upload files</button>
+  <input class="dt-upload-input" type="file" hidden data-dt-upload-input multiple />
+  <ul class="dt-upload-list" data-dt-upload-list></ul>
+</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="row">
+        <h2>DropZone</h2>
+        <div class="row-content">
+          <div class="preview-grid">
+<div class="dt-dropzone" data-dt-dropzone role="region" aria-label="Drop files here or browse">
+  <p class="dt-dropzone-caption" data-dt-dropzone-caption>Drop files here or browse</p>
+  <button class="dt-dropzone-browse" type="button" data-dt-dropzone-browse>Browse</button>
+  <input class="dt-dropzone-input" type="file" hidden data-dt-dropzone-input />
+</div>
+          </div>
+        </div>
+      </section>

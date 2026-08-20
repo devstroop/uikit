@@ -5,6 +5,7 @@ import {
   Colorpicker,
   Column,
   Datepicker,
+  DropZone,
   Footer,
   Header,
   Layout,
@@ -13,12 +14,15 @@ import {
   Password,
   Rating,
   Row,
+  SecurityCode,
   Sidebar,
+  SignaturePad,
   Slider,
   Stack,
   Textbox,
   Timespanpicker,
   Typography,
+  Upload,
 } from "@devstroop/react-uikitkit";
 import { Section } from "./section";
 
@@ -32,6 +36,7 @@ export function ShellExamples() {
       <TokenSamplesSection />
       <TextInputsSection />
       <PickerSection />
+      <SpecialInputsSection />
       <AppShellSection />
     </>
   );
@@ -482,6 +487,56 @@ function PickerSection() {
         <strong>Rating</strong>
         <Rating value={3} ariaLabel="Interactive rating" clearLabel="Clear rating" />
         <Rating value={4} readOnly ariaLabel="Readonly rating" />
+      </div>
+    </Section>
+  );
+}
+
+function SpecialInputsSection() {
+  const [code, setCode] = useState("");
+  const [signature, setSignature] = useState("");
+  const [uploaded, setUploaded] = useState<string[]>([]);
+  const [dropped, setDropped] = useState<string[]>([]);
+  return (
+    <Section title="Special inputs" className="dt-form-grid">
+      <div>
+        <strong>SecurityCode</strong>
+        <SecurityCode length={6} value={code} onChange={setCode} label="Verification code" />
+        <p className="hint">Value: {code || "—"}</p>
+        <SecurityCode length={4} size="sm" label="PIN" />
+      </div>
+      <div>
+        <strong>SignaturePad</strong>
+        <SignaturePad
+          onChange={(v) => setSignature(v)}
+          ariaLabel="Signature"
+          height={120}
+        />
+        <p className="hint">{signature ? "Signature captured" : "Draw above"}</p>
+      </div>
+      <div>
+        <strong>Upload</strong>
+        <Upload
+          url="/api/files"
+          multiple
+          chooseText="Choose files"
+          onComplete={(name) => setUploaded((prev) => [...prev, name])}
+        />
+        <p className="hint">
+          {uploaded.length > 0 ? `Completed: ${uploaded.join(", ")}` : "Pick a file to upload (demo endpoint)"}
+        </p>
+      </div>
+      <div>
+        <strong>DropZone</strong>
+        <DropZone
+          accept="image/*"
+          multiple
+          label="Drop images here or browse"
+          onDrop={(files) => setDropped([...files].map((f) => f.name))}
+        />
+        <p className="hint">
+          {dropped.length > 0 ? `Dropped: ${dropped.join(", ")}` : "Drag an image here"}
+        </p>
       </div>
     </Section>
   );
