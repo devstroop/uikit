@@ -154,3 +154,13 @@ code {
   font-family: ui-monospace, "SF Mono", Menlo, monospace;
   font-size: 0.9em;
 }
+.u-cell {
+  padding: 12px 16px;
+  border: 1px dashed var(--dt-color-border);
+  border-radius: var(--dt-radius-md);
+  color: var(--dt-color-text-muted);
+  font-size: var(--dt-font-size-sm);
+  text-align: center;
+  display: inline-block;
+  box-sizing: border-box;
+}
