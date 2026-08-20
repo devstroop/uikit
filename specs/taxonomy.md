@@ -26,7 +26,8 @@ actions: button, dropdown, selectbar, splitbutton, togglebutton
 data: data-grid, data-list
 data-display: avatar, badge, data-filter, empty-state, icon, stat, table
 feedback: alert, dialog, progress, skeleton, toast, tooltip
-forms: autocomplete, checkbox, checkboxlist, field, form, input, label, listbox, radiobuttonlist, select, switch, textarea, validators
+forms: autocomplete, checkbox, checkboxlist, field, form, input, label, listbox, mask, numeric, password, radiobuttonlist, select, switch, textarea, textbox, validators
+>>>>>>> origin/features
 layout: body, column, footer, header, layout, row, stack
 navigation: sidebar, tabs
 surfaces: accordion, card

@@ -1,5 +1,20 @@
 import { useState } from "react";
-import { Body, Button, Column, Footer, Header, Layout, Row, Sidebar, Stack, Typography } from "@devstroop/react-uikitkit";
+import {
+  Body,
+  Button,
+  Column,
+  Footer,
+  Header,
+  Layout,
+  Mask,
+  Numeric,
+  Password,
+  Row,
+  Sidebar,
+  Stack,
+  Textbox,
+  Typography,
+} from "@devstroop/react-uikitkit";
 import { Section } from "./section";
 
 export function ShellExamples() {
@@ -10,6 +25,7 @@ export function ShellExamples() {
       <TypographySection />
       <UtilitiesSection />
       <TokenSamplesSection />
+      <TextInputsSection />
       <AppShellSection />
     </>
   );
@@ -306,6 +322,62 @@ function TokenSamplesSection() {
           Focus-visible rings on tonal controls use <code>outline-*</code> tokens (button/secondary →
           outline-secondary, etc.). All border/outline tokens hold ≥ 3:1 vs bg/surface (WCAG 1.4.11).
         </p>
+      </div>
+    </Section>
+  );
+}
+
+function TextInputsSection() {
+  const [qty, setQty] = useState<number | null>(3);
+  return (
+    <Section title="Text inputs · Textbox · Password · Mask · Numeric" className="dt-form-grid">
+      <div>
+        <strong>Textbox</strong>
+        <Textbox placeholder="sm" size="sm" aria-label="Textbox sm" />
+        <Textbox placeholder="md" aria-label="Textbox md" />
+        <Textbox placeholder="lg" size="lg" aria-label="Textbox lg" />
+        <Textbox placeholder="Invalid" invalid aria-label="Textbox invalid" />
+        <Textbox placeholder="Disabled" disabled aria-label="Textbox disabled" />
+      </div>
+      <div>
+        <strong>Password</strong>
+        <Password placeholder="sm" size="sm" aria-label="Password sm" />
+        <Password placeholder="md" aria-label="Password md" />
+        <Password placeholder="lg" size="lg" aria-label="Password lg" />
+        <Password placeholder="Invalid" invalid aria-label="Password invalid" />
+        <Password placeholder="Disabled" disabled aria-label="Password disabled" />
+      </div>
+      <div>
+        <strong>Mask</strong>
+        <Mask mask="(###) ###-####" placeholder="(123) 456-7890" aria-label="Phone" />
+        <Mask mask="##/##/####" placeholder="MM/DD/YYYY" size="sm" aria-label="Date" />
+        <Mask mask="###-##-####" placeholder="123-45-6789" aria-label="SSN" />
+      </div>
+      <div>
+        <strong>Numeric</strong>
+        <Numeric
+          aria-label="Quantity"
+          value={qty}
+          min={0}
+          max={10}
+          onChange={setQty}
+        />
+        <Numeric
+          aria-label="Rating"
+          defaultValue={3}
+          min={0}
+          max={5}
+          step={1}
+          size="sm"
+        />
+        <Numeric
+          aria-label="Step 5"
+          defaultValue={0}
+          min={0}
+          step={5}
+          placeholder="steps of 5"
+        />
+        <Numeric aria-label="Disabled" defaultValue={2} disabled />
       </div>
     </Section>
   );
