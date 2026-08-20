@@ -16,6 +16,9 @@
         "primary",
         "primary-hover",
         "primary-fg",
+        "secondary",
+        "secondary-hover",
+        "secondary-fg",
         "danger",
         "danger-hover",
         "danger-fg",
@@ -26,6 +29,42 @@
         "info-hover",
         "info-fg",
         "warning",
+        "border-primary",
+        "border-primary-light",
+        "border-primary-darker",
+        "border-secondary",
+        "border-secondary-light",
+        "border-secondary-darker",
+        "border-info",
+        "border-info-light",
+        "border-info-darker",
+        "border-success",
+        "border-success-light",
+        "border-success-darker",
+        "border-warning",
+        "border-warning-light",
+        "border-warning-darker",
+        "border-danger",
+        "border-danger-light",
+        "border-danger-darker",
+        "outline-primary",
+        "outline-primary-light",
+        "outline-primary-darker",
+        "outline-secondary",
+        "outline-secondary-light",
+        "outline-secondary-darker",
+        "outline-info",
+        "outline-info-light",
+        "outline-info-darker",
+        "outline-success",
+        "outline-success-light",
+        "outline-success-darker",
+        "outline-warning",
+        "outline-warning-light",
+        "outline-warning-darker",
+        "outline-danger",
+        "outline-danger-light",
+        "outline-danger-darker",
         "text-primary",
         "text-success",
         "text-warning",
@@ -92,7 +131,7 @@
     },
     "motion": {
       "kind": "duration",
-      "description": "Full-cycle animation durations (shimmer, sweep) — distinct from the interaction `transition` durations.",
+      "description": "Full-cycle animation durations (shimmer, sweep) \u2014 distinct from the interaction `transition` durations.",
       "tokens": [
         "shimmer",
         "sweep"
@@ -225,6 +264,131 @@
       "fg": "surface",
       "bg": "palette-5",
       "min": 4.5
+    },
+    {
+      "fg": "secondary-fg",
+      "bg": "secondary",
+      "min": 4.5
+    },
+    {
+      "fg": "border-primary",
+      "bg": "bg",
+      "min": 3.0
+    },
+    {
+      "fg": "border-primary",
+      "bg": "surface",
+      "min": 3.0
+    },
+    {
+      "fg": "border-secondary",
+      "bg": "bg",
+      "min": 3.0
+    },
+    {
+      "fg": "border-secondary",
+      "bg": "surface",
+      "min": 3.0
+    },
+    {
+      "fg": "border-info",
+      "bg": "bg",
+      "min": 3.0
+    },
+    {
+      "fg": "border-info",
+      "bg": "surface",
+      "min": 3.0
+    },
+    {
+      "fg": "border-success",
+      "bg": "bg",
+      "min": 3.0
+    },
+    {
+      "fg": "border-success",
+      "bg": "surface",
+      "min": 3.0
+    },
+    {
+      "fg": "border-warning",
+      "bg": "bg",
+      "min": 3.0
+    },
+    {
+      "fg": "border-warning",
+      "bg": "surface",
+      "min": 3.0
+    },
+    {
+      "fg": "border-danger",
+      "bg": "bg",
+      "min": 3.0
+    },
+    {
+      "fg": "border-danger",
+      "bg": "surface",
+      "min": 3.0
+    },
+    {
+      "fg": "outline-primary",
+      "bg": "bg",
+      "min": 3.0
+    },
+    {
+      "fg": "outline-primary",
+      "bg": "surface",
+      "min": 3.0
+    },
+    {
+      "fg": "outline-secondary",
+      "bg": "bg",
+      "min": 3.0
+    },
+    {
+      "fg": "outline-secondary",
+      "bg": "surface",
+      "min": 3.0
+    },
+    {
+      "fg": "outline-info",
+      "bg": "bg",
+      "min": 3.0
+    },
+    {
+      "fg": "outline-info",
+      "bg": "surface",
+      "min": 3.0
+    },
+    {
+      "fg": "outline-success",
+      "bg": "bg",
+      "min": 3.0
+    },
+    {
+      "fg": "outline-success",
+      "bg": "surface",
+      "min": 3.0
+    },
+    {
+      "fg": "outline-warning",
+      "bg": "bg",
+      "min": 3.0
+    },
+    {
+      "fg": "outline-warning",
+      "bg": "surface",
+      "min": 3.0
+    },
+    {
+      "fg": "outline-danger",
+      "bg": "bg",
+      "min": 3.0
+    },
+    {
+      "fg": "outline-danger",
+      "bg": "surface",
+      "min": 3.0
     }
   ]
 }

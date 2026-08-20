@@ -27,7 +27,7 @@ that works on both surfaces), not as an omission.
 
 | Tier | Tokens | Kind | Semantics |
 |---|---|---|---|
-| `color` | `bg`, `surface`, `surface-hover`, `border`, `border-strong`, `text`, `text-muted`, `primary`, `primary-hover`, `primary-fg`, `danger`, `danger-hover`, `danger-fg`, `success`, `warning`, `focus`, `backdrop` | color | Semantic color roles. `bg` = page canvas, `surface` = elevated containers, `*-fg` = foreground on the paired fill, `focus` = focus-visible ring (may be translucent), `backdrop` = overlay scrim |
+| `color` | `bg`, `surface`, `surface-hover`, `border`, `border-strong`, `text`, `text-muted`, `primary`, `primary-hover`, `primary-fg`, `secondary`, `secondary-hover`, `secondary-fg`, `danger`, `danger-hover`, `danger-fg`, `success`, `success-hover`, `success-fg`, `info`, `info-hover`, `info-fg`, `warning`, `border-{primary,secondary,info,success,warning,danger}({-light,-darker})`, `outline-{primary,secondary,info,success,warning,danger}({-light,-darker})`, `text-primary`, `text-success`, `text-warning`, `text-danger`, `palette-0`…`palette-5`, `focus`, `backdrop` | color | Semantic color roles. `bg` = page canvas, `surface` = elevated containers, `*-fg` = foreground on the paired fill, `border-*`/`outline-*` = per-tone line/focus-ring families (Radzen parity), `focus` = neutral focus-visible ring (may be translucent), `backdrop` = overlay scrim |
 | `radius` | `sm`, `md`, `lg`, `full` | length | Corner radii, `full` = pill/circle |
 | `space` | `1`…`6` | length | Spacing scale (gaps, paddings) |
 | `font` | `sans`, `size-xs`…`size-lg`, `weight-regular`…`weight-bold` | font | Family stack, type scale, weights |
@@ -70,6 +70,18 @@ Derived tokens carry their own contracts (see
   — WCAG 2.1 non-text contrast for interactive control boundaries (inputs,
   selects, textareas, secondary buttons, checkboxes, outline badges). The
   `border` token stays decorative (container separators only).
+- `border-*` and `outline-*` per-tone families (Radzen `--rz-border-*` /
+  `--rz-outline-*` parity): the base token is the tone color itself, held
+  at >= 3.1 against **both** `bg` and `surface`; `-light` is a 30% tint
+  toward `bg` and `-darker` a 35% shade toward black, each walked (lightness
+  up then down) until the 3.1 non-text threshold holds in the current mode.
+  Every member of both families is a schema `contrastRules` pair (>= 3.0)
+  and is re-checked by `scripts/audit-colors.mjs` wherever components use
+  it. Tone-specific focus-visible rings (`outline-primary`,
+  `outline-danger`, …) replace the neutral `focus` token on tonal controls.
+- `secondary` (Radzen's second brand color) is derived per theme: its fill
+  is walked so `secondary-fg` (white in light mode, light in dark mode)
+  clears 4.5, and `secondary-hover` walks one step further.
 
 Only opaque colors are checked; translucent values (`focus`, `backdrop`,
 alpha-bearing colors) are skipped.
