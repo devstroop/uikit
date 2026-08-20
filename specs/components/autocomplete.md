@@ -3,8 +3,8 @@ name: Autocomplete
 status: implemented
 category: forms
 frameworks:
-  react: v0.15.0
-  htmx: v0.13.0
+  react: v0.17.0
+  htmx: v0.15.0
 tokens:
   - "color.border-strong"
   - "color.surface"
