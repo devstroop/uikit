@@ -175,7 +175,7 @@ code {
 .u-swatch {
   background: #e5e7eb;
   border-radius: var(--dt-radius-md);
-  color: var(--dt-color-text);
+  color: #111827;
   font-size: var(--dt-font-size-sm);
   display: inline-block;
 }
