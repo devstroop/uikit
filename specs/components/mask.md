@@ -3,8 +3,8 @@ name: Mask
 status: implemented
 category: forms
 frameworks:
-  react: v0.15.0
-  htmx: v0.13.0
+  react: v0.18.0
+  htmx: v0.16.0
 tokens:
   - "color.border-strong"
   - "radius.md"
