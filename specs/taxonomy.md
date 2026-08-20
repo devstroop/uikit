@@ -22,14 +22,16 @@ with a single member signals a core primitive that warrants its own bucket
 
 ## Taxonomy
 
-actions: button
+actions: button, dropdown, selectbar, splitbutton, togglebutton
 data: data-grid, data-list
 data-display: avatar, badge, data-filter, empty-state, icon, stat, table
 feedback: alert, dialog, progress, skeleton, toast, tooltip
-forms: checkbox, field, form, input, label, mask, numeric, password, select, switch, textarea, textbox, validators
+forms: autocomplete, checkbox, checkboxlist, field, form, input, label, listbox, mask, numeric, password, radiobuttonlist, select, switch, textarea, textbox, validators
+>>>>>>> origin/features
 layout: body, column, footer, header, layout, row, stack
 navigation: sidebar, tabs
 surfaces: accordion, card
+typography: typography
 utilities: theme-switcher, utilities
 
 ## Placement notes
@@ -51,4 +53,7 @@ utilities: theme-switcher, utilities
   `accordion` is a static container, not navigation, in this system.
 - **actions** — the single interactive trigger primitive (Radzen Buttons;
   shadcn Actions). Menus/dropdowns belong here when they ship.
+- **typography** — the cross-cutting text-presentation primitive (display
+  headings, body copy, captions, overlines; MUI Typography). Every component
+  type should draw from its tiers instead of picking sizes ad hoc.
 - **utilities** — cross-cutting, non-visual concerns (theme switching).
