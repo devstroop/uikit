@@ -26,7 +26,7 @@ actions: button
 data: data-grid, data-list
 data-display: avatar, badge, data-filter, empty-state, icon, stat, table
 feedback: alert, dialog, progress, skeleton, toast, tooltip
-forms: checkbox, field, form, input, label, select, switch, textarea, validators
+forms: checkbox, field, form, input, label, mask, numeric, password, select, switch, textarea, textbox, validators
 layout: body, column, footer, header, layout, row, stack
 navigation: sidebar, tabs
 surfaces: accordion, card

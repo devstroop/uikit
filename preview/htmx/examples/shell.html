@@ -245,3 +245,66 @@
           </form>
         </div>
       </section>
+      <section class="row">
+        <h2>Text inputs · Textbox · Password · Mask · Numeric</h2>
+        <div class="row-content">
+          <div class="preview-inputs">
+            <div>
+              <strong>Textbox</strong>
+              <input class="dt-textbox dt-textbox--sm" type="text" placeholder="sm" aria-label="Textbox sm" />
+              <input class="dt-textbox dt-textbox--md" type="text" placeholder="md" aria-label="Textbox md" />
+              <input class="dt-textbox dt-textbox--lg" type="text" placeholder="lg" aria-label="Textbox lg" />
+              <input class="dt-textbox dt-textbox--md dt-textbox--invalid" type="text" aria-invalid="true" placeholder="Invalid" />
+              <input class="dt-textbox dt-textbox--md" type="text" placeholder="Disabled" disabled />
+            </div>
+            <div>
+              <strong>Password</strong>
+              <div class="dt-password" data-dt-password>
+                <input class="dt-password-input dt-password-input--sm" type="password" data-dt-password-input placeholder="sm" />
+                <button class="dt-password-toggle" type="button" data-dt-password-toggle aria-pressed="false" aria-label="Show password">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" data-dt-password-icon="visible"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" data-dt-password-icon="hidden" hidden><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19M14.12 14.12a3 3 0 11-4.24-4.24" /><path d="M1 1l22 22" /></svg>
+                </button>
+              </div>
+              <div class="dt-password" data-dt-password>
+                <input class="dt-password-input dt-password-input--md" type="password" data-dt-password-input placeholder="md" />
+                <button class="dt-password-toggle" type="button" data-dt-password-toggle aria-pressed="false" aria-label="Show password">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" data-dt-password-icon="visible"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" data-dt-password-icon="hidden" hidden><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19M14.12 14.12a3 3 0 11-4.24-4.24" /><path d="M1 1l22 22" /></svg>
+                </button>
+              </div>
+              <div class="dt-password" data-dt-password>
+                <input class="dt-password-input dt-password-input--md" type="password" data-dt-password-input placeholder="Disabled" disabled />
+                <button class="dt-password-toggle" type="button" data-dt-password-toggle aria-pressed="false" aria-label="Show password" disabled>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" data-dt-password-icon="visible"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" data-dt-password-icon="hidden" hidden><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19M14.12 14.12a3 3 0 11-4.24-4.24" /><path d="M1 1l22 22" /></svg>
+                </button>
+              </div>
+            </div>
+            <div>
+              <strong>Mask</strong>
+              <input class="dt-mask dt-mask--md" type="text" data-dt-mask="(###) ###-####" placeholder="(123) 456-7890" aria-label="Phone" />
+              <input class="dt-mask dt-mask--sm" type="text" data-dt-mask="##/##/####" placeholder="MM/DD/YYYY" aria-label="Date" />
+              <input class="dt-mask dt-mask--md" type="text" data-dt-mask="###-##-####" placeholder="123-45-6789" aria-label="SSN" />
+            </div>
+            <div>
+              <strong>Numeric</strong>
+              <div class="dt-numeric" data-dt-numeric data-dt-min="0" data-dt-max="10">
+                <input class="dt-numeric-input dt-numeric-input--md" type="text" inputmode="decimal" data-dt-numeric-input value="3" aria-label="Quantity" />
+                <button class="dt-numeric-btn dt-numeric-btn--up" type="button" data-dt-numeric-up aria-label="Increment"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 15l-6-6-6 6" /></svg></button>
+                <button class="dt-numeric-btn dt-numeric-btn--down" type="button" data-dt-numeric-down aria-label="Decrement"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" /></svg></button>
+              </div>
+              <div class="dt-numeric" data-dt-numeric data-dt-min="0" data-dt-max="5">
+                <input class="dt-numeric-input dt-numeric-input--sm" type="text" inputmode="decimal" data-dt-numeric-input value="3" aria-label="Rating" />
+                <button class="dt-numeric-btn dt-numeric-btn--up" type="button" data-dt-numeric-up aria-label="Increment"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 15l-6-6-6 6" /></svg></button>
+                <button class="dt-numeric-btn dt-numeric-btn--down" type="button" data-dt-numeric-down aria-label="Decrement"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" /></svg></button>
+              </div>
+              <div class="dt-numeric" data-dt-numeric data-dt-min="0" data-dt-step="5">
+                <input class="dt-numeric-input dt-numeric-input--md" type="text" inputmode="decimal" data-dt-numeric-input value="0" aria-label="Step 5" />
+                <button class="dt-numeric-btn dt-numeric-btn--up" type="button" data-dt-numeric-up aria-label="Increment"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 15l-6-6-6 6" /></svg></button>
+                <button class="dt-numeric-btn dt-numeric-btn--down" type="button" data-dt-numeric-down aria-label="Decrement"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" /></svg></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
