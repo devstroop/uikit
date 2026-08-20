@@ -129,6 +129,14 @@ body {
   align-items: start;
 }
 
+.preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  align-items: start;
+  gap: 16px;
+  width: 100%;
+}
+
 .dt-icon-row {
   color: var(--dt-color-text-muted);
 }
@@ -163,4 +171,21 @@ code {
   text-align: center;
   display: inline-block;
   box-sizing: border-box;
+}
+
+.preview-inputs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.preview-inputs strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: var(--dt-font-size-sm);
+  color: var(--dt-color-text-muted);
+}
+
+.preview-inputs > div > * + * {
+  margin-top: 0.5rem;
 }
