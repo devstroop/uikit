@@ -7,6 +7,7 @@ export function ShellExamples() {
     <>
       <GridSection />
       <StackSection />
+      <UtilitiesSection />
       <AppShellSection />
     </>
   );
@@ -208,6 +209,35 @@ function StackSection() {
           </div>
           <div style={{ border: "1px solid var(--dt-color-border)", padding: "1rem" }}>Second</div>
         </Stack>
+      </div>
+    </Section>
+  );
+}
+
+function UtilitiesSection() {
+  return (
+    <Section title="Utilities">
+      <div className="layout-grid">
+        <div className="dt-display-flex" style={{ gap: "0.5rem" }}>
+          <span className="dt-display-block u-cell">block</span>
+          <span className="dt-display-flex u-cell">flex</span>
+          <span className="dt-display-grid u-cell">grid</span>
+        </div>
+        <div className="dt-display-flex dt-justify-content-space-between dt-align-items-center" style={{ minHeight: 64 }}>
+          <span className="u-cell">start</span>
+          <span className="u-cell">middle</span>
+          <span className="u-cell">end</span>
+        </div>
+        <div className="dt-overflow-auto u-cell" style={{ maxHeight: 64 }}>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
+        </div>
+        <div className="dt-w-50 u-cell">.dt-w-50</div>
+        <div className="dt-w-fit-content u-cell">.dt-w-fit-content</div>
+        <div className="dt-max-w-50 u-cell">.dt-max-w-50</div>
+        <div className="dt-h-25 u-cell">.dt-h-25</div>
+        <div className="dt-display-flex dt-display-md-block dt-w-100 dt-w-md-50 u-cell">
+          block at ≥ 768px · width 100% below / 50% from md
+        </div>
       </div>
     </Section>
   );
