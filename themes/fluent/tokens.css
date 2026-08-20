@@ -98,10 +98,24 @@
   --dt-font-size-sm: 14px;
   --dt-font-size-md: 16px;
   --dt-font-size-lg: 20px;
+  --dt-font-size-xl: 24px;
+  --dt-font-display-1: clamp(2.5rem, 4vw + 1rem, 3rem);
+  --dt-font-display-2: clamp(2.25rem, 3.75vw + 0.9rem, 2.75rem);
+  --dt-font-display-3: clamp(2rem, 3.5vw + 0.8rem, 2.5rem);
+  --dt-font-display-4: clamp(1.75rem, 3vw + 0.7rem, 2.25rem);
+  --dt-font-display-5: clamp(1.5rem, 2.5vw + 0.625rem, 2rem);
+  --dt-font-display-6: clamp(1.125rem, 1.5vw + 0.75rem, 1.5rem);
   --dt-font-weight-regular: 400;
   --dt-font-weight-medium: 500;
   --dt-font-weight-bold: 600;
-  --dt-font-size-xl: 24px;
+  /* letterspacing */
+  --dt-letterspacing-display-1: -0.04em;
+  --dt-letterspacing-display-2: -0.035em;
+  --dt-letterspacing-display-3: -0.03em;
+  --dt-letterspacing-display-4: -0.02em;
+  --dt-letterspacing-display-5: -0.015em;
+  --dt-letterspacing-display-6: -0.01em;
+  --dt-letterspacing-overline: 0.08em;
   /* shadow */
   --dt-shadow-sm: 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.14);
   --dt-shadow-md: 0 0 2px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.14), 0 8px 16px rgba(0, 0, 0, 0.14);
