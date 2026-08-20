@@ -12,7 +12,8 @@ tokens:
   - "transition.fast"
   - "color.primary-fg"
   - "color.primary"
-  - "color.focus"
+  - "color.outline-primary"
+
 a11y:
   - "Native <input type=\"checkbox\">: checked/indeterminate/disabled state semantics, Space toggle, and form integration come from the browser."
   - "Checkmark glyph is primary-fg on primary fill — contrast >= 4.5:1 per schema contrastRules (primary-fg on primary)."

@@ -36,8 +36,13 @@ tokens:
   - "color.info"
   - "color.info-hover"
   - "color.info-fg"
-  - "color.focus"
   - "transition.fast"
+  - "color.outline-primary"
+  - "color.outline-secondary"
+  - "color.outline-danger"
+  - "color.outline-success"
+  - "color.outline-info"
+
 a11y:
   - "Renders a semantic <button> element (native Enter/Space activation)."
   - "Focus visible ring via --dt-color-focus (keyboard-only, :focus-visible)."
