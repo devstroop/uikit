@@ -91,12 +91,20 @@
     "space": {
       "kind": "length",
       "tokens": [
+        "0",
+        "05",
         "1",
         "2",
         "3",
         "4",
         "5",
-        "6"
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12"
       ]
     },
     "font": {
@@ -150,7 +158,7 @@
     },
     "motion": {
       "kind": "duration",
-      "description": "Full-cycle animation durations (shimmer, sweep) \u2014 distinct from the interaction `transition` durations.",
+      "description": "Full-cycle animation durations (shimmer, sweep) — distinct from the interaction `transition` durations.",
       "tokens": [
         "shimmer",
         "sweep"
@@ -292,122 +300,122 @@
     {
       "fg": "border-primary",
       "bg": "bg",
-      "min": 3.0
+      "min": 3
     },
     {
       "fg": "border-primary",
       "bg": "surface",
-      "min": 3.0
+      "min": 3
     },
     {
       "fg": "border-secondary",
       "bg": "bg",
-      "min": 3.0
+      "min": 3
     },
     {
       "fg": "border-secondary",
       "bg": "surface",
-      "min": 3.0
+      "min": 3
     },
     {
       "fg": "border-info",
       "bg": "bg",
-      "min": 3.0
+      "min": 3
     },
     {
       "fg": "border-info",
       "bg": "surface",
-      "min": 3.0
+      "min": 3
     },
     {
       "fg": "border-success",
       "bg": "bg",
-      "min": 3.0
+      "min": 3
     },
     {
       "fg": "border-success",
       "bg": "surface",
-      "min": 3.0
+      "min": 3
     },
     {
       "fg": "border-warning",
       "bg": "bg",
-      "min": 3.0
+      "min": 3
     },
     {
       "fg": "border-warning",
       "bg": "surface",
-      "min": 3.0
+      "min": 3
     },
     {
       "fg": "border-danger",
       "bg": "bg",
-      "min": 3.0
+      "min": 3
     },
     {
       "fg": "border-danger",
       "bg": "surface",
-      "min": 3.0
+      "min": 3
     },
     {
       "fg": "outline-primary",
       "bg": "bg",
-      "min": 3.0
+      "min": 3
     },
     {
       "fg": "outline-primary",
       "bg": "surface",
-      "min": 3.0
+      "min": 3
     },
     {
       "fg": "outline-secondary",
       "bg": "bg",
-      "min": 3.0
+      "min": 3
     },
     {
       "fg": "outline-secondary",
       "bg": "surface",
-      "min": 3.0
+      "min": 3
     },
     {
       "fg": "outline-info",
       "bg": "bg",
-      "min": 3.0
+      "min": 3
     },
     {
       "fg": "outline-info",
       "bg": "surface",
-      "min": 3.0
+      "min": 3
     },
     {
       "fg": "outline-success",
       "bg": "bg",
-      "min": 3.0
+      "min": 3
     },
     {
       "fg": "outline-success",
       "bg": "surface",
-      "min": 3.0
+      "min": 3
     },
     {
       "fg": "outline-warning",
       "bg": "bg",
-      "min": 3.0
+      "min": 3
     },
     {
       "fg": "outline-warning",
       "bg": "surface",
-      "min": 3.0
+      "min": 3
     },
     {
       "fg": "outline-danger",
       "bg": "bg",
-      "min": 3.0
+      "min": 3
     },
     {
       "fg": "outline-danger",
       "bg": "surface",
-      "min": 3.0
+      "min": 3
     }
   ]
 }
