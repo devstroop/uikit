@@ -108,9 +108,28 @@
         "size-md",
         "size-lg",
         "size-xl",
+        "display-1",
+        "display-2",
+        "display-3",
+        "display-4",
+        "display-5",
+        "display-6",
         "weight-regular",
         "weight-medium",
         "weight-bold"
+      ]
+    },
+    "letterspacing": {
+      "kind": "length",
+      "description": "Letter-spacing for the display scale and overline (em units). Negative values tighten the largest headings.",
+      "tokens": [
+        "display-1",
+        "display-2",
+        "display-3",
+        "display-4",
+        "display-5",
+        "display-6",
+        "overline"
       ]
     },
     "shadow": {
