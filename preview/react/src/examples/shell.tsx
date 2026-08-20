@@ -2,17 +2,22 @@ import { useState } from "react";
 import {
   Body,
   Button,
+  Colorpicker,
   Column,
+  Datepicker,
   Footer,
   Header,
   Layout,
   Mask,
   Numeric,
   Password,
+  Rating,
   Row,
   Sidebar,
+  Slider,
   Stack,
   Textbox,
+  Timespanpicker,
   Typography,
 } from "@devstroop/react-uikitkit";
 import { Section } from "./section";
@@ -26,6 +31,7 @@ export function ShellExamples() {
       <UtilitiesSection />
       <TokenSamplesSection />
       <TextInputsSection />
+      <PickerSection />
       <AppShellSection />
     </>
   );
@@ -391,6 +397,91 @@ function TextInputsSection() {
           placeholder="steps of 5"
         />
         <Numeric aria-label="Disabled" defaultValue={2} disabled />
+      </div>
+    </Section>
+  );
+}
+
+function PickerSection() {
+  const [color, setColor] = useState("#2563eb");
+  const [paletteColor, setPaletteColor] = useState("#ff2800");
+  return (
+    <Section title="Pickers" className="dt-form-grid">
+      <div>
+        <strong>Datepicker</strong>
+        <Datepicker ariaLabel="Datepicker md" defaultValue="2026-08-20" format="yyyy-MM-dd" allowClear />
+        <Datepicker
+          ariaLabel="Datepicker with time"
+          defaultValue="2026-08-20 14:30"
+          format="yyyy-MM-dd HH:mm"
+          showTime
+          showButton
+          size="sm"
+        />
+        <Datepicker ariaLabel="Inline datepicker" defaultValue="2026-08-20" format="yyyy-MM-dd" inline />
+      </div>
+      <div>
+        <strong>Timespanpicker</strong>
+        <Timespanpicker
+          ariaLabel="Timespanpicker full"
+          defaultValue="1.02:30:00"
+          precision="second"
+          showDays
+          showHours
+          showMinutes
+          showSeconds
+        />
+        <Timespanpicker
+          ariaLabel="Timespanpicker hours/minutes"
+          defaultValue="02:30"
+          precision="minute"
+          showHours
+          showMinutes
+          size="sm"
+        />
+      </div>
+      <div>
+        <strong>Colorpicker</strong>
+        <Colorpicker
+          value={color}
+          onChange={setColor}
+          showSaturation
+          showRgba
+          showPalette
+          showArrow
+          aria-label="Colorpicker"
+        />
+        <Colorpicker
+          value={paletteColor}
+          onChange={setPaletteColor}
+          showPalette
+          showButton
+          size="sm"
+          aria-label="Colorpicker palette"
+        />
+      </div>
+      <div>
+        <strong>Slider</strong>
+        <Slider label="Volume" value={40} min={0} max={100} />
+        <Slider label="Temperature" value={25} min={10} max={50} step={5} />
+        <Slider
+          label="Price range"
+          range
+          valueMin={20}
+          valueMax={80}
+          min={0}
+          max={100}
+          minLabel="Min price"
+          maxLabel="Max price"
+        />
+        <div style={{ height: 160 }}>
+          <Slider label="Vertical" value={70} min={0} max={100} orientation="vertical" />
+        </div>
+      </div>
+      <div>
+        <strong>Rating</strong>
+        <Rating value={3} ariaLabel="Interactive rating" clearLabel="Clear rating" />
+        <Rating value={4} readOnly ariaLabel="Readonly rating" />
       </div>
     </Section>
   );
