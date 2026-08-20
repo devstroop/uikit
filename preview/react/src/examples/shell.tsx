@@ -286,6 +286,19 @@ function UtilitiesSection() {
         <div className="dt-display-flex dt-display-md-block dt-w-100 dt-w-md-50 u-cell">
           block at ≥ 768px · width 100% below / 50% from md
         </div>
+        <div className="dt-display-flex" style={{ gap: "1rem", flexWrap: "wrap" }}>
+          <span className="dt-p-1 u-swatch">.dt-p-1 (4px)</span>
+          <span className="dt-p-3 u-swatch">.dt-p-3 (12px)</span>
+          <span className="dt-p-6 u-swatch">.dt-p-6 (24px)</span>
+          <span className="dt-p-12 u-swatch">.dt-p-12 (48px)</span>
+        </div>
+        <div className="dt-display-flex" style={{ flexWrap: "wrap" }}>
+          <span className="u-swatch-plain">A</span>
+          <span className="dt-mx-3 u-swatch-plain">.dt-mx-3 on B</span>
+          <span className="u-swatch-plain">C</span>
+        </div>
+        <div className="dt-mt-4 dt-mb-2 u-cell">.dt-mt-4 pushes this card down · .dt-mb-2 below</div>
+        <div className="dt-mx-auto dt-w-fit-content u-cell">.dt-mx-auto centers this fit-content block</div>
       </div>
     </Section>
   );
