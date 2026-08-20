@@ -2,17 +2,22 @@ import { useState } from "react";
 import {
   Body,
   Button,
+  Colorpicker,
   Column,
+  Datepicker,
   Footer,
   Header,
   Layout,
   Mask,
   Numeric,
   Password,
+  Rating,
   Row,
   Sidebar,
+  Slider,
   Stack,
   Textbox,
+  Timespanpicker,
   Typography,
 } from "@devstroop/react-uikitkit";
 import { Section } from "./section";
@@ -26,6 +31,7 @@ export function ShellExamples() {
       <UtilitiesSection />
       <TokenSamplesSection />
       <TextInputsSection />
+      <PickerSection />
       <AppShellSection />
     </>
   );
@@ -286,6 +292,19 @@ function UtilitiesSection() {
         <div className="dt-display-flex dt-display-md-block dt-w-100 dt-w-md-50 u-cell">
           block at ≥ 768px · width 100% below / 50% from md
         </div>
+        <div className="dt-display-flex" style={{ gap: "1rem", flexWrap: "wrap" }}>
+          <span className="dt-p-1 u-swatch">.dt-p-1 (4px)</span>
+          <span className="dt-p-3 u-swatch">.dt-p-3 (12px)</span>
+          <span className="dt-p-6 u-swatch">.dt-p-6 (24px)</span>
+          <span className="dt-p-12 u-swatch">.dt-p-12 (48px)</span>
+        </div>
+        <div className="dt-display-flex" style={{ flexWrap: "wrap" }}>
+          <span className="u-swatch-plain">A</span>
+          <span className="dt-mx-3 u-swatch-plain">.dt-mx-3 on B</span>
+          <span className="u-swatch-plain">C</span>
+        </div>
+        <div className="dt-mt-4 dt-mb-2 u-cell">.dt-mt-4 pushes this card down · .dt-mb-2 below</div>
+        <div className="dt-mx-auto dt-w-fit-content u-cell">.dt-mx-auto centers this fit-content block</div>
       </div>
     </Section>
   );
@@ -378,6 +397,91 @@ function TextInputsSection() {
           placeholder="steps of 5"
         />
         <Numeric aria-label="Disabled" defaultValue={2} disabled />
+      </div>
+    </Section>
+  );
+}
+
+function PickerSection() {
+  const [color, setColor] = useState("#2563eb");
+  const [paletteColor, setPaletteColor] = useState("#ff2800");
+  return (
+    <Section title="Pickers" className="dt-form-grid">
+      <div>
+        <strong>Datepicker</strong>
+        <Datepicker ariaLabel="Datepicker md" defaultValue="2026-08-20" format="yyyy-MM-dd" allowClear />
+        <Datepicker
+          ariaLabel="Datepicker with time"
+          defaultValue="2026-08-20 14:30"
+          format="yyyy-MM-dd HH:mm"
+          showTime
+          showButton
+          size="sm"
+        />
+        <Datepicker ariaLabel="Inline datepicker" defaultValue="2026-08-20" format="yyyy-MM-dd" inline />
+      </div>
+      <div>
+        <strong>Timespanpicker</strong>
+        <Timespanpicker
+          ariaLabel="Timespanpicker full"
+          defaultValue="1.02:30:00"
+          precision="second"
+          showDays
+          showHours
+          showMinutes
+          showSeconds
+        />
+        <Timespanpicker
+          ariaLabel="Timespanpicker hours/minutes"
+          defaultValue="02:30"
+          precision="minute"
+          showHours
+          showMinutes
+          size="sm"
+        />
+      </div>
+      <div>
+        <strong>Colorpicker</strong>
+        <Colorpicker
+          value={color}
+          onChange={setColor}
+          showSaturation
+          showRgba
+          showPalette
+          showArrow
+          aria-label="Colorpicker"
+        />
+        <Colorpicker
+          value={paletteColor}
+          onChange={setPaletteColor}
+          showPalette
+          showButton
+          size="sm"
+          aria-label="Colorpicker palette"
+        />
+      </div>
+      <div>
+        <strong>Slider</strong>
+        <Slider label="Volume" value={40} min={0} max={100} />
+        <Slider label="Temperature" value={25} min={10} max={50} step={5} />
+        <Slider
+          label="Price range"
+          range
+          valueMin={20}
+          valueMax={80}
+          min={0}
+          max={100}
+          minLabel="Min price"
+          maxLabel="Max price"
+        />
+        <div style={{ height: 160 }}>
+          <Slider label="Vertical" value={70} min={0} max={100} orientation="vertical" />
+        </div>
+      </div>
+      <div>
+        <strong>Rating</strong>
+        <Rating value={3} ariaLabel="Interactive rating" clearLabel="Clear rating" />
+        <Rating value={4} readOnly ariaLabel="Readonly rating" />
       </div>
     </Section>
   );

@@ -172,6 +172,20 @@ code {
   display: inline-block;
   box-sizing: border-box;
 }
+.u-swatch {
+  background: #e5e7eb;
+  border-radius: var(--dt-radius-md);
+  color: #111827;
+  font-size: var(--dt-font-size-sm);
+  display: inline-block;
+}
+.u-swatch-plain {
+  background: #d1d5db;
+  padding: 8px 12px;
+  color: #111827;
+  font-size: var(--dt-font-size-sm);
+  display: inline-block;
+}
 
 .preview-inputs {
   display: grid;
