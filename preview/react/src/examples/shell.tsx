@@ -8,6 +8,7 @@ export function ShellExamples() {
       <GridSection />
       <StackSection />
       <UtilitiesSection />
+      <TokenSamplesSection />
       <AppShellSection />
     </>
   );
@@ -238,6 +239,42 @@ function UtilitiesSection() {
         <div className="dt-display-flex dt-display-md-block dt-w-100 dt-w-md-50 u-cell">
           block at ≥ 768px · width 100% below / 50% from md
         </div>
+      </div>
+    </Section>
+  );
+}
+
+function TokenSamplesSection() {
+  const tones = ["primary", "secondary", "info", "success", "warning", "danger"] as const;
+  return (
+    <Section title="Border / outline tokens">
+      <div className="layout-grid">
+        <div className="dt-display-flex" style={{ gap: "0.5rem", flexWrap: "wrap" }}>
+          {tones.map((tone) => (
+            <span
+              key={tone}
+              className="u-cell"
+              style={{ border: `2px solid var(--dt-color-border-${tone})` }}
+            >
+              border-{tone}
+            </span>
+          ))}
+        </div>
+        <div className="dt-display-flex" style={{ gap: "0.5rem", flexWrap: "wrap" }}>
+          {tones.map((tone) => (
+            <span
+              key={tone}
+              className="u-cell"
+              style={{ border: `2px dashed var(--dt-color-outline-${tone})` }}
+            >
+              outline-{tone}
+            </span>
+          ))}
+        </div>
+        <p style={{ fontSize: "var(--dt-font-size-sm)", color: "var(--dt-color-text-muted)" }}>
+          Focus-visible rings on tonal controls use <code>outline-*</code> tokens (button/secondary →
+          outline-secondary, etc.). All border/outline tokens hold ≥ 3:1 vs bg/surface (WCAG 1.4.11).
+        </p>
       </div>
     </Section>
   );

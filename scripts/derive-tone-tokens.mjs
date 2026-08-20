@@ -186,6 +186,62 @@ for (const dir of dirs) {
     color["border-strong"][mode] = rgbToHex(
       hslToRgb({ ...bsHsl, l: Math.min(97, Math.max(3, bsL)) }),
     );
+
+    // Per-color border/outline families (issue #76) — Radzen parity.
+    // Base tokens are hue-preserving walks of the tone color; -light and
+    // -darker are 30% tints toward bg and 35% shades toward black, both
+    // walked so every token holds >= 3.1 against BOTH bg and surface
+    // (WCAG 1.4.11 non-text contrast, per mode).
+
+    color.secondary ??= {};
+    color["secondary-hover"] ??= {};
+    color["secondary-fg"] ??= {};
+    if (!color.secondary[mode]) color.secondary[mode] = "#64748b";
+    const secFg = hexToRgb(mode === "light" ? "#ffffff" : "#f1f5f9");
+    const secSeed = hexToRgb(color.secondary[mode]);
+    const secFit = rgbToHex(walkLightness(rgbToHsl(secSeed), secFg, -1));
+    color.secondary[mode] = secFit;
+    color["secondary-hover"][mode] = rgbToHex(walkLightness(rgbToHsl(hexToRgb(secFit)), secFg, -1));
+    color["secondary-fg"][mode] = mode === "light" ? "#ffffff" : "#f1f5f9";
+
+    const mixToward = (base, target, pct) => ({
+      r: base.r * (1 - pct) + target.r * pct,
+      g: base.g * (1 - pct) + target.g * pct,
+      b: base.b * (1 - pct) + target.b * pct,
+    });
+
+    for (const tone of ["primary", "secondary", "info", "success", "warning", "danger"]) {
+      const val = color[tone];
+      const base = hexToRgb(typeof val === "string" ? val : val[mode]);
+      const familyFit = (rgb) => [bg, surface].every((t) => contrast(rgb, t) >= 3.1);
+      const walkFamily = (start) => {
+        const hsl = rgbToHsl(start);
+        if (familyFit(start)) return start;
+        for (const dir of [darkerFill ? -1 : 1, darkerFill ? 1 : -1]) {
+          let l = hsl.l;
+          for (let i = 0; i < 100; i++) {
+            l += dir;
+            if (l < 3 || l > 97) break;
+            const rgb = hslToRgb({ ...hsl, l });
+            if (familyFit(rgb)) return rgb;
+          }
+        }
+        return start;
+      };
+      const start = {
+        light: mixToward(base, bg, 0.3),
+        dark: mixToward(base, { r: 0, g: 0, b: 0 }, 0.35),
+      };
+      const baseFit = walkFamily(base);
+      for (const family of ["border", "outline"]) {
+        color[`${family}-${tone}`] ??= {};
+        color[`${family}-${tone}`][mode] = rgbToHex(baseFit);
+        color[`${family}-${tone}-light`] ??= {};
+        color[`${family}-${tone}-light`][mode] = rgbToHex(walkFamily(start.light));
+        color[`${family}-${tone}-darker`] ??= {};
+        color[`${family}-${tone}-darker`][mode] = rgbToHex(walkFamily(start.dark));
+      }
+    }
   }
 
   await writeFile(path, `${JSON.stringify(theme, null, 2)}\n`);

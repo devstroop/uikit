@@ -133,6 +133,33 @@
         </div>
       </section>
       <section class="row">
+        <h2>Border / outline tokens</h2>
+        <div class="row-content">
+          <div class="layout-grid">
+            <div class="dt-display-flex" style="gap: 0.5rem; flex-wrap: wrap">
+              <span class="u-cell" style="border: 2px solid var(--dt-color-border-primary)">border-primary</span>
+              <span class="u-cell" style="border: 2px solid var(--dt-color-border-secondary)">border-secondary</span>
+              <span class="u-cell" style="border: 2px solid var(--dt-color-border-info)">border-info</span>
+              <span class="u-cell" style="border: 2px solid var(--dt-color-border-success)">border-success</span>
+              <span class="u-cell" style="border: 2px solid var(--dt-color-border-warning)">border-warning</span>
+              <span class="u-cell" style="border: 2px solid var(--dt-color-border-danger)">border-danger</span>
+            </div>
+            <div class="dt-display-flex" style="gap: 0.5rem; flex-wrap: wrap">
+              <span class="u-cell" style="border: 2px dashed var(--dt-color-outline-primary)">outline-primary</span>
+              <span class="u-cell" style="border: 2px dashed var(--dt-color-outline-secondary)">outline-secondary</span>
+              <span class="u-cell" style="border: 2px dashed var(--dt-color-outline-info)">outline-info</span>
+              <span class="u-cell" style="border: 2px dashed var(--dt-color-outline-success)">outline-success</span>
+              <span class="u-cell" style="border: 2px dashed var(--dt-color-outline-warning)">outline-warning</span>
+              <span class="u-cell" style="border: 2px dashed var(--dt-color-outline-danger)">outline-danger</span>
+            </div>
+            <p style="font-size: var(--dt-font-size-sm); color: var(--dt-color-text-muted)">
+              Focus-visible rings on tonal controls use <code>outline-*</code> tokens. All border/outline
+              tokens hold ≥ 3:1 vs bg/surface (WCAG 1.4.11).
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="row">
         <h2>App Shell · Layout · Header · Sidebar · Body · Footer</h2>
         <div class="row-content">
           <div class="dt-layout" style="width: 100%; min-height: 420px; border: 1px dashed var(--dt-color-border); border-radius: var(--dt-radius-md); overflow: hidden">
