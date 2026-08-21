@@ -24,7 +24,12 @@ import {
   Steps,
   Toc,
   Tree,
+  Barcode,
   Gantt,
+  Pivot,
+  QRCode,
+  Timeline,
+  VirtualGrid,
   Scheduler,
   Rating,
   Row,
@@ -56,6 +61,7 @@ export function ShellExamples() {
       <StepsSplitterSection />
       <TreePickListSection />
       <SchedulerGanttSection />
+      <DataExtrasSection />
       <AppShellSection />
     </>
   );
@@ -782,6 +788,52 @@ function SchedulerGanttSection() {
       <div>
         <strong>Gantt</strong>
         <Gantt tasks={ganttTasks} view="week" ariaLabel="Demo gantt" />
+      </div>
+    </Section>
+  );
+}
+
+function DataExtrasSection() {
+  const [sourceRows] = useState(() =>
+    Array.from({ length: 50 }, (_, i) => ({ region: i % 2 ? "East" : "West", product: ["A", "B", "C"][i % 3], amount: (i + 1) * 10 })),
+  );
+  const [gridData] = useState(() => Array.from({ length: 1000 }, (_, i) => ({ id: i + 1, name: `Row ${i + 1}` })));
+  const loadSlice = (_args: { skip: number; top: number }) => {
+    return new Promise<Record<string, unknown>[]>((resolve) => {
+      setTimeout(() => resolve(gridData.slice(_args.skip, _args.top).map((r) => ({ id: r.id, name: r.name }))), 50);
+    });
+  };
+  return (
+    <Section title="Pivot · Timeline · VirtualGrid · QRCode · Barcode" className="dt-form-grid">
+      <div>
+        <strong>Pivot</strong>
+        <Pivot
+          data={sourceRows}
+          rowFields={[{ property: "region", title: "Region" }]}
+          columnFields={[{ property: "product", title: "Product" }]}
+          aggregateFields={[{ property: "amount", aggregate: "Sum" }]}
+          ariaLabel="Demo pivot"
+        />
+      </div>
+      <div>
+        <strong>Timeline</strong>
+        <Timeline
+          items={[
+            { label: "Created", content: "Jan 2026" },
+            { label: "Reviewed", content: "Feb 2026" },
+            { label: "Shipped", content: "Mar 2026" },
+          ]}
+          ariaLabel="Demo timeline"
+        />
+      </div>
+      <div>
+        <strong>VirtualGrid</strong>
+        <VirtualGrid count={1000} loadData={loadSlice} columns={[{ property: "id", title: "ID", width: "80px" }, { property: "name", title: "Name" }]} height={200} ariaLabel="Demo virtual grid" />
+      </div>
+      <div>
+        <strong>QRCode & Barcode</strong>
+        <QRCode value="https://devstroop.com" size={96} ariaLabel="Demo QR code" />
+        <Barcode value="DEV-123" showValue ariaLabel="Demo barcode" />
       </div>
     </Section>
   );
