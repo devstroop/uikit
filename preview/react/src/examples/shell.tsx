@@ -11,6 +11,7 @@ import {
   Layout,
   Mask,
   Numeric,
+  Pager,
   Password,
   Rating,
   Row,
@@ -37,6 +38,7 @@ export function ShellExamples() {
       <TextInputsSection />
       <PickerSection />
       <SpecialInputsSection />
+      <PagerSection />
       <AppShellSection />
     </>
   );
@@ -537,6 +539,56 @@ function SpecialInputsSection() {
         <p className="hint">
           {dropped.length > 0 ? `Dropped: ${dropped.join(", ")}` : "Drag an image here"}
         </p>
+      </div>
+    </Section>
+  );
+}
+
+function PagerSection() {
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+  return (
+    <Section title="Pager">
+      <div>
+        <strong>Default</strong>
+        <Pager
+          count={100}
+          pageSize={pageSize}
+          page={page}
+          onPageChange={({ page: p }) => setPage(p)}
+          onPageSizeChange={setPageSize}
+          pageSizeOptions={[10, 20, 50]}
+          ariaLabel="Pagination default"
+        />
+        <p className="hint">
+          Page {page} of {Math.ceil(100 / pageSize)} (pageSize {pageSize})
+        </p>
+      </div>
+      <div>
+        <strong>Many pages (ellipsis)</strong>
+        <Pager
+          count={1000}
+          pageSize={10}
+          page={5}
+          pageNumbersCount={5}
+          onPageChange={() => {}}
+          ariaLabel="Pagination many pages"
+        />
+      </div>
+      <div>
+        <strong>Center aligned</strong>
+        <Pager count={35} pageSize={10} page={2} horizontalAlign="center" onPageChange={() => {}} ariaLabel="Pagination center" />
+      </div>
+      <div>
+        <strong>Custom summary</strong>
+        <Pager
+          count={42}
+          pageSize={10}
+          page={1}
+          pagingSummaryTemplate={({ count, pageNumber, pageCount }) => `Showing ${count} items — page ${pageNumber}/${pageCount}`}
+          onPageChange={() => {}}
+          ariaLabel="Pagination custom summary"
+        />
       </div>
     </Section>
   );
