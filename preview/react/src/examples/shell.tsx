@@ -3,6 +3,7 @@ import {
   Body,
   Breadcrumb,
   Button,
+  Carousel,
   Colorpicker,
   Column,
   Datepicker,
@@ -18,6 +19,9 @@ import {
   PanelMenu,
   Password,
   ProfileMenu,
+  Splitter,
+  Steps,
+  Toc,
   Rating,
   Row,
   SecurityCode,
@@ -45,6 +49,7 @@ export function ShellExamples() {
       <SpecialInputsSection />
       <PagerSection />
       <MenuFamilySection />
+      <StepsSplitterSection />
       <AppShellSection />
     </>
   );
@@ -666,6 +671,57 @@ function MenuFamilySection() {
       <div>
         <strong>Breadcrumb</strong>
         <Breadcrumb items={breadcrumbItems} ariaLabel="Demo breadcrumb" />
+      </div>
+    </Section>
+  );
+}
+
+function StepsSplitterSection() {
+  const [step, setStep] = useState(1);
+  const carouselItems = [
+    <div key="1" style={{ padding: 24, background: "var(--dt-color-surface)", border: "1px solid var(--dt-color-border)", borderRadius: "var(--dt-radius-md)" }}>Slide 1</div>,
+    <div key="2" style={{ padding: 24, background: "var(--dt-color-surface)", border: "1px solid var(--dt-color-border)", borderRadius: "var(--dt-radius-md)" }}>Slide 2</div>,
+    <div key="3" style={{ padding: 24, background: "var(--dt-color-surface)", border: "1px solid var(--dt-color-border)", borderRadius: "var(--dt-radius-md)" }}>Slide 3</div>,
+  ];
+  return (
+    <Section title="Steps · Splitter · Toc · Carousel" className="dt-form-grid">
+      <div>
+        <strong>Steps</strong>
+        <Steps
+          items={[{ text: "Cart" }, { text: "Shipping" }, { text: "Payment" }, { text: "Review" }]}
+          selectedIndex={step}
+          onChange={setStep}
+          ariaLabel="Demo steps"
+        />
+        <p className="hint">Active: {step + 1} of 4</p>
+      </div>
+      <div>
+        <strong>Splitter</strong>
+        <div style={{ height: 120, border: "1px solid var(--dt-color-border)", borderRadius: "var(--dt-radius-md)", overflow: "hidden" }}>
+          <Splitter
+            orientation="horizontal"
+            panes={[
+              { size: "40%", min: "20%", collapsible: true, label: "Left", children: <div style={{ padding: 12 }}>Left pane</div> },
+              { size: "60%", label: "Right", children: <div style={{ padding: 12 }}>Right pane</div> },
+            ]}
+            ariaLabel="Demo splitter"
+          />
+        </div>
+      </div>
+      <div>
+        <strong>Toc</strong>
+        <Toc
+          items={[
+            { text: "Introduction", selector: "#toc-intro" },
+            { text: "Usage", selector: "#toc-usage" },
+            { text: "API", selector: "#toc-api" },
+          ]}
+          ariaLabel="Demo toc"
+        />
+      </div>
+      <div>
+        <strong>Carousel</strong>
+        <Carousel items={carouselItems} ariaLabel="Demo carousel" showArrows showIndicators />
       </div>
     </Section>
   );
