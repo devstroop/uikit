@@ -1268,3 +1268,50 @@
         </div>
       </section>
 
+      <section class="row">
+        <h2>Pivot · Timeline · VirtualGrid · QRCode · Barcode</h2>
+        <div class="row-content">
+          <div class="preview-grid">
+<div class="dt-pivot" data-dt-pivot aria-label="Demo pivot">
+  <div class="dt-pivot-fields">
+    <button type="button" class="dt-pivot-chip" data-dt-pivot-chip data-dt-zone="row" data-dt-property="region" aria-label="Remove row field Region">Region</button>
+    <button type="button" class="dt-pivot-chip" data-dt-pivot-chip data-dt-zone="agg" data-dt-property="amount" aria-label="Remove agg field amount (Sum)">amount (Sum)</button>
+  </div>
+  <table class="dt-pivot-table" role="grid" aria-label="Pivot table">
+    <thead><tr><th scope="col">Region</th><th scope="col">A</th><th scope="col">B</th><th scope="col">Total</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">East</th><td>10</td><td>20</td><td>30</td></tr>
+      <tr><th scope="row">West</th><td>30</td><td>40</td><td>70</td></tr>
+      <tr class="dt-pivot-total-row"><th scope="row">Total</th><td>40</td><td>60</td><td>100</td></tr>
+    </tbody>
+  </table>
+</div>
+<ol class="dt-timeline" data-dt-timeline role="list" aria-label="Demo timeline">
+  <li class="dt-timeline-item"><span class="dt-timeline-marker" aria-hidden="true"></span><div class="dt-timeline-body"><div class="dt-timeline-label">Created</div><div class="dt-timeline-content">Jan 2026</div></div></li>
+  <li class="dt-timeline-item"><span class="dt-timeline-marker" aria-hidden="true"></span><div class="dt-timeline-body"><div class="dt-timeline-label">Shipped</div><div class="dt-timeline-content">Mar 2026</div></div></li>
+</ol>
+<div class="dt-virtual-grid" data-dt-virtual-grid role="grid" aria-label="Demo virtual grid" aria-rowcount="1000" tabindex="0">
+  <div class="dt-virtual-header" role="row">
+    <div class="dt-virtual-head-cell" role="columnheader">ID</div>
+    <div class="dt-virtual-head-cell" role="columnheader">Name</div>
+  </div>
+  <div data-dt-virtual-rows>
+    <div class="dt-virtual-row" role="row"><div class="dt-virtual-cell" role="gridcell">1</div><div class="dt-virtual-cell" role="gridcell">Row 1</div></div>
+    <div class="dt-virtual-row" role="row"><div class="dt-virtual-cell" role="gridcell">2</div><div class="dt-virtual-cell" role="gridcell">Row 2</div></div>
+  </div>
+</div>
+<svg class="dt-qrcode" data-dt-qrcode role="img" aria-label="Demo QR code" width="96" height="96" viewBox="0 0 25 25" shape-rendering="crispEdges">
+  <rect width="25" height="25" fill="var(--dt-color-surface)"></rect>
+  <g fill="var(--dt-color-text)"><path d="M0 0h7v7H0zM1 1v5h5V1zM2 2h3v3H2z"></path><path d="M18 0h7v7h-7zM19 1v5h5V1zM20 2h3v3h-3z"></path><path d="M0 18h7v7H0zM1 19v5h5v-5zM2 20h3v3H2z"></path></g>
+</svg>
+<span class="dt-barcode" data-dt-barcode>
+  <svg role="img" aria-label="Demo barcode" width="100%" height="60" viewBox="0 0 202 60" preserveAspectRatio="none">
+    <rect width="202" height="60" fill="var(--dt-color-surface)"></rect>
+    <g fill="var(--dt-color-text)"><rect x="0" width="2" height="60"></rect><rect x="4" width="1" height="60"></rect><rect x="7" width="1" height="60"></rect><rect x="11" width="2" height="60"></rect><rect x="15" width="1" height="60"></rect><rect x="18" width="3" height="60"></rect></g>
+  </svg>
+  <span class="dt-barcode-value">DEV-123</span>
+</span>
+          </div>
+        </div>
+      </section>
+
