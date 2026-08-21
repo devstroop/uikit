@@ -24,6 +24,8 @@ import {
   Steps,
   Toc,
   Tree,
+  Gantt,
+  Scheduler,
   Rating,
   Row,
   SecurityCode,
@@ -53,6 +55,7 @@ export function ShellExamples() {
       <MenuFamilySection />
       <StepsSplitterSection />
       <TreePickListSection />
+      <SchedulerGanttSection />
       <AppShellSection />
     </>
   );
@@ -756,6 +759,29 @@ function TreePickListSection() {
           onTargetChange={setTarget}
           ariaLabel="Demo picklist"
         />
+      </div>
+    </Section>
+  );
+}
+
+function SchedulerGanttSection() {
+  const schedulerData = [
+    { id: "1", title: "Meeting", start: new Date("2024-01-15T10:00:00"), end: new Date("2024-01-15T11:00:00") },
+    { id: "2", title: "Lunch", start: new Date("2024-01-15T12:00:00"), end: new Date("2024-01-15T13:00:00") },
+  ];
+  const ganttTasks = [
+    { id: "1", name: "Task 1", start: new Date("2024-01-01"), end: new Date("2024-01-05"), progress: 50 },
+    { id: "2", name: "Task 2", start: new Date("2024-01-06"), end: new Date("2024-01-10"), dependencies: ["1"] },
+  ];
+  return (
+    <Section title="Scheduler · Gantt" className="dt-form-grid">
+      <div>
+        <strong>Scheduler</strong>
+        <Scheduler data={schedulerData} view="week" date={new Date("2024-01-15")} ariaLabel="Demo scheduler" />
+      </div>
+      <div>
+        <strong>Gantt</strong>
+        <Gantt tasks={ganttTasks} view="week" ariaLabel="Demo gantt" />
       </div>
     </Section>
   );
