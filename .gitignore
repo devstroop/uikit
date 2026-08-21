@@ -3,6 +3,6 @@ dist/
 !frameworks/react/dist/
 !frameworks/htmx/dist/
 preview/*/dist/
-visual/screenshots/
+visual/
 *.log
 .DS_Store
