@@ -1,18 +1,23 @@
 import { useState } from "react";
 import {
   Body,
+  Breadcrumb,
   Button,
   Colorpicker,
   Column,
   Datepicker,
   DropZone,
+  FabMenu,
   Footer,
   Header,
   Layout,
   Mask,
+  Menu,
   Numeric,
   Pager,
+  PanelMenu,
   Password,
+  ProfileMenu,
   Rating,
   Row,
   SecurityCode,
@@ -39,6 +44,7 @@ export function ShellExamples() {
       <PickerSection />
       <SpecialInputsSection />
       <PagerSection />
+      <MenuFamilySection />
       <AppShellSection />
     </>
   );
@@ -589,6 +595,77 @@ function PagerSection() {
           onPageChange={() => {}}
           ariaLabel="Pagination custom summary"
         />
+      </div>
+    </Section>
+  );
+}
+
+function MenuFamilySection() {
+  const menuItems = [
+    { text: "Home", value: "home", path: "/" },
+    {
+      text: "Products",
+      value: "products",
+      children: [
+        { text: "Laptops", value: "laptops", path: "/products/laptops" },
+        { text: "Phones", value: "phones", path: "/products/phones" },
+      ],
+    },
+    { text: "About", value: "about", path: "/about" },
+  ];
+  const panelItems = [
+    { text: "Dashboard", icon: "◆", value: "dash" },
+    {
+      text: "Settings",
+      icon: "⚙",
+      value: "settings",
+      children: [
+        { text: "Profile", value: "profile" },
+        { text: "Security", value: "security" },
+      ],
+    },
+  ];
+  const profileItems = [
+    { text: "Profile", path: "/profile" },
+    { text: "Settings", path: "/settings" },
+    { text: "Sign out", path: "/logout" },
+  ];
+  const fabItems = [
+    { text: "Create", icon: "+", value: "create" },
+    { text: "Upload", icon: "↑", value: "upload" },
+  ];
+  const breadcrumbItems = [
+    { text: "Home", path: "/" },
+    { text: "Products", path: "/products" },
+    { text: "Laptops", path: "/products/laptops" },
+  ];
+  return (
+    <Section title="Menu family · Menu · PanelMenu · ProfileMenu · FabMenu · Breadcrumb" className="dt-form-grid">
+      <div>
+        <strong>Menu</strong>
+        <Menu items={menuItems} ariaLabel="Demo menu" />
+      </div>
+      <div>
+        <strong>PanelMenu</strong>
+        <PanelMenu items={panelItems} ariaLabel="Demo panel menu" />
+      </div>
+      <div>
+        <strong>ProfileMenu</strong>
+        <ProfileMenu
+          items={profileItems}
+          trigger={<span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}><span style={{ width: 28, height: 28, borderRadius: "50%", background: "var(--dt-color-primary)", color: "var(--dt-color-primary-fg)", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>A</span> Alice</span>}
+          ariaLabel="Demo profile menu"
+        />
+      </div>
+      <div>
+        <strong>FabMenu</strong>
+        <div style={{ position: "relative", height: 120, border: "1px dashed var(--dt-color-border)", borderRadius: "var(--dt-radius-md)" }}>
+          <FabMenu items={fabItems} position="bottom-right" ariaLabel="Demo fab menu" />
+        </div>
+      </div>
+      <div>
+        <strong>Breadcrumb</strong>
+        <Breadcrumb items={breadcrumbItems} ariaLabel="Demo breadcrumb" />
       </div>
     </Section>
   );
