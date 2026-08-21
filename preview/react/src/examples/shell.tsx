@@ -14,6 +14,7 @@ import {
   Layout,
   Mask,
   Menu,
+  PickList,
   Numeric,
   Pager,
   PanelMenu,
@@ -22,6 +23,7 @@ import {
   Splitter,
   Steps,
   Toc,
+  Tree,
   Rating,
   Row,
   SecurityCode,
@@ -50,6 +52,7 @@ export function ShellExamples() {
       <PagerSection />
       <MenuFamilySection />
       <StepsSplitterSection />
+      <TreePickListSection />
       <AppShellSection />
     </>
   );
@@ -722,6 +725,37 @@ function StepsSplitterSection() {
       <div>
         <strong>Carousel</strong>
         <Carousel items={carouselItems} ariaLabel="Demo carousel" showArrows showIndicators />
+      </div>
+    </Section>
+  );
+}
+
+function TreePickListSection() {
+  const treeData = [
+    { id: "1", text: "Documents", children: [{ id: "1-1", text: "Resume.pdf" }, { id: "1-2", text: "Cover.pdf" }] },
+    { id: "2", text: "Pictures", children: [{ id: "2-1", text: "Vacation.jpg" }] },
+  ];
+  const [source, setSource] = useState([
+    { id: "1", text: "Apple" },
+    { id: "2", text: "Banana" },
+    { id: "3", text: "Cherry" },
+  ]);
+  const [target, setTarget] = useState([{ id: "4", text: "Date" }]);
+  return (
+    <Section title="Tree · PickList" className="dt-form-grid">
+      <div>
+        <strong>Tree</strong>
+        <Tree data={treeData} ariaLabel="Demo tree" selectionMode="single" />
+      </div>
+      <div>
+        <strong>PickList</strong>
+        <PickList
+          source={source}
+          target={target}
+          onSourceChange={setSource}
+          onTargetChange={setTarget}
+          ariaLabel="Demo picklist"
+        />
       </div>
     </Section>
   );
