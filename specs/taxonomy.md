@@ -28,7 +28,7 @@ data-display: avatar, badge, data-filter, empty-state, icon, stat, table
 feedback: alert, dialog, progress, skeleton, toast, tooltip
 forms: autocomplete, checkbox, checkboxlist, colorpicker, datepicker, drop-zone, field, form, input, label, listbox, mask, numeric, password, radiobuttonlist, rating, security-code, select, signature-pad, slider, switch, textarea, textbox, timespanpicker, upload, validators
 layout: body, column, footer, header, layout, row, stack
-navigation: breadcrumb, fab-menu, menu, pager, panel-menu, profile-menu, sidebar, tabs
+navigation: breadcrumb, carousel, fab-menu, menu, pager, panel-menu, profile-menu, sidebar, splitter, steps, tabs, toc
 surfaces: accordion, card
 typography: typography
 utilities: theme-switcher, utilities
