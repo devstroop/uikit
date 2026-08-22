@@ -15,6 +15,7 @@ import {
   Mask,
   Menu,
   PickList,
+  Chart,
   Numeric,
   Pager,
   PanelMenu,
@@ -62,6 +63,7 @@ export function ShellExamples() {
       <TreePickListSection />
       <SchedulerGanttSection />
       <DataExtrasSection />
+      <ChartSection />
       <AppShellSection />
     </>
   );
@@ -834,6 +836,30 @@ function DataExtrasSection() {
         <strong>QRCode & Barcode</strong>
         <QRCode value="https://devstroop.com" size={96} ariaLabel="Demo QR code" />
         <Barcode value="DEV-123" showValue ariaLabel="Demo barcode" />
+      </div>
+    </Section>
+  );
+}
+
+function ChartSection() {
+  const data = [
+    { month: "Jan", value: 10 },
+    { month: "Feb", value: 20 },
+    { month: "Mar", value: 15 },
+  ];
+  const barData = [
+    { cat: "A", val: 5 },
+    { cat: "B", val: 12 },
+  ];
+  return (
+    <Section title="Chart" className="dt-form-grid">
+      <div>
+        <strong>Line</strong>
+        <Chart series={[{ type: "line", title: "Sales", data, categoryProperty: "month", valueProperty: "value" }]} ariaLabel="Demo chart" />
+      </div>
+      <div>
+        <strong>Column</strong>
+        <Chart series={[{ type: "column", title: "Revenue", data: barData, categoryProperty: "cat", valueProperty: "val" }]} ariaLabel="Demo column chart" />
       </div>
     </Section>
   );
