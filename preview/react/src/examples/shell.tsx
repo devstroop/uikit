@@ -16,6 +16,8 @@ import {
   Menu,
   PickList,
   Chart,
+  Dialog,
+  ThemeSwitcher,
   Numeric,
   Pager,
   PanelMenu,
@@ -55,15 +57,38 @@ export function ShellExamples() {
       <UtilitiesSection />
       <TokenSamplesSection />
       <TextInputsSection />
-      <PickerSection />
-      <SpecialInputsSection />
+      <DatepickerSection />
+      <TimespanpickerSection />
+      <ColorpickerSection />
+      <SliderSection />
+      <RatingSection />
+      <SecurityCodeSection />
+      <SignaturePadSection />
+      <UploadSection />
+      <DropZoneSection />
       <PagerSection />
-      <MenuFamilySection />
-      <StepsSplitterSection />
-      <TreePickListSection />
-      <SchedulerGanttSection />
-      <DataExtrasSection />
+      <MenuSection />
+      <PanelMenuSection />
+      <ProfileMenuSection />
+      <FabMenuSection />
+      <BreadcrumbSection />
+      <StepsSection />
+      <SplitterSection />
+      <TocSection />
+      <CarouselSection />
+      <TreeSection />
+      <PickListSection />
+      <SchedulerSection />
+      <GanttSection />
+      <PivotSection />
+      <TimelineSection />
+      <VirtualGridSection />
+      <QRCodeSection />
+      <BarcodeSection />
       <ChartSection />
+      <DialogSection />
+      <ThemeSwitcherSection />
+      <ValidatorsSection />
       <AppShellSection />
     </>
   );
@@ -434,11 +459,9 @@ function TextInputsSection() {
   );
 }
 
-function PickerSection() {
-  const [color, setColor] = useState("#2563eb");
-  const [paletteColor, setPaletteColor] = useState("#ff2800");
+function DatepickerSection() {
   return (
-    <Section title="Pickers" className="dt-form-grid">
+    <Section title="Datepicker" className="dt-form-grid">
       <div>
         <strong>Datepicker</strong>
         <Datepicker ariaLabel="Datepicker md" defaultValue="2026-08-20" format="yyyy-MM-dd" allowClear />
@@ -452,6 +475,13 @@ function PickerSection() {
         />
         <Datepicker ariaLabel="Inline datepicker" defaultValue="2026-08-20" format="yyyy-MM-dd" inline />
       </div>
+    </Section>
+  );
+}
+
+function TimespanpickerSection() {
+  return (
+    <Section title="Timespanpicker" className="dt-form-grid">
       <div>
         <strong>Timespanpicker</strong>
         <Timespanpicker
@@ -472,6 +502,15 @@ function PickerSection() {
           size="sm"
         />
       </div>
+    </Section>
+  );
+}
+
+function ColorpickerSection() {
+  const [color, setColor] = useState("#2563eb");
+  const [paletteColor, setPaletteColor] = useState("#ff2800");
+  return (
+    <Section title="Colorpicker" className="dt-form-grid">
       <div>
         <strong>Colorpicker</strong>
         <Colorpicker
@@ -492,6 +531,13 @@ function PickerSection() {
           aria-label="Colorpicker palette"
         />
       </div>
+    </Section>
+  );
+}
+
+function SliderSection() {
+  return (
+    <Section title="Slider" className="dt-form-grid">
       <div>
         <strong>Slider</strong>
         <Slider label="Volume" value={40} min={0} max={100} />
@@ -510,6 +556,13 @@ function PickerSection() {
           <Slider label="Vertical" value={70} min={0} max={100} orientation="vertical" />
         </div>
       </div>
+    </Section>
+  );
+}
+
+function RatingSection() {
+  return (
+    <Section title="Rating" className="dt-form-grid">
       <div>
         <strong>Rating</strong>
         <Rating value={3} ariaLabel="Interactive rating" clearLabel="Clear rating" />
@@ -519,51 +572,54 @@ function PickerSection() {
   );
 }
 
-function SpecialInputsSection() {
+function SecurityCodeSection() {
   const [code, setCode] = useState("");
-  const [signature, setSignature] = useState("");
-  const [uploaded, setUploaded] = useState<string[]>([]);
-  const [dropped, setDropped] = useState<string[]>([]);
   return (
-    <Section title="Special inputs" className="dt-form-grid">
+    <Section title="SecurityCode" className="dt-form-grid">
       <div>
         <strong>SecurityCode</strong>
         <SecurityCode length={6} value={code} onChange={setCode} label="Verification code" />
         <p className="hint">Value: {code || "—"}</p>
         <SecurityCode length={4} size="sm" label="PIN" />
       </div>
+    </Section>
+  );
+}
+
+function SignaturePadSection() {
+  const [signature, setSignature] = useState("");
+  return (
+    <Section title="SignaturePad" className="dt-form-grid">
       <div>
         <strong>SignaturePad</strong>
-        <SignaturePad
-          onChange={(v) => setSignature(v)}
-          ariaLabel="Signature"
-          height={120}
-        />
+        <SignaturePad onChange={(v) => setSignature(v)} ariaLabel="Signature" height={120} />
         <p className="hint">{signature ? "Signature captured" : "Draw above"}</p>
       </div>
+    </Section>
+  );
+}
+
+function UploadSection() {
+  const [uploaded, setUploaded] = useState<string[]>([]);
+  return (
+    <Section title="Upload" className="dt-form-grid">
       <div>
         <strong>Upload</strong>
-        <Upload
-          url="/api/files"
-          multiple
-          chooseText="Choose files"
-          onComplete={(name) => setUploaded((prev) => [...prev, name])}
-        />
-        <p className="hint">
-          {uploaded.length > 0 ? `Completed: ${uploaded.join(", ")}` : "Pick a file to upload (demo endpoint)"}
-        </p>
+        <Upload url="/api/files" multiple chooseText="Choose files" onComplete={(name) => setUploaded((prev) => [...prev, name])} />
+        <p className="hint">{uploaded.length > 0 ? `Completed: ${uploaded.join(", ")}` : "Pick a file to upload (demo endpoint)"}</p>
       </div>
+    </Section>
+  );
+}
+
+function DropZoneSection() {
+  const [dropped, setDropped] = useState<string[]>([]);
+  return (
+    <Section title="DropZone" className="dt-form-grid">
       <div>
         <strong>DropZone</strong>
-        <DropZone
-          accept="image/*"
-          multiple
-          label="Drop images here or browse"
-          onDrop={(files) => setDropped([...files].map((f) => f.name))}
-        />
-        <p className="hint">
-          {dropped.length > 0 ? `Dropped: ${dropped.join(", ")}` : "Drag an image here"}
-        </p>
+        <DropZone accept="image/*" multiple label="Drop images here or browse" onDrop={(files) => setDropped([...files].map((f) => f.name))} />
+        <p className="hint">{dropped.length > 0 ? `Dropped: ${dropped.join(", ")}` : "Drag an image here"}</p>
       </div>
     </Section>
   );
@@ -619,133 +675,101 @@ function PagerSection() {
   );
 }
 
-function MenuFamilySection() {
+function MenuSection() {
   const menuItems = [
     { text: "Home", value: "home", path: "/" },
-    {
-      text: "Products",
-      value: "products",
-      children: [
-        { text: "Laptops", value: "laptops", path: "/products/laptops" },
-        { text: "Phones", value: "phones", path: "/products/phones" },
-      ],
-    },
+    { text: "Products", value: "products", children: [{ text: "Laptops", value: "laptops", path: "/products/laptops" }, { text: "Phones", value: "phones", path: "/products/phones" }] },
     { text: "About", value: "about", path: "/about" },
   ];
+  return (
+    <Section title="Menu" className="dt-form-grid">
+      <div><strong>Menu</strong><Menu items={menuItems} ariaLabel="Demo menu" /></div>
+    </Section>
+  );
+}
+function PanelMenuSection() {
   const panelItems = [
     { text: "Dashboard", icon: "◆", value: "dash" },
-    {
-      text: "Settings",
-      icon: "⚙",
-      value: "settings",
-      children: [
-        { text: "Profile", value: "profile" },
-        { text: "Security", value: "security" },
-      ],
-    },
-  ];
-  const profileItems = [
-    { text: "Profile", path: "/profile" },
-    { text: "Settings", path: "/settings" },
-    { text: "Sign out", path: "/logout" },
-  ];
-  const fabItems = [
-    { text: "Create", icon: "+", value: "create" },
-    { text: "Upload", icon: "↑", value: "upload" },
-  ];
-  const breadcrumbItems = [
-    { text: "Home", path: "/" },
-    { text: "Products", path: "/products" },
-    { text: "Laptops", path: "/products/laptops" },
+    { text: "Settings", icon: "⚙", value: "settings", children: [{ text: "Profile", value: "profile" }, { text: "Security", value: "security" }] },
   ];
   return (
-    <Section title="Menu family · Menu · PanelMenu · ProfileMenu · FabMenu · Breadcrumb" className="dt-form-grid">
-      <div>
-        <strong>Menu</strong>
-        <Menu items={menuItems} ariaLabel="Demo menu" />
-      </div>
-      <div>
-        <strong>PanelMenu</strong>
-        <PanelMenu items={panelItems} ariaLabel="Demo panel menu" />
-      </div>
-      <div>
-        <strong>ProfileMenu</strong>
-        <ProfileMenu
-          items={profileItems}
-          trigger={<span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}><span style={{ width: 28, height: 28, borderRadius: "50%", background: "var(--dt-color-primary)", color: "var(--dt-color-primary-fg)", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>A</span> Alice</span>}
-          ariaLabel="Demo profile menu"
-        />
-      </div>
-      <div>
-        <strong>FabMenu</strong>
-        <div style={{ position: "relative", height: 120, border: "1px dashed var(--dt-color-border)", borderRadius: "var(--dt-radius-md)" }}>
-          <FabMenu items={fabItems} position="bottom-right" ariaLabel="Demo fab menu" />
-        </div>
-      </div>
-      <div>
-        <strong>Breadcrumb</strong>
-        <Breadcrumb items={breadcrumbItems} ariaLabel="Demo breadcrumb" />
-      </div>
+    <Section title="PanelMenu" className="dt-form-grid">
+      <div><strong>PanelMenu</strong><PanelMenu items={panelItems} ariaLabel="Demo panel menu" /></div>
+    </Section>
+  );
+}
+function ProfileMenuSection() {
+  const profileItems = [{ text: "Profile", path: "/profile" }, { text: "Settings", path: "/settings" }, { text: "Sign out", path: "/logout" }];
+  return (
+    <Section title="ProfileMenu" className="dt-form-grid">
+      <div><strong>ProfileMenu</strong><ProfileMenu items={profileItems} trigger={<span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}><span style={{ width: 28, height: 28, borderRadius: "50%", background: "var(--dt-color-primary)", color: "var(--dt-color-primary-fg)", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>A</span> Alice</span>} ariaLabel="Demo profile menu" /></div>
+    </Section>
+  );
+}
+function FabMenuSection() {
+  const fabItems = [{ text: "Create", icon: "+", value: "create" }, { text: "Upload", icon: "↑", value: "upload" }];
+  return (
+    <Section title="FabMenu" className="dt-form-grid">
+      <div><strong>FabMenu</strong><div style={{ position: "relative", height: 120, border: "1px dashed var(--dt-color-border)", borderRadius: "var(--dt-radius-md)" }}><FabMenu items={fabItems} position="bottom-right" ariaLabel="Demo fab menu" /></div></div>
+    </Section>
+  );
+}
+function BreadcrumbSection() {
+  const breadcrumbItems = [{ text: "Home", path: "/" }, { text: "Products", path: "/products" }, { text: "Laptops", path: "/products/laptops" }];
+  return (
+    <Section title="Breadcrumb" className="dt-form-grid">
+      <div><strong>Breadcrumb</strong><Breadcrumb items={breadcrumbItems} ariaLabel="Demo breadcrumb" /></div>
     </Section>
   );
 }
 
-function StepsSplitterSection() {
+function StepsSection() {
   const [step, setStep] = useState(1);
+  return (
+    <Section title="Steps" className="dt-form-grid">
+      <div><strong>Steps</strong><Steps items={[{ text: "Cart" }, { text: "Shipping" }, { text: "Payment" }, { text: "Review" }]} selectedIndex={step} onChange={setStep} ariaLabel="Demo steps" /><p className="hint">Active: {step + 1} of 4</p></div>
+    </Section>
+  );
+}
+function SplitterSection() {
+  return (
+    <Section title="Splitter" className="dt-form-grid">
+      <div><strong>Splitter</strong><div style={{ height: 120, border: "1px solid var(--dt-color-border)", borderRadius: "var(--dt-radius-md)", overflow: "hidden" }}><Splitter orientation="horizontal" panes={[{ size: "40%", min: "20%", collapsible: true, label: "Left", children: <div style={{ padding: 12 }}>Left pane</div> }, { size: "60%", label: "Right", children: <div style={{ padding: 12 }}>Right pane</div> }]} ariaLabel="Demo splitter" /></div></div>
+    </Section>
+  );
+}
+function TocSection() {
+  return (
+    <Section title="Toc" className="dt-form-grid">
+      <div><strong>Toc</strong><Toc items={[{ text: "Introduction", selector: "#toc-intro" }, { text: "Usage", selector: "#toc-usage" }, { text: "API", selector: "#toc-api" }]} ariaLabel="Demo toc" /></div>
+    </Section>
+  );
+}
+function CarouselSection() {
   const carouselItems = [
     <div key="1" style={{ padding: 24, background: "var(--dt-color-surface)", border: "1px solid var(--dt-color-border)", borderRadius: "var(--dt-radius-md)" }}>Slide 1</div>,
     <div key="2" style={{ padding: 24, background: "var(--dt-color-surface)", border: "1px solid var(--dt-color-border)", borderRadius: "var(--dt-radius-md)" }}>Slide 2</div>,
     <div key="3" style={{ padding: 24, background: "var(--dt-color-surface)", border: "1px solid var(--dt-color-border)", borderRadius: "var(--dt-radius-md)" }}>Slide 3</div>,
   ];
   return (
-    <Section title="Steps · Splitter · Toc · Carousel" className="dt-form-grid">
-      <div>
-        <strong>Steps</strong>
-        <Steps
-          items={[{ text: "Cart" }, { text: "Shipping" }, { text: "Payment" }, { text: "Review" }]}
-          selectedIndex={step}
-          onChange={setStep}
-          ariaLabel="Demo steps"
-        />
-        <p className="hint">Active: {step + 1} of 4</p>
-      </div>
-      <div>
-        <strong>Splitter</strong>
-        <div style={{ height: 120, border: "1px solid var(--dt-color-border)", borderRadius: "var(--dt-radius-md)", overflow: "hidden" }}>
-          <Splitter
-            orientation="horizontal"
-            panes={[
-              { size: "40%", min: "20%", collapsible: true, label: "Left", children: <div style={{ padding: 12 }}>Left pane</div> },
-              { size: "60%", label: "Right", children: <div style={{ padding: 12 }}>Right pane</div> },
-            ]}
-            ariaLabel="Demo splitter"
-          />
-        </div>
-      </div>
-      <div>
-        <strong>Toc</strong>
-        <Toc
-          items={[
-            { text: "Introduction", selector: "#toc-intro" },
-            { text: "Usage", selector: "#toc-usage" },
-            { text: "API", selector: "#toc-api" },
-          ]}
-          ariaLabel="Demo toc"
-        />
-      </div>
-      <div>
-        <strong>Carousel</strong>
-        <Carousel items={carouselItems} ariaLabel="Demo carousel" showArrows showIndicators />
-      </div>
+    <Section title="Carousel" className="dt-form-grid">
+      <div><strong>Carousel</strong><Carousel items={carouselItems} ariaLabel="Demo carousel" showArrows showIndicators /></div>
     </Section>
   );
 }
 
-function TreePickListSection() {
+function TreeSection() {
   const treeData = [
     { id: "1", text: "Documents", children: [{ id: "1-1", text: "Resume.pdf" }, { id: "1-2", text: "Cover.pdf" }] },
     { id: "2", text: "Pictures", children: [{ id: "2-1", text: "Vacation.jpg" }] },
   ];
+  return (
+    <Section title="Tree" className="dt-form-grid">
+      <div><strong>Tree</strong><Tree data={treeData} ariaLabel="Demo tree" selectionMode="single" /></div>
+    </Section>
+  );
+}
+function PickListSection() {
   const [source, setSource] = useState([
     { id: "1", text: "Apple" },
     { id: "2", text: "Banana" },
@@ -753,52 +777,53 @@ function TreePickListSection() {
   ]);
   const [target, setTarget] = useState([{ id: "4", text: "Date" }]);
   return (
-    <Section title="Tree · PickList" className="dt-form-grid">
-      <div>
-        <strong>Tree</strong>
-        <Tree data={treeData} ariaLabel="Demo tree" selectionMode="single" />
-      </div>
-      <div>
-        <strong>PickList</strong>
-        <PickList
-          source={source}
-          target={target}
-          onSourceChange={setSource}
-          onTargetChange={setTarget}
-          ariaLabel="Demo picklist"
-        />
-      </div>
+    <Section title="PickList" className="dt-form-grid">
+      <div><strong>PickList</strong><PickList source={source} target={target} onSourceChange={setSource} onTargetChange={setTarget} ariaLabel="Demo picklist" /></div>
     </Section>
   );
 }
 
-function SchedulerGanttSection() {
+function SchedulerSection() {
   const schedulerData = [
     { id: "1", title: "Meeting", start: new Date("2024-01-15T10:00:00"), end: new Date("2024-01-15T11:00:00") },
     { id: "2", title: "Lunch", start: new Date("2024-01-15T12:00:00"), end: new Date("2024-01-15T13:00:00") },
   ];
+  return (
+    <Section title="Scheduler" className="dt-form-grid">
+      <div><strong>Scheduler</strong><Scheduler data={schedulerData} view="week" date={new Date("2024-01-15")} ariaLabel="Demo scheduler" /></div>
+    </Section>
+  );
+}
+function GanttSection() {
   const ganttTasks = [
     { id: "1", name: "Task 1", start: new Date("2024-01-01"), end: new Date("2024-01-05"), progress: 50 },
     { id: "2", name: "Task 2", start: new Date("2024-01-06"), end: new Date("2024-01-10"), dependencies: ["1"] },
   ];
   return (
-    <Section title="Scheduler · Gantt" className="dt-form-grid">
-      <div>
-        <strong>Scheduler</strong>
-        <Scheduler data={schedulerData} view="week" date={new Date("2024-01-15")} ariaLabel="Demo scheduler" />
-      </div>
-      <div>
-        <strong>Gantt</strong>
-        <Gantt tasks={ganttTasks} view="week" ariaLabel="Demo gantt" />
-      </div>
+    <Section title="Gantt" className="dt-form-grid">
+      <div><strong>Gantt</strong><Gantt tasks={ganttTasks} view="week" ariaLabel="Demo gantt" /></div>
     </Section>
   );
 }
 
-function DataExtrasSection() {
+function PivotSection() {
   const [sourceRows] = useState(() =>
     Array.from({ length: 50 }, (_, i) => ({ region: i % 2 ? "East" : "West", product: ["A", "B", "C"][i % 3], amount: (i + 1) * 10 })),
   );
+  return (
+    <Section title="Pivot" className="dt-form-grid">
+      <div><strong>Pivot</strong><Pivot data={sourceRows} rowFields={[{ property: "region", title: "Region" }]} columnFields={[{ property: "product", title: "Product" }]} aggregateFields={[{ property: "amount", aggregate: "Sum" }]} ariaLabel="Demo pivot" /></div>
+    </Section>
+  );
+}
+function TimelineSection() {
+  return (
+    <Section title="Timeline" className="dt-form-grid">
+      <div><strong>Timeline</strong><Timeline items={[{ label: "Created", content: "Jan 2026" }, { label: "Reviewed", content: "Feb 2026" }, { label: "Shipped", content: "Mar 2026" }]} ariaLabel="Demo timeline" /></div>
+    </Section>
+  );
+}
+function VirtualGridSection() {
   const [gridData] = useState(() => Array.from({ length: 1000 }, (_, i) => ({ id: i + 1, name: `Row ${i + 1}` })));
   const loadSlice = (_args: { skip: number; top: number }) => {
     return new Promise<Record<string, unknown>[]>((resolve) => {
@@ -806,37 +831,22 @@ function DataExtrasSection() {
     });
   };
   return (
-    <Section title="Pivot · Timeline · VirtualGrid · QRCode · Barcode" className="dt-form-grid">
-      <div>
-        <strong>Pivot</strong>
-        <Pivot
-          data={sourceRows}
-          rowFields={[{ property: "region", title: "Region" }]}
-          columnFields={[{ property: "product", title: "Product" }]}
-          aggregateFields={[{ property: "amount", aggregate: "Sum" }]}
-          ariaLabel="Demo pivot"
-        />
-      </div>
-      <div>
-        <strong>Timeline</strong>
-        <Timeline
-          items={[
-            { label: "Created", content: "Jan 2026" },
-            { label: "Reviewed", content: "Feb 2026" },
-            { label: "Shipped", content: "Mar 2026" },
-          ]}
-          ariaLabel="Demo timeline"
-        />
-      </div>
-      <div>
-        <strong>VirtualGrid</strong>
-        <VirtualGrid count={1000} loadData={loadSlice} columns={[{ property: "id", title: "ID", width: "80px" }, { property: "name", title: "Name" }]} height={200} ariaLabel="Demo virtual grid" />
-      </div>
-      <div>
-        <strong>QRCode & Barcode</strong>
-        <QRCode value="https://devstroop.com" size={96} ariaLabel="Demo QR code" />
-        <Barcode value="DEV-123" showValue ariaLabel="Demo barcode" />
-      </div>
+    <Section title="VirtualGrid" className="dt-form-grid">
+      <div><strong>VirtualGrid</strong><VirtualGrid count={1000} loadData={loadSlice} columns={[{ property: "id", title: "ID", width: "80px" }, { property: "name", title: "Name" }]} height={200} ariaLabel="Demo virtual grid" /></div>
+    </Section>
+  );
+}
+function QRCodeSection() {
+  return (
+    <Section title="QRCode" className="dt-form-grid">
+      <div><strong>QRCode</strong><QRCode value="https://devstroop.com" size={96} ariaLabel="Demo QR code" /></div>
+    </Section>
+  );
+}
+function BarcodeSection() {
+  return (
+    <Section title="Barcode" className="dt-form-grid">
+      <div><strong>Barcode</strong><Barcode value="DEV-123" showValue ariaLabel="Demo barcode" /></div>
     </Section>
   );
 }
@@ -860,6 +870,44 @@ function ChartSection() {
       <div>
         <strong>Column</strong>
         <Chart series={[{ type: "column", title: "Revenue", data: barData, categoryProperty: "cat", valueProperty: "val" }]} ariaLabel="Demo column chart" />
+      </div>
+    </Section>
+  );
+}
+
+function DialogSection() {
+  const [open, setOpen] = useState(true);
+  return (
+    <Section title="Dialog" className="dt-form-grid">
+      <div>
+        <strong>Dialog</strong>
+        <Button onClick={() => setOpen(true)}>Open dialog</Button>
+        <Dialog open={open} onClose={() => setOpen(false)} title="Demo dialog">
+          <p>This is a dialog.</p>
+          <Button onClick={() => setOpen(false)}>Close</Button>
+        </Dialog>
+      </div>
+    </Section>
+  );
+}
+
+function ThemeSwitcherSection() {
+  return (
+    <Section title="ThemeSwitcher" className="dt-form-grid">
+      <div>
+        <strong>ThemeSwitcher</strong>
+        <ThemeSwitcher />
+      </div>
+    </Section>
+  );
+}
+
+function ValidatorsSection() {
+  return (
+    <Section title="Validators" className="dt-form-grid">
+      <div>
+        <strong>Validators</strong>
+        <p className="hint">Validators are used with Form/Field — see Text inputs.</p>
       </div>
     </Section>
   );
