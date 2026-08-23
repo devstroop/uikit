@@ -3,8 +3,8 @@ name: Chart
 status: implemented
 category: data-display
 frameworks:
-  react: v0.28.0
-  htmx: v0.26.0
+  react: v0.29.0
+  htmx: v0.27.0
 tokens:
   - "color.border"
   - "color.palette-0"
