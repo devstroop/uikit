@@ -125,8 +125,9 @@ function readSpecs() {
 
 // Map kebab -> htmx data attribute selector (primary) and fallback aria-label
 function htmxSelector(kebab) {
-  // Most htmx components use data-dt-<kebab> on the root
-  // Special cases: drop-zone was renamed but data attr is still data-dt-dropzone
+  // Most htmx components use data-dt-<kebab> on the root, but some drop the hyphen
+  const noHyphen = new Set(["fab-menu", "panel-menu", "profile-menu", "pick-list", "drop-zone", "security-code", "signature-pad"]);
+  if (noHyphen.has(kebab)) return `[data-dt-${kebab.replace(/-/g, "")}]`;
   return `[data-dt-${kebab}]`;
 }
 
@@ -210,9 +211,9 @@ async function main() {
 
   const { reactPort, htmxPort, reactServer, htmxServer } = await ensureServers();
 
-  const browser = await chromium.launch();
-  const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
-  const page = await context.newPage();
+  let browser = await chromium.launch();
+  let context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+  let page = await context.newPage();
 
   let total = 0;
   let missing = [];
@@ -220,7 +221,21 @@ async function main() {
   for (const app of ["react", "htmx"]) {
     const port = app === "react" ? reactPort : htmxPort;
     const url = `http://localhost:${port}/`;
-    await page.goto(url, { waitUntil: "networkidle" });
+    try {
+      await page.goto(url, { waitUntil: "networkidle" });
+    } catch (e) {
+      // page/context may have been closed due to previous screenshot timeout — recreate
+      try { await page.close(); } catch {}
+      try {
+        page = await context.newPage({ viewport: { width: 1440, height: 900 } });
+      } catch {
+        try { await browser.close(); } catch {}
+        browser = await chromium.launch();
+        context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+        page = await context.newPage({ viewport: { width: 1440, height: 900 } });
+      }
+      await page.goto(url, { waitUntil: "networkidle" });
+    }
 
     for (const theme of themes) {
       for (const mode of modes) {
