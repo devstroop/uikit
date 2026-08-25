@@ -43,7 +43,7 @@ import {
   Timespanpicker,
   Typography,
   Upload,
-} from "@devstroop/react-uikitkit";
+} from "@devstroop/react-uikit";
 import { Section } from "./section";
 
 export function ShellExamples() {
