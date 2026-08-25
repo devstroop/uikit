@@ -3,8 +3,8 @@ name: Column
 status: implemented
 category: layout
 frameworks:
-  react: v0.3.5
-  htmx: v0.1.6
+  react: v0.13.0
+  htmx: v0.11.0
 tokens: []
 a11y:
   - "Renders a plain <div>; purely a layout container — no semantic role, no aria, no keyboard behavior."
@@ -27,6 +27,9 @@ fractions of the row width (`size / 12`), with optional responsive tiers
 | `sizeMd` / `offsetMd` | as above | `undefined` | Tier ≥ 768px |
 | `sizeLg` / `offsetLg` | as above | `undefined` | Tier ≥ 992px |
 | `sizeXl` / `offsetXl` | as above | `undefined` | Tier ≥ 1200px |
+| `sizeXxl` / `offsetXxl` | as above | `undefined` | Tier ≥ 2560px (Radzen `SizeXXL`/`OffsetXXL` parity) |
+| `order` | `"first"` \| `"last"` \| `number` | `undefined` | Visual order; `first`/`last` via classes, numbers via inline `order` style |
+| `orderSm` … `orderXxl` | as above | `undefined` | Responsive order (Radzen `Order<Breakpoint>` parity) |
 | `className` | `string` | `undefined` | Extra classes |
 
 All other `HTMLAttributes<HTMLDivElement>` are spread onto the `<div>`.

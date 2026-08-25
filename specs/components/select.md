@@ -13,7 +13,6 @@ tokens:
   - "font.sans"
   - "transition.fast"
   - "color.primary"
-  - "color.focus"
   - "color.danger"
   - "font.size-xs"
   - "font.size-sm"
@@ -24,6 +23,8 @@ tokens:
   - "control.height-md"
   - "control.height-lg"
   - "control.height-xl"
+  - "color.outline-primary"
+
 a11y:
   - "Renders a native <select>, preserving single-line combobox semantics, value change events, and form behavior."
   - "aria-invalid=\"true\" is set when the invalid prop is true (omitted otherwise)."

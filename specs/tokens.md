@@ -27,10 +27,11 @@ that works on both surfaces), not as an omission.
 
 | Tier | Tokens | Kind | Semantics |
 |---|---|---|---|
-| `color` | `bg`, `surface`, `surface-hover`, `border`, `border-strong`, `text`, `text-muted`, `primary`, `primary-hover`, `primary-fg`, `danger`, `danger-hover`, `danger-fg`, `success`, `warning`, `focus`, `backdrop` | color | Semantic color roles. `bg` = page canvas, `surface` = elevated containers, `*-fg` = foreground on the paired fill, `focus` = focus-visible ring (may be translucent), `backdrop` = overlay scrim |
+| `color` | `bg`, `surface`, `surface-hover`, `border`, `border-strong`, `text`, `text-muted`, `primary`, `primary-hover`, `primary-fg`, `secondary`, `secondary-hover`, `secondary-fg`, `danger`, `danger-hover`, `danger-fg`, `success`, `success-hover`, `success-fg`, `info`, `info-hover`, `info-fg`, `warning`, `border-{primary,secondary,info,success,warning,danger}({-light,-darker})`, `outline-{primary,secondary,info,success,warning,danger}({-light,-darker})`, `text-primary`, `text-success`, `text-warning`, `text-danger`, `palette-0`…`palette-5`, `focus`, `backdrop` | color | Semantic color roles. `bg` = page canvas, `surface` = elevated containers, `*-fg` = foreground on the paired fill, `border-*`/`outline-*` = per-tone line/focus-ring families (Radzen parity), `focus` = neutral focus-visible ring (may be translucent), `backdrop` = overlay scrim |
 | `radius` | `sm`, `md`, `lg`, `full` | length | Corner radii, `full` = pill/circle |
-| `space` | `1`…`6` | length | Spacing scale (gaps, paddings) |
-| `font` | `sans`, `size-xs`…`size-lg`, `weight-regular`…`weight-bold` | font | Family stack, type scale, weights |
+| `space` | `0`, `05`, `1`…`12` | length | Spacing scale (gaps, paddings, margins). Radzen parity: `0` = 0px, `05` = 2px, then `1`…`12` in 4px steps (4px … 48px). Exposed to markup through the `.dt-m-*`/`.dt-p-*` utilities and consumed by component gaps/paddings |
+| `font` | `sans`, `size-xs`…`size-xl`, `display-1`…`display-6`, `weight-regular`…`weight-bold` | font | Family stack, type scale (fixed sizes + fluid display clamp scale), weights |
+| `letterspacing` | `display-1`…`display-6`, `overline` | length | Letter-spacing in `em`; negative values tighten the display headings, `overline` widens the overline |
 | `shadow` | `sm`, `md`, `lg` | shadow | Elevation — dark variants expected for depth visibility |
 | `transition` | `fast`, `base`, `slow` | duration | Motion durations |
 | `ease` | `out` | easing | Standard easing curve |
@@ -70,14 +71,26 @@ Derived tokens carry their own contracts (see
   — WCAG 2.1 non-text contrast for interactive control boundaries (inputs,
   selects, textareas, secondary buttons, checkboxes, outline badges). The
   `border` token stays decorative (container separators only).
+- `border-*` and `outline-*` per-tone families (Radzen `--rz-border-*` /
+  `--rz-outline-*` parity): the base token is the tone color itself, held
+  at >= 3.1 against **both** `bg` and `surface`; `-light` is a 30% tint
+  toward `bg` and `-darker` a 35% shade toward black, each walked (lightness
+  up then down) until the 3.1 non-text threshold holds in the current mode.
+  Every member of both families is a schema `contrastRules` pair (>= 3.0)
+  and is re-checked by `scripts/audit-colors.mjs` wherever components use
+  it. Tone-specific focus-visible rings (`outline-primary`,
+  `outline-danger`, …) replace the neutral `focus` token on tonal controls.
+- `secondary` (Radzen's second brand color) is derived per theme: its fill
+  is walked so `secondary-fg` (white in light mode, light in dark mode)
+  clears 4.5, and `secondary-hover` walks one step further.
 
 Only opaque colors are checked; translucent values (`focus`, `backdrop`,
 alpha-bearing colors) are skipped.
 
 ## Typography scale
 
-Component text draws exclusively from the four `font.size-*` tokens. Every
-text role maps to exactly one tier, so sizes stay consistent across
+Component text draws from the `font.size-*` and `font.display-*` tokens.
+Every text role maps to exactly one tier, so sizes stay consistent across
 components (learned from Radzen's single `TextStyle` scale — components never
 pick sizes ad hoc):
 
@@ -88,6 +101,25 @@ pick sizes ad hoc):
 | `heading-sm` | `size-sm` | 14px | Section labels: accordion header, tabs; form labels, control text, body copy (alert, card body, table cells, dialog content), toast title |
 | `caption` | `size-xs` | 12px | Meta: badge, stat label/delta/hint, table headers, field hints/errors, tooltip, toast description, xs/sm buttons |
 | relative | — | `0.72em` | Avatar initials (scales with the avatar size) |
+
+### Display scale (`font.display-*`)
+
+The display headings are fluid: each value is a `clamp(min, vw + offset, max)`
+expression that scales with the viewport (`--dt-font-display-1` ~ 3rem down to
+`--dt-font-display-6` ~ 1.125rem). Same values in every theme — the type scale
+is font-face independent; only `font.sans` changes per theme. The largest
+headings carry negative tracking via the `letterspacing.display-*` tokens
+(`-0.04em` on `display-1` tapering to `-0.01em` on `display-6`), and `overline`
+uses the positive `letterspacing.overline` (`0.08em`).
+
+| Heading | `font.display-*` | `letterspacing.display-*` |
+|---|---|---|
+| `display-1` (`h1`) | `clamp(2.5rem, 4vw + 1rem, 3rem)` | `-0.04em` |
+| `display-2` (`h2`) | `clamp(2.25rem, 3.75vw + 0.9rem, 2.75rem)` | `-0.035em` |
+| `display-3` (`h3`) | `clamp(2rem, 3.5vw + 0.8rem, 2.5rem)` | `-0.03em` |
+| `display-4` (`h4`) | `clamp(1.75rem, 3vw + 0.7rem, 2.25rem)` | `-0.02em` |
+| `display-5` (`h5`) | `clamp(1.5rem, 2.5vw + 0.625rem, 2rem)` | `-0.015em` |
+| `display-6` (`h6`) | `clamp(1.125rem, 1.5vw + 0.75rem, 1.5rem)` | `-0.01em` |
 
 Two rules keep the scale honest:
 

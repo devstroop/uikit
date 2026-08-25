@@ -1,4 +1,5 @@
-import { Avatar, Badge, Button, Card, Column, EmptyState, Icon, Row, Stat, Table } from "@devstroop/react-uikitkit";
+import { useState } from "react";
+import { Avatar, Badge, Button, Card, Column, DataFilter, DataGrid, DataList, EmptyState, Icon, Row, Stat, Table } from "@devstroop/react-uikitkit";
 import { Section } from "./section";
 
 const TONES = ["primary", "success", "warning", "danger"] as const;
@@ -7,6 +8,9 @@ export function DataDisplayExamples() {
   return (
     <>
       <TableSection />
+      <DataListSection />
+      <DataGridSection />
+      <DataFilterSection />
       <BadgeSection />
       <StatSection />
       <CardSection />
@@ -29,12 +33,125 @@ function TableSection() {
         columns={[
           { key: "name", header: "Name" },
           { key: "role", header: "Role", render: (r) => <span style={{ color: "var(--dt-color-text-muted)" }}>{r.role}</span> },
-          { key: "status", header: "Status", align: "center", render: (r) => <Badge tone={r.status === "active" ? "success" : "warning"}>{r.status}</Badge> },
+          { key: "status", header: "Status", align: "center", render: (r) => <Badge tone={r.status === "active" ? "success" : "warning"} variant="solid">{r.status}</Badge> },
           { key: "actions", header: "Actions", align: "end", render: () => <Button variant="ghost" size="xs">…</Button> },
         ]}
         rows={rows}
         rowKey={(r) => String(r.id)}
+        caption="Team roster"
+        gridLines="default"
       />
+    </Section>
+  );
+}
+
+function DataListSection() {
+  return (
+    <Section title="DataList">
+      <DataList
+        data={Array.from({ length: 12 }, (_, i) => `Package ${i + 1}`)}
+        pageSize={4}
+        pageSizeOptions={[4, 8, 12]}
+        wrapItems
+        itemTemplate={(item) => (
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <span>{item}</span>
+            <Badge tone="primary" variant="soft">v1.{item.slice(-1)}</Badge>
+          </div>
+        )}
+      />
+    </Section>
+  );
+}
+
+const PEOPLE = [
+  { id: 1, name: "John Carter", role: "admin", status: "active", age: 30 },
+  { id: 2, name: "Jane Doe", role: "editor", status: "active", age: 25 },
+  { id: 3, name: "Bob Vance", role: "viewer", status: "paused", age: 40 },
+  { id: 4, name: "Alice Wong", role: "editor", status: "active", age: 22 },
+  { id: 5, name: "Charlie Fox", role: "viewer", status: "paused", age: 35 },
+];
+
+function DataGridSection() {
+  const [selected, setSelected] = useState<(string | number)[]>([]);
+  const [people, setPeople] = useState(PEOPLE);
+  return (
+    <Section title="DataGrid">
+      <DataGrid
+        columns={[
+          { property: "name", title: "Name", type: "string", sortable: true, frozen: true, width: "9rem" },
+          { property: "age", title: "Age", type: "number", align: "center", sortable: true },
+          { property: "role", title: "Role", type: "string", filterable: true },
+          { property: "status", title: "Status", type: "enum", filterable: true },
+        ]}
+        rows={people}
+        rowKey={(r) => String(r.id)}
+        allowSorting
+        allowMultiColumnSorting
+        showSortIndex
+        allowFiltering
+        allowPaging
+        pageSize={3}
+        pageSizeOptions={[3, 5, 10]}
+        pagerPosition="TopAndBottom"
+        selectionMode="Multiple"
+        selectedKeys={selected}
+        onSelectionChange={(keys) => setSelected([...keys])}
+        showColumnPicker
+        allowColumnResize
+        allowColumnReorder
+        allowGrouping
+        groupPanelText="Drag a column here to group"
+        groupExpanded
+        editMode="EditRow"
+        allowRowCreate
+        onRowUpdate={(original, updated) =>
+          setPeople((rows) => rows.map((r) => (r.id === original.id ? { ...r, ...updated } : r)))
+        }
+        onRowCreate={(row) => setPeople((rows) => [...rows, { ...row, id: Math.max(...rows.map((r) => r.id)) + 1 }])}
+        onRowDelete={(row) => setPeople((rows) => rows.filter((r) => r.id !== row.id))}
+        ariaLabel="People grid"
+        onRowClick={(r) => console.log("row", r.name)}
+      />
+      <p style={{ marginTop: "0.5rem", fontSize: "0.875rem", color: "var(--dt-color-fg-muted)" }}>
+        Selected: {selected.join(", ") || "none"} — group by drag onto the panel, inline-edit rows, add new rows.
+      </p>
+    </Section>
+  );
+}
+
+function DataFilterSection() {
+  const [filtered, setFiltered] = useState(PEOPLE);
+  return (
+    <Section title="DataFilter">
+      <Row gap="md">
+        <Column>
+          <DataFilter
+            properties={[
+              { name: "name", title: "Name", type: "string" },
+              { name: "age", title: "Age", type: "number" },
+              { name: "status", title: "Status", type: "enum", values: [
+                { value: "active", label: "Active" },
+                { value: "paused", label: "Paused" },
+              ] },
+            ]}
+            items={PEOPLE}
+            viewChanged={(items) => setFiltered([...items])}
+          />
+        </Column>
+        <Column>
+          <Table
+            columns={[
+              { key: "name", header: "Name" },
+              { key: "role", header: "Role" },
+              { key: "age", header: "Age", align: "center" },
+            ]}
+            rows={filtered}
+            rowKey={(r) => String(r.id)}
+            empty="No rows match the filter"
+          />
+        </Column>
+      </Row>
     </Section>
   );
 }

@@ -1,14 +1,15 @@
       <section class="row">
         <h2>Table</h2>
         <div class="row-content">
-<div class="dt-table-wrap">
+<div class="dt-table-wrap dt-table--no-alternating">
   <table class="dt-table">
+    <caption class="dt-table-caption">Team roster</caption>
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Role</th>
-        <th class="dt-table-cell--center">Status</th>
-        <th class="dt-table-cell--right">Actions</th>
+        <th scope="col">Name</th>
+        <th scope="col">Role</th>
+        <th scope="col" class="dt-table-cell--center">Status</th>
+        <th scope="col" class="dt-table-cell--right">Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -36,6 +37,175 @@
         </div>
       </section>
       <section class="row">
+        <h2>DataList</h2>
+        <div class="row-content">
+          <p class="dt-text-muted">Paged list (Radzen RadzenDataList parity): <code>data-dt-datalist</code> + <code>data-dt-datalist-items</code> container of <code>data-dt-datalist-item</code> children + <code>data-dt-datalist-pager</code>. <code>data-dt-datalist-wrap</code> renders a CSS grid; <code>dt:datalist-page</code>/<code>dt:datalist-change</code> fire on paging.</p>
+          <div class="dt-datalist" data-dt-datalist
+               data-dt-datalist-pagesize="4"
+               data-dt-datalist-pagesize-options="[4,8,12]"
+               data-dt-datalist-wrap>
+            <div class="dt-datalist-items" data-dt-datalist-items>
+              <div class="dt-datalist-item" data-dt-datalist-item>
+                <span>Package 1</span><span class="dt-badge dt-badge--soft dt-badge--primary">v1.1</span>
+              </div>
+              <div class="dt-datalist-item" data-dt-datalist-item>
+                <span>Package 2</span><span class="dt-badge dt-badge--soft dt-badge--primary">v1.2</span>
+              </div>
+              <div class="dt-datalist-item" data-dt-datalist-item>
+                <span>Package 3</span><span class="dt-badge dt-badge--soft dt-badge--primary">v1.3</span>
+              </div>
+              <div class="dt-datalist-item" data-dt-datalist-item>
+                <span>Package 4</span><span class="dt-badge dt-badge--soft dt-badge--primary">v1.4</span>
+              </div>
+              <div class="dt-datalist-item" data-dt-datalist-item>
+                <span>Package 5</span><span class="dt-badge dt-badge--soft dt-badge--primary">v1.5</span>
+              </div>
+              <div class="dt-datalist-item" data-dt-datalist-item>
+                <span>Package 6</span><span class="dt-badge dt-badge--soft dt-badge--primary">v1.6</span>
+              </div>
+              <div class="dt-datalist-item" data-dt-datalist-item>
+                <span>Package 7</span><span class="dt-badge dt-badge--soft dt-badge--primary">v1.7</span>
+              </div>
+              <div class="dt-datalist-item" data-dt-datalist-item>
+                <span>Package 8</span><span class="dt-badge dt-badge--soft dt-badge--primary">v1.8</span>
+              </div>
+              <div class="dt-datalist-item" data-dt-datalist-item>
+                <span>Package 9</span><span class="dt-badge dt-badge--soft dt-badge--primary">v1.9</span>
+              </div>
+              <div class="dt-datalist-item" data-dt-datalist-item>
+                <span>Package 10</span><span class="dt-badge dt-badge--soft dt-badge--primary">v1.10</span>
+              </div>
+              <div class="dt-datalist-item" data-dt-datalist-item>
+                <span>Package 11</span><span class="dt-badge dt-badge--soft dt-badge--primary">v1.11</span>
+              </div>
+              <div class="dt-datalist-item" data-dt-datalist-item>
+                <span>Package 12</span><span class="dt-badge dt-badge--soft dt-badge--primary">v1.12</span>
+              </div>
+            </div>
+            <div class="dt-datalist-empty" data-dt-datalist-empty hidden>No records found</div>
+            <div class="dt-datalist-pager" data-dt-datalist-pager></div>
+          </div>
+        </div>
+      </section>
+      <section class="row">
+        <h2>DataGrid</h2>
+        <div class="row-content">
+          <p class="dt-text-muted">Client-side grid: sort (multi with <code>data-dt-datagrid-multisort</code>), per-column filter, pager, row selection (<code>data-dt-datagrid-select="multiple"</code> fires <code>dt:grid-select</code>), column picker, resize, drag-to-reorder, drag-to-group, inline edit/add/delete rows, frozen first column. Fires <code>dt:grid-change</code> (pageNumber, sorts, filters, filterString, oDataFilterString) — server round-trips via <code>hx-get</code> swap the <code>data-dt-datagrid-rows</code> region.</p>
+          <div class="dt-datagrid" data-dt-datagrid
+               data-dt-datagrid-properties='[
+                 {"property":"name","title":"Name","type":"string","sortable":true,"frozen":true,"width":"9rem"},
+                 {"property":"age","title":"Age","type":"number","align":"center","sortable":true},
+                 {"property":"role","title":"Role","type":"string","filterable":true},
+                 {"property":"status","title":"Status","type":"enum","filterable":true}
+               ]'
+               data-dt-datagrid-sortable
+               data-dt-datagrid-multisort
+               data-dt-datagrid-filterable
+               data-dt-datagrid-select="multiple"
+               data-dt-datagrid-column-picker
+               data-dt-datagrid-resize
+               data-dt-datagrid-reorder
+               data-dt-datagrid-groupable
+               data-dt-datagrid-edit
+               data-dt-datagrid-delete
+               data-dt-datagrid-create
+               data-dt-datagrid-pagesize="3"
+               data-dt-datagrid-pagesize-options="[3,5,10]"
+               data-dt-datagrid-pagenumbers="5"
+               aria-label="People">
+            <div class="dt-datagrid-toolbar" data-dt-datagrid-toolbar></div>
+            <div class="dt-datagrid-data" data-dt-datagrid-data>
+              <table class="dt-datagrid-table" role="grid" aria-rowcount="6" aria-label="People">
+                <colgroup data-dt-datagrid-cols></colgroup>
+                <thead data-dt-datagrid-head></thead>
+                <tbody data-dt-datagrid-rows>
+                  <tr data-dt-row data-dt-row-key="1" data-dt-row-value='{"name":"John Carter","age":30,"role":"admin","status":"active"}'>
+                    <td data-dt-col="name">John Carter</td>
+                    <td data-dt-col="age" class="dt-datagrid-cell--center">30</td>
+                    <td data-dt-col="role">admin</td>
+                    <td data-dt-col="status">active</td>
+                  </tr>
+                  <tr data-dt-row data-dt-row-key="2" data-dt-row-value='{"name":"Jane Doe","age":25,"role":"editor","status":"active"}'>
+                    <td data-dt-col="name">Jane Doe</td>
+                    <td data-dt-col="age" class="dt-datagrid-cell--center">25</td>
+                    <td data-dt-col="role">editor</td>
+                    <td data-dt-col="status">active</td>
+                  </tr>
+                  <tr data-dt-row data-dt-row-key="3" data-dt-row-value='{"name":"Bob Vance","age":40,"role":"viewer","status":"paused"}'>
+                    <td data-dt-col="name">Bob Vance</td>
+                    <td data-dt-col="age" class="dt-datagrid-cell--center">40</td>
+                    <td data-dt-col="role">viewer</td>
+                    <td data-dt-col="status">paused</td>
+                  </tr>
+                  <tr data-dt-row data-dt-row-key="4" data-dt-row-value='{"name":"Alice Wong","age":22,"role":"editor","status":"active"}'>
+                    <td data-dt-col="name">Alice Wong</td>
+                    <td data-dt-col="age" class="dt-datagrid-cell--center">22</td>
+                    <td data-dt-col="role">editor</td>
+                    <td data-dt-col="status">active</td>
+                  </tr>
+                  <tr data-dt-row data-dt-row-key="5" data-dt-row-value='{"name":"Charlie Fox","age":35,"role":"viewer","status":"paused"}'>
+                    <td data-dt-col="name">Charlie Fox</td>
+                    <td data-dt-col="age" class="dt-datagrid-cell--center">35</td>
+                    <td data-dt-col="role">viewer</td>
+                    <td data-dt-col="status">paused</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="dt-datagrid-empty" data-dt-datagrid-empty hidden>No records found</div>
+            </div>
+            <div class="dt-datagrid-pager" data-dt-datagrid-pager></div>
+          </div>
+        </div>
+      </section>
+      <section class="row">
+        <h2>DataFilter</h2>
+        <div class="row-content">
+          <p class="dt-text-muted">Builder fires <code>dt:filter-change</code> (filters + filterString + oDataFilterString) on any change; consumers re-request rows via <code>hx-get</code> with the descriptor JSON and swap the result region.</p>
+          <div class="dt-datafilter" data-dt-datafilter
+               data-dt-datafilter-properties='[{"name":"name","title":"Name","type":"string"},{"name":"age","title":"Age","type":"number"},{"name":"status","title":"Status","type":"enum","values":[{"value":"active","label":"Active"},{"value":"paused","label":"Paused"}]}]'
+               data-dt-datafilter-operator="And">
+            <div class="dt-datafilter-rows" data-dt-datafilter-rows>
+              <div class="dt-datafilter-row" data-dt-datafilter-row>
+                <label class="dt-datafilter-label">Name
+                  <select class="dt-select" data-dt-datafilter-property aria-label="Property"></select>
+                </label>
+                <label class="dt-datafilter-label">Operator
+                  <select class="dt-select" data-dt-datafilter-operator aria-label="Operator"></select>
+                </label>
+                <label class="dt-datafilter-label">Value
+                  <input class="dt-input dt-input--md" data-dt-datafilter-value aria-label="Value">
+                </label>
+                <button type="button" class="dt-button dt-button--ghost" data-dt-datafilter-remove aria-label="Remove condition">×</button>
+              </div>
+            </div>
+            <div class="dt-datafilter-bar">
+              <button type="button" class="dt-button dt-button--secondary" data-dt-datafilter-add>Add filter</button>
+              <div class="dt-datafilter-operator-bar" role="radiogroup" aria-label="Join filters">
+                <label><input type="radio" name="df-op" value="And" checked> AND</label>
+                <label><input type="radio" name="df-op" value="Or"> OR</label>
+              </div>
+              <input type="hidden" data-dt-datafilter-output name="filters">
+            </div>
+          </div>
+          <table class="dt-table" style="margin-top: 1rem">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Role</th>
+                <th class="dt-table-cell--center">Age</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>John Carter</td><td>admin</td><td class="dt-table-cell--center">30</td></tr>
+              <tr><td>Jane Doe</td><td>editor</td><td class="dt-table-cell--center">25</td></tr>
+              <tr><td>Bob Vance</td><td>viewer</td><td class="dt-table-cell--center">40</td></tr>
+              <tr><td>Alice Wong</td><td>editor</td><td class="dt-table-cell--center">22</td></tr>
+              <tr><td>Charlie Fox</td><td>viewer</td><td class="dt-table-cell--center">35</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="row">
         <h2>Badge</h2>
         <div class="row-content">
           <span class="dt-badge dt-badge--soft dt-badge--neutral">neutral</span>
@@ -45,7 +215,7 @@
           <span class="dt-badge dt-badge--soft dt-badge--danger">danger</span>
           <span class="dt-badge dt-badge--solid dt-badge--neutral">solid</span>
           <span class="dt-badge dt-badge--solid dt-badge--primary">solid</span>
-          <span class="dt-badge dt-badge--solid dt-badge--success">solid</span>
+          <span class="dt-badge dt-badge--soft dt-badge--success">solid</span>
           <span class="dt-badge dt-badge--solid dt-badge--warning">solid</span>
           <span class="dt-badge dt-badge--solid dt-badge--danger">solid</span>
 <span class="dt-badge dt-badge--outline dt-badge--neutral">outline</span>
