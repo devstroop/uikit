@@ -102,6 +102,14 @@ body {
   align-items: start;
 }
 
+.preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  align-items: start;
+  gap: 16px;
+  width: 100%;
+}
+
 .layout-grid > button {
   align-self: flex-start;
 }

@@ -27,7 +27,7 @@ function Root() {
     <div className="chrome">
       <header className="chrome-header">
         <h1>@devstroop/react-uikitkit</h1>
-        <p>30 components, 6 design systems — all driven by the same tokens</p>
+        <p>34 components, 6 design systems — all driven by the same tokens</p>
         <div className="chrome-controls">
           <label>
             Theme

@@ -32,8 +32,14 @@ jobs:
           git diff --exit-code -- preview/htmx/vendor/tokens/
       - run: npm run preview:build
       - run: node scripts/visual-verify.mjs
+      - run: node scripts/generate-component-images.mjs --theme default --mode light
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: theme-screenshots
           path: visual/screenshots
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: component-screenshots
+          path: visual/components
