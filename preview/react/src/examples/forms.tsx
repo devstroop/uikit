@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Checkbox, email, Field, Form, Input, Label, required, Select, Switch, Textarea, useFormField } from "@devstroop/react-uikitkit";
+import { Button, Checkbox, email, Field, Form, Input, Label, required, Select, Switch, Textarea, useFormField } from "@devstroop/react-uikit";
 import { Section } from "./section";
 
 function ValidatedField({ name }: { name: string }) {

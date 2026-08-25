@@ -8,7 +8,7 @@ import {
   Selectbar,
   Splitbutton,
   Togglebutton,
-} from "@devstroop/react-uikitkit";
+} from "@devstroop/react-uikit";
 import { Section } from "./section";
 
 export function SelectionExamples() {
