@@ -1,6 +1,6 @@
 import { StrictMode, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
-import { ThemeSwitcher } from "@devstroop/react-uikitkit";
+import { ThemeSwitcher } from "@devstroop/react-uikit";
 import { THEMES } from "./themes";
 import { App } from "./App";
 import "./preview.css";
@@ -26,8 +26,8 @@ function Root() {
   return (
     <div className="chrome">
       <header className="chrome-header">
-        <h1>@devstroop/react-uikitkit</h1>
-        <p>30 components, 6 design systems — all driven by the same tokens</p>
+        <h1>@devstroop/react-uikit</h1>
+        <p>34 components, 6 design systems — all driven by the same tokens</p>
         <div className="chrome-controls">
           <label>
             Theme

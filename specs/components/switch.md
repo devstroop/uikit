@@ -12,7 +12,8 @@ tokens:
   - "color.surface"
   - "shadow.sm"
   - "color.primary"
-  - "color.focus"
+  - "color.outline-primary"
+
 a11y:
   - "Renders a native <input type=\"checkbox\"> with role=\"switch\", preserving native toggle semantics (aria-checked derived from :checked)."
   - "Accessible name must be supplied by the consumer (aria-label or a wrapping <label>)."
