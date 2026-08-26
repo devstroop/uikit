@@ -1,4 +1,4 @@
-import { Accordion, Button, Tabs } from "@devstroop/react-uikitkit";
+import { Accordion, Button, Tabs } from "@devstroop/react-uikit";
 import { Section } from "./section";
 
 export function MiscExamples() {

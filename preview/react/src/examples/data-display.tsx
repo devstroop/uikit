@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Avatar, Badge, Button, Card, Column, DataFilter, DataGrid, DataList, EmptyState, Icon, Row, Stat, Table } from "@devstroop/react-uikitkit";
+import { Avatar, Badge, Button, Card, Column, DataFilter, DataGrid, DataList, EmptyState, Icon, Row, Stat, Table } from "@devstroop/react-uikit";
 import { Section } from "./section";
 
 const TONES = ["primary", "success", "warning", "danger"] as const;
