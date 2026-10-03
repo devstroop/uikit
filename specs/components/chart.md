@@ -6,6 +6,7 @@ frameworks:
   react: v0.29.0
   htmx: v0.27.0
 tokens:
+  - "font.weight-bold"
   - "color.border"
   - "color.palette-0"
   - "color.palette-1"

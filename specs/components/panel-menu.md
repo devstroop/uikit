@@ -6,6 +6,7 @@ frameworks:
   react: v0.23.0
   htmx: v0.21.0
 tokens:
+  - "color.primary"
   - "color.border"
   - "color.outline-primary"
   - "color.surface"

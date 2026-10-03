@@ -6,6 +6,9 @@ frameworks:
   react: v0.7.0
   htmx: v0.5.0
 tokens:
+  - "space.4"
+  - "font.size-xs"
+  - "color.text"
   - "color.border"
   - "color.danger"
   - "color.text-muted"

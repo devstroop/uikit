@@ -6,6 +6,7 @@ frameworks:
   react: v0.10.0
   htmx: v0.8.0
 tokens:
+  - "radius.full"
   - "color.bg"
   - "color.border"
   - "color.primary"

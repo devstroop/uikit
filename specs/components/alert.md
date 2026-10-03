@@ -6,6 +6,11 @@ frameworks:
   react: v0.3.5
   htmx: v0.1.6
 tokens:
+  - "color.success-fg"
+  - "color.secondary-fg"
+  - "color.secondary"
+  - "color.info-fg"
+  - "color.info"
   - "space.1"
   - "space.2"
   - "space.3"

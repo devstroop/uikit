@@ -6,6 +6,17 @@ frameworks:
   react: v0.3.5
   htmx: v0.1.6
 tokens:
+  - "color.warning"
+  - "color.text-warning"
+  - "color.text-success"
+  - "color.text-primary"
+  - "color.text-danger"
+  - "color.secondary-hover"
+  - "color.secondary-fg"
+  - "color.secondary"
+  - "color.outline-warning"
+  - "color.border-primary"
+  - "color.border"
   - "radius.md"
   - "radius.full"
   - "space.2"
