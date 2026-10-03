@@ -4,9 +4,9 @@ import {
   Breadcrumb,
   Button,
   Carousel,
-  Colorpicker,
+  ColorPicker,
   Column,
-  Datepicker,
+  DatePicker,
   DropZone,
   FabMenu,
   Footer,
@@ -14,11 +14,13 @@ import {
   Layout,
   Mask,
   Menu,
+  MenuItem,
   PickList,
   Chart,
   Numeric,
   Pager,
   PanelMenu,
+  PanelMenuItem,
   Password,
   ProfileMenu,
   Splitter,
@@ -39,9 +41,9 @@ import {
   SignaturePad,
   Slider,
   Stack,
-  Textbox,
-  Timespanpicker,
-  Typography,
+  TextBox,
+  TimeSpanPicker,
+  Text,
   Upload,
 } from "@devstroop/react-uikit";
 import { Section } from "./section";
@@ -247,10 +249,10 @@ function GridSection() {
           </Column>
         </Row>
         <Row>
-          <Column sizeXxl={6} className="grid-cell">
+          <Column sizeXx={6} className="grid-cell">
             sizeXxl 6 (≥ 2560px)
           </Column>
-          <Column sizeXxl={6} className="grid-cell">
+          <Column sizeXx={6} className="grid-cell">
             sizeXxl 6
           </Column>
         </Row>
@@ -295,25 +297,25 @@ function TypographySection() {
     <Section title="Typography">
       <div className="layout-grid">
         <div>
-          <Typography variant="display-1">Display 1 — fluid clamp() scale</Typography>
-          <Typography variant="display-2">Display 2 — tighter tracking</Typography>
-          <Typography variant="display-3">Display 3</Typography>
-          <Typography variant="display-4">Display 4</Typography>
-          <Typography variant="display-5">Display 5</Typography>
-          <Typography variant="display-6">Display 6</Typography>
+          <Text textStyle="DisplayH1">Display 1 — fluid clamp() scale</Text>
+          <Text textStyle="DisplayH2">Display 2 — tighter tracking</Text>
+          <Text textStyle="DisplayH3">Display 3</Text>
+          <Text textStyle="DisplayH4">Display 4</Text>
+          <Text textStyle="DisplayH5">Display 5</Text>
+          <Text textStyle="DisplayH6">Display 6</Text>
         </div>
         <div>
-          <Typography variant="overline">Overline</Typography>
-          <Typography variant="body-1">
+          <Text textStyle="Overline">Overline</Text>
+          <Text textStyle="Body1">
             Body 1 — 0.875rem at 1.429 line-height. The default text style for
             paragraphs and prose across the system.
-          </Typography>
-          <Typography variant="body-2">
+          </Text>
+          <Text textStyle="Body2">
             Body 2 — same size at 1.5 line-height for relaxed reading.
-          </Typography>
-          <Typography variant="caption">
+          </Text>
+          <Text textStyle="Caption">
             Caption — 0.75rem metadata in the muted text color.
-          </Typography>
+          </Text>
         </div>
       </div>
     </Section>
@@ -401,14 +403,14 @@ function TokenSamplesSection() {
 function TextInputsSection() {
   const [qty, setQty] = useState<number | null>(3);
   return (
-    <Section title="Text inputs · Textbox · Password · Mask · Numeric" className="dx-form-grid">
+    <Section title="Text inputs · TextBox · Password · Mask · Numeric" className="dx-form-grid">
       <div>
-        <strong>Textbox</strong>
-        <Textbox placeholder="sm" size="sm" aria-label="Textbox sm" />
-        <Textbox placeholder="md" aria-label="Textbox md" />
-        <Textbox placeholder="lg" size="lg" aria-label="Textbox lg" />
-        <Textbox placeholder="Invalid" invalid aria-label="Textbox invalid" />
-        <Textbox placeholder="Disabled" disabled aria-label="Textbox disabled" />
+        <strong>TextBox</strong>
+        <TextBox placeholder="sm" size="sm" aria-label="TextBox sm" />
+        <TextBox placeholder="md" aria-label="TextBox md" />
+        <TextBox placeholder="lg" size="lg" aria-label="TextBox lg" />
+        <TextBox placeholder="Invalid" invalid aria-label="TextBox invalid" />
+        <TextBox placeholder="Disabled" disabled aria-label="TextBox disabled" />
       </div>
       <div>
         <strong>Password</strong>
@@ -456,19 +458,19 @@ function TextInputsSection() {
 
 function DatepickerSection() {
   return (
-    <Section title="Datepicker" className="dx-form-grid">
+    <Section title="DatePicker" className="dx-form-grid">
       <div>
-        <strong>Datepicker</strong>
-        <Datepicker ariaLabel="Datepicker md" defaultValue="2026-08-20" format="yyyy-MM-dd" allowClear />
-        <Datepicker
-          ariaLabel="Datepicker with time"
+        <strong>DatePicker</strong>
+        <DatePicker ariaLabel="DatePicker md" defaultValue="2026-08-20" format="yyyy-MM-dd" allowClear />
+        <DatePicker
+          ariaLabel="DatePicker with time"
           defaultValue="2026-08-20 14:30"
           format="yyyy-MM-dd HH:mm"
           showTime
           showButton
           size="sm"
         />
-        <Datepicker ariaLabel="Inline datepicker" defaultValue="2026-08-20" format="yyyy-MM-dd" inline />
+        <DatePicker ariaLabel="Inline datepicker" defaultValue="2026-08-20" format="yyyy-MM-dd" inline />
       </div>
     </Section>
   );
@@ -476,11 +478,11 @@ function DatepickerSection() {
 
 function TimespanpickerSection() {
   return (
-    <Section title="Timespanpicker" className="dx-form-grid">
+    <Section title="TimeSpanPicker" className="dx-form-grid">
       <div>
-        <strong>Timespanpicker</strong>
-        <Timespanpicker
-          ariaLabel="Timespanpicker full"
+        <strong>TimeSpanPicker</strong>
+        <TimeSpanPicker
+          ariaLabel="TimeSpanPicker full"
           defaultValue="1.02:30:00"
           precision="second"
           showDays
@@ -488,8 +490,8 @@ function TimespanpickerSection() {
           showMinutes
           showSeconds
         />
-        <Timespanpicker
-          ariaLabel="Timespanpicker hours/minutes"
+        <TimeSpanPicker
+          ariaLabel="TimeSpanPicker hours/minutes"
           defaultValue="02:30"
           precision="minute"
           showHours
@@ -505,25 +507,25 @@ function ColorpickerSection() {
   const [color, setColor] = useState("#2563eb");
   const [paletteColor, setPaletteColor] = useState("#ff2800");
   return (
-    <Section title="Colorpicker" className="dx-form-grid">
+    <Section title="ColorPicker" className="dx-form-grid">
       <div>
-        <strong>Colorpicker</strong>
-        <Colorpicker
+        <strong>ColorPicker</strong>
+        <ColorPicker
           value={color}
           onChange={setColor}
           showSaturation
           showRgba
           showPalette
           showArrow
-          aria-label="Colorpicker"
+          aria-label="ColorPicker"
         />
-        <Colorpicker
+        <ColorPicker
           value={paletteColor}
           onChange={setPaletteColor}
           showPalette
           showButton
           size="sm"
-          aria-label="Colorpicker palette"
+          aria-label="ColorPicker palette"
         />
       </div>
     </Section>
@@ -671,25 +673,35 @@ function PagerSection() {
 }
 
 function MenuSection() {
-  const menuItems = [
-    { text: "Home", value: "home", path: "/" },
-    { text: "Products", value: "products", children: [{ text: "Laptops", value: "laptops", path: "/products/laptops" }, { text: "Phones", value: "phones", path: "/products/phones" }] },
-    { text: "About", value: "about", path: "/about" },
-  ];
   return (
     <Section title="Menu" className="dx-form-grid">
-      <div><strong>Menu</strong><Menu items={menuItems} ariaLabel="Demo menu" /></div>
+      <div>
+        <strong>Menu</strong>
+        <Menu ariaLabel="Demo menu">
+          <MenuItem text="Home" value="home" path="/" />
+          <MenuItem text="Products" value="products">
+            <MenuItem text="Laptops" value="laptops" path="/products/laptops" />
+            <MenuItem text="Phones" value="phones" path="/products/phones" />
+          </MenuItem>
+          <MenuItem text="About" value="about" path="/about" />
+        </Menu>
+      </div>
     </Section>
   );
 }
 function PanelMenuSection() {
-  const panelItems = [
-    { text: "Dashboard", icon: "◆", value: "dash" },
-    { text: "Settings", icon: "⚙", value: "settings", children: [{ text: "Profile", value: "profile" }, { text: "Security", value: "security" }] },
-  ];
   return (
     <Section title="PanelMenu" className="dx-form-grid">
-      <div><strong>PanelMenu</strong><PanelMenu items={panelItems} ariaLabel="Demo panel menu" /></div>
+      <div>
+        <strong>PanelMenu</strong>
+        <PanelMenu ariaLabel="Demo panel menu">
+          <PanelMenuItem text="Dashboard" value="dash" />
+          <PanelMenuItem text="Settings" value="settings">
+            <PanelMenuItem text="Profile" value="profile" />
+            <PanelMenuItem text="Security" value="security" />
+          </PanelMenuItem>
+        </PanelMenu>
+      </div>
     </Section>
   );
 }
@@ -890,7 +902,7 @@ function AppShellSection() {
           <span style={{ flexGrow: 1 }} />
           <Button
             size="sm"
-            variant="ghost"
+            variant="text"
             onClick={() => setExpanded(!expanded)}
             aria-expanded={expanded}
             aria-controls="shell-sidebar"
@@ -904,7 +916,7 @@ function AppShellSection() {
               {["Dashboard", "Users", "Settings"].map((item, index) => (
                 <li key={item}>
                   <Button
-                    variant="ghost"
+                    variant="text"
                     size="sm"
                     style={{ width: "100%", justifyContent: "flex-start" }}
                     aria-current={index === 0 ? "page" : undefined}
@@ -945,7 +957,7 @@ function AppShellSection() {
           <span style={{ flexGrow: 1 }} />
           <Button
             size="sm"
-            variant="ghost"
+            variant="text"
             onClick={() => setLeftOpen(!leftOpen)}
             aria-expanded={leftOpen}
             aria-controls="drawer-left"
@@ -954,7 +966,7 @@ function AppShellSection() {
           </Button>
           <Button
             size="sm"
-            variant="ghost"
+            variant="text"
             onClick={() => setRightOpen(!rightOpen)}
             aria-expanded={rightOpen}
             aria-controls="drawer-right"
@@ -981,7 +993,7 @@ function AppShellSection() {
             <ul className="shell-nav">
               {["Inbox", "Sent", "Archive"].map((item) => (
                 <li key={item}>
-                  <Button variant="ghost" size="sm" style={{ width: "100%", justifyContent: "flex-start" }}>
+                  <Button variant="text" size="sm" style={{ width: "100%", justifyContent: "flex-start" }}>
                     {item}
                   </Button>
                 </li>
@@ -1001,7 +1013,7 @@ function AppShellSection() {
             <ul className="shell-nav">
               {["Dashboard", "Users", "Settings"].map((item) => (
                 <li key={item}>
-                  <Button variant="ghost" size="sm" style={{ width: "100%", justifyContent: "flex-start" }}>
+                  <Button variant="text" size="sm" style={{ width: "100%", justifyContent: "flex-start" }}>
                     {item}
                   </Button>
                 </li>

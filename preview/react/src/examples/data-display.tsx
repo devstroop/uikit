@@ -33,8 +33,8 @@ function TableSection() {
         columns={[
           { key: "name", header: "Name" },
           { key: "role", header: "Role", render: (r) => <span style={{ color: "var(--dx-color-text-muted)" }}>{r.role}</span> },
-          { key: "status", header: "Status", align: "center", render: (r) => <Badge tone={r.status === "active" ? "success" : "warning"} variant="solid">{r.status}</Badge> },
-          { key: "actions", header: "Actions", align: "end", render: () => <Button variant="ghost" size="xs">…</Button> },
+          { key: "status", header: "Status", align: "center", render: (r) => <Badge severity={r.status === "active" ? "success" : "warning"} variant="filled">{r.status}</Badge> },
+          { key: "actions", header: "Actions", align: "end", render: () => <Button variant="text" size="xs">…</Button> },
         ]}
         rows={rows}
         rowKey={(r) => String(r.id)}
@@ -56,7 +56,7 @@ function DataListSection() {
         itemTemplate={(item) => (
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <span>{item}</span>
-            <Badge tone="primary" variant="soft">v1.{item.slice(-1)}</Badge>
+            <Badge severity="primary" variant="flat">v1.{item.slice(-1)}</Badge>
           </div>
         )}
       />
@@ -159,10 +159,10 @@ function DataFilterSection() {
 function BadgeSection() {
   return (
     <Section title="Badge">
-      {(["soft", "solid", "outline"] as const).map((v) => (
+      {(["flat", "filled", "outlined"] as const).map((v) => (
         <span key={v} style={{ display: "inline-flex", gap: 8 }}>
           {TONES.map((t) => (
-            <Badge key={t} tone={t} variant={v}>
+            <Badge key={t} severity={t} variant={v}>
               {t}
             </Badge>
           ))}
@@ -170,7 +170,7 @@ function BadgeSection() {
       ))}
       <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
         {(["xs", "sm", "md", "lg", "xl"] as const).map((s) => (
-          <Badge key={s} tone="primary" size={s}>
+          <Badge key={s} severity="primary" size={s}>
             {s}
           </Badge>
         ))}
@@ -246,13 +246,13 @@ function IconSection() {
     <Section title="Icon">
       {names.map((n) => (
         <span key={n} title={n}>
-          <Icon name={n} />
+          <Icon icon={n} />
         </span>
       ))}
       <div className="dx-icon-row" style={{ display: "flex", gap: 8, alignItems: "center" }}>
         {(["xs", "sm", "md", "lg", "xl"] as const).map((s) => (
           <span key={s} title={s}>
-            <Icon name="settings" size={s} />
+            <Icon icon="settings" size={s} />
           </span>
         ))}
       </div>
@@ -263,7 +263,7 @@ function IconSection() {
 function EmptyStateSection() {
   return (
     <Section title="EmptyState">
-      <EmptyState icon={<Icon name="folder" size={32} />} title="No projects yet" description="Create your first project to get started." action={<Button size="lg">New project</Button>} />
+      <EmptyState icon={<Icon icon="folder" size={32} />} title="No projects yet" description="Create your first project to get started." action={<Button size="lg">New project</Button>} />
     </Section>
   );
 }

@@ -1,6 +1,6 @@
 import { StrictMode, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
-import { ThemeSwitcher } from "@devstroop/react-uikit";
+import { Switch } from "@devstroop/react-uikit";
 import { THEMES } from "./themes";
 import { App } from "./App";
 import "./preview.css";
@@ -39,7 +39,10 @@ function Root() {
               ))}
             </select>
           </label>
-          <ThemeSwitcher defaultTheme={dark ? "dark" : "light"} onChange={(t) => setDark(t === "dark")} />
+          <label className="dark-toggle">
+            Dark
+            <Switch checked={dark} onChange={(e) => setDark(e.target.checked)} aria-label="Dark mode" />
+          </label>
         </div>
       </header>
       <App />

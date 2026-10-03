@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",
+    "@types/node": "^26.6.4",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "playwright": "^1.62.1",
