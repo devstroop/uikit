@@ -195,6 +195,8 @@ async function gitSha() {
 }
 
 main().catch((err) => {
-  console.error(err.message);
-  process.exit(0);
+  // A crash is not a clean report — exit 1 so drift between the script
+  // and the radzen pin surfaces as CI red instead of a silent pass.
+  console.error(err);
+  process.exit(1);
 });
