@@ -9,8 +9,8 @@ vocabulary lives in [`tokens.schema.json`](./tokens.schema.json).
 
 A **theme** is a `tokens.json` file under `themes/<name>/`. It defines values
 for every token in the schema. Tokens are grouped into **tiers**; the tier and
-token name combine into the CSS custom property: `--dt-<tier>-<token>`
-(e.g. tier `color` + token `bg` → `--dt-color-bg`).
+token name combine into the CSS custom property: `--dx-<tier>-<token>`
+(e.g. tier `color` + token `bg` → `--dx-color-bg`).
 
 ### Value forms
 
@@ -29,7 +29,7 @@ that works on both surfaces), not as an omission.
 |---|---|---|---|
 | `color` | `bg`, `surface`, `surface-hover`, `border`, `border-strong`, `text`, `text-muted`, `primary`, `primary-hover`, `primary-fg`, `secondary`, `secondary-hover`, `secondary-fg`, `danger`, `danger-hover`, `danger-fg`, `success`, `success-hover`, `success-fg`, `info`, `info-hover`, `info-fg`, `warning`, `border-{primary,secondary,info,success,warning,danger}({-light,-darker})`, `outline-{primary,secondary,info,success,warning,danger}({-light,-darker})`, `text-primary`, `text-success`, `text-warning`, `text-danger`, `palette-0`…`palette-5`, `focus`, `backdrop` | color | Semantic color roles. `bg` = page canvas, `surface` = elevated containers, `*-fg` = foreground on the paired fill, `border-*`/`outline-*` = per-tone line/focus-ring families (Radzen parity), `focus` = neutral focus-visible ring (may be translucent), `backdrop` = overlay scrim |
 | `radius` | `sm`, `md`, `lg`, `full` | length | Corner radii, `full` = pill/circle |
-| `space` | `0`, `05`, `1`…`12` | length | Spacing scale (gaps, paddings, margins). Radzen parity: `0` = 0px, `05` = 2px, then `1`…`12` in 4px steps (4px … 48px). Exposed to markup through the `.dt-m-*`/`.dt-p-*` utilities and consumed by component gaps/paddings |
+| `space` | `0`, `05`, `1`…`12` | length | Spacing scale (gaps, paddings, margins). Radzen parity: `0` = 0px, `05` = 2px, then `1`…`12` in 4px steps (4px … 48px). Exposed to markup through the `.dx-m-*`/`.dx-p-*` utilities and consumed by component gaps/paddings |
 | `font` | `sans`, `size-xs`…`size-xl`, `display-1`…`display-6`, `weight-regular`…`weight-bold` | font | Family stack, type scale (fixed sizes + fluid display clamp scale), weights |
 | `letterspacing` | `display-1`…`display-6`, `overline` | length | Letter-spacing in `em`; negative values tighten the display headings, `overline` widens the overline |
 | `shadow` | `sm`, `md`, `lg` | shadow | Elevation — dark variants expected for depth visibility |
@@ -37,6 +37,30 @@ that works on both surfaces), not as an omission.
 | `ease` | `out` | easing | Standard easing curve |
 | `z` | `tooltip`, `popover`, `modal`, `toast` | integer | Layer order (ascending; `toast` highest) |
 | `control` | `height` | length | Default control height |
+
+## Spacing ownership
+
+Who supplies spacing, in order — mirrors Radzen's contract (`--rz-gap`
+default, composite padding, primitive zero):
+
+1. **Primitives** (button, input, select, textarea, checkbox, switch,
+   badge, label) ship **zero outer margin** — padding and internal gaps
+   only; they never create layout spacing.
+2. **Layout containers** own spacing via `gap`: `Stack` and `Row` default
+   to `space.4` (16px) at the CSS level, so bare containers space
+   themselves; tiers override via `--gap-*`/`gap` props. No `gap`
+   utilities exist (see utilities.md) — gap lives on the components.
+3. **Composites** (card, panel, tabs, fieldset, …) own **internal
+   padding** only; outer margin is the exception, not the rule (only
+   Alert ships one: `0 0 space.3`, see alert.md).
+4. **Form** owns field→field rhythm: `.dx-form` is a flex column with
+   `gap: space.3` (12px); `Field`'s internal `space.1` (4px) covers
+   label↔control only.
+5. **Typography** owns its box: text/heading elements reset
+   `margin: 0` (UA heading/paragraph margins never leak) — spacing
+   around text is the parent's job (layout gap or `dx-m-*`).
+6. **Page rhythm** comes from the `.dx-m-*`/`.dx-p-*` utilities (Radzen
+   `rz-pt-8`/`rz-mb-8` pattern), always with their token scale.
 
 ## Dark mode
 
@@ -105,8 +129,8 @@ pick sizes ad hoc):
 ### Display scale (`font.display-*`)
 
 The display headings are fluid: each value is a `clamp(min, vw + offset, max)`
-expression that scales with the viewport (`--dt-font-display-1` ~ 3rem down to
-`--dt-font-display-6` ~ 1.125rem). Same values in every theme — the type scale
+expression that scales with the viewport (`--dx-font-display-1` ~ 3rem down to
+`--dx-font-display-6` ~ 1.125rem). Same values in every theme — the type scale
 is font-face independent; only `font.sans` changes per theme. The largest
 headings carry negative tracking via the `letterspacing.display-*` tokens
 (`-0.04em` on `display-1` tapering to `-0.01em` on `display-6`), and `overline`

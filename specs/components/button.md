@@ -6,6 +6,17 @@ frameworks:
   react: v0.3.5
   htmx: v0.1.6
 tokens:
+  - "color.warning"
+  - "color.text-warning"
+  - "color.text-success"
+  - "color.text-primary"
+  - "color.text-danger"
+  - "color.secondary-hover"
+  - "color.secondary-fg"
+  - "color.secondary"
+  - "color.outline-warning"
+  - "color.border-primary"
+  - "color.border"
   - "radius.md"
   - "radius.full"
   - "space.2"
@@ -45,7 +56,7 @@ tokens:
 
 a11y:
   - "Renders a semantic <button> element (native Enter/Space activation)."
-  - "Focus visible ring via --dt-color-focus (keyboard-only, :focus-visible)."
+  - "Focus visible ring via --dx-color-focus (keyboard-only, :focus-visible)."
   - "Disabled state blocks activation (native disabled attribute)."
   - "Text-on-fill contrast >= 4.5:1 (primary-fg on primary, danger-fg on danger, success-fg on success, info-fg on info)."
   - "Icon-only buttons MUST carry an accessible name (aria-label or aria-labelledby); there is no visible text to derive one."

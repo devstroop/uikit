@@ -5,7 +5,16 @@ category: data-display
 frameworks:
   react: v0.7.0
   htmx: v0.5.0
-tokens: []
+tokens:
+  - "space.4"
+  - "font.size-xs"
+  - "color.text"
+  - "color.border"
+  - "color.danger"
+  - "color.text-muted"
+  - "space.1"
+  - "space.2"
+  - "space.3"
 a11y:
   - "Filter rows are form controls with labels: property/operator select lists and the value input get visible labels (Radzen uses label text above each control)."
   - "Adding/removing a filter row moves focus to the new row's property select; removing focuses the adjacent row or the add button."
@@ -88,22 +97,22 @@ here an array).
 ## htmx
 
 Markup in `lib/components/datafilter/datafilter.html`; behavior
-`[data-dt-datafilter]` in behaviors.js. The builder renders server-side;
+`[data-dx-datafilter]` in behaviors.js. The builder renders server-side;
 the behavior keeps UI state (rows, AND/OR) and re-requests data.
 
 ```html
-<div data-dt-datafilter data-dt-datafilter-target="#rows">
-  <form data-dt-datafilter-form>
-    <div data-dt-datafilter-rows>
-      <div data-dt-datafilter-row>
-        <select data-dt-datafilter-property aria-label="Property">…</select>
-        <select data-dt-datafilter-operator aria-label="Operator">…</select>
-        <input data-dt-datafilter-value aria-label="Value">
-        <button type="button" data-dt-datafilter-remove aria-label="Remove">×</button>
+<div data-dx-datafilter data-dx-datafilter-target="#rows">
+  <form data-dx-datafilter-form>
+    <div data-dx-datafilter-rows>
+      <div data-dx-datafilter-row>
+        <select data-dx-datafilter-property aria-label="Property">…</select>
+        <select data-dx-datafilter-operator aria-label="Operator">…</select>
+        <input data-dx-datafilter-value aria-label="Value">
+        <button type="button" data-dx-datafilter-remove aria-label="Remove">×</button>
       </div>
     </div>
-    <button type="button" data-dt-datafilter-add>Add filter</button>
-    <div data-dt-datafilter-operator-bar role="radiogroup" aria-label="Join filters">
+    <button type="button" data-dx-datafilter-add>Add filter</button>
+    <div data-dx-datafilter-operator-bar role="radiogroup" aria-label="Join filters">
       <label><input type="radio" name="op" value="And" checked> AND</label>
       <label><input type="radio" name="op" value="Or"> OR</label>
     </div>
@@ -111,16 +120,16 @@ the behavior keeps UI state (rows, AND/OR) and re-requests data.
 </div>
 ```
 
-- Behavior maintains the row list (clone `data-dt-datafilter-row` template
-  — property options copied from `data-dt-datafilter-properties`),
-  swaps operator options per property type (`data-dt-datafilter-operators`
+- Behavior maintains the row list (clone `data-dx-datafilter-row` template
+  — property options copied from `data-dx-datafilter-properties`),
+  swaps operator options per property type (`data-dx-datafilter-operators`
   per type), serializes rows into descriptors, and fires
-  `dt:filter-change` (`detail: { filters, filterString, oDataFilterString }`)
+  `dx:filter-change` (`detail: { filters, filterString, oDataFilterString }`)
   on the container. Consumers `hx-get` with `hx-vals` from
   `oDataFilterString` (or submit a form containing a
-  `data-dt-datafilter-output` hidden input holding the JSON descriptors).
+  `data-dx-datafilter-output` hidden input holding the JSON descriptors).
 - Server applies `filters` (any Linq/OData layer) and swaps the result
-  region; the swap target re-renders the whole `data-dt-datafilter` shell
+  region; the swap target re-renders the whole `data-dx-datafilter` shell
   so property options stay in sync.
 - No keyboard handling beyond native form controls; remove/add buttons are
   native `<button>`s.
@@ -137,5 +146,5 @@ the behavior keeps UI state (rows, AND/OR) and re-requests data.
 | toODataFilterString | renders `(contains(Name, 'jo') and Age gt 21)` with proper quoting/escaping |
 | react: builder rows | add/remove rows, per-type default operators, value editors |
 | react: viewChanged | fires with filtered result on each committed change |
-| htmx: serialize | `dt:filter-change` detail carries descriptors + both string forms |
+| htmx: serialize | `dx:filter-change` detail carries descriptors + both string forms |
 | htmx: operator swap | changing property type swaps the operator option set |

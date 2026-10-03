@@ -13,11 +13,13 @@ export function MiscExamples() {
 function ButtonSection() {
   return (
     <Section title="Button">
-      {(["primary", "secondary", "ghost", "danger", "success", "info"] as const).map((v) => (
-        <Button key={v} variant={v}>
-          {v}
+      {(["primary", "secondary", "danger", "success", "info"] as const).map((s) => (
+        <Button key={s} severity={s}>
+          {s}
         </Button>
       ))}
+      <Button variant="text">text</Button>
+      <Button variant="outlined">outlined</Button>
       <Button disabled>disabled</Button>
       <Button size="sm">sm</Button>
       <Button size="lg">lg</Button>

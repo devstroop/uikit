@@ -25,7 +25,7 @@ gutter (default `space.4`), following the Radzen Row/Column grid model.
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `gap` | `xs` \| `sm` \| `md` \| `lg` \| `xl` \| `number` \| `string` | `undefined` | Row gutter override; `xs`–`xl` map to `--dt-space-1..5`, numbers become `px`, other strings pass through (defaults to `space.4`) |
+| `gap` | `xs` \| `sm` \| `md` \| `lg` \| `xl` \| `number` \| `string` | `undefined` | Row gutter override; `xs`–`xl` map to `--dx-space-1..5`, numbers become `px`, other strings pass through (defaults to `space.4`) |
 | `rowGap` | `xs` \| `sm` \| `md` \| `lg` \| `xl` \| `number` \| `string` | `undefined` | Separate cross-axis gap (`row-gap`), Radzen `RowGap` parity |
 | `align` | `start` \| `center` \| `end` \| `stretch` \| `baseline` \| `normal` | `stretch` | Cross-axis alignment (`align-items`) |
 | `justify` | `start` \| `center` \| `end` \| `between` \| `around` \| `evenly` \| `normal` \| `left` \| `right` \| `stretch` \| `space-between` \| `space-around` \| `space-evenly` | `start` | Main-axis distribution (`justify-content`); `between`/`around`/`evenly` alias the `space-*` values, `left`/`right` alias `start`/`end` |
@@ -36,13 +36,13 @@ All other `HTMLAttributes<HTMLDivElement>` are spread onto the `<div>`.
 
 ## Behavior
 
-- DOM: `div[class~=dt-row]` with `display: flex; flex-wrap: wrap;
-  gap: var(--dt-space-4)`.
+- DOM: `div[class~=dx-row]` with `display: flex; flex-wrap: wrap;
+  gap: var(--dx-space-4)`.
 - Modifier classes map one-to-one to alignment/justification (`center`,
   `end`, `baseline`, `justify-between`, `justify-around`, `justify-evenly`,
   `no-wrap`).
-- Gap modifiers (htmx): `dt-row--gap-xs` … `dt-row--gap-xl` map to the
-  `--dt-space-1..5` token scale (4, 8, 12, 16, 24 px); react `gap` takes the
+- Gap modifiers (htmx): `dx-row--gap-xs` … `dx-row--gap-xl` map to the
+  `--dx-space-1..5` token scale (4, 8, 12, 16, 20 px); react `gap` takes the
   same `xs`–`xl` tiers (class-based) plus numbers (px) and arbitrary CSS
   length strings; Radzen parity is a CSS-length gap on the row.
 - Works with plain content as well as `Column` children; `Column` width math
@@ -59,7 +59,7 @@ Not keyboard- or focus-relevant: plain container, never interactive.
 |---|---|
 | Defaults | `<div>` with row class, `wrap` flex, `space.4` gap |
 | `gap` | numeric gap becomes `px`; string gap passes through |
-| `gap` (tier) | `xs`–`xl` gap (react) / `dt-row--gap-xs…xl` (htmx) maps to `--dt-space-1..5` |
+| `gap` (tier) | `xs`–`xl` gap (react) / `dx-row--gap-xs…xl` (htmx) maps to `--dx-space-1..5` |
 | `align` / `justify` | matching modifier class applied |
 | `wrap=false` | `no-wrap` class applied |
 | Attributes spread | `id` / `aria-*` forwarded to the `<div>` |

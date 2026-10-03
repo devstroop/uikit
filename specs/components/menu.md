@@ -50,4 +50,4 @@ Horizontal (or vertical) navigation bar with dropdown submenus (RadzenMenu parit
 ## Behavior
 
 - Submenus open on hover (horizontal) or click; keyboard ArrowDown opens, Escape closes.
-- htmx variant: markup is server-rendered with data-dt-menu, data-dt-menu-item, data-dt-menu-submenu; behavior toggles aria-expanded and dispatches dt:menu-click{ text, value, path }.
+- htmx variant: markup is server-rendered with data-dx-menu, data-dx-menu-item, data-dx-menu-submenu; behavior toggles aria-expanded and dispatches dx:menu-click{ text, value, path }.

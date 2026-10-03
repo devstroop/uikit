@@ -25,54 +25,54 @@ export function FeedbackExamples() {
 function AlertToastSection() {
   const toast = useToast();
   const matrix = [
-    { tone: "info", icon: "info", title: "Info" },
-    { tone: "success", icon: "check-circle", title: "Success" },
-    { tone: "warning", icon: "alert", title: "Warning" },
-    { tone: "danger", icon: "x-circle", title: "Danger" },
+    { severity: "info", icon: "info", title: "Info" },
+    { severity: "success", icon: "check_circle", title: "Success" },
+    { severity: "warning", icon: "warning", title: "Warning" },
+    { severity: "danger", icon: "error", title: "Danger" },
   ] as const;
   return (
     <Section title="Alert · Toast">
       <div className="layout-grid">
-        {(["soft", "outline", "solid"] as const).map((variant) => (
+        {(["flat", "outlined", "filled"] as const).map((variant) => (
           <Alert
             key={variant}
             variant={variant}
-            tone={variant === "solid" ? "danger" : "info"}
+            severity={variant === "filled" ? "danger" : "info"}
             title={variant}
-            icon={<Icon name={variant === "solid" ? "check-circle" : "info"} size={18} />}
+            icon={<Icon icon={variant === "filled" ? "check_circle" : "info"} size={18} />}
           >
-            {variant === "soft" ? "Tone tint, default." : variant === "outline" ? "Tone border, no tint." : "Tone fill, contrast text."}
+            {variant === "flat" ? "Severity tint, default." : variant === "outlined" ? "Severity border, no tint." : "Severity fill, contrast text."}
           </Alert>
         ))}
-        {matrix.map(({ tone, icon, title }) => (
-          <Alert key={tone} tone={tone} title={title} dismissible icon={<Icon name={icon} size={18} />}>
-            {tone === "info" ? "A new version is available." : tone === "success" ? "The release is live." : tone === "warning" ? "Clean up soon." : "Check the pipeline logs."}
+        {matrix.map(({ severity, icon, title }) => (
+          <Alert key={severity} severity={severity} title={title} dismissible icon={<Icon icon={icon} size={18} />}>
+            {severity === "info" ? "A new version is available." : severity === "success" ? "The release is live." : severity === "warning" ? "Clean up soon." : "Check the pipeline logs."}
           </Alert>
         ))}
         <Alert
-          variant="solid"
-          tone="danger"
-          title="Solid danger"
+          variant="filled"
+          severity="danger"
+          title="Filled danger"
           dismissible
-          icon={<Icon name="x-circle" size={18} />}
+          icon={<Icon icon="error" size={18} />}
           onDismiss={() => console.log("alert dismissed")}
         >
-          Uses --dt-color-danger-fg.
+          Uses --dx-color-danger-fg.
         </Alert>
         {(["xs", "sm", "md", "lg", "xl"] as const).map((size) => (
-          <Alert key={size} size={size} tone="info" title={size} icon={<Icon name="info" size={16} />}>
+          <Alert key={size} size={size} severity="info" title={size} icon={<Icon icon="info" size={16} />}>
             {size === "md" ? "Default tier" : `${size} padding · type · radius`}
           </Alert>
         ))}
         <div className="button-row">
-          <Button onClick={() => toast.toast({ title: "Saved", description: "Changes are synced.", tone: "success" })}>
+          <Button onClick={() => toast.toast({ title: "Saved", description: "Changes are synced.", severity: "success" })}>
             Show toast
           </Button>
           <Button
             onClick={() =>
               toast.toast({
                 title: "Item removed",
-                tone: "info",
+                severity: "info",
                 action: { label: "Undo", onClick: () => console.log("undo") },
                 cancel: { label: "Dismiss" },
                 showProgress: true,
@@ -84,14 +84,14 @@ function AlertToastSection() {
           </Button>
           <Button
             onClick={() => {
-              toast.toast({ title: "Building…", id: "build", durationMs: 0, tone: "info" });
+              toast.toast({ title: "Building…", id: "build", durationMs: 0, severity: "info" });
               window.setTimeout(
                 () =>
                   toast.toast({
                     id: "build",
                     title: "Build succeeded",
                     description: "All checks passed.",
-                    tone: "success",
+                    severity: "success",
                   }),
                 1500,
               );
@@ -104,7 +104,7 @@ function AlertToastSection() {
               toast.toast({
                 title: "Click me to dismiss",
                 description: "Persistent, closeOnClick.",
-                tone: "warning",
+                severity: "warning",
                 durationMs: 0,
                 closeOnClick: true,
                 showProgress: false,
@@ -141,10 +141,10 @@ function OverlaySection() {
         description="This cannot be undone."
         footer={
           <>
-            <Button variant="secondary" onClick={() => setOpen(false)}>
+            <Button severity="secondary" onClick={() => setOpen(false)}>
               Cancel
             </Button>
-            <Button variant="danger" onClick={() => setOpen(false)}>
+            <Button severity="danger" onClick={() => setOpen(false)}>
               Delete
             </Button>
           </>
@@ -156,11 +156,11 @@ function OverlaySection() {
       <div className="button-row">
         {(["top", "bottom", "left", "right"] as const).map((placement) => (
           <Tooltip key={placement} content={`${placement} tooltip`} placement={placement}>
-            <Button variant="secondary">{placement}</Button>
+            <Button severity="secondary">{placement}</Button>
           </Tooltip>
         ))}
         <Tooltip content="Appears after 800 ms" delayMs={800}>
-          <Button variant="ghost">slow tooltip</Button>
+          <Button variant="text">slow tooltip</Button>
         </Tooltip>
       </div>
     </Section>
@@ -172,13 +172,13 @@ function SkeletonProgressSection() {
     <Section title="Skeleton · Progress">
       <Progress value={0} aria-label="Empty progress" />
       <Progress value={62} aria-label="Storage used" />
-      <Progress value={100} tone="success" aria-label="Upload complete" />
-      <Progress value={55} tone="warning" aria-label="Battery level" />
-      <Progress value={30} tone="danger" aria-label="Errors found" />
+      <Progress value={100} severity="success" aria-label="Upload complete" />
+      <Progress value={55} severity="warning" aria-label="Battery level" />
+      <Progress value={30} severity="danger" aria-label="Errors found" />
       <Progress indeterminate aria-label="Downloading updates" />
       <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
         <Progress value={62} variant="circular" aria-label="Storage used" />
-        <Progress value={100} variant="circular" tone="success" aria-label="Upload complete" />
+        <Progress value={100} variant="circular" severity="success" aria-label="Upload complete" />
         <Progress variant="circular" indeterminate aria-label="Downloading updates" />
       </div>
       <div style={{ display: "flex", gap: 12, alignItems: "center" }}>

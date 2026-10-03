@@ -6,6 +6,7 @@ frameworks:
   react: v0.29.0
   htmx: v0.27.0
 tokens:
+  - "font.weight-bold"
   - "color.border"
   - "color.palette-0"
   - "color.palette-1"
@@ -58,4 +59,4 @@ SVG chart core (RadzenChart parity subset): cartesian chart with category/value 
 - Series colors cycle through palette-0..5 tokens.
 - Scales are computed from data (nice min/max/step) unless overridden by valueAxis.
 - Tooltips: single shared tooltip div positioned near the hovered point showing `title: value`; hidden on leave.
-- htmx variant: `<div class="dt-chart" data-dt-chart data-dt-series='<json>' ...>`; behavior renders the same SVG client-side from the JSON attribute, wires tooltip + click dispatching dt:chart-point-click.
+- htmx variant: `<div class="dx-chart" data-dx-chart data-dx-series='<json>' ...>`; behavior renders the same SVG client-side from the JSON attribute, wires tooltip + click dispatching dx:chart-point-click.

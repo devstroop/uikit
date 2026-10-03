@@ -9,6 +9,9 @@ tokens:
   - "font.sans"
   - "font.size-xs"
   - "font.size-sm"
+  - "font.size-md"
+  - "font.size-lg"
+  - "font.size-xl"
   - "font.display-1"
   - "font.display-2"
   - "font.display-3"
@@ -16,6 +19,7 @@ tokens:
   - "font.display-5"
   - "font.display-6"
   - "font.weight-medium"
+  - "font.weight-bold"
   - "letterspacing.display-1"
   - "letterspacing.display-2"
   - "letterspacing.display-3"
@@ -27,8 +31,8 @@ tokens:
 a11y:
   - "Display variants map to real heading levels h1-h6 so the document outline is preserved."
   - "Body copy renders as a semantic <p>; caption/overline render as inline <span>s."
-  - "Caption uses --dt-color-text-muted, which the theme validator holds >= 4.5:1 against bg and surface."
-  - "All tiers set font-family from --dt-font-sans so headings never fall back to the browser serif default."
+  - "Caption uses --dx-color-text-muted, which the theme validator holds >= 4.5:1 against bg and surface."
+  - "All tiers set font-family from --dx-font-sans so headings never fall back to the browser serif default."
   - "The display scale is fluid (clamp() with vw) — no fixed sizes that break at narrow viewports."
 ---
 
@@ -61,8 +65,15 @@ element (`id`, `aria-*`, `className`, ...). The component is `forwardRef`d.
 - `caption` = `font.size-xs` at 1.429, muted via `color.text-muted`.
 - `overline` = `font.size-xs`, uppercase, `letterspacing.overline` (0.08em)
   tracking, `font.weight-medium`.
-- All tiers set `font-family: var(--dt-font-sans)` — the type scale is
+- All tiers set `font-family: var(--dx-font-sans)` — the type scale is
   font-face independent but the stack is theme-specific.
+- Margin policy: every tier **owns its box** — `margin: 0`, so UA
+  `h1`–`h6`/`p` margins never leak. Spacing around text is the parent's
+  job (layout `gap` or `dx-m-*` utilities), never the text element's.
+- htmx markup presets: `.dx-h1`…`.dx-h6` apply the standard heading ramp
+  (h1/h2 = `font.display-5`/`display-6` bold, h3/h4 = `font.size-xl`/`size-lg`
+  bold, h5/h6 = `font.size-md` medium) with `margin: 0`; `.dx-text-muted`
+  applies `color.text-muted` standalone (composes with any element).
 
 ## Keyboard
 

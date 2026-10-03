@@ -77,8 +77,14 @@ jobs:
           git diff --exit-code
       - name: Preview vendor copies are in sync
         run: |
-          cp dist/uikit.js dist/uikit.css ../../preview/htmx/vendor/
-          git -C ../.. diff --exit-code -- preview/htmx/vendor/
+          # preview/htmx/vendor/ is a verbatim copy of the frameworks/htmx
+          # pin's dist: cmp keeps the preview on exactly what CI builds.
+          for f in uikit.css uikit.js; do
+            if ! cmp -s "dist/$f" "../../preview/htmx/vendor/$f"; then
+              echo "preview/htmx/vendor/$f differs from frameworks/htmx/dist/$f" >&2
+              exit 1
+            fi
+          done
 
   preview:
     name: Preview (react)
@@ -123,4 +129,4 @@ jobs:
       - run: npm test
       - run: npm run build
       - name: Verify built package exports
-        run: node -e "import('./dist/main.es.js').then((m) => { const names = ['Button','Card','Badge','Icon','Stat','Table','EmptyState','Field','Label','Input','Select','Checkbox','Switch','Tooltip','Dialog','ToastProvider','useToast','Alert','Skeleton','Progress','Avatar','Tabs','Accordion','Textarea']; const missing = names.filter((n) => !(n in m)); if (missing.length) { console.error('missing exports:', missing); process.exit(1); } console.log('all', names.length, 'exports present'); })"
+        run: node -e "import('./dist/main.es.js').then((m) => { const names = ['Button','Card','Badge','Icon','Stat','Table','EmptyState','Field','Label','Input','Select','CheckBox','Switch','Tooltip','Dialog','ToastProvider','useToast','Alert','Skeleton','Progress','Avatar','Tabs','Accordion','TextArea']; const missing = names.filter((n) => !(n in m)); if (missing.length) { console.error('missing exports:', missing); process.exit(1); } console.log('all', names.length, 'exports present'); })"

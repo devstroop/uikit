@@ -6,6 +6,11 @@ frameworks:
   react: v0.3.5
   htmx: v0.1.6
 tokens:
+  - "color.success-fg"
+  - "color.secondary-fg"
+  - "color.secondary"
+  - "color.info-fg"
+  - "color.info"
   - "space.1"
   - "space.2"
   - "space.3"
@@ -39,9 +44,9 @@ tokens:
   - "color.danger-fg"
 a11y:
   - "Root carries role=\"alert\" so the message is announced on mount."
-  - "Dismiss control is a native <button> with aria-label=\"Dismiss alert\" and a visible focus-visible ring (--dt-color-focus outline) when keyboard-focused."
+  - "Dismiss control is a native <button> with aria-label=\"Dismiss alert\" and a visible focus-visible ring (--dx-color-focus outline) when keyboard-focused."
   - "The soft variant paints a 12% tone tint — color-mix(in srgb, <tone> 12%, transparent), the same painted tint the text-{tone} tokens are derived against (scripts/derive-tone-tokens.mjs), matching the badge soft variant. The alert foreground (title + body) uses text-{tone} (>= 4.5:1 on the tint over both bg and surface per the derivation); the title is differentiated by size (size-md) and weight (bold) only, Radzen-style. Tone variants also paint the 1px border with the tone color."
-  - "Variant paint rules (Badge parity): outline = transparent fill, tone border, text-{tone} foreground; solid = tone fill with `--dt-color-primary-fg` (info) / `--dt-color-danger-fg` (danger) / `--dt-color-surface` (success, warning) foreground, all >= 4.5:1 on the tone fill."
+  - "Variant paint rules (Badge parity): outline = transparent fill, tone border, text-{tone} foreground; solid = tone fill with `--dx-color-primary-fg` (info) / `--dx-color-danger-fg` (danger) / `--dx-color-surface` (success, warning) foreground, all >= 4.5:1 on the tone fill."
   - "Tone distinction is carried by the tinted background, the tone-colored text, and the severity icon — three redundant cues, so tone is not conveyed by color alone for color-vision-impaired users (the icon glyph differs per tone)."
   - "Dismissing removes the element from the DOM entirely (no stale region)."
 ---
@@ -80,15 +85,17 @@ accepts only the props above).
 - `variant` paint (same language as Badge):
   - `soft` (default) — 12% tint fill, tone border, `text-{tone}` foreground.
   - `outline` — transparent fill, tone border, `text-{tone}` foreground.
-  - `solid` — tone fill; foreground `--dt-color-primary-fg` (info),
-    `--dt-color-danger-fg` (danger), `--dt-color-surface` (success, warning).
+  - `solid` — tone fill; foreground `--dx-color-primary-fg` (info),
+    `--dx-color-danger-fg` (danger), `--dx-color-surface` (success, warning).
     The dismiss button dims to 75% `currentColor` and hovers to full.
-- The severity icon (`dt-alert-icon` / react `icon` prop, typically 18px,
+- The severity icon (`dx-alert-icon` / react `icon` prop, typically 18px,
   `stroke="currentColor"`) inherits the tone foreground; it is rendered
   `aria-hidden` because the `role="alert"` text carries the message.
 - The alert carries `margin: 0 0 space.3` (theme spacing) so stacked alerts
   and surrounding content are separated; internal padding is `space.3` with
-  `space.2` between icon/content.
+  `space.2` between icon/content. Bottom-only is an intentional divergence
+  from Radzen (`margin: 1rem 0`, size-scaled): a top margin would stack
+  additively with a parent layout gap, double-spacing the banner.
 - `size` scales the whole banner through root-level custom properties
   (`--alert-pad`, `--alert-gap`, `--alert-radius`, `--alert-title-size`,
   `--alert-body-size`, `--alert-dismiss-size`, `--alert-dismiss-font`):
@@ -100,7 +107,7 @@ accepts only the props above).
 - `dismissible` renders a 22×22px × button; clicking sets internal dismissed
   state, calls `onDismiss` (if given), and the whole alert returns `null`.
 - Dismiss button hover: `surface-hover` background, `color.text` foreground.
-- htmx: the dismiss button carries `data-dt-dismiss`; behaviors.js removes
+- htmx: the dismiss button carries `data-dx-dismiss`; behaviors.js removes
   the alert on activation. Server-side follow-up (Radzen `Close` parity) is
   achieved by adding hx-* attributes to the dismiss button.
 
@@ -108,7 +115,7 @@ accepts only the props above).
 
 The alert itself is non-interactive. The dismiss button is a native button:
 Enter and Space activate it; it receives the document focus order and shows
-a `--dt-color-focus` outline on `:focus-visible`.
+a `--dx-color-focus` outline on `:focus-visible`.
 
 ## Tests
 

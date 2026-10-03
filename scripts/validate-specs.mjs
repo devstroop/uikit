@@ -14,9 +14,10 @@
 
 import { readFileSync } from "node:fs";
 import { access, readFile, readdir } from "node:fs/promises";
-import { dirname, join, resolve } from "node:path";
+import { basename, dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parse as parseYaml } from "yaml";
+import { componentDirCandidates, componentDirKeys, dirKey } from "./token-names.mjs";
 import "./ci-annotations.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -44,17 +45,33 @@ function readFrontmatter(markdown) {
   return parseYaml(match[1]);
 }
 
-function implDirFor(technology, componentName) {
-  if (technology === "react") {
-    return join(FRAMEWORKS_DIR, "react", "lib", "components", componentName);
+/**
+ * Resolve the component source directory for a spec name. Candidate names
+ * come from token-names.mjs so one spec resolves against the pinned
+ * snapshots (which still ship the pre-rename directory) and against current
+ * sources (which ship the renamed one) alike. Returns null when no candidate
+ * exists; the caller reports it as a violation, never a silent skip.
+ */
+async function implDirFor(technology, componentName) {
+  const base =
+    technology === "react"
+      ? join(FRAMEWORKS_DIR, "react", "lib", "components")
+      : technology === "htmx"
+        ? join(FRAMEWORKS_DIR, "htmx", "lib", "components")
+        : null;
+  if (!base || typeof componentName !== "string" || !componentName) return null;
+
+  let entries;
+  try {
+    entries = await readdir(base, { withFileTypes: true });
+  } catch {
+    return null;
   }
-  if (technology === "htmx") {
-    const kebab = componentName
-      .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
-      .toLowerCase();
-    return join(FRAMEWORKS_DIR, "htmx", "lib", "components", kebab);
-  }
-  return null;
+  const candidates = componentDirKeys(componentName);
+  const match = entries.find(
+    (e) => e.isDirectory() && candidates.includes(dirKey(e.name)),
+  );
+  return match ? join(base, match.name) : null;
 }
 
 async function validateSpec(file, taxonomy) {
@@ -106,40 +123,40 @@ async function validateSpec(file, taxonomy) {
         fail(`frameworks.${technology} must be a version string`);
       }
       if (meta.status === "implemented") {
-        const dir = implDirFor(technology, meta.name);
-        if (dir) {
+        const dir = await implDirFor(technology, meta.name);
+        if (!dir) {
+          const candidates =
+            typeof meta.name === "string" && meta.name
+              ? componentDirCandidates(meta.name)
+              : [name];
+          fail(
+            `implemented in ${technology} but no source dir: ` +
+              `frameworks/${technology}/lib/components/${candidates.join("|")}/`,
+          );
+          continue;
+        }
+        // File names follow the resolved directory, not the spec name, so a
+        // renamed directory is checked against the files it actually ships.
+        const dirName = basename(dir);
+        if (technology === "react") {
           try {
-            await readdir(dir);
+            await access(join(dir, `${dirName}.test.tsx`));
           } catch {
             fail(
-              `implemented in ${technology} but no source dir: ` +
-                `frameworks/${technology}/lib/components/${meta.name}/`,
+              `implemented in ${technology} but no test file: ` +
+                `${dirName}.test.tsx`,
             );
-            continue;
           }
-          if (technology === "react") {
+        }
+        if (technology === "htmx") {
+          for (const ext of ["html", "css"]) {
             try {
-              await access(join(dir, `${meta.name}.test.tsx`));
+              await access(join(dir, `${dirName}.${ext}`));
             } catch {
               fail(
-                `implemented in ${technology} but no test file: ` +
-                  `${meta.name}.test.tsx`,
+                `implemented in ${technology} but no ${ext} file: ` +
+                  `${dirName}.${ext}`,
               );
-            }
-          }
-          if (technology === "htmx") {
-            const kebab = meta.name
-              .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
-              .toLowerCase();
-            for (const ext of ["html", "css"]) {
-              try {
-                await access(join(dir, `${kebab}.${ext}`));
-              } catch {
-                fail(
-                  `implemented in ${technology} but no ${ext} file: ` +
-                    `${kebab}.${ext}`,
-                );
-              }
             }
           }
         }

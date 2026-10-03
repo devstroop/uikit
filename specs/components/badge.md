@@ -6,6 +6,12 @@ frameworks:
   react: v0.3.5
   htmx: v0.1.6
 tokens:
+  - "space.05"
+  - "color.success-fg"
+  - "color.secondary-fg"
+  - "color.secondary"
+  - "color.info-fg"
+  - "color.info"
   - "space.1"
   - "radius.full"
   - "font.sans"

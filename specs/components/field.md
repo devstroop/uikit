@@ -55,25 +55,25 @@ Form wrapper that composes a label, control, and hint/error messaging.
 ## htmx semantics
 
 Reference markup: `lib/components/field/field.html`. The wrapper root is
-`.dt-field`; a message element is `<div class="dt-field-error"
-id="<error-id>" aria-live="polite" data-dt-field-error>`.
+`.dx-field`; a message element is `<div class="dx-field-error"
+id="<error-id>" aria-live="polite" data-dx-field-error>`.
 
 - A server template composes the wrapper and may pre-render an error
   (then `aria-invalid="true"` on the control).
-- Inside a `[data-dt-form]`, submit-time validation messages are written
-  into the closest (within `.dt-field`) or next-sibling
-  `[data-dt-field-error]` element; multiple messages are joined with
+- Inside a `[data-dx-form]`, submit-time validation messages are written
+  into the closest (within `.dx-field`) or next-sibling
+  `[data-dx-field-error]` element; multiple messages are joined with
   ` · `. The error id is merged into the control's `aria-describedby`
   (a consumer-supplied hint id is preserved and space-joined) and the
   error element gets `aria-live="polite"`.
 - A passing field clears the error text and restores the original
   `aria-describedby`.
-- Editing a field after an invalid submit clears `data-dt-invalid`,
+- Editing a field after an invalid submit clears `data-dx-invalid`,
   `aria-invalid`, the error text, and the described-by merge; validity
   is re-evaluated on the next submit.
-- Without a `[data-dt-field-error]` element the field still receives
-  `aria-invalid="true"` / `data-dt-invalid` and messages stay available
-  via the `dt:invalid` detail.
+- Without a `[data-dx-field-error]` element the field still receives
+  `aria-invalid="true"` / `data-dx-invalid` and messages stay available
+  via the `dx:invalid` detail.
 
 ## Keyboard
 
@@ -94,7 +94,7 @@ click-to-focus is native `<label>` + `htmlFor` behavior.
 | ARIA invalid | `error` adds `aria-invalid="true"` to the child control |
 | ARIA merge | consumer-supplied `aria-describedby`/`aria-invalid` on the child are preserved |
 | No label | children render without a `<label>` |
-| htmx message render | invalid submit writes messages into `[data-dt-field-error]` and merges its id into `aria-describedby` |
+| htmx message render | invalid submit writes messages into `[data-dx-field-error]` and merges its id into `aria-describedby` |
 | htmx multi-message | multiple failing rules join with ` · ` |
 | htmx passing field | error text clears; original `aria-describedby` restored |
 | htmx edit | `input` after an invalid submit clears invalid state and error text |

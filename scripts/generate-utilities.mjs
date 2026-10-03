@@ -8,6 +8,10 @@
  *   frameworks/htmx/lib/components/utilities/utilities.css
  *   frameworks/react/lib/utilities.css
  *
+ * Class and var prefixes follow each framework's registry
+ * (frameworks/<name>/uikit.yml -> tokens.prefix, default "dt" for legacy
+ * pins) — see scripts/generate-css.mjs.
+ *
  * Radzen parity (issues #75 + #79):
  *   - display / justify-content / align-items / overflow / w/vw/min-w/max-w /
  *     h/vh/min-h/max-h families with breakpoint suffixes
@@ -16,11 +20,34 @@
  * Breakpoint map (Radzen): xs 576, sm 768, md 1024, lg 1280, xl 1920, xx 2560.
  */
 
-import { writeFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { parse as parseYaml } from "yaml";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+
+const TARGETS = [
+  ["htmx", "lib/components/utilities/utilities.css"],
+  ["react", "lib/utilities.css"],
+];
+
+async function targetPrefix(framework) {
+  const registryPath = join(ROOT, "frameworks", framework, "uikit.yml");
+  try {
+    const registry = parseYaml(await readFile(registryPath, "utf8"));
+    const prefix = registry?.tokens?.prefix ?? "dt";
+    if (prefix !== "dx" && prefix !== "dt") {
+      throw new Error(
+        `frameworks/${framework}/uikit.yml: tokens.prefix must be "dx" or "dt"`,
+      );
+    }
+    return prefix;
+  } catch (err) {
+    if (err.code === "ENOENT") return "dt";
+    throw err;
+  }
+}
 
 const BREAKPOINTS = [
   ["xs", 576],
@@ -75,39 +102,39 @@ const PADDING_FAMILIES = [
   ["pe", "padding-inline-end"],
 ];
 
-function rule(className, declaration) {
-  return `.dt-${className} { ${declaration} !important; }`;
+function rule(className, declaration, prefix) {
+  return `.${prefix}-${className} { ${declaration} !important; }`;
 }
 
-function valueFamilies(suffix = "") {
+function valueFamilies(suffix = "", prefix = "dt") {
   const lines = [];
   for (const [family, property, values] of VALUE_FAMILIES) {
     for (const value of values) {
       const suffixPart = suffix ? `${suffix}-` : "";
-      lines.push(rule(`${family}-${suffixPart}${value === "25%" ? "25" : value.replace("%", "").replace("vw", "").replace("vh", "")}`, `${property}: ${value}`));
+      lines.push(rule(`${family}-${suffixPart}${value === "25%" ? "25" : value.replace("%", "").replace("vw", "").replace("vh", "")}`, `${property}: ${value}`, prefix));
     }
   }
   return lines;
 }
 
-function spacingFamilies(suffix = "") {
+function spacingFamilies(suffix = "", prefix = "dt") {
   const lines = [];
   const suffixPart = suffix ? `${suffix}-` : "";
   for (const [family, property] of MARGIN_FAMILIES) {
     for (const size of SIZES) {
-      lines.push(rule(`${family}-${suffixPart}${size}`, `${property}: var(--dt-space-${size})`));
+      lines.push(rule(`${family}-${suffixPart}${size}`, `${property}: var(--${prefix}-space-${size})`, prefix));
     }
-    lines.push(rule(`${family}-${suffixPart}auto`, `${property}: auto`));
+    lines.push(rule(`${family}-${suffixPart}auto`, `${property}: auto`, prefix));
   }
   for (const [family, property] of PADDING_FAMILIES) {
     for (const size of SIZES) {
-      lines.push(rule(`${family}-${suffixPart}${size}`, `${property}: var(--dt-space-${size})`));
+      lines.push(rule(`${family}-${suffixPart}${size}`, `${property}: var(--${prefix}-space-${size})`, prefix));
     }
   }
   return lines;
 }
 
-function build() {
+function build(prefix = "dt") {
   const header = `/* layout utilities — Radzen theme utilities parity (issues #75, #79)
  * Flex/grid/overflow/sizing/spacing helpers as class names with breakpoint
  * suffixes. Spacing scale mirrors Radzen: 0..12 in 4px steps ("05" = 2px)
@@ -118,12 +145,12 @@ function build() {
 `;
 
   const lines = [
-    ...valueFamilies(),
-    ...spacingFamilies(),
+    ...valueFamilies("", prefix),
+    ...spacingFamilies("", prefix),
   ];
   for (const [bp, minWidth] of BREAKPOINTS) {
     lines.push("", `@media (min-width: ${minWidth}px) {`);
-    for (const line of [...valueFamilies(bp), ...spacingFamilies(bp)]) {
+    for (const line of [...valueFamilies(bp, prefix), ...spacingFamilies(bp, prefix)]) {
       lines.push(`  ${line}`);
     }
     lines.push("}");
@@ -131,8 +158,9 @@ function build() {
   return header + lines.join("\n") + "\n";
 }
 
-const css = build();
-
-await writeFile(join(ROOT, "frameworks/htmx/lib/components/utilities/utilities.css"), css);
-await writeFile(join(ROOT, "frameworks/react/lib/utilities.css"), css);
-console.log(`wrote ${css.split("\n").length} lines to htmx + react utilities css`);
+for (const [framework, relPath] of TARGETS) {
+  const prefix = await targetPrefix(framework);
+  const css = build(prefix);
+  await writeFile(join(ROOT, "frameworks", framework, relPath), css);
+  console.log(`wrote ${css.split("\n").length} lines to ${framework} utilities css (--${prefix}-)`);
+}

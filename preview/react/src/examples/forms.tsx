@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Checkbox, email, Field, Form, Input, Label, required, Select, Switch, Textarea, useFormField } from "@devstroop/react-uikit";
+import { Button, CheckBox, email, Field, Form, Input, Label, required, Select, Switch, TextArea, useFormField } from "@devstroop/react-uikit";
 import { Section } from "./section";
 
 function ValidatedField({ name }: { name: string }) {
@@ -38,7 +38,7 @@ export function FormExamples() {
   const [checked, setChecked] = useState(false);
   const [switched, setSwitched] = useState(true);
   return (
-    <Section title="Field · Label · Input · Select · Textarea · Checkbox · Switch" className="dt-form-grid">
+    <Section title="Field · Label · Input · Select · TextArea · CheckBox · Switch" className="dx-form-grid">
       <Field label="Email" htmlFor="f-email" hint="We never share it.">
         <Input id="f-email-sm" size="sm" placeholder="small" />
         <Input id="f-email" type="email" placeholder="you@example.com" />
@@ -70,9 +70,9 @@ export function FormExamples() {
         />
       </Field>
       <Field label="Notes" htmlFor="f-notes">
-        <Textarea id="f-notes-sm" size="sm" rows={2} placeholder="small" />
-        <Textarea id="f-notes" rows={3} placeholder="Anything else?" />
-        <Textarea id="f-notes-lg" size="lg" rows={4} placeholder="large" />
+        <TextArea id="f-notes-sm" size="sm" rows={2} placeholder="small" />
+        <TextArea id="f-notes" rows={3} placeholder="Anything else?" />
+        <TextArea id="f-notes-lg" size="lg" rows={4} placeholder="large" />
       </Field>
       <Field label="Other types" htmlFor="f-types">
         <Input id="f-password" type="password" placeholder="password" aria-label="Password" />
@@ -85,7 +85,7 @@ export function FormExamples() {
       </Field>
       <Label htmlFor="f-naked">Standalone label</Label>
       <Label htmlFor="f-check">
-        <Checkbox id="f-check" checked={checked} onChange={() => setChecked(!checked)} />
+        <CheckBox id="f-check" checked={checked} onChange={() => setChecked(!checked)} />
         Subscribe to updates
       </Label>
       <Label htmlFor="f-switch">
@@ -93,7 +93,7 @@ export function FormExamples() {
         Dark mode in app
       </Label>
       <Label htmlFor="f-check-disabled">
-        <Checkbox id="f-check-disabled" disabled />
+        <CheckBox id="f-check-disabled" disabled />
         Disabled checkbox
       </Label>
       <Label htmlFor="f-switch-disabled">

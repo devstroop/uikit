@@ -125,10 +125,10 @@ function readSpecs() {
 
 // Map kebab -> htmx data attribute selector (primary) and fallback aria-label
 function htmxSelector(kebab) {
-  // Most htmx components use data-dt-<kebab> on the root, but some drop the hyphen
+  // Most htmx components use data-dx-<kebab> on the root, but some drop the hyphen
   const noHyphen = new Set(["fab-menu", "panel-menu", "profile-menu", "pick-list", "drop-zone", "security-code", "signature-pad"]);
-  if (noHyphen.has(kebab)) return `[data-dt-${kebab.replace(/-/g, "")}]`;
-  return `[data-dt-${kebab}]`;
+  if (noHyphen.has(kebab)) return `[data-dx-${kebab.replace(/-/g, "")}]`;
+  return `[data-dx-${kebab}]`;
 }
 
 // For React, the root is often a landmark with aria-label containing the
@@ -287,7 +287,7 @@ async function main() {
             }
             if (!found) {
               // Last resort: any element with data-dt fallback (for components that also have data attr in React preview)
-              locator = page.locator(`[data-dt-${kebab}]`).first();
+              locator = page.locator(`[data-dx-${kebab}]`).first();
               found = (await locator.count()) > 0;
             }
           }

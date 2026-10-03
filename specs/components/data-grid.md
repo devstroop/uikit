@@ -5,7 +5,14 @@ category: data
 frameworks:
   react: v0.10.0
   htmx: v0.8.0
-tokens: []
+tokens:
+  - "radius.full"
+  - "color.bg"
+  - "color.border"
+  - "color.primary"
+  - "color.surface"
+  - "color.text"
+  - "color.text-muted"
 a11y:
   - "Grid table carries role=grid with aria-rowcount on the data region; sorted columns expose aria-sort (ascending/descending/none) on the th."
   - "Sorting is triggered by a keyboard-focusable control (button in th) and announces the new order via an aria-live result summary."
@@ -37,8 +44,8 @@ Radzen `RadzenDataGridColumn<TItem>` parity subset:
 | `format` | display format string for number/date values (Radzen `FormatString` parity) |
 | `align` | `left` \| `center` \| `right` (th + td alignment, Radzen `TextAlign` parity) |
 | `sortable` / `filterable` | per-column overrides of the grid-wide toggles (default: grid-wide) |
-| `frozen` | frozen column (left-edge sticky, `--dt-datagrid-frozen-width` for row backgrounds) |
-| `render` | react render prop `(row, { index }) => ReactNode`; htmx: inline slot via `data-dt-col-render` or a `Template` child |
+| `frozen` | frozen column (left-edge sticky, `--dx-datagrid-frozen-width` for row backgrounds) |
+| `render` | react render prop `(row, { index }) => ReactNode`; htmx: inline slot via `data-dx-col-render` or a `Template` child |
 
 ## Sorting
 
@@ -65,8 +72,8 @@ Radzen `RadzenDataGridColumn<TItem>` parity subset:
   (default And) grid-wide, Radzen parity.
 - Filtering is applied client-side to the full item set before
   sorting/paging (Radzen order parity: filter → sort → page).
-- htmx: `data-dt-filter-*` attributes on the grid plus a hidden
-  `dt:filter-change` payload re-served by the server; client-side filter
+- htmx: `data-dx-filter-*` attributes on the grid plus a hidden
+  `dx:filter-change` payload re-served by the server; client-side filter
   row is rendered by the behavior.
 
 ## Paging
@@ -84,27 +91,27 @@ Radzen `RadzenDataGridColumn<TItem>` parity subset:
 - `selectionMode`: `None` \| `Single` \| `Multiple` (Radzen `SelectionMode`
   parity). Rows expose `aria-selected` and a `selected` row class.
 - Controlled keys via `selectedKeys` + `onSelectionChange(keys)` (react);
-  htmx: `data-dt-datagrid-select="single|multiple"`, `data-dt-row-key` per
-  row, event `dt:grid-select` with `{ keys }`.
+  htmx: `data-dx-datagrid-select="single|multiple"`, `data-dx-row-key` per
+  row, event `dx:grid-select` with `{ keys }`.
 - Row clicks that land on interactive controls (sort buttons, filter
   inputs, resize handles, links) do not toggle selection.
 
 ## Column picker
 
-- `showColumnPicker` (react) / `data-dt-datagrid-column-picker` (htmx):
+- `showColumnPicker` (react) / `data-dx-datagrid-column-picker` (htmx):
   toolbar button toggling an `aria-expanded` menu of labelled checkboxes.
 - `column.visible: false` columns are hidden initially but still listed in
   the picker (Radzen `Columns` visibility parity); picker text customizable
-  via `columnPickerText` / `data-dt-datagrid-picker-text`.
+  via `columnPickerText` / `data-dx-datagrid-picker-text`.
 
 ## Column resize / reorder / frozen
 
-- `allowColumnResize` (react) / `data-dt-datagrid-resize` (htmx): separator
+- `allowColumnResize` (react) / `data-dx-datagrid-resize` (htmx): separator
   handle per column header; dragging updates the colgroup width
   (min 48px).
-- `allowColumnReorder` (react) / `data-dt-datagrid-reorder` (htmx):
+- `allowColumnReorder` (react) / `data-dx-datagrid-reorder` (htmx):
   drag-and-drop on headers reorders columns; htmx fires
-  `dt:grid-column-reorder` with `{ from, to }`.
+  `dx:grid-column-reorder` with `{ from, to }`.
 - Frozen columns: `frozen: true` pins the column to the left edge with
   sticky positioning; multiple frozen columns stack offsets computed from
   their widths (react helper `gridFrozenOffsets`, htmx synced to body
@@ -112,7 +119,7 @@ Radzen `RadzenDataGridColumn<TItem>` parity subset:
 
 ## Grouping
 
-- `allowGrouping` (react) / `data-dt-datagrid-groupable` (htmx): a group
+- `allowGrouping` (react) / `data-dx-datagrid-groupable` (htmx): a group
   panel in the toolbar; drag a column header onto the panel to group by it
   (reorder + resize must be enabled for drag). The grouped column is
   hidden from the grid body while grouping is active.
@@ -120,29 +127,29 @@ Radzen `RadzenDataGridColumn<TItem>` parity subset:
   (`aria-expanded`, ▼/▶ indicator) collapsing/expanding the group's rows;
   the panel shows an active-group chip with a remove (×) button.
 - React: `groupPanelText`, `groupExpanded` props. htmx events:
-  `dt:grid-group-change {property}` (null on clear).
+  `dx:grid-group-change {property}` (null on clear).
 
 ## Inline editing
 
-- `editMode="EditRow"` (react) / `data-dt-datagrid-edit` (htmx): command
+- `editMode="EditRow"` (react) / `data-dx-datagrid-edit` (htmx): command
   column (Actions) with Edit/Save/Cancel per row; editing swaps the row's
   cells for typed inputs (number/checkbox/text per column type). Only one
   row edits at a time; cancel restores original cell text.
-- `allowRowCreate` (react) / `data-dt-datagrid-create` (htmx): Add row
+- `allowRowCreate` (react) / `data-dx-datagrid-create` (htmx): Add row
   button in the toolbar opens a new-row input row (Save/Cancel).
-  `data-dt-datagrid-delete` (htmx) adds a per-row Delete button.
+  `data-dx-datagrid-delete` (htmx) adds a per-row Delete button.
 - Events: react `onRowUpdate(original, updated)`, `onRowCreate(row)`,
-  `onRowDelete(row)`; htmx `dt:grid-row-update {original, updated}`,
-  `dt:grid-row-create {row}`, `dt:grid-row-delete {row}` — consumers
+  `onRowDelete(row)`; htmx `dx:grid-row-update {original, updated}`,
+  `dx:grid-row-create {row}`, `dx:grid-row-delete {row}` — consumers
   persist to their data store (grid holds rows in the DOM only).
 
 ## Grid DOM
 
-- `.dt-datagrid` wrapper > optional top pager > `.dt-datagrid-data`
-  (role=grid, aria-rowcount = visible row count + 1) > `table.dt-datagrid-table`
+- `.dx-datagrid` wrapper > optional top pager > `.dx-datagrid-data`
+  (role=grid, aria-rowcount = visible row count + 1) > `table.dx-datagrid-table`
   with colgroup (sticky widths) > thead (header row + optional filter row)
   > tbody (tr per row, hover row bg) > empty message
-  `.dt-datagrid-empty` > loading overlay `.dt-datagrid-loading`
+  `.dx-datagrid-empty` > loading overlay `.dx-datagrid-loading`
   (aria-busy) > optional bottom pager.
 - Grid-level `aria-label`/`aria-labelledby`; row count announced via live
   region when sort/filter/page changes.
@@ -152,7 +159,7 @@ Radzen `RadzenDataGridColumn<TItem>` parity subset:
 `LoadData({ skip, top, orderBy, filters, sorts })` + `Count` round-trip is
 explicitly out of scope for #74; the client pipeline (filter → sort →
 page) and the OData string helpers give consumers a server path via
-`dt:filter-change`/viewChanged without built-in data loading.
+`dx:filter-change`/viewChanged without built-in data loading.
 
 ## react
 
@@ -174,20 +181,20 @@ page) and the OData string helpers give consumers a server path via
 
 ## htmx
 
-- `dt-datagrid` behavior: `data-dt-datagrid` root with
-  `data-dt-datagrid-properties` (column JSON), `data-dt-datagrid-sortable`,
-  `data-dt-datagrid-filterable`, `data-dt-datagrid-pagesize`,
-  `data-dt-datagrid-pagesize-options`, `data-dt-datagrid-groupable`,
-  `data-dt-datagrid-edit`, `data-dt-datagrid-delete`,
-  `data-dt-datagrid-create`; sort controls (`data-dt-sort`,
-  `data-dt-sort-desc`, cycling on click), filter row
-  (`data-dt-filter-property` select, `data-dt-filter-value` input),
-  pager (`data-dt-page`, `data-dt-page-size`, `data-dt-page-summary`).
-- Events: `dt:grid-change` with detail
+- `dx-datagrid` behavior: `data-dx-datagrid` root with
+  `data-dx-datagrid-properties` (column JSON), `data-dx-datagrid-sortable`,
+  `data-dx-datagrid-filterable`, `data-dx-datagrid-pagesize`,
+  `data-dx-datagrid-pagesize-options`, `data-dx-datagrid-groupable`,
+  `data-dx-datagrid-edit`, `data-dx-datagrid-delete`,
+  `data-dx-datagrid-create`; sort controls (`data-dx-sort`,
+  `data-dx-sort-desc`, cycling on click), filter row
+  (`data-dx-filter-property` select, `data-dx-filter-value` input),
+  pager (`data-dx-page`, `data-dx-page-size`, `data-dx-page-summary`).
+- Events: `dx:grid-change` with detail
   `{ pageNumber, pageSize, sorts, filters, filterString, oDataFilterString }`
-  for server round-trips; `dt:grid-sort`, `dt:grid-filter`, `dt:grid-page`,
-  `dt:grid-group-change {property}`, `dt:grid-row-update {original,
-  updated}`, `dt:grid-row-create {row}`, `dt:grid-row-delete {row}`
+  for server round-trips; `dx:grid-sort`, `dx:grid-filter`, `dx:grid-page`,
+  `dx:grid-group-change {property}`, `dx:grid-row-update {original,
+  updated}`, `dx:grid-row-create {row}`, `dx:grid-row-delete {row}`
   granular events.
 - Reference markup `data-grid.html`/`data-grid.css`.
 
@@ -196,14 +203,14 @@ page) and the OData string helpers give consumers a server path via
 | Area | react | htmx |
 |---|---|---|
 | column model: dotted paths, format, align, template | DataGrid + grid tests | behavior init/populate |
-| sorting: single/multi cycle, aria-sort, sort index | grid tests | `dt:grid-sort` + th classes |
-| filtering: per-column, default ops, pipeline reuse, case sensitivity | grid tests | `dt:grid-filter` + hidden payload |
+| sorting: single/multi cycle, aria-sort, sort index | grid tests | `dx:grid-sort` + th classes |
+| filtering: per-column, default ops, pipeline reuse, case sensitivity | grid tests | `dx:grid-filter` + hidden payload |
 | paging: pageSize options, clamp, summary, pager positions | Pager tests | pager clicks + summary text |
-| selection: single/multiple, aria-selected, interactive-target guard | DataGrid tests | `dt:grid-select` + aria-selected |
-| column picker: toggle visibility, visible=false initial, picker text | DataGrid tests | `dt:grid-column-pick` + panel render |
+| selection: single/multiple, aria-selected, interactive-target guard | DataGrid tests | `dx:grid-select` + aria-selected |
+| column picker: toggle visibility, visible=false initial, picker text | DataGrid tests | `dx:grid-column-pick` + panel render |
 | resize: drag to colgroup width, min clamp | DataGrid tests | handle mousedown/mousemove |
-| reorder: drag/drop order change | DataGrid tests | dragstart/drop + `dt:grid-column-reorder` |
-| grouping: panel drop, group rows, collapse/expand, clear | DataGrid tests | `dt:grid-group-change` + aria-expanded |
-| inline editing: edit/save/cancel, create, delete | DataGrid tests | `dt:grid-row-update`/`-create`/`-delete` |
+| reorder: drag/drop order change | DataGrid tests | dragstart/drop + `dx:grid-column-reorder` |
+| grouping: panel drop, group rows, collapse/expand, clear | DataGrid tests | `dx:grid-group-change` + aria-expanded |
+| inline editing: edit/save/cancel, create, delete | DataGrid tests | `dx:grid-row-update`/`-create`/`-delete` |
 | frozen: sticky offsets stacking | DataGrid tests | th/td sticky + left offsets |
 | empty message, loading overlay, aria roles | DataGrid tests | markup assertions |

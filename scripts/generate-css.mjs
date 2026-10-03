@@ -7,9 +7,14 @@
  *   node scripts/generate-css.mjs themes/name  # one theme
  *
  * Output:
- *   themes/<name>/tokens.css                   canonical generated file
+ *   themes/<name>/tokens.css                   canonical generated file (--dx-)
  *   + one copy per frameworks registry entry
  *     (frameworks/<name>/uikit.yml -> tokens.sync)
+ *
+ * Prefix: themes are canonically --dx-. Each registry may declare
+ * tokens.prefix ("dx" | "dt") to receive a converted copy; the default is
+ * "dt" so legacy submodule pins keep receiving byte-identical output until
+ * they are repointed (frameworks/<name>/uikit.yml, committed with the pin).
  */
 
 import { readFile, writeFile, mkdir, readdir } from "node:fs/promises";
@@ -44,12 +49,23 @@ async function frameworkSyncTargets() {
       continue;
     }
     const sync = registry?.tokens?.sync;
+    if (sync == null) {
+      // react: tokens.css is hand-maintained after the monorepo
+      // extraction (see its file header) — not a sync target.
+      continue;
+    }
     if (typeof sync !== "string" || !sync) {
       throw new Error(
-        `${relative(ROOT, registryPath)}: missing tokens.sync target`,
+        `${relative(ROOT, registryPath)}: invalid tokens.sync target`,
       );
     }
-    targets.push(join(dir, sync));
+    const prefix = registry?.tokens?.prefix ?? "dt";
+    if (prefix !== "dx" && prefix !== "dt") {
+      throw new Error(
+        `${relative(ROOT, registryPath)}: tokens.prefix must be "dx" or "dt"`,
+      );
+    }
+    targets.push({ path: join(dir, sync), prefix });
   }
   return targets;
 }
@@ -81,7 +97,7 @@ function header(themeName) {
   ].join("\n");
 }
 
-function render(themeName, schema, values) {
+function render(themeName, schema, values, prefix = "dx") {
   const lines = [header(themeName)];
   const tierOrder = Object.keys(schema.tiers);
   for (const mode of ["light", "dark"]) {
@@ -94,7 +110,7 @@ function render(themeName, schema, values) {
       if (modeValues.length === 0) continue;
       lines.push(`  /* ${tier} */`);
       for (const [token, value] of modeValues) {
-        lines.push(`  --dt-${tier}-${token}: ${parseValue(value)[mode]};`);
+        lines.push(`  --${prefix}-${tier}-${token}: ${parseValue(value)[mode]};`);
       }
     }
     lines.push("}", "");
@@ -122,15 +138,17 @@ async function main() {
       readFile(tokensPath, "utf8").then(JSON.parse),
       readFile(join(ROOT, "specs/tokens.schema.json"), "utf8").then(JSON.parse),
     ]);
-    const css = render(themeName, schema, tokens.values);
+    const css = render(themeName, schema, tokens.values, "dx");
     await writeFile(join(themeDir, "tokens.css"), css);
     console.log(`wrote themes/${themeName}/tokens.css`);
     const syncs = arg ? themeName === basename(arg) : themeName === "default";
     if (syncs) {
-      for (const targetPath of targets) {
-        await mkdir(dirname(targetPath), { recursive: true });
-        await writeFile(targetPath, css);
-        console.log(`synced ${relative(ROOT, targetPath)}`);
+      for (const target of targets) {
+        const syncCss =
+          target.prefix === "dx" ? css : render(themeName, schema, tokens.values, target.prefix);
+        await mkdir(dirname(target.path), { recursive: true });
+        await writeFile(target.path, syncCss);
+        console.log(`synced ${relative(ROOT, target.path)} (--${target.prefix}-)`);
       }
     }
   }
