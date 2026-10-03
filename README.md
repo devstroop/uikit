@@ -31,10 +31,41 @@ preview/        per-stack playgrounds (preview/react/ showcases all themes)
   ships them as server-rendered HTML fragments + plain CSS + a 4 KB
   behaviors script (`@devstroop/uikit-htmx`). Both frameworks are
   validated against the same specs (token parity enforced).
+  `frameworks/blazor` pins the upstream Radzen Blazor depot as our
+  behavioral reference — `npm run radzen:parity` diffs each spec against
+  it (report-only).
 
 ## Repositories
 
 - GitHub: `devstroop/uikit` — canonical source and CI (`.github/workflows/`).
+
+## CI
+
+Two workflows: `CI` (`.github/workflows/ci.yml`) runs on PRs, pushes to
+`master`/`develop`, and a weekly cron on master; `Visual verification`
+(`.github/workflows/visual.yml`) runs on PRs only.
+
+| Job | What it gates |
+|---|---|
+| Tokens & specs | tokens:validate → tokens:generate in-sync → specs:validate → parity:validate (react+htmx) → radzen:parity (report-only, into the run summary) |
+| htmx framework | build, tests, dist/vendor sync checks |
+| Preview (react) | preview typecheck + production build |
+| React framework | lint, typecheck, tests, build, export list |
+| Visual verification | axe + WCAG contrast (6 themes × light/dark), Playwright artifacts uploaded |
+
+All jobs run Node 22.23.3 + npm 10.9.9 (pinned in the workflows), fail
+loudly (`✗` errors become `::error::` annotations), and run under
+`timeout-minutes` with per-branch concurrency cancellation. Protected
+branches require all jobs.
+
+Run the whole gate locally before pushing:
+
+```bash
+npm run ci:local   # tokens → generate-diff → specs → parity → radzen → preview typecheck+build
+```
+
+Local submodules not matching the recorded pins produce the same red:
+`git submodule status` (no `+`/`M` prefixes) and `npm run ci:local`.
 
 ## Development
 

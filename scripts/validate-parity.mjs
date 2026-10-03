@@ -47,6 +47,7 @@ import {
   dottedFromReactName,
   extractVarRefs,
 } from "./token-names.mjs";
+import "./ci-annotations.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const SPECS_DIR = join(ROOT, "specs/components");
