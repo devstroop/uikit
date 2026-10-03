@@ -49,9 +49,14 @@ async function frameworkSyncTargets() {
       continue;
     }
     const sync = registry?.tokens?.sync;
+    if (sync == null) {
+      // react: tokens.css is hand-maintained after the monorepo
+      // extraction (see its file header) — not a sync target.
+      continue;
+    }
     if (typeof sync !== "string" || !sync) {
       throw new Error(
-        `${relative(ROOT, registryPath)}: missing tokens.sync target`,
+        `${relative(ROOT, registryPath)}: invalid tokens.sync target`,
       );
     }
     const prefix = registry?.tokens?.prefix ?? "dt";
