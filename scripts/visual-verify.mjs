@@ -57,6 +57,36 @@ function waitFor(url, timeoutMs = 60_000) {
   });
 }
 
+// Deterministic theme-change wait: instead of guessing with fixed sleeps,
+// wait for the app's actual state to reflect the new theme. htmx enables
+// exactly one <link data-theme-link> (and must finish loading it); react
+// replaces the #active-theme <style> payload.
+async function waitThemeApplied(app, page, selectValue, prevStylePayload) {
+  if (app === "htmx") {
+    await page.waitForFunction(
+      (v) => {
+        const enabled = [...document.querySelectorAll("[data-theme-link]")].filter((l) => !l.disabled);
+        return enabled.length === 1 && enabled[0].dataset.themeLink === v && enabled[0].sheet !== null;
+      },
+      selectValue,
+      { timeout: 5_000 },
+    );
+    return;
+  }
+  await page.waitForFunction(
+    (prev) => {
+      const el = document.getElementById("active-theme");
+      return el !== null && el.textContent.length > 0 && el.textContent !== prev;
+    },
+    prevStylePayload,
+    { timeout: 5_000 },
+  );
+}
+
+async function waitModeApplied(page, mode) {
+  await page.waitForFunction((m) => document.documentElement.dataset.theme === m, mode, { timeout: 5_000 });
+}
+
 function waitForExit(child) {
   return new Promise((resolve, reject) => {
     child.once("exit", (code) => (code === 0 ? resolve() : reject(new Error(`exit ${code}`))));
@@ -223,16 +253,28 @@ page.on("pageerror", (err) => errors.push(`[pageerror] ${err.message}`));
 
 for (const app of ["react", "htmx"]) {
   const url = app === "react" ? `http://localhost:${REACT_PORT}/` : `http://localhost:${HTMX_PORT}/`;
-  await page.goto(url, { waitUntil: "networkidle" });
+  await page.goto(url, { waitUntil: "domcontentloaded" });
+  await page.waitForSelector("select");
+  let prevTheme = app === "react" ? "default" : await page.evaluate(() => {
+    const el = document.querySelector("[data-theme-link]:not([disabled])");
+    return el ? el.dataset.themeLink : "default";
+  });
   for (const theme of THEMES) {
     for (const mode of MODES) {
+      const themeChanged = theme !== prevTheme;
+      const prevThemeCss =
+        app === "react"
+          ? await page.evaluate(() => document.getElementById("active-theme")?.textContent ?? "")
+          : "";
       await page.selectOption("select", theme);
       const dark =
         app === "react"
           ? page.locator(".chrome-controls input[type='checkbox']")
           : page.locator(".dark-toggle input");
       mode === "dark" ? await dark.check() : await dark.uncheck();
-      await page.waitForTimeout(200);
+      if (themeChanged) await waitThemeApplied(app, page, theme, prevThemeCss);
+      prevTheme = theme;
+      await waitModeApplied(page, mode);
       const violations = app === "htmx" ? await auditContrast(page) : [];
       const tokenViolations = await auditTokens(page);
       const axeViolations = await auditAxe(page);
