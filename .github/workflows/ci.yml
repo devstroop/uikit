@@ -48,7 +48,7 @@ jobs:
       - name: Radzen reference parity (report-only)
         run: |
           set -o pipefail
-          npm run radzen:parity | tee -a "$GITHUB_STEP_SUMMARY"
+          node scripts/check-radzen-parity.mjs | tee -a "$GITHUB_STEP_SUMMARY"
 
   htmx:
     name: htmx framework

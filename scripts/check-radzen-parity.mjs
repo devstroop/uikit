@@ -113,7 +113,9 @@ async function main() {
   const specs = (await readdir(SPECS_DIR)).filter((f) => f.endsWith(".md"));
 
   let native = 0, covered = 0, tokensFullMatch = 0, apiFullMatch = 0;
-  const lines = [];
+  const matched = [];
+  const diverging = [];
+  const nativeFiles = [];
 
   for (const file of specs.sort()) {
     const markdown = await readFile(join(SPECS_DIR, file), "utf8");
@@ -125,7 +127,7 @@ async function main() {
     const razor = await razorAndParamsFor(candidateNorms, razorFiles, csFiles);
     const scss = await scssFor(candidateNorms, scssFiles);
     if (!razor && !scss) {
-      lines.push(`  · ${file} — no Radzen counterpart (uikit-native)`);
+      nativeFiles.push(file);
       native++;
       continue;
     }
@@ -142,7 +144,7 @@ async function main() {
       const radzenOnly = [...mappedDotted].filter((t) => !declared.has(t));
       const specUnreferenced = [...declared].filter((t) => !mappedDotted.has(t));
       if (radzenOnly.length === 0 && specUnreferenced.length === 0) tokensFullMatch++;
-      if (radzenOnly.length) problems.push(`    radzen uses but spec lacks: ${radzenOnly.join(", ")}`);
+      if (radzenOnly.length) problems.push(`Radzen uses but the spec lacks: ${radzenOnly.map((t) => `\`${t}\``).join(", ")}`);
       if (specUnreferenced.length) {
         const byTier = {};
         for (const t of specUnreferenced) {
@@ -150,9 +152,9 @@ async function main() {
           byTier[tier] = (byTier[tier] ?? 0) + 1;
         }
         const summary = Object.entries(byTier).map(([k, v]) => `${k}: ${v}`).join(", ");
-        problems.push(`    spec tokens with no rz equivalent: ${specUnreferenced.length} (${summary})`);
+        problems.push(`Spec tokens without an rz equivalent: ${specUnreferenced.length} (${summary})`);
       }
-      if (unmapped.length) problems.push(`    ${unmapped.length} component-scoped/unmappable --rz refs (e.g. ${unmapped[0]})`);
+      if (unmapped.length) problems.push(`${unmapped.length} component-scoped/unmappable \`--rz\` refs (e.g. \`${unmapped[0]}\`)`);
     }
 
     // --- api ---
@@ -164,25 +166,42 @@ async function main() {
       const radzenOnly = [...params].filter((p) => !apiProps.has(p) && ![...apiProps].some((s) => norm(s) === norm(p)));
       const specOnly = [...apiProps].filter((p) => !normProps.has(norm(p)));
       if (radzenOnly.length === 0 && specOnly.length === 0) apiFullMatch++;
-      if (radzenOnly.length) problems.push(`    Radzen-only props (porting candidates): ${radzenOnly.join(", ")}`);
-      if (specOnly.length) problems.push(`    spec-only props (intended or missing): ${specOnly.join(", ")}`);
+      if (radzenOnly.length) problems.push(`Radzen-only props (porting candidates): ${radzenOnly.map((t) => `\`${t}\``).join(", ")}`);
+      if (specOnly.length) problems.push(`Spec-only props (intended or missing): ${specOnly.map((t) => `\`${t}\``).join(", ")}`);
     } else {
-      problems.push("    no .razor.cs parameter source found");
+      problems.push("No `.razor.cs` parameter source found");
     }
 
-    if (problems.length === 0) {
-      lines.push(`  ✓ ${file} — tokens and API match`);
-    } else {
-      lines.push(`  ! ${file} — divergence report:`);
-      lines.push(...problems);
-    }
+    if (problems.length === 0) matched.push(file);
+    else diverging.push({ file, problems });
   }
 
-  console.log(`radzen-parity report (frameworks/blazor @ ${await gitSha()}):`);
-  console.log(`  specs checked: ${covered + native}, covered: ${covered}, uikit-native: ${native}`);
-  console.log(`  full token match: ${tokensFullMatch}, full API match: ${apiFullMatch}\n`);
-  console.log(lines.join("\n"));
-  console.log("\n(report-only — exit 0)");
+  const out = [];
+  out.push("## Radzen parity report");
+  out.push("");
+  out.push(`frameworks/blazor @ \`${await gitSha()}\` · report-only (exit 0 on findings; exit 1 on crash)`);
+  out.push("");
+  out.push("| Implemented | Covered by Radzen | Uikit-native | Full token match | Full API match |");
+  out.push("|---|---|---|---|---|");
+  out.push(`| ${covered + native} | ${covered} | ${native} | ${tokensFullMatch} | ${apiFullMatch} |`);
+  out.push("");
+  out.push(`### Diverging specs (${diverging.length})`);
+  out.push("");
+  for (const { file, problems } of diverging) {
+    out.push(`#### \`${file}\``);
+    out.push("");
+    for (const problem of problems) out.push(`- ${problem}`);
+    out.push("");
+  }
+  out.push(`### Token + API match (${matched.length})`);
+  out.push("");
+  out.push(matched.length ? matched.map((f) => `\`${f}\``).join(", ") : "_none yet_");
+  out.push("");
+  out.push(`### Uikit-native, no Radzen counterpart (${nativeFiles.length})`);
+  out.push("");
+  out.push(nativeFiles.map((f) => `\`${f}\``).join(", ") || "_none_");
+  out.push("");
+  console.log(out.join("\n"));
 }
 
 async function gitSha() {
