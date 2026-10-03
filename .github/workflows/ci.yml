@@ -106,7 +106,9 @@ jobs:
         working-directory: frameworks/react
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-      - run: git submodule update --init frameworks/react
+      # The Utilities parity test cross-checks frameworks/htmx's
+      # utilities.css — both submodules are a real requirement, not optional.
+      - run: git submodule update --init frameworks/react frameworks/htmx
         working-directory: ${{ github.workspace }}
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:

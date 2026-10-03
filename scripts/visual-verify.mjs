@@ -87,6 +87,39 @@ async function waitModeApplied(page, mode) {
   await page.waitForFunction((m) => document.documentElement.dataset.theme === m, mode, { timeout: 5_000 });
 }
 
+// Hard proof that the theme+mode tokens actually reached the page: poll
+// the root element's computed --dt-color-bg against the value that is
+// expected for the *selected* (theme, mode) pair from the source CSS.
+// This fixes the race that let audits run against a half-applied theme —
+// the dt-color- text values in the old audits sampled the previous
+// theme's cascade.
+function expectedVarFor(theme, mode, varName) {
+  const css = readFileSync(join(ROOT, "themes", theme, "tokens.css"), "utf8");
+  let block = css;
+  if (mode === "dark") {
+    const m = css.match(/\[data-theme="dark"\]\s*\{([\s\S]*?)\}/);
+    block = m ? m[1] : css;
+  } else {
+    const m = css.match(/:root\s*\{([\s\S]*?)\}/);
+    block = m ? m[1] : css;
+  }
+  for (const line of block.split("\n")) {
+    const t = line.trim();
+    if (t.startsWith(`${varName}:`)) return t.slice(varName.length + 1).replace(/;$/, "").trim();
+  }
+  return null;
+}
+
+async function waitTokenState(page, theme, mode) {
+  const expected = expectedVarFor(theme, mode, "--dt-color-bg");
+  if (!expected) return;
+  await page.waitForFunction(
+    (v) => getComputedStyle(document.documentElement).getPropertyValue("--dt-color-bg").trim() === v,
+    expected,
+    { timeout: 5_000 },
+  );
+}
+
 function waitForExit(child) {
   return new Promise((resolve, reject) => {
     child.once("exit", (code) => (code === 0 ? resolve() : reject(new Error(`exit ${code}`))));
@@ -243,7 +276,7 @@ async function auditAxe(page) {
 }
 
 const errors = [];
-const browser = await chromium.launch();
+const browser = await chromium.launch({ args: ["--no-sandbox", "--disable-dev-shm-usage"] });
 const context = await browser.newContext();
 const page = await context.newPage({ viewport: { width: 1440, height: 900 } });
 page.on("console", (msg) => {
@@ -275,6 +308,7 @@ for (const app of ["react", "htmx"]) {
       if (themeChanged) await waitThemeApplied(app, page, theme, prevThemeCss);
       prevTheme = theme;
       await waitModeApplied(page, mode);
+      await waitTokenState(page, theme, mode);
       const violations = app === "htmx" ? await auditContrast(page) : [];
       const tokenViolations = await auditTokens(page);
       const axeViolations = await auditAxe(page);
