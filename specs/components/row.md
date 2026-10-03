@@ -42,7 +42,7 @@ All other `HTMLAttributes<HTMLDivElement>` are spread onto the `<div>`.
   `end`, `baseline`, `justify-between`, `justify-around`, `justify-evenly`,
   `no-wrap`).
 - Gap modifiers (htmx): `dx-row--gap-xs` … `dx-row--gap-xl` map to the
-  `--dx-space-1..5` token scale (4, 8, 12, 16, 24 px); react `gap` takes the
+  `--dx-space-1..5` token scale (4, 8, 12, 16, 20 px); react `gap` takes the
   same `xs`–`xl` tiers (class-based) plus numbers (px) and arbitrary CSS
   length strings; Radzen parity is a CSS-length gap on the row.
 - Works with plain content as well as `Column` children; `Column` width math

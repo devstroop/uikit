@@ -38,6 +38,30 @@ that works on both surfaces), not as an omission.
 | `z` | `tooltip`, `popover`, `modal`, `toast` | integer | Layer order (ascending; `toast` highest) |
 | `control` | `height` | length | Default control height |
 
+## Spacing ownership
+
+Who supplies spacing, in order — mirrors Radzen's contract (`--rz-gap`
+default, composite padding, primitive zero):
+
+1. **Primitives** (button, input, select, textarea, checkbox, switch,
+   badge, label) ship **zero outer margin** — padding and internal gaps
+   only; they never create layout spacing.
+2. **Layout containers** own spacing via `gap`: `Stack` and `Row` default
+   to `space.4` (16px) at the CSS level, so bare containers space
+   themselves; tiers override via `--gap-*`/`gap` props. No `gap`
+   utilities exist (see utilities.md) — gap lives on the components.
+3. **Composites** (card, panel, tabs, fieldset, …) own **internal
+   padding** only; outer margin is the exception, not the rule (only
+   Alert ships one: `0 0 space.3`, see alert.md).
+4. **Form** owns field→field rhythm: `.dx-form` is a flex column with
+   `gap: space.3` (12px); `Field`'s internal `space.1` (4px) covers
+   label↔control only.
+5. **Typography** owns its box: text/heading elements reset
+   `margin: 0` (UA heading/paragraph margins never leak) — spacing
+   around text is the parent's job (layout gap or `dx-m-*`).
+6. **Page rhythm** comes from the `.dx-m-*`/`.dx-p-*` utilities (Radzen
+   `rz-pt-8`/`rz-mb-8` pattern), always with their token scale.
+
 ## Dark mode
 
 The dark scheme is activated by `[data-theme="dark"]` on any ancestor (typically

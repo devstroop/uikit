@@ -88,7 +88,9 @@ accepts only the props above).
   `aria-hidden` because the `role="alert"` text carries the message.
 - The alert carries `margin: 0 0 space.3` (theme spacing) so stacked alerts
   and surrounding content are separated; internal padding is `space.3` with
-  `space.2` between icon/content.
+  `space.2` between icon/content. Bottom-only is an intentional divergence
+  from Radzen (`margin: 1rem 0`, size-scaled): a top margin would stack
+  additively with a parent layout gap, double-spacing the banner.
 - `size` scales the whole banner through root-level custom properties
   (`--alert-pad`, `--alert-gap`, `--alert-radius`, `--alert-title-size`,
   `--alert-body-size`, `--alert-dismiss-size`, `--alert-dismiss-font`):

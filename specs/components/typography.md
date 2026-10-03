@@ -63,6 +63,13 @@ element (`id`, `aria-*`, `className`, ...). The component is `forwardRef`d.
   tracking, `font.weight-medium`.
 - All tiers set `font-family: var(--dx-font-sans)` — the type scale is
   font-face independent but the stack is theme-specific.
+- Margin policy: every tier **owns its box** — `margin: 0`, so UA
+  `h1`–`h6`/`p` margins never leak. Spacing around text is the parent's
+  job (layout `gap` or `dx-m-*` utilities), never the text element's.
+- htmx markup presets: `.dx-h1`…`.dx-h6` apply the standard heading ramp
+  (h1/h2 = `font.display-5`/`display-6` bold, h3/h4 = `font.size-xl`/`size-lg`
+  bold, h5/h6 = `font.size-md` medium) with `margin: 0`; `.dx-text-muted`
+  applies `color.text-muted` standalone (composes with any element).
 
 ## Keyboard
 

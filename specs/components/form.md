@@ -7,6 +7,7 @@ frameworks:
   htmx: v0.2.0
 tokens:
   - "font.sans"
+  - "space.3"
 a11y:
   - "Renders a semantic <form> element — native submit semantics, labels, and autofill apply without framework intervention."
   - "When action/method are set the form performs a native browser submit (SPA events are not fired); this is the no-JS fallback."
@@ -38,6 +39,12 @@ validation gate, firing `onSubmit`/`onInvalidSubmit`).
 
 ## Behavior
 
+- Layout: `display: flex; flex-direction: column; gap: var(--dx-space-3)`
+  — the form owns vertical rhythm between stacked fields, buttons, and
+  helper text (12px, nearest token to Radzen FormField's `0.625rem`
+  internal top margin). `Field`'s internal `space.1` covers label↔control
+  only, so the two never double-stack. Pair with `dx-field`, `dx-row`,
+  `dx-column` for everything the form doesn't layout itself.
 - `registerField` keeps a `validate: () => string[]` descriptor per name;
   empty list = valid. Validators come from the built-in set (validators
   spec) or a custom function.
