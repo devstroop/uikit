@@ -10,19 +10,33 @@ on:
       - features
       - chores
       - docs
+  schedule:
+    # Weekly (Mon 06:17 UTC): date/calendar-dependent test rots and pin
+    # drift surface without waiting for a PR, and the visual/API gates get
+    # a weekly honest run on master too.
+    - cron: "17 6 * * 1"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   tokens:
     name: Tokens & specs
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           submodules: recursive
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
-          node-version: 22
+          node-version: '22.23.3'
           cache: npm
+      - run: npm i -g npm@10.9.9
       - run: npm ci
       - run: npm run tokens:validate
       - name: Generated CSS is in sync
@@ -31,22 +45,29 @@ jobs:
           git diff --exit-code
       - run: npm run specs:validate
       - run: npm run parity:validate
+      - name: Radzen reference parity (report-only)
+        run: |
+          set -o pipefail
+          node scripts/check-radzen-parity.mjs | tee -a "$GITHUB_STEP_SUMMARY"
 
   htmx:
     name: htmx framework
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     defaults:
       run:
         working-directory: frameworks/htmx
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - run: git submodule update --init frameworks/htmx
+        working-directory: ${{ github.workspace }}
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
-          submodules: recursive
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
+          node-version: '22.23.3'
           cache: npm
           cache-dependency-path: frameworks/htmx/package-lock.json
+      - run: npm i -g npm@10.9.9
+        working-directory: ${{ github.workspace }}
       - run: npm ci
       - run: npm run build
       - run: npm test
@@ -62,14 +83,16 @@ jobs:
   preview:
     name: Preview (react)
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - run: git submodule update --init frameworks/react
+        working-directory: ${{ github.workspace }}
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
-          submodules: recursive
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
+          node-version: '22.23.3'
           cache: npm
+      - run: npm i -g npm@10.9.9
       - run: npm ci
       - run: npm run preview:typecheck
       - run: npm run preview:build
@@ -77,18 +100,23 @@ jobs:
   react:
     name: React framework
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     defaults:
       run:
         working-directory: frameworks/react
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      # The Utilities parity test cross-checks frameworks/htmx's
+      # utilities.css — both submodules are a real requirement, not optional.
+      - run: git submodule update --init frameworks/react frameworks/htmx
+        working-directory: ${{ github.workspace }}
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
-          submodules: recursive
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
+          node-version: '22.23.3'
           cache: npm
           cache-dependency-path: frameworks/react/package-lock.json
+      - run: npm i -g npm@10.9.9
+        working-directory: ${{ github.workspace }}
       - run: npm ci
       - run: npm run lint
       - run: npm run typecheck

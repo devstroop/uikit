@@ -11,7 +11,9 @@
     "parity:validate": "node scripts/validate-parity.mjs",
     "preview": "vite preview/react",
     "preview:build": "vite build preview/react",
-    "preview:typecheck": "tsc -p preview/react/tsconfig.json"
+    "preview:typecheck": "tsc -p preview/react/tsconfig.json",
+    "radzen:parity": "node scripts/check-radzen-parity.mjs",
+    "ci:local": "npm run tokens:validate && npm run tokens:generate && git diff --exit-code && npm run specs:validate && npm run parity:validate && npm run radzen:parity && npm run preview:typecheck && npm run preview:build"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",
@@ -23,5 +25,9 @@
     "typescript": "^5.9.3",
     "vite": "^7.3.6",
     "yaml": "^2.8.0"
+  },
+  "engines": {
+    "node": ">=22 <23",
+    "npm": ">=10 <11"
   }
 }

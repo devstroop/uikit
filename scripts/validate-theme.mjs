@@ -11,6 +11,7 @@
  * Exit 1 on any violation.
  */
 
+import "./ci-annotations.mjs";
 import { readFile, readdir } from "node:fs/promises";
 import { readFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
