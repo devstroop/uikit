@@ -3,8 +3,8 @@
  * Audit every color-bearing declaration in all component stylesheets
  * (htmx + react) against every theme, light + dark.
  *
- * For each rule: resolves var(--dt-*) references and color-mix() against
- * the theme values, then verifies:
+ * For each rule: resolves var(--dt-*)/var(--dx-*) references and color-mix()
+ * against the theme values, then verifies:
  *   fg    (color / fill / stroke)    vs background >= 4.5
  *   border / outline                 vs background >= 3.0
  *   alpha < 1 backgrounds are composited over both `bg` and `surface`
@@ -106,7 +106,7 @@ function colorMixResolve(value, themeColors, mode) {
 function resolveColor(value, themeColors, mode) {
   value = value.trim();
   if (value === "currentColor") return null;
-  const m = value.match(/^var\(--dt-(.+?)\)$/);
+  const m = value.match(/^var\(--d[tx]-(.+?)\)$/);
   if (m) {
     const token = themeColors[m[1].replace(/^color-/, "")];
     if (!token) return null;
@@ -157,7 +157,7 @@ function auditFile(file, rel, theme, mode) {
 
   const containerBase = {};
   for (const c of CONTAINERS) {
-    const base = resolveColor(`var(--dt-${c})`, colors, mode);
+    const base = resolveColor(`var(--dx-${c})`, colors, mode);
     containerBase[c] = { rgb: base, alpha: base.a };
   }
 
@@ -213,10 +213,10 @@ function auditFile(file, rel, theme, mode) {
         if (pair.kind === "border/bg") {
           const same = pair.a.r === pair.b.r && pair.a.g === pair.b.g && pair.a.b === pair.b.b;
           const tintBg = /color-mix/.test(bgRaw || "");
-          const toneBorder = /var\(--dt-color-(primary|success|warning|danger)\)/.test(
+          const toneBorder = /var\(--d[tx]-color-(primary|success|warning|danger)\)/.test(
             borderRaw || "",
           );
-          const decorBorder = /var\(--dt-color-border\)/.test(borderRaw || "");
+          const decorBorder = /var\(--d[tx]-color-border\)/.test(borderRaw || "");
           if (same) continue;
           if (tintBg && toneBorder) status = "INFO";
           if (!tintBg && decorBorder) status = "INFO";

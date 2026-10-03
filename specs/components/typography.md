@@ -27,8 +27,8 @@ tokens:
 a11y:
   - "Display variants map to real heading levels h1-h6 so the document outline is preserved."
   - "Body copy renders as a semantic <p>; caption/overline render as inline <span>s."
-  - "Caption uses --dt-color-text-muted, which the theme validator holds >= 4.5:1 against bg and surface."
-  - "All tiers set font-family from --dt-font-sans so headings never fall back to the browser serif default."
+  - "Caption uses --dx-color-text-muted, which the theme validator holds >= 4.5:1 against bg and surface."
+  - "All tiers set font-family from --dx-font-sans so headings never fall back to the browser serif default."
   - "The display scale is fluid (clamp() with vw) — no fixed sizes that break at narrow viewports."
 ---
 
@@ -61,7 +61,7 @@ element (`id`, `aria-*`, `className`, ...). The component is `forwardRef`d.
 - `caption` = `font.size-xs` at 1.429, muted via `color.text-muted`.
 - `overline` = `font.size-xs`, uppercase, `letterspacing.overline` (0.08em)
   tracking, `font.weight-medium`.
-- All tiers set `font-family: var(--dt-font-sans)` — the type scale is
+- All tiers set `font-family: var(--dx-font-sans)` — the type scale is
   font-face independent but the stack is theme-specific.
 
 ## Keyboard

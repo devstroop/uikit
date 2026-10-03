@@ -5,7 +5,11 @@ category: data
 frameworks:
   react: v0.11.0
   htmx: v0.9.0
-tokens: []
+tokens:
+  - "color.border"
+  - "color.primary"
+  - "color.text"
+  - "color.text-muted"
 a11y:
   - "The list container carries an aria-label (react) or the markup provides its own label; item boundaries are structural (each item is a distinct child element)."
   - "The pager is a labelled navigation region: page buttons carry aria-current=page, ellipsis spans are aria-hidden, and the page summary is announced via a live region."
@@ -45,31 +49,31 @@ no sorting, filtering, or selection.
   vertically.
 - Empty: `data.length === 0` renders `emptyMessage` or `emptyTemplate`.
   Loading: `isLoading` renders `loadingTemplate`.
-- htmx: `data-dt-datalist` root with a `data-dt-datalist-items` container of
-  `data-dt-datalist-item` children and a `data-dt-datalist-pager` slot;
-  `data-dt-datalist-pagesize` / `-pagesize-options` / `-pagenumbers`;
-  `data-dt-datalist-wrap` switches to grid layout;
-  `data-dt-datalist-empty` message element.
+- htmx: `data-dx-datalist` root with a `data-dx-datalist-items` container of
+  `data-dx-datalist-item` children and a `data-dx-datalist-pager` slot;
+  `data-dx-datalist-pagesize` / `-pagesize-options` / `-pagenumbers`;
+  `data-dx-datalist-wrap` switches to grid layout;
+  `data-dx-datalist-empty` message element.
 
 ## Server-side (deferred)
 
 Radzen's `LoadData({ skip, top })` + `Count` round-trip is out of scope;
-consumers drive server pagination via the `dt:datalist-change` /
-`dt:datalist-page` events (htmx) or by slicing `data` themselves (react).
+consumers drive server pagination via the `dx:datalist-change` /
+`dx:datalist-page` events (htmx) or by slicing `data` themselves (react).
 
 ## Events
 
 - react: none emitted (controlled via props + `Pager` callbacks).
-- htmx: `dt:datalist-change` with `{ pageNumber, pageSize, pageCount,
-  total }`; `dt:datalist-page` with `{ pageNumber }` on page clicks.
+- htmx: `dx:datalist-change` with `{ pageNumber, pageSize, pageCount,
+  total }`; `dx:datalist-page` with `{ pageNumber }` on page clicks.
 
 ## Tests
 
 | Area | react | htmx |
 |---|---|---|
 | default page (pageSize) | DataList tests | visibility of first page items |
-| paging + page-change event | DataList tests | `dt:datalist-page` + item visibility |
+| paging + page-change event | DataList tests | `dx:datalist-page` + item visibility |
 | page-size change resets to page 1 | DataList tests | pager summary after select |
-| wrap vs stacked layout | DataList tests | `data-dt-datalist-wrap` class |
-| empty message / empty template | DataList tests | `data-dt-datalist-empty` unhidden |
+| wrap vs stacked layout | DataList tests | `data-dx-datalist-wrap` class |
+| empty message / empty template | DataList tests | `data-dx-datalist-empty` unhidden |
 | loading template | DataList tests | markup assertion |

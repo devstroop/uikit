@@ -28,7 +28,7 @@ optional wrap, gap, alignment, and justification.
 | `orientation` | `"horizontal"` \| `"vertical"` | `"vertical"` | Direction of the stack (`flex-direction`) |
 | `reverse` | `boolean` | `false` | Reverse the stack order (row-reverse / column-reverse) |
 | `wrap` | `boolean` \| `"nowrap"` \| `"wrap"` \| `"wrap-reverse"` | `true` | Wrap mode (`flex-wrap`) |
-| `gap` | `xs` \| `sm` \| `md` \| `lg` \| `xl` \| `number` \| `string` | `"sm"` | Spacing between items; tiers map to `--dt-space-1..5`, numbers become `px`, other strings pass through |
+| `gap` | `xs` \| `sm` \| `md` \| `lg` \| `xl` \| `number` \| `string` | `"sm"` | Spacing between items; tiers map to `--dx-space-1..5`, numbers become `px`, other strings pass through |
 | `align` | `start` \| `center` \| `end` \| `stretch` \| `baseline` \| `normal` | `undefined` | Cross-axis alignment (`align-items`) |
 | `justify` | `start` \| `center` \| `end` \| `between` \| `around` \| `evenly` \| `normal` | `undefined` | Main-axis distribution (`justify-content`) |
 | `className` | `string` | `undefined` | Extra classes |
@@ -37,8 +37,8 @@ All other `HTMLAttributes<HTMLDivElement>` are spread onto the `<div>`.
 
 ## Behavior
 
-- DOM: `div[class~=dt-stack]` with `display: flex; flex-direction: column`.
-- Orientation/reverse compile to `dt-stack--row`, `--row-reverse`,
+- DOM: `div[class~=dx-stack]` with `display: flex; flex-direction: column`.
+- Orientation/reverse compile to `dx-stack--row`, `--row-reverse`,
   `--column`, `--column-reverse`; wrap adds `--nowrap` / `--wrap-reverse`;
   gap tiers map to `--gap-xs` … `--gap-xl` (4, 8, 12, 16, 24 px).
 - Align/justify map to `--align-*` / `--justify-*` modifier classes

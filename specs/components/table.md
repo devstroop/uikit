@@ -53,10 +53,10 @@ Tabular data display with a bordered, rounded wrapper, column alignment control,
 - Cell borders removed on the last row; body cells render `text` color on the default background.
 - `gridLines`: `default`/`both` render horizontal row separators + vertical cell separators;
   `none` removes all internal borders; `horizontal` keeps row lines only; `vertical` keeps
-  column lines only. htmx: `dt-table--grid-none` / `-grid-horizontal` / `-grid-vertical` on the wrapper.
+  column lines only. htmx: `dx-table--grid-none` / `-grid-horizontal` / `-grid-vertical` on the wrapper.
 - `allowAlternatingRows` stripes even body rows (`surface-hover`); disabling adds no visual
-  alternation. htmx: alternating is default, disabled with `dt-table--no-alternating`.
-- `caption` renders inside the `<table>` with `caption-side: top` styling (htmx `dt-table-caption`).
+  alternation. htmx: alternating is default, disabled with `dx-table--no-alternating`.
+- `caption` renders inside the `<table>` with `caption-side: top` styling (htmx `dx-table-caption`).
 - Alternating stripes are never the sole conveyer of meaning (content remains in cells).
 
 ## Keyboard

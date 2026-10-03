@@ -1,14 +1,16 @@
 {
   "name": "@devstroop/uikit",
   "private": true,
-  "description": "Framework-agnostic UI kit for Devstroop app front-ends — spec + token tooling.",
+  "description": "Framework-agnostic UI kit for Devstroop app front-ends \u2014 spec + token tooling.",
   "type": "module",
   "license": "MIT",
   "scripts": {
+    "names:test": "node scripts/token-names.mjs",
     "tokens:validate": "node scripts/validate-theme.mjs",
     "tokens:generate": "node scripts/generate-css.mjs",
     "specs:validate": "node scripts/validate-specs.mjs",
     "parity:validate": "node scripts/validate-parity.mjs",
+    "parity:react": "node scripts/check-react-parity.mjs",
     "preview": "vite preview/react",
     "preview:build": "vite build preview/react",
     "preview:typecheck": "tsc -p preview/react/tsconfig.json"

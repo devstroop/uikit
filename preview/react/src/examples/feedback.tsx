@@ -57,7 +57,7 @@ function AlertToastSection() {
           icon={<Icon name="x-circle" size={18} />}
           onDismiss={() => console.log("alert dismissed")}
         >
-          Uses --dt-color-danger-fg.
+          Uses --dx-color-danger-fg.
         </Alert>
         {(["xs", "sm", "md", "lg", "xl"] as const).map((size) => (
           <Alert key={size} size={size} tone="info" title={size} icon={<Icon name="info" size={16} />}>

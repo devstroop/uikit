@@ -30,7 +30,7 @@ a11y:
   - "Renders a native <input type=\"text\">, so label association and form semantics apply; the formatted value is plain text and is read by screen readers as typed."
   - "The mask is visible in the control itself (separators are literal characters), so no aria-live region is needed to announce formatting."
   - "aria-invalid is set to \"true\" when `invalid` is true (and omitted otherwise)."
-  - "Focus indicator: :focus-visible draws a 3px --dt-color-outline-primary ring plus primary border."
+  - "Focus indicator: :focus-visible draws a 3px --dx-color-outline-primary ring plus primary border."
   - "Text on surface >= 4.5:1 (color.text on color.surface); disabled state lowers opacity to 0.55."
 ---
 

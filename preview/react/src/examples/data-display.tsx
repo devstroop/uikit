@@ -32,7 +32,7 @@ function TableSection() {
       <Table
         columns={[
           { key: "name", header: "Name" },
-          { key: "role", header: "Role", render: (r) => <span style={{ color: "var(--dt-color-text-muted)" }}>{r.role}</span> },
+          { key: "role", header: "Role", render: (r) => <span style={{ color: "var(--dx-color-text-muted)" }}>{r.role}</span> },
           { key: "status", header: "Status", align: "center", render: (r) => <Badge tone={r.status === "active" ? "success" : "warning"} variant="solid">{r.status}</Badge> },
           { key: "actions", header: "Actions", align: "end", render: () => <Button variant="ghost" size="xs">…</Button> },
         ]}
@@ -113,7 +113,7 @@ function DataGridSection() {
         ariaLabel="People grid"
         onRowClick={(r) => console.log("row", r.name)}
       />
-      <p style={{ marginTop: "0.5rem", fontSize: "0.875rem", color: "var(--dt-color-fg-muted)" }}>
+      <p style={{ marginTop: "0.5rem", fontSize: "0.875rem", color: "var(--dx-color-text-muted)" }}>
         Selected: {selected.join(", ") || "none"} — group by drag onto the panel, inline-edit rows, add new rows.
       </p>
     </Section>
@@ -249,7 +249,7 @@ function IconSection() {
           <Icon name={n} />
         </span>
       ))}
-      <div className="dt-icon-row" style={{ display: "flex", gap: 8, alignItems: "center" }}>
+      <div className="dx-icon-row" style={{ display: "flex", gap: 8, alignItems: "center" }}>
         {(["xs", "sm", "md", "lg", "xl"] as const).map((s) => (
           <span key={s} title={s}>
             <Icon name="settings" size={s} />

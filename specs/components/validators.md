@@ -43,21 +43,21 @@ import { email, required } from "@devstroop/react-uikit";
 
 ## htmx
 
-Rules are attributes on `[data-dt-field]`; the `data-dt-form` behavior
+Rules are attributes on `[data-dx-field]`; the `data-dx-form` behavior
 evaluates them on submit:
 
 | Rule | Attribute | Value |
 |---|---|---|
-| required | `data-dt-required` | (present) |
-| email | `data-dt-email` | (present) |
-| pattern | `data-dt-pattern` | JS regexp source |
-| min | `data-dt-min` | number |
-| max | `data-dt-max` | number |
-| minlength | `data-dt-minlength` | number |
-| maxlength | `data-dt-maxlength` | number |
+| required | `data-dx-required` | (present) |
+| email | `data-dx-email` | (present) |
+| pattern | `data-dx-pattern` | JS regexp source |
+| min | `data-dx-min` | number |
+| max | `data-dx-max` | number |
+| minlength | `data-dx-minlength` | number |
+| maxlength | `data-dx-maxlength` | number |
 
-Messages: `data-dt-<rule>-message` (per rule), else
-`data-dt-error-message` (field-wide), else the default above. Native
+Messages: `data-dx-<rule>-message` (per rule), else
+`data-dx-error-message` (field-wide), else the default above. Native
 constraints on the same element (`required`, `min`, `max`, `minlength`,
 `maxlength`, `pattern`, `type="email"`, `type="number"`) are also
 respected through the browser's validity API (message = native
@@ -65,10 +65,10 @@ respected through the browser's validity API (message = native
 
 ## Behavior
 
-- Validation runs on submit, once, for every enabled `[data-dt-field]` /
+- Validation runs on submit, once, for every enabled `[data-dx-field]` /
   registered field. There is no keystroke validation (Radzen parity).
 - A failing field reports every message from its rules
-  (`onInvalidSubmit` errors map / `dt:invalid` detail `messages`).
+  (`onInvalidSubmit` errors map / `dx:invalid` detail `messages`).
 - Re-submit recomputes state: a fixed field clears its invalid state.
 
 ## Keyboard
@@ -84,10 +84,10 @@ None — validation never consumes keys or focus.
 | pattern | regexp match decides; empty passes |
 | min/max (number) | bounds enforced; non-numeric fails; empty passes |
 | minlength/maxlength | length bounds; empty passes |
-| messages (htmx) | `data-dt-<rule>-message` beats `data-dt-error-message` beats default |
+| messages (htmx) | `data-dx-<rule>-message` beats `data-dx-error-message` beats default |
 | native bridge (htmx) | native `required` blocks with `validationMessage` |
 | revalidation (htmx) | stale `aria-invalid` cleared when the value is fixed |
-| `dt:invalid` detail | per-field `messages` array present |
+| `dx:invalid` detail | per-field `messages` array present |
 | custom validator (react) | `(value, model)` receives the form model |
 
 Every framework implementation must pass an equivalent matrix (per

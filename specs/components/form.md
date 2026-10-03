@@ -54,29 +54,29 @@ validation gate, firing `onSubmit`/`onInvalidSubmit`).
 Reference markup (`lib/components/form/form.html`):
 
 ```html
-<form class="dt-form" data-dt-form action="/login" method="post">
-  <div class="dt-field">
-    <label class="dt-field-label" for="email">Email</label>
-    <input id="email" class="dt-input dt-input--md" type="email" name="email" data-dt-field />
+<form class="dx-form" data-dx-form action="/login" method="post">
+  <div class="dx-field">
+    <label class="dx-field-label" for="email">Email</label>
+    <input id="email" class="dx-input dx-input--md" type="email" name="email" data-dx-field />
   </div>
-  <button class="dt-button dt-button--primary" type="submit">Login</button>
+  <button class="dx-button dx-button--primary" type="submit">Login</button>
 </form>
 ```
 
-`data-dt-form` (behaviors.js) runs on submit:
+`data-dx-form` (behaviors.js) runs on submit:
 
-- Rules declared on `[data-dt-field]` elements are evaluated at submit
-  time (`data-dt-required`, `data-dt-email`, `data-dt-pattern`,
-  `data-dt-min`, `data-dt-max`, `data-dt-minlength`, `data-dt-maxlength` —
+- Rules declared on `[data-dx-field]` elements are evaluated at submit
+  time (`data-dx-required`, `data-dx-email`, `data-dx-pattern`,
+  `data-dx-min`, `data-dx-max`, `data-dx-minlength`, `data-dx-maxlength` —
   see the validators spec); native constraints (required/min/max/...)
   are respected via the validity API. Empty values pass every rule
   except required.
-- Failing fields get `aria-invalid="true"` + `data-dt-invalid` and block
-  the submit: `preventDefault()` + `dt:invalid` event with
+- Failing fields get `aria-invalid="true"` + `data-dx-invalid` and block
+  the submit: `preventDefault()` + `dx:invalid` event with
   `detail: { fields: [{ name, element, messages }] }`. Messages are also
-  written into the field's `[data-dt-field-error]` element (see the
+  written into the field's `[data-dx-field-error]` element (see the
   field spec) and its id is merged into `aria-describedby`.
-- All valid: `dt:submit` event, `detail: { form, data: FormData }`; the
+- All valid: `dx:submit` event, `detail: { form, data: FormData }`; the
   native submit proceeds (server round-trip or htmx attributes).
 - Editing a field after an invalid submit clears its invalid state;
   validity is re-evaluated on the next submit.
@@ -85,8 +85,8 @@ Events bubble for delegation:
 
 | Event | detail | When |
 |---|---|---|
-| `dt:submit` | `{ form, data: FormData }` | Valid submit, not blocked |
-| `dt:invalid` | `{ fields: [{ name, element, messages }] }` | Invalid fields blocked the submit |
+| `dx:submit` | `{ form, data: FormData }` | Valid submit, not blocked |
+| `dx:invalid` | `{ fields: [{ name, element, messages }] }` | Invalid fields blocked the submit |
 
 ## Keyboard
 
@@ -106,10 +106,10 @@ buttons activate with Enter/Space. The container adds no key handling.
 | `useFormField` reveals errors | errors appear only after an invalid submit, clear on change, re-appear on the next invalid submit |
 | `action` + `method` (react) | native attributes rendered; no SPA events fired |
 | `useFormContext` outside `<Form>` | throws |
-| Valid submit (htmx) | `dt:submit` dispatched with `FormData`; default not prevented |
-| Invalid field (htmx) | `dt:invalid` dispatched with the field's `name`; default prevented; `dt:submit` not dispatched |
-| Error element (htmx) | messages written into `[data-dt-field-error]`; error id merged into `aria-describedby` |
-| `data-dt-invalid` without aria | treated as invalid |
+| Valid submit (htmx) | `dx:submit` dispatched with `FormData`; default not prevented |
+| Invalid field (htmx) | `dx:invalid` dispatched with the field's `name`; default prevented; `dx:submit` not dispatched |
+| Error element (htmx) | messages written into `[data-dx-field-error]`; error id merged into `aria-describedby` |
+| `data-dx-invalid` without aria | treated as invalid |
 | Disabled invalid field (htmx) | skipped; submit proceeds |
 
 Every framework implementation must pass an equivalent matrix (per

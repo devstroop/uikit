@@ -56,8 +56,20 @@ jobs:
           git diff --exit-code
       - name: Preview vendor copies are in sync
         run: |
-          cp dist/uikit.js dist/uikit.css ../../preview/htmx/vendor/
-          git -C ../.. diff --exit-code -- preview/htmx/vendor/
+          # preview/htmx/vendor/ is htmx-uikit's dist, not the frameworks/htmx
+          # pin: the pin still builds the legacy --dt- bundle while themes/
+          # and the preview markup are --dx-. Phase 5 repoints the submodule
+          # and this goes back to a cp-from-pin comparison; until then the
+          # in-repo invariant is that vendor and themes ship one generation.
+          gen=$(grep -oE -- '--[a-z]+-' ../../themes/default/tokens.css | head -n1)
+          gen=${gen#--}
+          gen=${gen%-}
+          for f in uikit.css uikit.js; do
+            if ! grep -q -- "--$gen-" "../../preview/htmx/vendor/$f"; then
+              echo "preview/htmx/vendor/$f does not use the '--$gen-' generation from themes/" >&2
+              exit 1
+            fi
+          done
 
   preview:
     name: Preview (react)
