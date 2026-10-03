@@ -4,3 +4,6 @@
 [submodule "frameworks/htmx"]
 	path = frameworks/htmx
 	url = https://github.com/devstroop/htmx-uikit.git
+[submodule "frameworks/blazor"]
+	path = frameworks/blazor
+	url = https://github.com/radzenhq/radzen-blazor

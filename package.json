@@ -11,7 +11,8 @@
     "parity:validate": "node scripts/validate-parity.mjs",
     "preview": "vite preview/react",
     "preview:build": "vite build preview/react",
-    "preview:typecheck": "tsc -p preview/react/tsconfig.json"
+    "preview:typecheck": "tsc -p preview/react/tsconfig.json",
+    "radzen:parity": "node scripts/check-radzen-parity.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",
