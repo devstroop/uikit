@@ -141,3 +141,24 @@ Two rules keep the scale honest:
 No hardcoded values in framework code: if a component needs a value that is not
 expressible with this vocabulary, extend the schema first (all tiers are
 opt-in per theme, but the token list is the full vocabulary).
+
+## Theme distribution & consumption
+
+All themes emit `themes/<name>/tokens.css` (generated, do not edit). The generator (`scripts/generate-css.mjs:1`) reads `frameworks/*/uikit.yml:13` registry to find sync targets:
+
+- Only `themes/default/tokens.css` is vendored into each framework (`frameworks/react/lib/styles/tokens.css` via `uikit.yml:13`). Other themes are **not** vendored — consumers import them directly from the source (`uikit/themes/<name>/tokens.css`) or re-run the generator in their own build.
+- A consumer picks a theme by importing its tokens once, then the framework:
+
+```ts
+import "@devstroop/react-uikit/style.css";          // components
+import "uikit/themes/default/tokens.css";            // or fluent/github/material/...
+// or: import "@devstroop/react-uikit/lib/styles/tokens.css" // default vendored copy
+```
+
+- Dark parity: `[data-theme="dark"]` on `<html>` (or any ancestor) activates dark values. Only tokens with a `dark` variant are re-emitted there; the rest inherit from `:root`. Override any subset on `:root` or a scoped container:
+
+```css
+:root { --dt-color-primary: #7c3aed; --dt-radius-md: 6px; }
+```
+
+See `specs/tokens.schema.json:1` for the canonical tier list and `themes/default/tokens.json` for the reference palette.
