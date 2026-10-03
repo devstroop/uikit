@@ -309,6 +309,8 @@ for (const app of ["react", "htmx"]) {
       prevTheme = theme;
       await waitModeApplied(page, mode);
       await waitTokenState(page, theme, mode);
+      // Brief settle grace for web-font/showcase-sticky assets.
+      await page.waitForTimeout(120);
       const violations = app === "htmx" ? await auditContrast(page) : [];
       const tokenViolations = await auditTokens(page);
       const axeViolations = await auditAxe(page);
