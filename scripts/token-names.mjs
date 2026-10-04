@@ -98,6 +98,18 @@ export function parseToken(dotted) {
  */
 export const COMPONENT_DIR_ALIASES = { typography: "text" };
 
+/**
+ * Legacy flat spellings that alias canonical schema tokens. The monorepo
+ * renamed the flat-era error/warn-container fills to the schema's
+ * danger/warning hues; old pins and external CSS still use the legacy
+ * spelling, and both parity directions (missing AND extra) must treat the
+ * two as the same token.
+ */
+export const TOKEN_NAME_ALIASES = {
+  "error-container": "danger-container",
+  "warn-container": "warning-container",
+};
+
 /** PascalCase/camelCase/kebab name -> kebab-case. */
 export function kebabCase(name) {
   return name
@@ -193,6 +205,14 @@ export function reactCandidates(dotted) {
       out.push({ name: `on-${rest.slice(0, -3)}-color`, rule: "fg-on-color" });
     }
     out.push({ name: rest, rule: "bare-alias" });
+    // canonical token may carry legacy flat spellings (error-container →
+    // danger-container): react/htmx implementations predate the rename.
+    for (const [legacy, canonical] of Object.entries(TOKEN_NAME_ALIASES)) {
+      if (canonical === rest) {
+        out.push({ name: `${legacy}-color`, rule: "legacy-alias" });
+        out.push({ name: legacy, rule: "legacy-alias" });
+      }
+    }
     return out;
   }
   out.push({ name: `${tier}-${rest}`, rule: "identity" });
@@ -223,8 +243,11 @@ export function dottedFromReactName(flat) {
   if (flat.endsWith("-color")) {
     const inner = flat.slice(0, -"-color".length);
     if (inner.startsWith("on-")) return `color.${inner.slice(3)}-fg`;
-    // react spells the uikit `color.bg` token `background-color`.
-    return `color.${inner === "background" ? "bg" : inner}`;
+    // react spells the uikit `color.bg` token `background-color`, and the
+    // legacy flat-era names (error/warn-container) alias danger/warning.
+    const mapped =
+      inner === "background" ? "bg" : (TOKEN_NAME_ALIASES[inner] ?? inner);
+    return `color.${mapped}`;
   }
   const i = flat.indexOf("-");
   if (i > 0 && TIERS.includes(flat.slice(0, i))) {
@@ -346,6 +369,16 @@ function selfTest() {
     "tokenUsed matches tier-first flat suffix",
     tokenUsed("color.primary", { dotted: new Set(), flat: new Set(["color-primary"]) }),
     { name: "color-primary", rule: "tier-flat" },
+  );
+  eq(
+    "dottedFromReactName aliases legacy error-container spelling",
+    dottedFromReactName("error-container-color"),
+    "color.danger-container",
+  );
+  eq(
+    "tokenUsed accepts legacy warn-container spelling for warning-container",
+    tokenUsed("color.warning-container", { dotted: new Set(), flat: new Set(["warn-container"]) }),
+    { name: "warn-container", rule: "legacy-alias" },
   );
   eq(
     "tokenUsed ignores non-schema dotted",
