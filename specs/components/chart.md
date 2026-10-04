@@ -34,7 +34,7 @@ a11y:
 
 # Chart
 
-SVG chart core (RadzenChart parity subset): cartesian chart with category/value axes, line/area/bar/column series, tooltips, data labels, and SeriesClick.
+SVG chart core (RadzenChart parity subset): cartesian chart with category/value axes, line/area/bar/column/scatter/bubble/pie/donut/gauge/radar/funnel/heatmap series, stacking (incl. full-stacked percent mode), range bands, markers, tooltips, data labels, and SeriesClick.
 
 ## API
 
@@ -47,16 +47,20 @@ SVG chart core (RadzenChart parity subset): cartesian chart with category/value 
 | `categoryAxis` | `{ title?, gridlines? }` | — | Category axis config; gridlines default false. |
 | `showLegend` / `Legend` | `boolean` | `true` | Render legend under the plot. |
 | `tooltipVisible` | `boolean` | `true` | Enable hover tooltips. |
+| `stacked100Percent` | `boolean` | `false` | Normalize every stack group to percentages; axis ticks and value labels carry a `%` suffix. Unstacked series keep raw values. |
 | `onSeriesClick` / `SeriesClick` | `(args: SeriesClickArgs) => void` | `undefined` | Called when a bar/column/point is clicked. |
 | `ariaLabel` | `string` | `"Chart"` | aria-label on the figure. |
 | `className` | `string` | `undefined` | Extra class. |
 
-`ChartSeries` = `{ type: "line" \| "area" \| "bar" \| "column"; data: Record<string, unknown>[]; categoryProperty: string; valueProperty: string; title?: string; color?: string; labels?: { visible?: boolean } }`
+`ChartSeries` = `{ type: "line" \| "area" \| "bar" \| "column" \| "scatter" \| "bubble" \| "pie" \| "donut" \| "gauge" \| "radar" \| "funnel" \| "heatmap"; data: Record<string, unknown>[]; categoryProperty: string; valueProperty: string; title?: string; color?: string; stack?: string; labels?: { visible?: boolean }; minProperty?: string; maxProperty?: string; markers?: { shape?: "circle" \| "square" \| "diamond" \| "triangle"; size?: number; visible?: boolean }; dash?: string \| number[]; lineWidth?: number; innerRadius?: number; sizeProperty?: string; rowProperty?: string }`
 `SeriesClickArgs` = `{ seriesTitle: string; category: string; value: number; item: Record<string, unknown> }`
 
 ## Behavior
 
 - Series colors cycle through palette-0..5 tokens.
-- Scales are computed from data (nice min/max/step) unless overridden by valueAxis.
+- Scales are computed from data (nice min/max/step) unless overridden by valueAxis. Stacked series fit the scale by per-category totals.
+- Stacking: series sharing `stack` accumulate per category (line/area offsets, single-slot columns/bars). With `stacked100Percent`, each stack group normalizes to 0..100 (scale domain becomes percent; tooltips, labels, and SeriesClick values are the plotted percentages).
+- Range bands: series with `minProperty` + `maxProperty` render a min/max band (line/area polygon) or span bars/columns from min to max.
+- Markers: line/area/scatter/bubble points render configurable shapes (circle default, square/diamond/triangle; size override; `visible: false` keeps hit areas). Line/area strokes take `lineWidth` (default 2) and `dash`.
 - Tooltips: single shared tooltip div positioned near the hovered point showing `title: value`; hidden on leave.
-- htmx variant: `<div class="dx-chart" data-dx-chart data-dx-series='<json>' ...>`; behavior renders the same SVG client-side from the JSON attribute, wires tooltip + click dispatching dx:chart-point-click.
+- htmx variant: `<div class="dx-chart" data-dx-chart data-dx-series='<json>' ...>`; charts are server-rendered reference markup (see lib/components/chart/chart.html for stacked/full-stacked/range/marker examples); the behavior wires tooltip + click dispatching dx:chart-point-click and is series-type agnostic.
