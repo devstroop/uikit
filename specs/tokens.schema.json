@@ -69,6 +69,7 @@
         "text-success",
         "text-warning",
         "text-danger",
+        "text-info",
         "palette-0",
         "palette-1",
         "palette-2",
@@ -158,7 +159,7 @@
     },
     "motion": {
       "kind": "duration",
-      "description": "Full-cycle animation durations (shimmer, sweep) — distinct from the interaction `transition` durations.",
+      "description": "Full-cycle animation durations (shimmer, sweep) \u2014 distinct from the interaction `transition` durations.",
       "tokens": [
         "shimmer",
         "sweep"
@@ -259,6 +260,11 @@
     },
     {
       "fg": "text-danger",
+      "bg": "bg",
+      "min": 4.5
+    },
+    {
+      "fg": "text-info",
       "bg": "bg",
       "min": 4.5
     },

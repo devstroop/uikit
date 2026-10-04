@@ -11,6 +11,7 @@ tokens:
   - "color.text-success"
   - "color.text-primary"
   - "color.text-danger"
+  - "color.text-info"
   - "color.secondary-hover"
   - "color.secondary-fg"
   - "color.secondary"

@@ -35,6 +35,7 @@ tokens:
   - "color.text-success"
   - "color.text-warning"
   - "color.text-danger"
+  - "color.text-info"
 a11y:
   - "Renders a semantic <span>; no interactive role — must not be used for interactive controls."
   - "Text-on-fill contrast >= 4.5:1: primary-fg on primary (solid primary), text on surface (solid neutral/success/warning/danger) per schema contrastRules."
