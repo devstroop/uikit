@@ -86,6 +86,8 @@ tokens:
   - "color.border-warning-dark"
   - "color.border-danger-lighter"
   - "color.border-danger-dark"
+  - "color.danger-container"
+  - "color.warning-container"
 a11y:
   - "Utility classes are presentational only — they never change semantics, focus order, or keyboard behavior."
   - "Visually-hidden content must pair a utility (e.g. dx-display-none is not for a11y-only text); use dx-sr-only semantics in the component or markup instead."
