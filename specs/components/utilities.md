@@ -27,6 +27,7 @@ tokens:
   - "color.text-success"
   - "color.text-warning"
   - "color.text-danger"
+  - "color.text-info"
   - "color.border-primary"
   - "color.border-primary-light"
   - "color.border-primary-darker"

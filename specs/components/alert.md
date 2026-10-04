@@ -40,6 +40,7 @@ tokens:
   - "color.text-success"
   - "color.text-warning"
   - "color.text-danger"
+  - "color.text-info"
   - "color.primary-fg"
   - "color.danger-fg"
 a11y:

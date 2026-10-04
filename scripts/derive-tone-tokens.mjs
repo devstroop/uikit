@@ -145,7 +145,7 @@ for (const dir of dirs) {
       );
     }
 
-    for (const tone of ["primary", "success", "warning", "danger"]) {
+    for (const tone of ["primary", "success", "warning", "danger", "info"]) {
       const val = color[tone];
       const base = hexToRgb(typeof val === "string" ? val : val[mode]);
       const tintOf = (container) => ({
