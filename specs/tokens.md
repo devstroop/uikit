@@ -71,6 +71,40 @@ values to every color that changes meaning in dark mode (see `default` theme
 for the reference set: all surface/line/text roles, brand colors, shadows,
 `focus`, `backdrop`).
 
+
+## Distribution & consumption
+
+`themes/<name>/tokens.json` → `node scripts/generate-css.mjs` renders
+`themes/<name>/tokens.css` (`--dx-` prefix): light values under `:root`,
+dark values under `[data-theme="dark"]` on any ancestor. The generator then
+syncs one copy per framework that declares a `tokens.sync` target in
+`frameworks/<name>/uikit.yml` — with an optional `tokens.prefix` (`"dx"` |
+`"dt"`, default `"dt"` for legacy submodule pins; current pins declare `"dx"`).
+Only the **`default`** theme is vendored this way: each framework's
+`lib/styles/tokens.css` IS the default theme's generated output. Every other
+theme is consumed by importing `themes/<name>/tokens.css` from the uikit repo
+next to (after) the vendor default — see `themes/README.md`. htmx's
+`dist/uikit.css` carries only the flat-name alias layer + components, so it
+stays correct with any theme tokens.css paired against it.
+
+```css
+/* example: htmx consumer picking a non-default theme */
+@import url("themes/material-3/tokens.css");  /* canonical, :root + dark */
+@import url("dist/uikit.css");                 /* aliases + components */
+```
+
+Rules for consumers:
+
+1. Read the generated `--dx-*` custom properties directly. Do **not** ship
+   app-level alias bridges (`--se-` / `--blurple` style shims): they fall
+   outside the token contract and drift silently.
+2. Keep the two mode blocks in sync when overriding: an override block that
+   sets light values but omits the dark twin silently dark-inherits the
+   override (`default` is the reference implementation for pairing).
+3. Only tokens listed in `specs/tokens.schema.json` are in contract — react's
+   flat names not in the schema (and htmx's legacy `--se-` references) are
+   extensions, not overrides of the token model.
+
 ## Contrast policy (WCAG 2.1 AA)
 
 The validator enforces minimum contrast between text-on-background pairs.
