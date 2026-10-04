@@ -31,7 +31,7 @@ layout: body, column, footer, header, layout, row, stack
 navigation: breadcrumb, carousel, fab-menu, menu, pager, panel-menu, profile-menu, sidebar, splitter, steps, tabs, toc
 surfaces: accordion, card
 typography: typography
-utilities: theme-switcher, utilities, live-region
+utilities: theme-switcher, utilities, live-region, media-query
 
 ## Placement notes
 
