@@ -1,7 +1,7 @@
 {
   "name": "@devstroop/uikit",
   "private": true,
-  "description": "Framework-agnostic UI kit for Devstroop app front-ends \u2014 spec + token tooling.",
+  "description": "Framework-agnostic UI kit for Devstroop app front-ends — spec + token tooling.",
   "type": "module",
   "license": "MIT",
   "scripts": {
@@ -22,6 +22,7 @@
     "@types/node": "^26.6.4",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
+    "dompurify": "^3.4.16",
     "playwright": "^1.62.1",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
