@@ -242,6 +242,44 @@ for (const dir of dirs) {
         color[`${family}-${tone}-darker`][mode] = rgbToHex(walkFamily(start.dark));
       }
     }
+
+    // Flat-era tier ladder, border extras and containers (issue #196).
+    // Default ships these seeded from the legacy ladder; other themes
+    // derive them from the mode's own tone: light/lighter are the tone
+    // mixed 30%/45% toward white, dark/darker 15%/30% toward black (the
+    // recipe that reproduces the shipped default ladder to <1/255 mean
+    // error); border extras mix the derived border-{tone} base the same
+    // way (exact to <=0.5/255); containers are the tone at 85% toward bg
+    // (light) / 50% into black (dark).
+    const WHITE = { r: 255, g: 255, b: 255 };
+    const BLACK = { r: 0, g: 0, b: 0 };
+    for (const tone of ["primary", "secondary", "info", "success", "warning", "danger"]) {
+      const val = color[tone];
+      const base = hexToRgb(typeof val === "string" ? val : val[mode]);
+      const ladder = [
+        ["lighter", WHITE, 0.45],
+        ["light", WHITE, 0.3],
+        ["dark", BLACK, 0.15],
+        ["darker", BLACK, 0.3],
+      ];
+      for (const [step, target, pct] of ladder) {
+        color[`${tone}-${step}`] ??= {};
+        color[`${tone}-${step}`][mode] ??= rgbToHex(mixToward(base, target, pct));
+      }
+      const borderBase = hexToRgb(color[`border-${tone}`][mode]);
+      const borderSteps = [
+        ["lighter", WHITE, 0.45],
+        ["dark", BLACK, 0.15],
+      ];
+      for (const [step, target, pct] of borderSteps) {
+        color[`border-${tone}-${step}`] ??= {};
+        color[`border-${tone}-${step}`][mode] ??= rgbToHex(mixToward(borderBase, target, pct));
+      }
+      color[`${tone}-container`] ??= {};
+      color[`${tone}-container`][mode] ??= rgbToHex(
+        mode === "light" ? mixToward(base, bg, 0.85) : mixToward(base, BLACK, 0.5),
+      );
+    }
   }
 
   await writeFile(path, `${JSON.stringify(theme, null, 2)}\n`);
