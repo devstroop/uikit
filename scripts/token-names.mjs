@@ -263,8 +263,8 @@ export function extractVars(source) {
 export function extractVarRefs(source) {
   const dotted = new Set();
   const flat = new Set();
-  for (const m of source.matchAll(/var\(--dt-([a-z0-9-]+)/g)) dotted.add(varToToken(m[1]));
-  for (const m of source.matchAll(/var\(--dx-([a-z0-9-]+)/g)) flat.add(m[1]);
+  for (const m of source.matchAll(/var\(\s*--dt-([a-z0-9-]+)/g)) dotted.add(varToToken(m[1]));
+  for (const m of source.matchAll(/var\(\s*--dx-([a-z0-9-]+)/g)) flat.add(m[1]);
   return { dotted, flat };
 }
 
