@@ -41,6 +41,8 @@ import { fileURLToPath } from "node:url";
 import { parse as parseYaml } from "yaml";
 import {
   componentDirKeys,
+  componentDirCandidates,
+  kebabCase,
   dirKey,
   isKnownPinGap,
   tokenUsed,
@@ -88,7 +90,46 @@ async function implDir(technology, componentName) {
   const match = entries.find(
     (e) => e.isDirectory() && candidates.includes(dirKey(e.name)),
   );
-  return match ? join(base, match.name) : null;
+  if (match) return join(base, match.name);
+
+  // Utility-level specs (hooks, behavioral attributes) do not have a
+  // component directory. Resolve them against the hook module dir (react)
+  // or the htmx behaviors bundle, so parity enforces their declared/used
+  // token contract the same way. Neither contributes var() token usage,
+  // so a spec here declares token/st: [].
+  if (technology === "react") {
+    const hooksDir = join(FRAMEWORKS_DIR, "react", "lib", "hooks");
+    try {
+      const hookFiles = await readdir(hooksDir, { withFileTypes: true });
+      const hook = hookFiles.find(
+        (f) =>
+          f.isFile() &&
+          candidates.includes(dirKey(f.name.replace(/\.[^.]+$/, "").replace(/^use/, "")))
+      );
+      if (hook) return hooksDir;
+    } catch {
+      /* hooks dir may not exist in older pins */
+    }
+    return null;
+  }
+
+  if (technology === "htmx") {
+    const behaviors = join(FRAMEWORKS_DIR, "htmx", "lib", "behaviors.js");
+    try {
+      const src = await readFile(behaviors, "utf8");
+      // Match the canonical attribute spellings: the component dir
+      // candidate list ported into a `data-dx-<kebab>` attribute probe.
+      const reg = componentDirCandidates(componentName);
+      for (const name of reg) {
+        if (src.includes(`data-dx-${name}`)) {
+          return dirname(behaviors);
+        }
+      }
+    } catch {
+      /* no behaviors bundle in older pins */
+    }
+  }
+  return null;
 }
 
 async function usedTokens(dir) {
