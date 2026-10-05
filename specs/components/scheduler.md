@@ -1,17 +1,18 @@
 ---
 name: Scheduler
-status: proposed
+status: implemented
 category: data
 frameworks:
   react: v0.26.0
   htmx: v0.24.0
 tokens:
   - "color.surface"
+  - "color.primary-fg"
+  - "color.surface-hover"
   - "color.border"
   - "color.text"
   - "color.text-muted"
   - "color.primary"
-  - "color.primary-fg"
   - "color.outline-primary"
   - "radius.sm"
   - "radius.md"
@@ -20,7 +21,6 @@ tokens:
   - "font.weight-medium"
   - "space.1"
   - "space.2"
-  - "transition.fast"
 a11y:
   - "Root has role='grid' with aria-label and aria-multiselectable false; each time slot is role='gridcell' with aria-selected for the selected event."
   - "Events are <button> with aria-label from title + time, aria-pressed for selected, and aria-disabled for disabled events."
