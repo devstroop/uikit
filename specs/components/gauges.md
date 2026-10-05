@@ -9,7 +9,9 @@ tokens:
   - "color.border"
   - "color.primary"
   - "color.text"
+  - "color.text-muted"
   - "font.size-md"
+  - "font.size-sm"
   - "font.weight-bold"
   - "space.1"
 a11y:
@@ -38,6 +40,22 @@ default 200), `showValue` (default true), `formatValue`.
 <div class="dx-gauge" role="meter" aria-label="Speed" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">…</div>
 ```
 
+## LinearGauge
+
+Horizontal/vertical scale with ticks + labels, range bands, value fill +
+pointer, and a value label. `value`/`min`/`max` drive the fraction
+(clamped); `ticks: { count?, showLabels? }` (default 5 shown);
+`ranges: [{ from, to, color }]` render under the fill; `color` (default
+primary), `length` (default 280/220), `thickness` (default 20).
+
+```tsx
+<LinearGauge value={40} min={0} max={100} ranges={[{ from: 0, to: 50, color: "green" }]} />
+```
+
+```html
+<div class="dx-gauge" role="meter" aria-label="Load" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">…</div>
+```
+
 ## Tests
 
 | Scenario | Assertion |
@@ -46,6 +64,9 @@ default 200), `showValue` (default true), `formatValue`.
 | Partial arc (react) | value path differs from track; omitted at minimum; clamps above max |
 | Color stops (react) | stepped pick by fraction |
 | Label (react) | formatted text shown; hidden on demand |
+| Proportional fill (react) | fill width scales with value; vertical grows bottom-up |
+| Range bands (react) | band rects render under the fill |
+| Clamp (react) | fill capped at the track end above max |
 
 Every framework implementation must pass an equivalent matrix (per
 `docs/DEVELOPMENT_STRATEGY.md`).
