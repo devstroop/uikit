@@ -46,6 +46,31 @@ Horizontal/vertical scale with ticks + labels, range bands, value fill +
 pointer, and a value label. `value`/`min`/`max` drive the fraction
 (clamped); `ticks: { count?, showLabels? }` (default 5 shown);
 `ranges: [{ from, to, color }]` render under the fill; `color` (default
+primary), `length` (default 280/220), `thickness` (default 20). Vertical
+grows bottom-up.
+
+```tsx
+<LinearGauge value={40} min={0} max={100} ranges={[{ from: 0, to: 50, color: "green" }]} />
+```
+
+## RadialGauge
+
+Circular scale with ticks + labels, range bands, needle pointer(s), and
+a value label. `startAngle`/`endAngle` in degrees from top, clockwise
+(default full circle; a 360° sweep stops a hair short so the track
+paints). Extra `pointers: [{ value, color? }]` render alongside the
+value needle.
+
+```tsx
+<RadialGauge value={40} min={0} max={100} />
+```
+
+## LinearGauge
+
+Horizontal/vertical scale with ticks + labels, range bands, value fill +
+pointer, and a value label. `value`/`min`/`max` drive the fraction
+(clamped); `ticks: { count?, showLabels? }` (default 5 shown);
+`ranges: [{ from, to, color }]` render under the fill; `color` (default
 primary), `length` (default 280/220), `thickness` (default 20).
 
 ```tsx
@@ -67,6 +92,10 @@ primary), `length` (default 280/220), `thickness` (default 20).
 | Proportional fill (react) | fill width scales with value; vertical grows bottom-up |
 | Range bands (react) | band rects render under the fill |
 | Clamp (react) | fill capped at the track end above max |
+| Linear proportional fill (react) | fill scales with value; vertical grows bottom-up |
+| Linear ranges (react) | band rects render under the fill |
+| Radial needle (react) | endpoint matches value fraction exactly |
+| Radial bands/pointers (react) | band strokes + extra needles render |
 
 Every framework implementation must pass an equivalent matrix (per
 `docs/DEVELOPMENT_STRATEGY.md`).
