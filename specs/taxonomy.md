@@ -24,7 +24,7 @@ with a single member signals a core primitive that warrants its own bucket
 
 actions: button, dropdown, selectbar, splitbutton, togglebutton
 data: barcode, data-grid, data-list, gantt, pick-list, pivot, qrcode, scheduler, timeline, tree, virtual-grid
-data-display: avatar, badge, chart, data-filter, empty-state, gauges, icon, markdown, stat, table
+data-display: avatar, badge, chart, data-filter, empty-state, gauges, icon, markdown, range-navigator, stat, table
 feedback: aichat, alert, dialog, dialog-service, notification-service, popup, progress, skeleton, toast, tooltip
 forms: autocomplete, checkbox, checkboxlist, colorpicker, datepicker, drop-zone, field, form, html-editor, input, label, login, listbox, mask, numeric, password, radiobuttonlist, rating, security-code, select, signature-pad, slider, switch, textarea, textbox, timespanpicker, upload, validators
 layout: body, column, footer, header, layout, row, stack
