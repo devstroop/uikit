@@ -8,6 +8,7 @@ frameworks:
 tokens:
   - "font.weight-bold"
   - "color.border"
+  - "color.danger"
   - "color.palette-0"
   - "color.palette-1"
   - "color.palette-2"
@@ -52,7 +53,7 @@ SVG chart core (RadzenChart parity subset): cartesian chart with category/value 
 | `ariaLabel` | `string` | `"Chart"` | aria-label on the figure. |
 | `className` | `string` | `undefined` | Extra class. |
 
-`ChartSeries` = `{ type: "line" \| "area" \| "bar" \| "column" \| "scatter" \| "bubble" \| "pie" \| "donut" \| "gauge" \| "radar" \| "funnel" \| "heatmap"; data: Record<string, unknown>[]; categoryProperty: string; valueProperty: string; title?: string; color?: string; stack?: string; labels?: { visible?: boolean }; minProperty?: string; maxProperty?: string; markers?: { shape?: "circle" \| "square" \| "diamond" \| "triangle"; size?: number; visible?: boolean }; dash?: string \| number[]; lineWidth?: number; innerRadius?: number; sizeProperty?: string; rowProperty?: string }`
+`ChartSeries` = `{ type: "line" \| "area" \| "bar" \| "column" \| "scatter" \| "bubble" \| "pie" \| "donut" \| "gauge" \| "radar" \| "funnel" \| "heatmap" \| "candlestick" \| "ohlc" \| "highlow"; data: Record<string, unknown>[]; categoryProperty: string; valueProperty: string; title?: string; color?: string; stack?: string; labels?: { visible?: boolean }; minProperty?: string; maxProperty?: string; markers?: { shape?: "circle" \| "square" \| "diamond" \| "triangle"; size?: number; visible?: boolean }; dash?: string \| number[]; lineWidth?: number; innerRadius?: number; sizeProperty?: string; rowProperty?: string }`
 `SeriesClickArgs` = `{ seriesTitle: string; category: string; value: number; item: Record<string, unknown> }`
 
 ## Behavior
@@ -62,5 +63,6 @@ SVG chart core (RadzenChart parity subset): cartesian chart with category/value 
 - Stacking: series sharing `stack` accumulate per category (line/area offsets, single-slot columns/bars). With `stacked100Percent`, each stack group normalizes to 0..100 (scale domain becomes percent; tooltips, labels, and SeriesClick values are the plotted percentages).
 - Range bands: series with `minProperty` + `maxProperty` render a min/max band (line/area polygon) or span bars/columns from min to max.
 - Markers: line/area/scatter/bubble points render configurable shapes (circle default, square/diamond/triangle; size override; `visible: false` keeps hit areas). Line/area strokes take `lineWidth` (default 2) and `dash`.
+- OHLC family: `openProperty`/`highProperty`/`lowProperty`/`closeProperty` feed candlestick bodies (filled rising, hollow falling; `upColor`/`downColor`, danger default for falling), ohlc open/close ticks, and highlow range lines. Points without a complete quad fall back to the close marker. Scales include high/low extremes; clicks report the close value.
 - Tooltips: single shared tooltip div positioned near the hovered point showing `title: value`; hidden on leave.
 - htmx variant: `<div class="dx-chart" data-dx-chart data-dx-series='<json>' ...>`; charts are server-rendered reference markup (see lib/components/chart/chart.html for stacked/full-stacked/range/marker examples); the behavior wires tooltip + click dispatching dx:chart-point-click and is series-type agnostic.
