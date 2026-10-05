@@ -297,23 +297,23 @@ function TypographySection() {
     <Section title="Typography">
       <div className="layout-grid">
         <div>
-          <Text textStyle="DisplayH1">Display 1 — fluid clamp() scale</Text>
-          <Text textStyle="DisplayH2">Display 2 — tighter tracking</Text>
-          <Text textStyle="DisplayH3">Display 3</Text>
-          <Text textStyle="DisplayH4">Display 4</Text>
-          <Text textStyle="DisplayH5">Display 5</Text>
-          <Text textStyle="DisplayH6">Display 6</Text>
+          <Text textStyle="displayH1">Display 1 — fluid clamp() scale</Text>
+          <Text textStyle="displayH2">Display 2 — tighter tracking</Text>
+          <Text textStyle="displayH3">Display 3</Text>
+          <Text textStyle="displayH4">Display 4</Text>
+          <Text textStyle="displayH5">Display 5</Text>
+          <Text textStyle="displayH6">Display 6</Text>
         </div>
         <div>
-          <Text textStyle="Overline">Overline</Text>
-          <Text textStyle="Body1">
+          <Text textStyle="overline">Overline</Text>
+          <Text textStyle="body1">
             Body 1 — 0.875rem at 1.429 line-height. The default text style for
             paragraphs and prose across the system.
           </Text>
-          <Text textStyle="Body2">
+          <Text textStyle="body2">
             Body 2 — same size at 1.5 line-height for relaxed reading.
           </Text>
-          <Text textStyle="Caption">
+          <Text textStyle="caption">
             Caption — 0.75rem metadata in the muted text color.
           </Text>
         </div>
