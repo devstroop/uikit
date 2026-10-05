@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import { Switch } from "@devstroop/react-uikit";
 import { THEMES } from "./themes";
 import { App } from "./App";
-import "./preview.css";
+import "./demos.css";
 
 function Root() {
   const [themeId, setThemeId] = useState(THEMES[0]?.id ?? "default");

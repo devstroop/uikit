@@ -37,7 +37,7 @@ function DropdownSection() {
   const [color, setColor] = useState<string | undefined>();
   return (
     <Section title="DropDown">
-      <div className="preview-grid">
+      <div className="demos-grid">
         <DropDown options={colorOptions} aria-label="Favorite color" placeholder="Pick a color" />
         <DropDown
           options={colorOptions}
@@ -69,7 +69,7 @@ function AutocompleteSection() {
   ];
   return (
     <Section title="AutoComplete">
-      <div className="preview-grid">
+      <div className="demos-grid">
         <AutoComplete options={fruitOptions} aria-label="Pick a fruit" placeholder="Type to filter…" />
         <AutoComplete
           options={fruitOptions}
@@ -95,7 +95,7 @@ function ListboxSection() {
   ];
   return (
     <Section title="ListBox">
-      <div className="preview-grid">
+      <div className="demos-grid">
         <ListBox
           options={colorOptions}
           aria-label="Destination"
@@ -172,7 +172,7 @@ function SelectbarSection() {
   ];
   return (
     <Section title="SelectBar">
-      <div className="preview-grid">
+      <div className="demos-grid">
         <SelectBar options={alignOptions} aria-label="Alignment" value={align} onChange={setAlign} />
         <SelectBar
           options={[
@@ -194,7 +194,7 @@ function TogglebuttonSection() {
   const [bold, setBold] = useState(false);
   return (
     <Section title="ToggleButton">
-      <div className="preview-grid">
+      <div className="demos-grid">
         <ToggleButton pressed={bold} onChange={setBold} aria-label="Bold">
           Bold
         </ToggleButton>
@@ -223,7 +223,7 @@ function SplitbuttonSection() {
   ];
   return (
     <Section title="SplitButton">
-      <div className="preview-grid">
+      <div className="demos-grid">
         <SplitButton
           label="Save"
           onClick={() => setMessage("Saved")}

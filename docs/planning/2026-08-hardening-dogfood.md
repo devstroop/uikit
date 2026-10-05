@@ -24,7 +24,7 @@ Despite green gates, drift remains (below) — hardening targets drift, not pari
 ## 2. Hardening gaps — `uikit` (`frameworks/react` submodule `@devstroop/react-uikit@0.6.0` at `21e0389`)
 
 1. **Pin/drift (p0).** Web `package.json:15` pins `git+https://github.com/devstroop/react-uikit.git#v0.1.0` (pre `--dt-` rename #57) vs current `frameworks/react/package.json:3` `0.6.0` (`--dt-` prefix `lib/styles/tokens.css:14`, `specs/tokens.schema.json:1`). Web still bridges `--se-`/`--blurple` in `SoftEther-Web/src/app/index.css:8` and imports `@devstroop/react-ui` (old name `frameworks/react/uikit.yml:4`) in `src/app/main.tsx:3`. Consumers must import per-theme `themes/<name>/tokens.css` — docs unclear.
-2. **Preview vite alias typo (p0).** `preview/react/vite.config.ts:6` alias `"@devstroop/react-uikitkit"` extra `kit` — dead, but wrong if ever used.
+2. **Demos vite alias typo (p0).** `demos/react/vite.config.ts:6` alias `"@devstroop/react-uikitkit"` extra `kit` — dead, but wrong if ever used.
 3. **README drift (p1).** `frameworks/react/README.md:38` Button table `primary/secondary/ghost/danger` omits `success/info` now in spec `specs/components/button.md:15` + impl `lib/components/Button/Button.tsx:5` (cycle #6, #68). Size `xs..xl` + `iconOnly` + `aria-label` note missing.
 4. **Playwright thin (p1).** Only `scripts/visual-verify.mjs:1` → 24 screenshots (6 themes × light/dark × react/htmx) + `AxeBuilder` `visual-verify.mjs:113`. No per-component Playwright in `frameworks/react` (JSDOM vitest only) for Dialog focus-trap/Esc, Tooltip delay+Esc, Field `aria-live=polite` `Field.tsx:31`, Form pipeline `Form.tsx:34`, Switch `role=switch`.
 5. **Token-sync docs (p1).** `scripts/generate-css.mjs:79` syncs only `default` to `tokens.sync:lib/styles/tokens.css` (`frameworks/react/uikit.yml:13`). Consumer guide says “pick a theme by importing its `tokens.css`” but not that only `default` is vendored.
@@ -58,7 +58,7 @@ master                           protected — releases only
 - Every impl branch from its **accumulator**, never `master`/`develop` directly.
 - Worktrees as siblings: `../uikit.<accumulator>` and `../uikit.<issue#>-<slug>` (#103).
 - Max 3 levels nesting (not used this cycle); PR chain would be unit → part → epic → accumulator with squash merges; accumulator → `develop` merge commits.
-- `dist/` + `preview/vendor` regenerated on branches touching framework, CI in-sync gates.
+- `dist/` + `demos/vendor` regenerated on branches touching framework, CI in-sync gates.
 
 ```
 Worktree layout:
@@ -66,7 +66,7 @@ Worktree layout:
 ├── uikit/                         master
 ├── uikit.develop/  uikit.fixes/  uikit.features/  uikit.chores/  uikit.docs/
 ├── uikit.doc-158-hardening-plan/
-├── uikit.fix-159-preview-alias/
+├── uikit.fix-159-demos-alias/
 ├── uikit.fix-160-readme-button-sync/
 ├── uikit.chore-161-playwright-axe/
 └── uikit.chore-162-token-sync-docs/
@@ -81,7 +81,7 @@ Worktree layout:
 | # | Item | Label | Branch | Accumulator |
 |---|---|---|---|---|
 | 158 | **docs: planning** this file | docs | `doc/158-hardening-plan` | docs |
-| 159 | **fix: preview vite alias** `preview/react/vite.config.ts:6` typo | fix | `fix/159-preview-alias` | fixes |
+| 159 | **fix: demos vite alias** `demos/react/vite.config.ts:6` typo | fix | `fix/159-demos-alias` | fixes |
 | 160 | **fix: README Button variants** `success/info` + `size`/`iconOnly` | fix | `fix/160-readme-button-sync` | fixes |
 | 161 | **chore: Playwright+axe** per-component (`Dialog`/`Tooltip`/`Field`/`Form`) | chore | `chore/161-playwright-axe` | chores |
 | 162 | **chore: token-sync docs** `specs/tokens.md` + `README` theming | chore | `chore/162-token-sync-docs` | chores |
@@ -108,9 +108,9 @@ No `feature` this cycle — harden core 33 before breadth (data-grid/scheduler/c
 - This file committed; `tokens:validate`/`specs:validate`/`parity:validate` green.
 - PR `docs(planning): 2026-08 hardening & dogfood` squash into `docs`, then `docs→develop` merge commit.
 
-### #159 `fix/159-preview-alias`
-- Edit `preview/react/vite.config.ts:6` alias → `"@devstroop/react-uikit"`.
-- Verify `npm run preview:typecheck` + `vite build preview/react` green; no `docs/planning` churn.
+### #159 `fix/159-demos-alias`
+- Edit `demos/react/vite.config.ts:6` alias → `"@devstroop/react-uikit"`.
+- Verify `npm run demos:typecheck` + `vite build demos/react` green; no `docs/planning` churn.
 
 ### #160 `fix/160-readme-button-sync`
 - Update `frameworks/react/README.md:38` table: `primary/secondary/ghost/danger/success/info`, size `xs..xl`, `fullWidth`, `iconOnly` + `aria-label` note per `specs/components/button.md`.
@@ -128,8 +128,8 @@ No `feature` this cycle — harden core 33 before breadth (data-grid/scheduler/c
 
 ## 7. Playwright strategy
 
-- **Existing:** `scripts/visual-verify.mjs:1` serves `preview/react` on `4199` (`vite preview`) + static `preview/htmx` on `4198`, takes 24 screenshots to `visual/screenshots`, runs `auditTokens` + `auditContrast` + `AxeBuilder` `visual-verify.mjs:45/113`.
-- **Hardening add:** per-component Playwright in `frameworks/react` (not preview) — `playwright.config.ts` + `e2e/`. CI: new `e2e.yml` triggers `pull_request` only, caches `~/.cache/ms-playwright` keyed on `package-lock.json`, `timeout-minutes:30`.
+- **Existing:** `scripts/visual-verify.mjs:1` serves `demos/react` on `4199` (`vite demos`) + static `demos/htmx` on `4198`, takes 24 screenshots to `visual/screenshots`, runs `auditTokens` + `auditContrast` + `AxeBuilder` `visual-verify.mjs:45/113`.
+- **Hardening add:** per-component Playwright in `frameworks/react` (not demos) — `playwright.config.ts` + `e2e/`. CI: new `e2e.yml` triggers `pull_request` only, caches `~/.cache/ms-playwright` keyed on `package-lock.json`, `timeout-minutes:30`.
 - **Web dogfood:** `SoftEther-Web` `scripts/test-auth.mjs` + custom `playwright_browser_*` manual spot-checks: `npm run dev` → snapshot `http://127.0.0.1:5173/login` etc., evaluate computed `--dt-*` vars like prior `check-gap2.mjs`/`dashboard-audit.mjs`.
 
 ---

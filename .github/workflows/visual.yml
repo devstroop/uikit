@@ -31,13 +31,13 @@ jobs:
           path: ~/.cache/ms-playwright
           key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
       - run: npx playwright install chromium
-      - name: Preview theme vendor copies are in sync
+      - name: Demos theme vendor copies are in sync
         run: |
           for t in default fluent github material material-3 shadcn; do
-            cp "themes/$t/tokens.css" "preview/htmx/vendor/tokens/$t.css"
+            cp "themes/$t/tokens.css" "demos/htmx/vendor/tokens/$t.css"
           done
-          git diff --exit-code -- preview/htmx/vendor/tokens/
-      - run: npm run preview:build
+          git diff --exit-code -- demos/htmx/vendor/tokens/
+      - run: npm run demos:build
       - run: node scripts/visual-verify.mjs
       - run: node scripts/generate-component-images.mjs --theme default --mode light
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4

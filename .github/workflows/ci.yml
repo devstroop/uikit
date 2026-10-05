@@ -75,19 +75,19 @@ jobs:
         run: |
           node scripts/build.mjs
           git diff --exit-code
-      - name: Preview vendor copies are in sync
+      - name: Demos vendor copies are in sync
         run: |
-          # preview/htmx/vendor/ is a verbatim copy of the frameworks/htmx
-          # pin's dist: cmp keeps the preview on exactly what CI builds.
+          # demos/htmx/vendor/ is a verbatim copy of the frameworks/htmx
+          # pin's dist: cmp keeps the demos on exactly what CI builds.
           for f in uikit.css uikit.js; do
-            if ! cmp -s "dist/$f" "../../preview/htmx/vendor/$f"; then
-              echo "preview/htmx/vendor/$f differs from frameworks/htmx/dist/$f" >&2
+            if ! cmp -s "dist/$f" "../../demos/htmx/vendor/$f"; then
+              echo "demos/htmx/vendor/$f differs from frameworks/htmx/dist/$f" >&2
               exit 1
             fi
           done
 
-  preview:
-    name: Preview (react)
+  demos:
+    name: Demos (react)
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -100,8 +100,8 @@ jobs:
           cache: npm
       - run: npm i -g npm@10.9.9
       - run: npm ci
-      - run: npm run preview:typecheck
-      - run: npm run preview:build
+      - run: npm run demos:typecheck
+      - run: npm run demos:build
 
   react:
     name: React framework
