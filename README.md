@@ -8,7 +8,7 @@ specs/          component contracts + token schema (source of truth)
 themes/         design tokens per design system (data, validated, generated)
 scripts/        token generator + validators
 frameworks/     per-technology implementations of the same contracts
-preview/        per-stack playgrounds (preview/react/ showcases all themes)
+demos/        per-stack playgrounds (demos/react/ showcases all themes)
 ```
 
 - **Specs first** — every component and every token starts in `specs/`
@@ -49,7 +49,7 @@ Two workflows: `CI` (`.github/workflows/ci.yml`) runs on PRs, pushes to
 |---|---|
 | Tokens & specs | tokens:validate → tokens:generate in-sync → specs:validate → parity:validate (react+htmx) → radzen:parity (report-only, into the run summary) |
 | htmx framework | build, tests, dist/vendor sync checks |
-| Preview (react) | preview typecheck + production build |
+| Demos (react) | demos typecheck + production build |
 | React framework | lint, typecheck, tests, build, export list |
 | Visual verification | axe + WCAG contrast (6 themes × light/dark), Playwright artifacts uploaded |
 
@@ -61,7 +61,7 @@ branches require all jobs.
 Run the whole gate locally before pushing:
 
 ```bash
-npm run ci:local   # tokens → generate-diff → specs → parity → radzen → preview typecheck+build
+npm run ci:local   # tokens → generate-diff → specs → parity → radzen → demos typecheck+build
 ```
 
 Local submodules not matching the recorded pins produce the same red:
@@ -73,7 +73,7 @@ Branch/PR/release protocol follows the org standard — see
 `frameworks/react/docs/DEVELOPMENT_STRATEGY.md`.
 
 ```bash
-npm ci                        # tooling + preview deps
+npm ci                        # tooling + demos deps
 npm run tokens:validate       # all themes must validate before commit
 npm run tokens:generate       # regenerate tokens.css (+ framework syncs)
 npm run specs:validate        # component specs vs. token schema + impls
@@ -85,11 +85,11 @@ npm run lint && npm run typecheck && npm test && npm run build --prefix framewor
 # htmx framework
 npm run build --prefix frameworks/htmx        # dist/uikit.js + uikit.css
 
-# theme playgrounds (preview/react, preview/htmx): all 6 themes, light/dark
-npm run preview                # react dev server
-npm run preview:build          # react production build
-npm run preview:typecheck      # preview sources type-checked
-(cd preview/htmx && python3 -m http.server)  # static htmx showcase
+# theme playgrounds (demos/react, demos/htmx): all 6 themes, light/dark
+npm run demos                # react dev server
+npm run demos:build          # react production build
+npm run demos:typecheck      # demos sources type-checked
+(cd demos/htmx && python3 -m http.server)  # static htmx showcase
 ```
 
 ## License

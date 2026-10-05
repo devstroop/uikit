@@ -11,11 +11,11 @@
     "specs:validate": "node scripts/validate-specs.mjs",
     "parity:validate": "node scripts/validate-parity.mjs",
     "parity:react": "node scripts/check-react-parity.mjs",
-    "preview": "vite preview/react",
-    "preview:build": "vite build preview/react",
-    "preview:typecheck": "tsc -p preview/react/tsconfig.json",
+    "demos": "vite demos/react",
+    "demos:build": "vite build demos/react",
+    "demos:typecheck": "tsc -p demos/react/tsconfig.json",
     "radzen:parity": "node scripts/check-radzen-parity.mjs",
-    "ci:local": "npm run tokens:validate && npm run tokens:generate && git diff --exit-code && npm run specs:validate && npm run parity:validate && npm run radzen:parity && npm run preview:typecheck && npm run preview:build"
+    "ci:local": "npm run tokens:validate && npm run tokens:generate && git diff --exit-code && npm run specs:validate && npm run parity:validate && npm run radzen:parity && npm run demos:typecheck && npm run demos:build"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Generate per-component screenshots for every spec in specs/components/.
- * Reuses the preview servers and selectors from scripts/visual-verify.mjs
+ * Reuses the demos servers and selectors from scripts/visual-verify.mjs
  * but writes clipped images to visual/components/<kebab>/ instead of
  * full-page screenshots.
  *
@@ -17,7 +17,7 @@
  *
  * The script will reuse already-running dev servers at REACT_PORT=5173 and
  * HTMX_PORT=8000 if they are up (as started in the current session), otherwise
- * it will spawn its own preview servers on 4199/4198 like visual-verify.mjs.
+ * it will spawn its own demos servers on 4199/4198 like visual-verify.mjs.
  */
 
 import { mkdirSync, readdirSync, readFileSync, rmSync } from "node:fs";
@@ -39,8 +39,8 @@ const MODES = ["light", "dark"];
 // fallback to visual-verify's ports 4199/4198 if not available.
 const REACT_CANDIDATES = [5173, 4199];
 const HTMX_CANDIDATES = [8000, 4198];
-const REACT_DIST = join(ROOT, "preview", "react");
-const HTMX_DIR = join(ROOT, "preview", "htmx");
+const REACT_DIST = join(ROOT, "demos", "react");
+const HTMX_DIR = join(ROOT, "demos", "htmx");
 
 const MIME = {
   ".html": "text/html",
@@ -162,17 +162,17 @@ async function ensureServers() {
   let htmxServer = null;
 
   if (reactPort === null) {
-    // Spawn vite preview as visual-verify does (port 4199)
+    // Spawn vite demos as visual-verify does (port 4199)
     reactPort = 4199;
-    const preview = spawn(
+    const demos = spawn(
       process.execPath,
-      [join(ROOT, "node_modules", "vite", "bin", "vite.js"), "preview", "preview/react", "--port", String(reactPort), "--strictPort"],
+      [join(ROOT, "node_modules", "vite", "bin", "vite.js"), "preview", "demos/react", "--port", String(reactPort), "--strictPort"],
       { cwd: ROOT, stdio: "ignore" },
     );
     await waitFor(`http://localhost:${reactPort}/`);
-    reactServer = preview;
+    reactServer = demos;
   } else {
-    console.log(`Reusing React preview at :${reactPort}`);
+    console.log(`Reusing React demos at :${reactPort}`);
   }
 
   if (htmxPort === null) {
@@ -180,7 +180,7 @@ async function ensureServers() {
     htmxServer = await serve(HTMX_DIR, htmxPort);
     await waitFor(`http://localhost:${htmxPort}/`);
   } else {
-    console.log(`Reusing HTMX preview at :${htmxPort}`);
+    console.log(`Reusing HTMX demos at :${htmxPort}`);
   }
 
   return { reactPort, htmxPort, reactServer, htmxServer };
@@ -286,7 +286,7 @@ async function main() {
               found = (await locator.count()) > 0;
             }
             if (!found) {
-              // Last resort: any element with data-dt fallback (for components that also have data attr in React preview)
+              // Last resort: any element with data-dt fallback (for components that also have data attr in React demos)
               locator = page.locator(`[data-dx-${kebab}]`).first();
               found = (await locator.count()) > 0;
             }
@@ -322,7 +322,7 @@ async function main() {
     if (missing.length > 20) console.log(`  ... and ${missing.length - 20} more`);
   }
   console.log(`\nPreview remains at http://localhost:${reactPort}/ (react) and http://localhost:${htmxPort}/ (htmx) if you started dev servers at 5173/8000.`);
-  console.log(`To attach to a spec, add to specs/components/<kebab>.md:\n  ## Preview\n  ![${specs[0]?.name ?? "Component"}](../../visual/components/${specs[0]?.kebab ?? "kebab"}/react-default-light.png)`);
+  console.log(`To attach to a spec, add to specs/components/<kebab>.md:\n  ## Demos\n  ![${specs[0]?.name ?? "Component"}](../../visual/components/${specs[0]?.kebab ?? "kebab"}/react-default-light.png)`);
 }
 
 main().catch((e) => {

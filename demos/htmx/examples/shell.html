@@ -207,10 +207,10 @@
             <header class="dx-header" aria-label="App shell header">
               <span style="font-weight: 600">App title</span>
               <span style="flex-grow: 1"></span>
-              <button class="dx-button dx-button--ghost dx-button--sm" type="button" id="preview-shell-toggle" data-dx-sidebar-toggle="#preview-shell-sidebar" aria-expanded="true" aria-controls="preview-shell-sidebar">Collapse sidebar</button>
+              <button class="dx-button dx-button--ghost dx-button--sm" type="button" id="demos-shell-toggle" data-dx-sidebar-toggle="#demos-shell-sidebar" aria-expanded="true" aria-controls="demos-shell-sidebar">Collapse sidebar</button>
             </header>
             <div class="dx-layout-row">
-              <aside class="dx-sidebar dx-sidebar--left dx-sidebar--responsive" id="preview-shell-sidebar" aria-label="App shell navigation">
+              <aside class="dx-sidebar dx-sidebar--left dx-sidebar--responsive" id="demos-shell-sidebar" aria-label="App shell navigation">
                 <nav aria-label="Demo navigation">
 <ul class="shell-nav">
   <li><button class="dx-button dx-button--ghost dx-button--sm" type="button" style="width: 100%; justify-content: flex-start" aria-current="page">Dashboard</button></li>
@@ -234,18 +234,18 @@
   <header class="dx-header" aria-label="Drawers header">
     <span style="font-weight: 600">Overlay drawers</span>
     <span style="flex-grow: 1"></span>
-    <button class="dx-button dx-button--ghost dx-button--sm" type="button" id="preview-drawer-left-toggle" data-dx-sidebar-toggle="#preview-drawer-left-sidebar" aria-expanded="false" aria-controls="preview-drawer-left-sidebar">Open left</button>
-    <button class="dx-button dx-button--ghost dx-button--sm" type="button" id="preview-drawer-right-toggle" data-dx-sidebar-toggle="#preview-drawer-right-sidebar" aria-expanded="false" aria-controls="preview-drawer-right-sidebar">Open right</button>
+    <button class="dx-button dx-button--ghost dx-button--sm" type="button" id="demos-drawer-left-toggle" data-dx-sidebar-toggle="#demos-drawer-left-sidebar" aria-expanded="false" aria-controls="demos-drawer-left-sidebar">Open left</button>
+    <button class="dx-button dx-button--ghost dx-button--sm" type="button" id="demos-drawer-right-toggle" data-dx-sidebar-toggle="#demos-drawer-right-sidebar" aria-expanded="false" aria-controls="demos-drawer-right-sidebar">Open right</button>
   </header>
   <div class="dx-layout-row">
-    <div class="dx-layout-mask dx-layout-mask--hidden" id="preview-drawer-left-mask" data-dx-sidebar-mask="#preview-drawer-left-sidebar"></div>
-    <div class="dx-layout-mask dx-layout-mask--hidden" id="preview-drawer-right-mask" data-dx-sidebar-mask="#preview-drawer-right-sidebar"></div>
+    <div class="dx-layout-mask dx-layout-mask--hidden" id="demos-drawer-left-mask" data-dx-sidebar-mask="#demos-drawer-left-sidebar"></div>
+    <div class="dx-layout-mask dx-layout-mask--hidden" id="demos-drawer-right-mask" data-dx-sidebar-mask="#demos-drawer-right-sidebar"></div>
     <div class="dx-body" aria-label="Drawers body">
       <div class="dx-row">
         <div class="dx-column dx-column--12 grid-cell">Body content — drawers overlay this from either edge. Escape or the mask closes them.</div>
       </div>
     </div>
-    <aside class="dx-sidebar dx-sidebar--left dx-sidebar--overlay dx-sidebar--collapsed" id="preview-drawer-left-sidebar" aria-label="Left drawer navigation">
+    <aside class="dx-sidebar dx-sidebar--left dx-sidebar--overlay dx-sidebar--collapsed" id="demos-drawer-left-sidebar" aria-label="Left drawer navigation">
       <nav aria-label="Left drawer demo navigation">
         <ul class="shell-nav">
           <li><button class="dx-button dx-button--ghost dx-button--sm" type="button" style="width: 100%; justify-content: flex-start">Inbox</button></li>
@@ -254,7 +254,7 @@
         </ul>
       </nav>
     </aside>
-    <aside class="dx-sidebar dx-sidebar--right dx-sidebar--overlay dx-sidebar--collapsed" id="preview-drawer-right-sidebar" aria-label="Right drawer navigation">
+    <aside class="dx-sidebar dx-sidebar--right dx-sidebar--overlay dx-sidebar--collapsed" id="demos-drawer-right-sidebar" aria-label="Right drawer navigation">
       <nav aria-label="Right drawer demo navigation">
         <ul class="shell-nav">
           <li><button class="dx-button dx-button--ghost dx-button--sm" type="button" style="width: 100%; justify-content: flex-start">Dashboard</button></li>
@@ -272,14 +272,14 @@
         <div class="row-content">
           <form class="dx-form" data-dx-form style="max-width: 360px">
             <div class="dx-field">
-              <label class="dx-field-label" for="preview-form-name">Name</label>
-              <input id="preview-form-name" class="dx-input dx-input--md" type="text" name="name" data-dx-field data-dx-required data-dx-minlength="2" placeholder="Full name" />
-              <div id="preview-form-name-error" class="dx-field-error" aria-live="polite" data-dx-field-error></div>
+              <label class="dx-field-label" for="demos-form-name">Name</label>
+              <input id="demos-form-name" class="dx-input dx-input--md" type="text" name="name" data-dx-field data-dx-required data-dx-minlength="2" placeholder="Full name" />
+              <div id="demos-form-name-error" class="dx-field-error" aria-live="polite" data-dx-field-error></div>
             </div>
             <div class="dx-field">
-              <label class="dx-field-label" for="preview-form-email">Email</label>
-              <input id="preview-form-email" class="dx-input dx-input--md" type="email" name="email" data-dx-field data-dx-required data-dx-email placeholder="you@example.com" />
-              <div id="preview-form-email-error" class="dx-field-error" aria-live="polite" data-dx-field-error></div>
+              <label class="dx-field-label" for="demos-form-email">Email</label>
+              <input id="demos-form-email" class="dx-input dx-input--md" type="email" name="email" data-dx-field data-dx-required data-dx-email placeholder="you@example.com" />
+              <div id="demos-form-email-error" class="dx-field-error" aria-live="polite" data-dx-field-error></div>
             </div>
             <button class="dx-button dx-button--primary" type="submit">Submit</button>
             <p style="font-size: var(--dx-font-size-xs); color: var(--dx-color-text-muted)">Submit validates rules (<code>data-dx-required</code>, <code>data-dx-email</code>, <code>data-dx-minlength</code>): failures block the submit, render into <code>[data-dx-field-error]</code>, set <code>aria-invalid</code> and dispatch <code>dx:invalid</code>; editing clears the error; a valid submit dispatches <code>dx:submit</code> with FormData.</p>
@@ -289,7 +289,7 @@
       <section class="row">
         <h2>Text inputs · Textbox · Password · Mask · Numeric</h2>
         <div class="row-content">
-          <div class="preview-inputs">
+          <div class="demos-inputs">
             <div>
               <strong>Textbox</strong>
               <input class="dx-textbox dx-textbox--sm" type="text" placeholder="sm" aria-label="Textbox sm" />
@@ -352,7 +352,7 @@
       <section class="row">
         <h2>Dropdown</h2>
         <div class="row-content">
-          <div class="preview-grid">
+          <div class="demos-grid">
             <div class="dx-dropdown dx-dropdown--md" data-dx-dropdown>
               <button type="button" role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-controls="pv-dd1-menu" aria-label="Pick a color" class="dx-dropdown__trigger" data-dx-dropdown-trigger>
                 <span class="dx-dropdown__placeholder">Pick a color</span>
@@ -400,7 +400,7 @@
       <section class="row">
         <h2>Autocomplete</h2>
         <div class="row-content">
-          <div class="preview-grid">
+          <div class="demos-grid">
             <div class="dx-autocomplete dx-autocomplete--md" data-dx-autocomplete>
               <div class="dx-autocomplete__wrap">
                 <input type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="pv-ac1-menu" aria-label="Pick a fruit" class="dx-autocomplete__input" placeholder="Type to filter…" autocomplete="off" data-dx-autocomplete-input />
@@ -431,7 +431,7 @@
       <section class="row">
         <h2>Listbox</h2>
         <div class="row-content">
-          <div class="preview-grid">
+          <div class="demos-grid">
             <div role="listbox" tabindex="0" class="dx-listbox" aria-label="Destination" aria-activedescendant="pv-lb1-1" data-dx-listbox style="max-height: 180px">
               <div role="option" id="pv-lb1-1" class="dx-listbox__option dx-listbox__option--selected" data-dx-listbox-option data-dx-listbox-value="red" aria-selected="true">Red</div>
               <div role="option" id="pv-lb1-2" class="dx-listbox__option" data-dx-listbox-option data-dx-listbox-value="green" aria-selected="false">Green</div>
@@ -450,7 +450,7 @@
       <section class="row">
         <h2>Checkboxlist</h2>
         <div class="row-content">
-          <div class="preview-grid">
+          <div class="demos-grid">
             <fieldset class="dx-checkboxlist">
               <legend class="dx-checkboxlist__legend">Notifications</legend>
               <ul class="dx-checkboxlist__list">
@@ -503,7 +503,7 @@
       <section class="row">
         <h2>Radiobuttonlist</h2>
         <div class="row-content">
-          <div class="preview-grid">
+          <div class="demos-grid">
             <fieldset class="dx-radiobuttonlist">
               <legend class="dx-radiobuttonlist__legend">Delivery</legend>
               <ul class="dx-radiobuttonlist__list">
@@ -533,7 +533,7 @@
       <section class="row">
         <h2>Selectbar</h2>
         <div class="row-content">
-          <div class="preview-grid">
+          <div class="demos-grid">
             <div role="group" class="dx-selectbar dx-selectbar--md" aria-label="Alignment" data-dx-selectbar>
               <button type="button" class="dx-selectbar__option dx-selectbar__option--selected" aria-pressed="true" data-dx-selectbar-option data-dx-selectbar-value="left">Left</button>
               <button type="button" class="dx-selectbar__option" aria-pressed="false" data-dx-selectbar-option data-dx-selectbar-value="center">Center</button>
@@ -550,7 +550,7 @@
       <section class="row">
         <h2>Togglebutton</h2>
         <div class="row-content">
-          <div class="preview-grid">
+          <div class="demos-grid">
             <button type="button" class="dx-togglebutton dx-togglebutton--md" aria-pressed="false" data-dx-togglebutton>Bold</button>
             <button type="button" class="dx-togglebutton dx-togglebutton--md dx-togglebutton--pressed" aria-pressed="true" data-dx-togglebutton>Italic</button>
             <button type="button" class="dx-togglebutton dx-togglebutton--sm" aria-pressed="false" data-dx-togglebutton>Small</button>
@@ -562,7 +562,7 @@
       <section class="row">
         <h2>Splitbutton</h2>
         <div class="row-content">
-          <div class="preview-grid">
+          <div class="demos-grid">
             <div class="dx-splitbutton dx-splitbutton--md" data-dx-splitbutton>
               <button type="button" class="dx-splitbutton__action" data-dx-splitbutton-action>Save</button>
               <button type="button" class="dx-splitbutton__caret" aria-label="More actions" aria-haspopup="menu" aria-expanded="false" aria-controls="pv-sb1-menu" data-dx-splitbutton-caret>▾</button>
@@ -588,7 +588,7 @@
       <section class="row">
         <h2>Datepicker</h2>
         <div class="row-content">
-          <div class="preview-grid">
+          <div class="demos-grid">
 <div class="dx-datepicker" data-dx-datepicker data-dx-format="yyyy-MM-dd" data-dx-locale="en-US">
   <input class="dx-datepicker-input dx-datepicker-input--md" type="text" data-dx-datepicker-input value="2026-08-20" aria-label="Date" />
   <button class="dx-datepicker-trigger" type="button" data-dx-datepicker-trigger aria-haspopup="dialog" aria-expanded="false" aria-controls="pv-dp1-popup" aria-label="Open calendar">
@@ -690,7 +690,7 @@
       <section class="row">
         <h2>Timespanpicker</h2>
         <div class="row-content">
-          <div class="preview-grid">
+          <div class="demos-grid">
 <div class="dx-timespanpicker" data-dx-timespanpicker data-dx-format="d.HH:mm:ss" data-dx-precision="second" data-dx-show-days data-dx-show-hours data-dx-show-minutes data-dx-show-seconds>
   <input class="dx-timespanpicker-input dx-timespanpicker-input--md" type="text" data-dx-timespanpicker-input value="1.02:30:00" aria-label="Duration" />
   <button class="dx-timespanpicker-trigger" type="button" data-dx-timespanpicker-trigger aria-haspopup="dialog" aria-expanded="false" aria-controls="pv-tsp1-popup" aria-label="Set duration">
@@ -787,7 +787,7 @@
       <section class="row">
         <h2>Colorpicker</h2>
         <div class="row-content">
-          <div class="preview-grid">
+          <div class="demos-grid">
 <div class="dx-colorpicker" data-dx-colorpicker data-dx-value="#2563eb" data-dx-show-saturation data-dx-show-rgba data-dx-show-palette data-dx-show-arrow>
   <button type="button" role="button" class="dx-colorpicker-trigger" data-dx-colorpicker-trigger aria-haspopup="dialog" aria-expanded="false" aria-controls="pv-cp1-popup" aria-label="Pick a color">
     <span class="dx-colorpicker-value" data-dx-colorpicker-value></span>
@@ -882,7 +882,7 @@
       <section class="row">
         <h2>Slider</h2>
         <div class="row-content">
-          <div class="preview-grid">
+          <div class="demos-grid">
 <div class="dx-slider" data-dx-slider data-dx-min="0" data-dx-max="100" data-dx-step="1" data-dx-value="40">
   <div class="dx-slider-track" data-dx-slider-track>
     <div class="dx-slider-range" data-dx-slider-range></div>
@@ -909,7 +909,7 @@
       <section class="row">
         <h2>Rating</h2>
         <div class="row-content">
-          <div class="preview-grid">
+          <div class="demos-grid">
 <div class="dx-rating" data-dx-rating role="radiogroup" aria-label="Rating" aria-readonly="false" data-dx-stars="5" data-dx-value="3">
   <button type="button" class="dx-rating-clear" data-dx-rating-clear aria-label="Clear rating" tabindex="0">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" /><path d="M5.6 5.6l12.8 12.8" /></svg>
@@ -964,7 +964,7 @@
       <section class="row">
         <h2>SecurityCode</h2>
         <div class="row-content">
-          <div class="preview-grid">
+          <div class="demos-grid">
 <div class="dx-securitycode" data-dx-securitycode data-dx-length="6" role="group" aria-label="Security code">
   <input class="dx-securitycode-cell dx-securitycode-cell--md" type="text" inputmode="numeric" maxlength="1" data-dx-securitycode-cell aria-label="Digit 1 of 6" />
   <input class="dx-securitycode-cell dx-securitycode-cell--md" type="text" inputmode="numeric" maxlength="1" data-dx-securitycode-cell aria-label="Digit 2 of 6" />
@@ -988,7 +988,7 @@
       <section class="row">
         <h2>SignaturePad</h2>
         <div class="row-content">
-          <div class="preview-grid">
+          <div class="demos-grid">
 <div class="dx-signaturepad" data-dx-signaturepad>
   <div class="dx-signaturepad-header">
     <span class="dx-signaturepad-label">Signature</span>
@@ -1003,7 +1003,7 @@
       <section class="row">
         <h2>Upload</h2>
         <div class="row-content">
-          <div class="preview-grid">
+          <div class="demos-grid">
 <div class="dx-upload" data-dx-upload data-dx-upload-url="/api/files" data-dx-upload-param="files" data-dx-upload-auto="true" data-dx-upload-multiple>
   <button class="dx-upload-trigger" type="button" data-dx-upload-trigger>Upload files</button>
   <input class="dx-upload-input" type="file" hidden data-dx-upload-input multiple />
@@ -1016,7 +1016,7 @@
       <section class="row">
         <h2>DropZone</h2>
         <div class="row-content">
-          <div class="preview-grid">
+          <div class="demos-grid">
 <div class="dx-dropzone" data-dx-dropzone role="region" aria-label="Drop files here or browse">
   <p class="dx-dropzone-caption" data-dx-dropzone-caption>Drop files here or browse</p>
   <button class="dx-dropzone-browse" type="button" data-dx-dropzone-browse>Browse</button>
@@ -1029,7 +1029,7 @@
       <section class="row">
         <h2>Pager</h2>
         <div class="row-content">
-          <div class="preview-grid">
+          <div class="demos-grid">
 <nav class="dx-pager dx-pager--left" data-dx-pager data-dx-count="35" data-dx-page-size="10" data-dx-page="1" data-dx-page-numbers-count="5" aria-label="Pagination demo">
   <span class="dx-pager-summary" data-dx-pager-summary role="status" aria-live="polite">Page 1 of 4 (35 items)</span>
   <div class="dx-pager-controls" data-dx-pager-controls role="group" aria-label="Pagination demo controls">
@@ -1074,7 +1074,7 @@
       <section class="row">
         <h2>Menu</h2>
         <div class="row-content">
-          <div class="preview-grid">
+          <div class="demos-grid">
 <nav class="dx-menu" data-dx-menu aria-label="Demo menu">
   <div class="dx-menu-menubar" role="menubar" aria-label="Demo menu" data-dx-menu-menubar>
     <div class="dx-menu-item-wrapper" data-dx-menu-item-wrapper>
@@ -1099,7 +1099,7 @@
       <section class="row">
         <h2>PanelMenu</h2>
         <div class="row-content">
-          <div class="preview-grid">
+          <div class="demos-grid">
 <nav class="dx-panelmenu" data-dx-panelmenu aria-label="Demo panel menu">
   <button type="button" class="dx-panelmenu-item" role="button" data-dx-panelmenu-item data-dx-text="Dashboard" aria-expanded="false" aria-controls="demo-panel-sub" tabindex="0">Dashboard <span class="dx-panelmenu-caret" aria-hidden="true">▸</span></button>
   <div id="demo-panel-sub" role="menu" class="dx-panelmenu-panel" data-dx-panelmenu-panel hidden>
@@ -1115,7 +1115,7 @@
       <section class="row">
         <h2>ProfileMenu</h2>
         <div class="row-content">
-          <div class="preview-grid">
+          <div class="demos-grid">
 <nav class="dx-profilemenu" data-dx-profilemenu aria-label="Demo profile menu">
   <button type="button" class="dx-profilemenu-trigger" data-dx-profilemenu-trigger aria-haspopup="menu" aria-expanded="false" aria-controls="demo-profile-menu">Alice ▾</button>
   <div id="demo-profile-menu" role="menu" class="dx-profilemenu-menu" data-dx-profilemenu-menu hidden>
@@ -1131,7 +1131,7 @@
       <section class="row">
         <h2>FabMenu</h2>
         <div class="row-content">
-          <div class="preview-grid">
+          <div class="demos-grid">
 <div class="dx-fabmenu dx-fabmenu--bottom-right" data-dx-fabmenu aria-label="Demo fab menu">
   <button type="button" class="dx-fabmenu-trigger" data-dx-fabmenu-trigger aria-haspopup="menu" aria-expanded="false" aria-label="Open menu">+</button>
   <div role="menu" class="dx-fabmenu-menu" data-dx-fabmenu-menu hidden>
@@ -1146,7 +1146,7 @@
       <section class="row">
         <h2>Breadcrumb</h2>
         <div class="row-content">
-          <div class="preview-grid">
+          <div class="demos-grid">
 <nav class="dx-breadcrumb" data-dx-breadcrumb aria-label="Demo breadcrumb">
   <ol class="dx-breadcrumb-list" data-dx-breadcrumb-list>
     <li class="dx-breadcrumb-item" data-dx-breadcrumb-item><a href="/" class="dx-breadcrumb-link" data-dx-breadcrumb-link data-dx-text="Home" data-dx-path="/">Home</a><span class="dx-breadcrumb-separator" aria-hidden="true">/</span></li>
@@ -1161,7 +1161,7 @@
       <section class="row">
         <h2>Steps</h2>
         <div class="row-content">
-          <div class="preview-grid">
+          <div class="demos-grid">
 <nav class="dx-steps" data-dx-steps data-dx-selected-index="1" aria-label="Demo steps">
   <ol class="dx-steps-list" role="list" data-dx-steps-list>
     <li class="dx-steps-item" role="listitem" data-dx-steps-item><button type="button" class="dx-steps-step" role="button" data-dx-steps-step data-dx-index="0" aria-current="step">Cart</button><span class="dx-steps-connector" aria-hidden="true"></span></li>
@@ -1177,7 +1177,7 @@
       <section class="row">
         <h2>Splitter</h2>
         <div class="row-content">
-          <div class="preview-grid">
+          <div class="demos-grid">
 <div class="dx-splitter dx-splitter--horizontal" data-dx-splitter data-dx-orientation="horizontal" aria-label="Demo splitter" style="height: 200px">
   <div class="dx-splitter-pane" role="group" aria-label="Left pane" data-dx-splitter-pane data-dx-size="40%" data-dx-collapsible style="flex: 0 0 40%"><div class="dx-splitter-content">Left pane</div></div>
   <div class="dx-splitter-handle" role="separator" data-dx-splitter-handle data-dx-index="0" aria-orientation="horizontal" aria-valuemin="20" aria-valuemax="80" aria-valuenow="40" aria-label="Resize handle 1" tabindex="0"><span class="dx-splitter-grip" aria-hidden="true"></span></div>
@@ -1190,7 +1190,7 @@
       <section class="row">
         <h2>Toc</h2>
         <div class="row-content">
-          <div class="preview-grid">
+          <div class="demos-grid">
 <nav class="dx-toc dx-toc--vertical" data-dx-toc aria-label="Demo toc">
   <ol class="dx-toc-list" data-dx-toc-list>
     <li class="dx-toc-item" data-dx-toc-item><a href="#toc-intro" class="dx-toc-link dx-toc-link--active" data-dx-toc-link aria-current="location">Introduction</a></li>
@@ -1205,7 +1205,7 @@
       <section class="row">
         <h2>Carousel</h2>
         <div class="row-content">
-          <div class="preview-grid">
+          <div class="demos-grid">
 <div class="dx-carousel" data-dx-carousel aria-label="Demo carousel" role="region" aria-roledescription="carousel">
   <button type="button" class="dx-carousel-prev" data-dx-carousel-prev aria-label="Previous slide" aria-controls="demo-carousel-slides">‹</button>
   <div id="demo-carousel-slides" class="dx-carousel-slides" data-dx-carousel-slides>
@@ -1221,7 +1221,7 @@
       <section class="row">
         <h2>Tree</h2>
         <div class="row-content">
-          <div class="preview-grid">
+          <div class="demos-grid">
 <div class="dx-tree" data-dx-tree data-dx-selection-mode="single" role="tree" aria-label="Demo tree" aria-multiselectable="false">
   <div class="dx-tree-children" role="group" data-dx-tree-children>
     <div class="dx-tree-item" role="treeitem" data-dx-tree-item data-dx-key="1" data-dx-text="Documents" aria-level="1" aria-setsize="2" aria-posinset="1" aria-expanded="true" aria-selected="false" tabindex="0">
@@ -1239,7 +1239,7 @@
       <section class="row">
         <h2>PickList</h2>
         <div class="row-content">
-          <div class="preview-grid">
+          <div class="demos-grid">
 <div class="dx-picklist" data-dx-picklist aria-label="Demo picklist">
   <div class="dx-picklist-panel" data-dx-picklist-source>
     <div class="dx-picklist-caption">Source</div>
@@ -1255,7 +1255,7 @@
       <section class="row">
         <h2>Scheduler</h2>
         <div class="row-content">
-          <div class="preview-grid">
+          <div class="demos-grid">
 <div class="dx-scheduler" data-dx-scheduler data-dx-view="week" role="group" aria-label="Demo scheduler">
   <div class="dx-scheduler-header">
     <button type="button" class="dx-scheduler-nav" data-dx-scheduler-prev aria-label="Previous">‹</button>
@@ -1276,7 +1276,7 @@
       <section class="row">
         <h2>Gantt</h2>
         <div class="row-content">
-          <div class="preview-grid">
+          <div class="demos-grid">
 <div class="dx-gantt" data-dx-gantt role="grid" aria-label="Demo gantt" aria-rowcount="2">
   <div class="dx-gantt-header" role="row">
     <div class="dx-gantt-header-cell" role="columnheader">Task</div>
@@ -1290,7 +1290,7 @@
       <section class="row">
         <h2>Pivot</h2>
         <div class="row-content">
-          <div class="preview-grid">
+          <div class="demos-grid">
 <div class="dx-pivot" data-dx-pivot aria-label="Demo pivot">
   <div class="dx-pivot-fields">
     <button type="button" class="dx-pivot-chip" data-dx-pivot-chip data-dx-zone="row" data-dx-property="region" aria-label="Remove row field Region">Region</button>
@@ -1312,7 +1312,7 @@
       <section class="row">
         <h2>Timeline</h2>
         <div class="row-content">
-          <div class="preview-grid">
+          <div class="demos-grid">
 <ol class="dx-timeline" data-dx-timeline role="list" aria-label="Demo timeline">
   <li class="dx-timeline-item"><span class="dx-timeline-marker" aria-hidden="true"></span><div class="dx-timeline-body"><div class="dx-timeline-label">Created</div><div class="dx-timeline-content">Jan 2026</div></div></li>
   <li class="dx-timeline-item"><span class="dx-timeline-marker" aria-hidden="true"></span><div class="dx-timeline-body"><div class="dx-timeline-label">Shipped</div><div class="dx-timeline-content">Mar 2026</div></div></li>
@@ -1324,7 +1324,7 @@
       <section class="row">
         <h2>VirtualGrid</h2>
         <div class="row-content">
-          <div class="preview-grid">
+          <div class="demos-grid">
 <div class="dx-virtual-grid" data-dx-virtual-grid role="grid" aria-label="Demo virtual grid" aria-rowcount="1000" tabindex="0">
   <div class="dx-virtual-header" role="row">
     <div class="dx-virtual-head-cell" role="columnheader">ID</div>
@@ -1338,7 +1338,7 @@
       <section class="row">
         <h2>QRCode</h2>
         <div class="row-content">
-          <div class="preview-grid">
+          <div class="demos-grid">
 <svg class="dx-qrcode" data-dx-qrcode role="img" aria-label="Demo QR code" width="96" height="96" viewBox="0 0 25 25" shape-rendering="crispEdges">
   <rect width="25" height="25" fill="var(--dx-color-surface)"></rect>
   <g fill="var(--dx-color-text)"><path d="M0 0h7v7H0zM1 1v5h5V1zM2 2h3v3H2z"></path><path d="M18 0h7v7h-7zM19 1v5h5V1zM20 2h3v3h-3z"></path><path d="M0 18h7v7H0zM1 19v5h5v-5zM2 20h3v3H2z"></path></g>
@@ -1350,7 +1350,7 @@
       <section class="row">
         <h2>Barcode</h2>
         <div class="row-content">
-          <div class="preview-grid">
+          <div class="demos-grid">
 <span class="dx-barcode" data-dx-barcode>
   <svg role="img" aria-label="Demo barcode" width="100%" height="60" viewBox="0 0 202 60" preserveAspectRatio="none">
     <rect width="202" height="60" fill="var(--dx-color-surface)"></rect>
@@ -1365,7 +1365,7 @@
       <section class="row">
         <h2>Chart</h2>
         <div class="row-content">
-          <div class="preview-grid">
+          <div class="demos-grid">
 <div class="dx-chart" data-dx-chart data-dx-width="600" data-dx-height="400"
      data-dx-series='[{"type":"line","title":"Sales","data":[{"month":"Jan","value":10},{"month":"Feb","value":20}],"categoryProperty":"month","valueProperty":"value"}]'
      aria-label="Demo chart" role="img">

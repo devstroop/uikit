@@ -84,7 +84,7 @@ All other `HTMLAttributes<HTMLElement>` are spread onto the `<aside>`.
   `[data-dx-sidebar-toggle]` behavior keeps the linked mask in sync
   (finds `[data-dx-sidebar-mask="#target"]` and mirrors the collapsed
   state), so no per-page JS is needed to show/hide the scrim.
-- The preview/site toggle button sets `aria-expanded`/`aria-controls`
+- The demos/site toggle button sets `aria-expanded`/`aria-controls`
   (see a11y) and flips the `expanded` prop; the component itself is
   fully controlled and does not listen to events.
 - htmx: `dx-sidebar--collapsed` on the aside is the initial state; the

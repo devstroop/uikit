@@ -2,7 +2,7 @@ node_modules/
 dist/
 !frameworks/react/dist/
 !frameworks/htmx/dist/
-preview/*/dist/
+demos/*/dist/
 visual/
 *.log
 .DS_Store

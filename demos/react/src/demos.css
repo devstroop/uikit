@@ -102,7 +102,7 @@ body {
   align-items: start;
 }
 
-.preview-grid {
+.demos-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   align-items: start;

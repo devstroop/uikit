@@ -129,7 +129,7 @@ body {
   align-items: start;
 }
 
-.preview-grid {
+.demos-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   align-items: start;
@@ -187,19 +187,19 @@ code {
   display: inline-block;
 }
 
-.preview-inputs {
+.demos-inputs {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1rem;
 }
 
-.preview-inputs strong {
+.demos-inputs strong {
   display: block;
   margin-bottom: 0.5rem;
   font-size: var(--dx-font-size-sm);
   color: var(--dx-color-text-muted);
 }
 
-.preview-inputs > div > * + * {
+.demos-inputs > div > * + * {
   margin-top: 0.5rem;
 }

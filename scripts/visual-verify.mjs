@@ -259,19 +259,19 @@ async function auditContrast(page) {
   }, CONTRAST_PAIRS);
 }
 
-const preview = spawn(
+const demos = spawn(
   process.execPath,
-  [join(ROOT, "node_modules", "vite", "bin", "vite.js"), "preview", "preview/react", "--port", String(REACT_PORT), "--strictPort"],
+  [join(ROOT, "node_modules", "vite", "bin", "vite.js"), "preview", "demos/react", "--port", String(REACT_PORT), "--strictPort"],
   { cwd: ROOT, stdio: "ignore" },
 );
 await waitFor(`http://localhost:${REACT_PORT}/`);
-const htmx = await serve(join(ROOT, "preview", "htmx"), HTMX_PORT);
+const htmx = await serve(join(ROOT, "demos", "htmx"), HTMX_PORT);
 
 async function auditAxe(page, app) {
   const builder = new AxeBuilder({ page });
   if (app === "react") {
-    // The react preview still runs against the legacy pin (frameworks/react),
-    // whose components hardcode --dt-era colors, while the preview themes have
+    // The react demos still runs against the legacy pin (frameworks/react),
+    // whose components hardcode --dt-era colors, while the demos themes have
     // moved to --dx-: canvas-vs-fallback pairs produce color-contrast failures
     // that are resolved by the Phase 5 submodule repoint. Every other axe rule
     // still runs on the react leg; the htmx leg runs the full audit.
@@ -338,7 +338,7 @@ for (const app of ["react", "htmx"]) {
 
 await browser.close();
 htmx.close();
-preview.kill();
+demos.kill();
 await new Promise((resolve) => setTimeout(resolve, 800));
 
 if (errors.length) {
