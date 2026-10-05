@@ -53,7 +53,7 @@ SVG chart core (RadzenChart parity subset): cartesian chart with category/value 
 | `ariaLabel` | `string` | `"Chart"` | aria-label on the figure. |
 | `className` | `string` | `undefined` | Extra class. |
 
-`ChartSeries` = `{ type: "line" \| "area" \| "bar" \| "column" \| "scatter" \| "bubble" \| "pie" \| "donut" \| "gauge" \| "radar" \| "funnel" \| "heatmap" \| "candlestick" \| "ohlc" \| "highlow" \| "trendline" \| "movingaverage" \| "treemap" \| "pyramid" \| "spider"; data: Record<string, unknown>[]; categoryProperty: string; valueProperty: string; title?: string; color?: string; stack?: string; labels?: { visible?: boolean }; minProperty?: string; maxProperty?: string; markers?: { shape?: "circle" \| "square" \| "diamond" \| "triangle"; size?: number; visible?: boolean }; dash?: string \| number[]; lineWidth?: number; innerRadius?: number; sizeProperty?: string; rowProperty?: string }`
+`ChartSeries` = `{ type: "line" \| "area" \| "bar" \| "column" \| "scatter" \| "bubble" \| "pie" \| "donut" \| "gauge" \| "radar" \| "funnel" \| "heatmap" \| "candlestick" \| "ohlc" \| "highlow" \| "trendline" \| "movingaverage" \| "treemap" \| "pyramid" \| "spider" \| "sankey"; data: Record<string, unknown>[]; categoryProperty: string; valueProperty: string; title?: string; color?: string; stack?: string; labels?: { visible?: boolean }; minProperty?: string; maxProperty?: string; markers?: { shape?: "circle" \| "square" \| "diamond" \| "triangle"; size?: number; visible?: boolean }; dash?: string \| number[]; lineWidth?: number; innerRadius?: number; sizeProperty?: string; rowProperty?: string }`
 `SeriesClickArgs` = `{ seriesTitle: string; category: string; value: number; item: Record<string, unknown> }`
 
 ## Behavior
@@ -68,5 +68,6 @@ SVG chart core (RadzenChart parity subset): cartesian chart with category/value 
 - Treemap: squarified value-proportional tiling with `childrenProperty` nesting (children tile inside the parent rect); labels skip tiny rects; leaf clicks report the leaf item.
 - Pyramid: stepped segments widening toward the base for ascending data (own width up top, next width below, no last-row shrink); shares the funnel tooltip/click/label contract.
 - Spider: radar geometry with per-category (per-spoke) scaling instead of the shared value scale — each spoke normalizes to its own maximum across spider series, so mixed-magnitude series stay comparable. Reuses the radar web grid; polygon, markers, labels, tooltips, and clicks follow the line contract.
+- Sankey: nodes laid in depth columns (longest-path, cycle-guarded), node height is max(inflow, outflow), links stack inside endpoints as proportional ribbons (`sourceProperty`/`targetProperty`, self-links and non-positive flows skipped).
 - Tooltips: single shared tooltip div positioned near the hovered point showing `title: value`; hidden on leave.
 - htmx variant: `<div class="dx-chart" data-dx-chart data-dx-series='<json>' ...>`; charts are server-rendered reference markup (see lib/components/chart/chart.html for stacked/full-stacked/range/marker examples); the behavior wires tooltip + click dispatching dx:chart-point-click and is series-type agnostic.
