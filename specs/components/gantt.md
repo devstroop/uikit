@@ -1,6 +1,6 @@
 ---
 name: Gantt
-status: proposed
+status: implemented
 category: data
 frameworks:
   react: v0.26.0
@@ -11,15 +11,14 @@ tokens:
   - "color.text"
   - "color.text-muted"
   - "color.primary"
-  - "color.primary-fg"
   - "color.outline-primary"
   - "radius.sm"
+  - "radius.md"
   - "font.sans"
   - "font.size-sm"
   - "font.weight-medium"
   - "space.1"
   - "space.2"
-  - "transition.fast"
 a11y:
   - "Root has role='grid' with aria-label and aria-rowcount; each task row is role='row' with aria-selected."
   - "Task bar is <div> with role='button' aria-label from task name + dates, aria-pressed for selected, and aria-valuenow/valuemin/valuemax for progress."
