@@ -30,6 +30,19 @@
  *
  * The spec is the contract: both directions are violations.
  *
+ * Props and behavior ride the same contract (spec is source of truth,
+ * implementations may extend):
+ *
+ *   props    every `## API` table prop must be covered by the react
+ *            interface (or native/spread) and by the htmx markup surface
+ *            (modifier, attribute, or documented value). Render-control
+ *            props (REACT_ONLY_PROPS) are react-side by design. Specs
+ *            without an API table are reported, not failed.
+ *   behavior every `## Tests` row must share a probe word with the test
+ *            suite(s) its scope marker selects ((htmx), (react), or
+ *            either when unmarked). Specs without a Tests table are
+ *            reported, not failed.
+ *
  *   node scripts/validate-parity.mjs
  *
  * Exit 1 on any violation.
@@ -45,9 +58,19 @@ import {
   kebabCase,
   dirKey,
   isKnownPinGap,
+  isKnownPropGap,
+  isKnownBehaviorGap,
   tokenUsed,
   dottedFromReactName,
   extractVarRefs,
+  extractSpecProps,
+  extractReactProps,
+  collectReactTypes,
+  extractHtmxSurface,
+  reactCoversProp,
+  htmxCoversProp,
+  scenarioSuites,
+  scenarioProbes,
 } from "./token-names.mjs";
 import "./ci-annotations.mjs";
 
@@ -145,6 +168,340 @@ async function usedTokens(dir) {
   return bundle;
 }
 
+async function dirSources(dir, exts) {
+  const out = [];
+  let entries;
+  try {
+    entries = await readdir(dir, { withFileTypes: true });
+  } catch {
+    return out;
+  }
+  for (const e of entries) {
+    if (e.isFile() && exts.test(e.name)) {
+      out.push(await readFile(join(dir, e.name), "utf8"));
+    }
+  }
+  return out;
+}
+
+/** Lowercased test text per component dirKey, per technology. */
+async function testCorpora() {
+  const corpora = { react: new Map(), htmx: new Map() };
+  const reactBase = join(FRAMEWORKS_DIR, "react", "lib", "components");
+  // alias targets: InputProps = TextBoxProps shares TextBox's coverage.
+  // Applied after the per-dir corpora are built, below.
+  const aliasTo = new Map(); // dirKey -> dirKey
+  try {
+    const dirs = new Map();
+    for (const e of await readdir(reactBase, { withFileTypes: true })) {
+      if (e.isDirectory()) dirs.set(dirKey(e.name), e.name);
+    }
+    for (const [dkey, dname] of dirs) {
+      for (const src of await dirSources(join(reactBase, dname), /\.(tsx|ts)$/)) {
+        for (const m of src.matchAll(
+          /(?:export\s+)?type\s+\w*(?:Props|Options)\w*[^=]*=\s*(\w+)\s*;/g
+        )) {
+          const target = dirs.get(dirKey(m[1].replace(/(Props|Options)$/, "")));
+          if (target && dirKey(target) !== dkey) aliasTo.set(dkey, dirKey(target));
+        }
+      }
+    }
+  } catch {
+    /* alias resolution is best-effort */
+  }
+  try {
+    for (const e of await readdir(reactBase, { withFileTypes: true })) {
+      if (!e.isDirectory()) continue;
+      const texts = await dirSources(join(reactBase, e.name), /\.test\.(tsx|ts|jsx|js)$/);
+      if (texts.length) {
+        corpora.react.set(
+          dirKey(e.name),
+          (corpora.react.get(dirKey(e.name)) ?? "") + "\n" + texts.join("\n").toLowerCase()
+        );
+      }
+    }
+  } catch {
+    /* no react pin */
+  }
+  for (const [from, to] of aliasTo) {
+    if (corpora.react.has(to)) {
+      corpora.react.set(
+        from,
+        (corpora.react.get(from) ?? "") + "\n" + corpora.react.get(to)
+      );
+    }
+  }
+  // hooks: useLiveRegion.test.ts covers the live-region spec (same
+  // strip-use-prefix rule as validate-specs.mjs).
+  try {
+    const hooksBase = join(FRAMEWORKS_DIR, "react", "lib", "hooks");
+    for (const e of await readdir(hooksBase, { withFileTypes: true })) {
+      if (!e.isFile() || !/\.test\.(ts|tsx|js|jsx)$/.test(e.name)) continue;
+      const key = dirKey(
+        e.name.replace(/\.[^.]+$/, "").replace(/^use/, "").replace(/\.[^.]+$/, "")
+      );
+      const text = (await readFile(join(hooksBase, e.name), "utf8")).toLowerCase();
+      corpora.react.set(key, (corpora.react.get(key) ?? "") + "\n" + text);
+    }
+  } catch {
+    /* no hooks dir in older pins */
+  }
+  // re-export following: entrypoint dirs (DialogService -> Dialog)
+  // share the underlying dir's tests, mirroring the props logic.
+  try {
+    const dirs = new Map();
+    for (const e of await readdir(reactBase, { withFileTypes: true })) {
+      if (e.isDirectory()) dirs.set(dirKey(e.name), e.name);
+    }
+    for (const [dkey, dname] of dirs) {
+      const dirPath = join(reactBase, dname);
+      for (const src of await dirSources(dirPath, /\.(tsx|ts)$/)) {
+        for (const m of src.matchAll(
+          /export\s+(?:type\s+)?\{[^}]*\}\s*from\s*['"](\.[^'"]+)['"]/g
+        )) {
+          const base = join(dirPath, m[1]);
+          for (const cand of [`${base}.tsx`, `${base}.ts`, join(base, "index.tsx"), join(base, "index.ts")]) {
+            const hit = [...dirs.values()].find(
+              (d) => cand.startsWith(join(reactBase, d) + "/") || cand === join(reactBase, d)
+            );
+            if (hit && hit !== dname) {
+              const extra = corpora.react.get(dirKey(hit));
+              if (extra) {
+                corpora.react.set(dkey, (corpora.react.get(dkey) ?? "") + "\n" + extra);
+              }
+              break;
+            }
+          }
+        }
+      }
+    }
+  } catch {
+    /* re-export following is best-effort */
+  }
+  const htmxBase = join(FRAMEWORKS_DIR, "htmx", "tests");
+  // Attribute by content, not filename: form-field-error-rendering.test.js
+  // covers the field spec; form-validation-rules covers validators.
+  // A test file belongs to every component whose data-dx-* attribute
+  // or dx-* class it references (dirKey-normalized), plus every spec
+  // whose htmx reference documents a data-dx-* attribute the test uses.
+  const htmxDirs = new Map(); // dirKey -> true
+  const attrToSpecs = new Map(); // data-dx-* -> [dirKey]
+  try {
+    const compBase = join(FRAMEWORKS_DIR, "htmx", "lib", "components");
+    for (const e of await readdir(compBase, { withFileTypes: true })) {
+      if (!e.isDirectory()) continue;
+      htmxDirs.set(dirKey(e.name), true);
+      const surface = (
+        await dirSources(join(compBase, e.name), /\.(html|css|js)$/)
+      )
+        .join("\n")
+        .toLowerCase();
+      for (const m of surface.matchAll(/data-dx-([a-z][a-z-]*)/g)) {
+        const attr = m[0];
+        if (!attrToSpecs.has(attr)) attrToSpecs.set(attr, []);
+        attrToSpecs.get(attr).push(dirKey(e.name));
+      }
+    }
+  } catch {
+    /* no htmx pin */
+  }
+  try {
+    const walk = async (dir) => {
+      for (const e of await readdir(dir, { withFileTypes: true })) {
+        const p = join(dir, e.name);
+        if (e.isDirectory()) await walk(p);
+        else if (/\.test\.(js|ts)$/.test(e.name)) {
+          const text = (await readFile(p, "utf8")).toLowerCase();
+          const keys = new Set([
+            dirKey(e.name.replace(/\.test\.(js|ts)$/, "")),
+          ]);
+          for (const m of text.matchAll(/data-dx-([a-z-]+)/g)) {
+            const k = dirKey(m[1]);
+            if (htmxDirs.has(k)) keys.add(k);
+            for (const s of attrToSpecs.get(m[0]) ?? []) keys.add(s);
+          }
+          for (const m of text.matchAll(/\.dx-([a-z-]+)/g)) {
+            const k = dirKey(m[1].split("--")[0].split("__")[0]);
+            if (htmxDirs.has(k)) keys.add(k);
+          }
+          for (const k of keys) {
+            corpora.htmx.set(k, (corpora.htmx.get(k) ?? "") + "\n" + text);
+          }
+        }
+      }
+    };
+    await walk(htmxBase);
+  } catch {
+    /* no htmx tests */
+  }
+  return corpora;
+}
+
+let corporaCache = null;
+async function corpora() {
+  if (!corporaCache) corporaCache = await testCorpora();
+  return corporaCache;
+}
+
+/** Whole-lib index: Props/Options type name -> body text. */
+let propsIndexCache = null;
+async function reactPropsIndex() {
+  if (propsIndexCache) return propsIndexCache;
+  const bodies = new Map();
+  const base = join(FRAMEWORKS_DIR, "react", "lib");
+  const walk = async (dir) => {
+    let entries;
+    try {
+      entries = await readdir(dir, { withFileTypes: true });
+    } catch {
+      return;
+    }
+    for (const e of entries) {
+      const p = join(dir, e.name);
+      if (e.isDirectory()) await walk(p);
+      else if (/\.(tsx|ts)$/.test(e.name) && !/\.test\./.test(e.name)) {
+        const { bodies: b } = collectReactTypes([await readFile(p, "utf8")]);
+        for (const [k, v] of b) {
+          if (!bodies.has(k)) bodies.set(k, v);
+        }
+      }
+    }
+  };
+  await walk(base);
+  propsIndexCache = bodies;
+  return bodies;
+}
+
+function testRows(markdown) {
+  const lines = markdown.split("\n");
+  const start = lines.findIndex((l) => l.startsWith("## Tests"));
+  if (start < 0) return null;
+  let end = lines.findIndex((l, i) => i > start && l.startsWith("## "));
+  if (end < 0) end = lines.length;
+  const pipes = lines.slice(start + 1, end).filter((l) => l.startsWith("|"));
+  if (pipes.length < 3) return [];
+  const header = pipes[0].split("|").map((c) => c.trim());
+  if (/^suite$/i.test(header[1] ?? "")) return "meta";
+  const rows = [];
+  for (const line of pipes.slice(2)) {
+    const cells = line.split("|").map((c) => c.trim());
+    if (cells.length < 3 || /^-+$/.test(cells[1])) continue;
+    rows.push(cells.slice(1, -1));
+  }
+  return rows;
+}
+
+async function checkProps(spec, componentName, markdown, violations) {
+  const declared = extractSpecProps(markdown);
+  if (!declared) {
+    console.log(`○ ${spec}: no API table — props unchecked`);
+    return violations;
+  }
+  if (declared.length === 0) {
+    console.log(`○ ${spec}: empty API table — props unchecked`);
+    return violations;
+  }
+  const before = violations;
+  const reactDir = await implDir("react", componentName);
+  const htmxDir = await implDir("htmx", componentName);
+  let reactSources = reactDir
+    ? await dirSources(reactDir, /\.(tsx|ts|jsx|js)$/)
+    : [];
+  // follow `export … from './types'` re-exports (Chart pattern)
+  if (reactDir) {
+    const extra = [];
+    for (const src of reactSources) {
+      for (const m of src.matchAll(
+        /export\s+(?:type\s+)?\{[^}]*\}\s*from\s*['"](\.[^'"]+)['"]/g
+      )) {
+        for (const cand of [
+          m[1],
+          `${m[1]}.ts`,
+          `${m[1]}.tsx`,
+          `${m[1]}/index.ts`,
+          `${m[1]}/index.tsx`,
+        ]) {
+          try {
+            extra.push(await readFile(join(reactDir, cand), "utf8"));
+            break;
+          } catch {
+            /* try next candidate */
+          }
+        }
+      }
+    }
+    reactSources = reactSources.concat(extra);
+  }
+  const reactBundle = reactDir
+    ? extractReactProps(reactSources, await reactPropsIndex())
+    : null;
+  const htmxSurface = htmxDir
+    ? extractHtmxSurface(await dirSources(htmxDir, /\.(html|css|js)$/))
+    : null;
+  for (const { name: prop, values } of declared) {
+    if (reactBundle) {
+      if (!reactCoversProp(prop, reactBundle)) {
+        if (isKnownPropGap(spec, prop, "react")) {
+          console.log(`✓ ${spec} (react): \`${prop}\` — known prop gap`);
+        } else {
+          console.error(`✗ ${spec} (react): spec prop \`${prop}\` not in interface`);
+          violations++;
+        }
+      }
+    }
+    if (htmxSurface) {
+      const hit = htmxCoversProp(spec, prop, values, htmxSurface);
+      if (!hit) {
+        if (isKnownPropGap(spec, prop, "htmx")) {
+          console.log(`✓ ${spec} (htmx): \`${prop}\` — known prop gap`);
+        } else {
+          console.error(`✗ ${spec} (htmx): spec prop \`${prop}\` not in markup surface`);
+          violations++;
+        }
+      }
+    }
+  }
+  if (violations === before) console.log(`✓ ${spec} props parity`);
+  return violations;
+}
+
+async function checkBehavior(spec, componentName, markdown, violations) {
+  const rows = testRows(markdown);
+  if (!rows) {
+    console.log(`○ ${spec}: no Tests table — behavior unchecked`);
+    return violations;
+  }
+  if (rows === "meta") {
+    console.log(`○ ${spec}: suite-index Tests table — behavior unchecked`);
+    return violations;
+  }
+  const before = violations;
+  const { react, htmx } = await corpora();
+  const keys = componentDirKeys(componentName);
+  const bodies = {
+    react: keys.map((k) => react.get(k) ?? "").join("\n"),
+    htmx: keys.map((k) => htmx.get(k) ?? "").join("\n"),
+  };
+  for (const cells of rows) {
+    const scenario = cells[0] ?? "";
+    const suites = scenarioSuites(scenario);
+    const probes = scenarioProbes(cells);
+    const haystacks = suites.map((s) => bodies[s]).filter(Boolean);
+    if (probes.length === 0 || haystacks.length === 0) continue;
+    const hit = probes.some((w) => haystacks.some((h) => h.includes(w)));
+    if (!hit) {
+      if (isKnownBehaviorGap(spec, scenario)) {
+        console.log(`✓ ${spec}: "${scenario}" — known behavior gap`);
+      } else {
+        console.error(`✗ ${spec}: Tests row "${scenario}" unreferenced by ${suites.join("/")} tests`);
+        violations++;
+      }
+    }
+  }
+  if (violations === before) console.log(`✓ ${spec} behavior parity`);
+  return violations;
+}
+
 async function main() {
   const known = await knownTokens();
   const files = (await readdir(SPECS_DIR)).filter((f) => f.endsWith(".md"));
@@ -218,6 +575,18 @@ async function main() {
         console.log(`✓ ${name} (${technology}) token parity`);
       }
     }
+
+    // props (per framework, spec ⊆ impl): every API-table prop must be
+    // covered by the react interface and by the htmx markup surface.
+    violations = await checkProps(
+      name,
+      meta.name ?? name,
+      markdown,
+      violations
+    );
+
+    // behavior: every Tests row must share a probe with its suite(s).
+    violations = await checkBehavior(name, meta.name ?? name, markdown, violations);
   }
 
   if (violations > 0) {

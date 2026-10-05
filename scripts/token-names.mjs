@@ -311,6 +311,368 @@ export function tokenUsed(dotted, used) {
   return null;
 }
 
+/* ------------------------------- props parity ------------------------------- */
+/**
+ * Props parity (spec is source of truth, implementations may extend).
+ * Spec API tables (`## API`, first column) declare the contract; react
+ * prop interfaces and the htmx markup surface must each cover it.
+ */
+
+/** Props no htmx reference implements: render-control, not configurability. */
+export const REACT_ONLY_PROPS = new Set([
+  "visible",
+  "className",
+  "style",
+  "children",
+]);
+
+/** Native DOM props a react interface inherits via *HTMLAttributes. */
+export const NATIVE_HTML_PROPS = new Set([
+  "id",
+  "title",
+  "href",
+  "disabled",
+  "placeholder",
+  "readOnly",
+  "tabIndex",
+  "className",
+  "style",
+  "htmlFor",
+]);
+
+/**
+ * Per-spec htmx name divergences: spec prop -> tokens the htmx reference
+ * uses instead (e.g. an id-association prop documented as for/id markup).
+ * Explicit and reviewable; the generic name/value matcher covers the rest.
+ */
+export const HTMX_PROP_ALIASES = {
+  // htmx spells responsive tiers as breakpoint infixes (.dx-col--sm-N),
+  // not sizeSm props.
+  column: {
+    sizeSm: ["--sm-"],
+    sizeMd: ["--md-"],
+    sizeLg: ["--lg-"],
+    sizeXl: ["--xl-"],
+    sizeXxl: ["--xxl-"],
+    "orderSm … orderXxl": ["-order-"],
+  },
+  // label association renders as for=/id= attributes, not a prop name.
+  field: { htmlFor: ["for="] },
+  label: { htmlFor: ["for="] },
+  // demonstrated under feature words rather than the prop name.
+  barcode: { showValue: ["barcode-value"] },
+  table: { gridLines: ["--grid-"], allowAlternatingRows: ["alternating"] },
+  togglebutton: { defaultPressed: ["pressed"] },
+  toast: { pauseOnHover: ["pause"] },
+};
+
+/** Gaps triaged as covered-but-divergent (spec, prop, framework). */
+export const KNOWN_PROP_GAPS = [
+  // tone-vs-severity naming decision (breaking): specs say tone, react
+  // says severity. Tracked for the unification call.
+  ["alert", "tone", "react"],
+  ["badge", "tone", "react"],
+  ["progress", "tone", "react"],
+  ["toast", "tone", "react"],
+  // icon system divergence: spec+htmx describe SVG (name/strokeWidth),
+  // react ships a ligature font (icon/size/color).
+  ["icon", "name", "react"],
+  ["icon", "strokeWidth", "react"],
+  // items-driven API vs children composition.
+  ["menu", "items", "react"],
+  ["menu", "orientation", "react"],
+  ["panel-menu", "items", "react"],
+  // breakpoint top tier: spec/htmx xxl vs react xx.
+  ["column", "sizeXxl", "react"],
+  ["column", "orderSm … orderXxl", "react"],
+  // small API deltas awaiting product call.
+  ["datepicker", "showInput", "react"],
+  ["theme-switcher", "defaultTheme", "react"],
+  // pending #236 (typography spec rewrite to the camelCase Text API).
+  ["typography", "variant", "react"],
+  ["typography", "as", "react"],
+  // htmx references don't demo the full prop surface yet (static demos
+  // trail the react API). Tracked for the demo-coverage sprint.
+  ["carousel", "defaultIndex", "htmx"],
+  ["checkboxlist", "options", "htmx"],
+  ["colorpicker", "invalid", "htmx"],
+  ["colorpicker", "placeholder", "htmx"],
+  ["data-list", "wrapItems", "htmx"],
+  ["data-list", "itemTemplate", "htmx"],
+  ["data-list", "emptyMessage", "htmx"],
+  ["data-list", "emptyTemplate", "htmx"],
+  ["data-list", "loadingTemplate", "htmx"],
+  ["data-list", "isLoading", "htmx"],
+  ["data-list", "showPageSizeSelector", "htmx"],
+  ["data-list", "ariaLabel", "htmx"],
+  ["datepicker", "showButton", "htmx"],
+  ["datepicker", "showInput", "htmx"],
+  ["datepicker", "allowClear", "htmx"],
+  ["datepicker", "disabledDates", "htmx"],
+  ["drop-zone", "dragLabel", "htmx"],
+  ["drop-zone", "browseText", "htmx"],
+  ["form", "model", "htmx"],
+  ["gantt", "view", "htmx"],
+  ["numeric", "incrementLabel", "htmx"],
+  ["pager", "pagingSummaryTemplate", "htmx"],
+  ["pager", "pageTitleFormat", "htmx"],
+  ["pager", "pageAriaLabelFormat", "htmx"],
+  ["password", "showLabel", "htmx"],
+  ["password", "hideLabel", "htmx"],
+  ["pick-list", "keyProperty", "htmx"],
+  ["pivot", "aggregateFields", "htmx"],
+  ["qrcode", "size", "htmx"],
+  ["radiobuttonlist", "options", "htmx"],
+  ["rating", "clearLabel", "htmx"],
+  ["rating", "rateLabel", "htmx"],
+  ["scheduler", "resources", "htmx"],
+  ["security-code", "autoFocus", "htmx"],
+  ["security-code", "liveAnnounce", "htmx"],
+  ["signature-pad", "clearLabel", "htmx"],
+  ["slider", "minLabel", "htmx"],
+  ["slider", "maxLabel", "htmx"],
+  ["table", "rowKey", "htmx"],
+  ["timespanpicker", "allowClear", "htmx"],
+  ["timespanpicker", "tabIndex", "htmx"],
+  ["tree", "textProperty", "htmx"],
+  ["tree", "keyProperty", "htmx"],
+  ["upload", "parameterName", "htmx"],
+  ["upload", "chooseText", "htmx"],
+  ["virtual-grid", "rowHeight", "htmx"],
+  ["virtual-grid", "loadData", "htmx"],
+];
+
+/** Rows triaged as covered-but-differently-worded (spec, scenario). */
+export const KNOWN_BEHAVIOR_GAPS = [
+  // covered: 'filters files by accept'.
+  ["drop-zone", "Accept filter"],
+  // covered: 'strips non-numeric characters while typing'.
+  ["numeric", "Typing sanitize"],
+  // ligature-system tests; rows describe the SVG system (see icon issue).
+  ["icon", "Default size/stroke"],
+  ["icon", "`size` / `strokeWidth`"],
+  ["icon", "Glyph"],
+];
+
+export function isKnownPropGap(spec, prop, framework) {
+  return KNOWN_PROP_GAPS.some(
+    ([s, p, f]) => s === spec && p === prop && f === framework
+  );
+}
+
+export function isKnownBehaviorGap(spec, scenario) {
+  return KNOWN_BEHAVIOR_GAPS.some(([s, r]) => s === spec && r === scenario);
+}
+
+/** First-column prop names (plus Type-column values) of a spec API table. */
+export function extractSpecProps(markdown) {
+  const lines = markdown.split("\n");
+  const start = lines.findIndex((l) => l.startsWith("## API"));
+  if (start < 0) return null;
+  let end = lines.findIndex((l, i) => i > start && l.startsWith("## "));
+  if (end < 0) end = lines.length;
+  const out = [];
+  const apiLines = lines.slice(start + 1, end);
+  for (let i = 0; i < apiLines.length; i++) {
+    const line = apiLines[i];
+    if (!line.startsWith("|")) continue;
+    // header row: followed by the delimiter row
+    if (/^\|[\s\-:|]+\|$/.test((apiLines[i + 1] ?? "").trim())) continue;
+    const cells = line.split("|").map((c) => c.trim());
+    if (cells.length < 4 || /^-+$/.test(cells[1])) continue;
+    const raw = cells[1].replace(/`/g, "").trim();
+    // "ours / Radzen" pairs document the local name first; dotted names
+    // (Provider.prop) contract on the leaf; "(all)"/"—" rows blanket native
+    // props and carry no single name to check.
+    if (!raw || raw.startsWith("(") || /^[^a-zA-Z0-9]+$/.test(raw)) continue;
+    const first = raw.split("/")[0].trim();
+    const segs = first.split(".");
+    const name = segs[segs.length - 1].trim();
+    if (!name) continue;
+    const values = [...cells[2].matchAll(/`([^`]+)`/g)].map((x) => x[1]);
+    out.push({ name, values });
+  }
+  return out;
+}
+
+/** Raw *Props/*Options type bodies across sources (nesting-aware). */
+export function collectReactTypes(sources) {
+  const bodies = new Map(); // type name -> body text
+  const aliases = new Map(); // type name -> referenced type name
+  let native = false;
+  let spread = false;
+  for (const src of sources) {
+    if (/\{\.\.\.\w+\}/.test(src)) spread = true;
+    // Props threaded straight through React generics (Label pattern):
+    // forwardRef<El, LabelHTMLAttributes<El>> — no interface at all.
+    if (/forwardRef\s*<[^>]*\b\w*Attributes\s*</.test(src)) native = true;
+    const decl =
+      /(?:export\s+)?(?:interface|type)\s+(\w+)(?:\s*<[^>]*>)?\s*(?:extends\s+([^\{=;]+?))?\s*(?:=\s*[^;{]+?)?\s*\{/g;
+    for (const m of src.matchAll(decl)) {
+      const [, tname, ext] = m;
+      if (ext && /Attributes/.test(ext)) native = true;
+      // brace-scan from the matched `{` to its mate (nesting-aware)
+      let depth = 0;
+      let body = "";
+      for (let i = m.index + m[0].length - 1; i < src.length; i++) {
+        const ch = src[i];
+        if (ch === "{") depth++;
+        else if (ch === "}") {
+          depth--;
+          if (depth === 0) break;
+        }
+        body += ch;
+      }
+      bodies.set(tname, (bodies.get(tname) ?? "") + "\n" + body);
+    }
+    // plain aliases and intersections: type InputProps = TextBoxProps;
+    // type LayoutProps = LayoutCommonProps & (… | HTMLAttributes<…>)
+    for (const m of src.matchAll(
+      /(?:export\s+)?type\s+(\w*(?:Props|Options)\w*)[^=]*=\s*([^;]+);/g
+    )) {
+      const rhs = m[2];
+      if (/Attributes/.test(rhs)) native = true;
+      const refs = [...rhs.matchAll(/\b([A-Z]\w*)\b/g)].map((x) => x[1]);
+      for (const ref of refs) {
+        if (ref !== m[1]) aliases.set(m[1] + "|" + ref, ref);
+      }
+    }
+  }
+  return { bodies, aliases, native, spread };
+}
+
+function membersOf(body, into) {
+  let depth = 0;
+  for (const line of body.split("\n")) {
+    if (depth <= 1) {
+      const pm = /^\s*(?:readonly\s+)?(\w+)\??\s*:/.exec(line);
+      if (pm) into.add(pm[1]);
+    }
+    for (const ch of line) {
+      if (ch === "{") depth++;
+      else if (ch === "}") depth--;
+    }
+  }
+}
+
+/** Member names of every *Props/*Options interface in TSX sources. */
+export function extractReactProps(sources, globalBodies) {
+  const { bodies, aliases, native, spread } = collectReactTypes(sources);
+  // resolve aliases transitively (InputProps = TextBoxProps, …)
+  const surface = new Set(
+    [...bodies.keys()].filter((k) => /(?:Props|Options)$/.test(k.split("|")[0]))
+  );
+  for (let round = 0; round < 5; round++) {
+    let moved = false;
+    for (const [from, to] of aliases) {
+      const target = bodies.get(to) ?? globalBodies?.get(to);
+      if (target) {
+        const base = from.split("|")[0];
+        if (!bodies.has(base)) {
+          bodies.set(base, target);
+          moved = true;
+        }
+        if (!surface.has(to)) {
+          surface.add(to);
+          moved = true;
+        }
+      }
+    }
+    if (!moved) break;
+  }
+  const props = new Set();
+  for (const [tname, body] of bodies) {
+    if (tname.includes("|")) continue;
+    if (!surface.has(tname) && !/(?:Props|Options)$/.test(tname)) continue;
+    membersOf(body, props);
+  }
+  return { props, native, spread };
+}
+
+/** Normalized text of an htmx component dir (.html/.css/.js). */
+export function extractHtmxSurface(sources) {
+  const text = sources.join("\n").toLowerCase();
+  return {
+    text,
+    squashed: text.replace(/[^a-z0-9]/g, ""),
+  };
+}
+
+export function propKebab(name) {
+  return name
+    .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
+    .toLowerCase();
+}
+
+export function propSquashed(name) {
+  return name.toLowerCase().replace(/[^a-z0-9]/g, "");
+}
+
+/** Does the react side cover a spec prop? */
+export function reactCoversProp(prop, bundle) {
+  if (bundle.props.has(prop)) return { via: "interface" };
+  const flat = prop.toLowerCase().replace(/-/g, "");
+  if (bundle.spread && (flat.startsWith("aria") || flat.startsWith("data")))
+    return { via: "spread" };
+  if (bundle.native && NATIVE_HTML_PROPS.has(prop)) return { via: "native" };
+  return null;
+}
+
+/** Does the htmx side cover a spec prop? */
+export function htmxCoversProp(spec, prop, values, surface) {
+  if (REACT_ONLY_PROPS.has(prop)) return { via: "react-only" };
+  // Static markup cannot express callbacks or controlled state: event
+  // props flow through DOM events on interactive components (dx:*
+  // CustomEvents wired in behaviors.js) and values render inline.
+  if (/^on[A-Z]/.test(prop)) return { via: "callback" };
+  if (prop === "value" || prop === "defaultValue") return { via: "controlled" };
+  const aliases =
+    (HTMX_PROP_ALIASES[spec] && HTMX_PROP_ALIASES[spec][prop]) || [];
+  const kebab = propKebab(prop);
+  const candidates = [
+    kebab,
+    propSquashed(prop),
+    // plural folding: spec `columns`, demo prose "column"
+    kebab.endsWith("s") && kebab.length > 3 ? kebab.slice(0, -1) : null,
+    ...aliases.map((a) => a.toLowerCase()),
+  ].filter(Boolean);
+  for (const c of candidates) {
+    if (!c) continue;
+    if (surface.text.includes(c) || surface.squashed.includes(c))
+      return { via: "surface" };
+  }
+  for (const v of values || []) {
+    const norm = v.toLowerCase().replace(/[^a-z0-9]/g, "");
+    if (norm.length > 1 && surface.squashed.includes(norm))
+      return { via: "value" };
+  }
+  return null;
+}
+
+/* ------------------------------- behavior parity ------------------------------- */
+
+const SCENARIO_STOP = new Set(
+  "a an the and or with without when while renders render rendered test tests component element correctly properly its it is are to of for in on as by be that this from via per each both only not no if then than into over prop props callback callbacks classes class state forms scenario assertion default size sizes variant style text content click clicks toggle item items react htmx applies applied present names value values shows show uses using used".split(
+    " "
+  )
+);
+
+/** Scope markers select which suite a Tests row belongs to. */
+export function scenarioSuites(scenario) {
+  const s = scenario.toLowerCase();
+  if (s.includes("(htmx)")) return ["htmx"];
+  if (s.includes("(react)")) return ["react"];
+  return ["react", "htmx"];
+}
+
+/** Three longest distinctive words — the row's probe. */
+export function scenarioProbes(cells) {
+  const words = (cells.join(" ").toLowerCase().match(/[a-z0-9]+/g) || []).filter(
+    (w) => !SCENARIO_STOP.has(w) && w.length > 3
+  );
+  return [...new Set(words)].sort((a, b) => b.length - a.length).slice(0, 3);
+}
+
 /* ------------------------------- self-test ------------------------------- */
 
 function selfTest() {
