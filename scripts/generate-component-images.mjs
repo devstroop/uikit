@@ -166,7 +166,7 @@ async function ensureServers() {
     reactPort = 4199;
     const demos = spawn(
       process.execPath,
-      [join(ROOT, "node_modules", "vite", "bin", "vite.js"), "demos", "demos/react", "--port", String(reactPort), "--strictPort"],
+      [join(ROOT, "node_modules", "vite", "bin", "vite.js"), "preview", "demos/react", "--port", String(reactPort), "--strictPort"],
       { cwd: ROOT, stdio: "ignore" },
     );
     await waitFor(`http://localhost:${reactPort}/`);

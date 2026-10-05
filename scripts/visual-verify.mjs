@@ -261,7 +261,7 @@ async function auditContrast(page) {
 
 const demos = spawn(
   process.execPath,
-  [join(ROOT, "node_modules", "vite", "bin", "vite.js"), "demos", "demos/react", "--port", String(REACT_PORT), "--strictPort"],
+  [join(ROOT, "node_modules", "vite", "bin", "vite.js"), "preview", "demos/react", "--port", String(REACT_PORT), "--strictPort"],
   { cwd: ROOT, stdio: "ignore" },
 );
 await waitFor(`http://localhost:${REACT_PORT}/`);
