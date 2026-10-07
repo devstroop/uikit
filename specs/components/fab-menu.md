@@ -42,9 +42,9 @@ Floating action button with an expandable radial/vertical menu (RadzenFabMenu pa
 |---|---|---|---|
 | `items` | `FabMenuItem[]` | — | Items (required). |
 | `position` / `Position` | `"bottom-right" \| "bottom-left" \| "top-right" \| "top-left"` | `"bottom-right"` | Screen position. |
-| `icon` | `string` | `"+"` | Main button icon/text. |
+| `icon` | `string` | `"add"` | Main button icon (canonical Material Symbols ligature name, e.g. `add`). React types this as `IconName`; literal glyphs like `"+"` are not accepted there. |
 | `onClick` / `Click` | `(args: FabMenuItemEventArgs) => void` | `undefined` | Called when an item is clicked. |
 | `ariaLabel` | `string` | `"Open menu"` | aria-label on the main button. |
 | `className` | `string` | `undefined` | Extra class. |
 
-`FabMenuItem` = `{ text: string; icon?: string; value?: string; disabled?: boolean }`
+`FabMenuItem` = `{ text: string; icon?: string; value?: string; disabled?: boolean }` (`icon`: canonical Material Symbols ligature name.)
