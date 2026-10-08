@@ -42,9 +42,9 @@ Floating action button with an expandable radial/vertical menu (RadzenFabMenu pa
 |---|---|---|---|
 | `items` | `FabMenuItem[]` | — | Items (required). |
 | `position` / `Position` | `"bottom-right" \| "bottom-left" \| "top-right" \| "top-left"` | `"bottom-right"` | Screen position. |
-| `icon` | `string` | `"add"` | Main button icon (canonical Material Symbols ligature name, e.g. `add`). React types this as `IconName`; literal glyphs like `"+"` are not accepted there. |
+| `icon` | `string` | `"add"` | Main button icon/text. React renders canonical Material Symbols ligature names (typed as `IconName`, e.g. `"add"`); htmx has no icon-font layer, so its reference renders the same action as a literal `"+"` glyph. |
 | `onClick` / `Click` | `(args: FabMenuItemEventArgs) => void` | `undefined` | Called when an item is clicked. |
 | `ariaLabel` | `string` | `"Open menu"` | aria-label on the main button. |
 | `className` | `string` | `undefined` | Extra class. |
 
-`FabMenuItem` = `{ text: string; icon?: string; value?: string; disabled?: boolean }` (`icon`: canonical Material Symbols ligature name.)
+`FabMenuItem` = `{ text: string; icon?: string; value?: string; disabled?: boolean }` (`icon`: a canonical ligature name in React, a literal glyph elsewhere.)
